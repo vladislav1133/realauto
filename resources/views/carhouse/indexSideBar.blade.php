@@ -32,6 +32,6 @@
             </select>
         </div>
         <button id="search-auto" class="btn search-auto">Искать</button>
-        </div>
+    </div>
 </aside>
 <!-- Sidebar end-->

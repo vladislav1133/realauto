@@ -34,7 +34,7 @@ class AjaxCarsController extends Controller
 
         $cars=$this->getCars($mark,$model,$year);
 
-        return view(env('THEME').'.content')->with('cars',$cars)->render();
+        return view(env('THEME').'.indexContent')->with('cars',$cars)->render();
     }
 
     protected function getCars($mark=false,$model=false,$year=false){

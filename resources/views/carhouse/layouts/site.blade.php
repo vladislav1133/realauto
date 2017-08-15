@@ -36,30 +36,7 @@
 
 @yield('header')
 
-
-@yield('banner')
-
-<!-- Car list start-->
-<div class="car-list content-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-xs-12">
-                @yield('sidebar')
-
-                @yield('news')
-
-                @yield('carBox')
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                <div id="content">
-                    @yield('content')
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Car list end-->
+@yield('content')
 
 @yield('footer')
 
@@ -72,6 +49,9 @@
 <!-- Custom javascript -->
 <script src="{{env('THEME')}}/js/search.js"></script>
 <script src="{{env('THEME')}}/js/bootstrap-select.min.js"></script>
+
+
+
 
 </body>
 </html>
