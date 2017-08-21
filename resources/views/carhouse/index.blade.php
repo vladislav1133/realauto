@@ -6,6 +6,8 @@
 
 @section('content')
 
+    @include(env('THEME').'.indexBanner')
+
     <!-- Car list start-->
     <div class="car-list content-area">
         <div class="container">

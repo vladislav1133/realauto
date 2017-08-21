@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    @include(env('THEME').'.blogContent')
+    {!! $content !!}
 @endsection
 
 @section('footer')

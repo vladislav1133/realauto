@@ -12,7 +12,10 @@
 */
 
 Route::get('/', ['as'=>'home','uses'=>'IndexController@index']);
-Route::get('blog',['as'=>'blog','uses'=>'BlogController@index']);
+
+Route::resource('blog','ArticlesController',[
+    'only' =>['index','show']
+]);
 
 Route::group(['prefix'=>'ajax'],function (){
     Route::get('cars/{mark?}/{model?}/{year?}','AjaxCarsController@ajaxCars');
@@ -22,3 +25,7 @@ Route::group(['prefix'=>'ajax'],function (){
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

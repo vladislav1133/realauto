@@ -45,7 +45,7 @@ class AjaxCarsController extends Controller
         if($year!=false){$where[]=['name','like','%'.$year.'%'];}
 
         $cars=$this->carRepository
-            ->get(['name','year','odometer','engine_type','path_to_image'],false,config('settings.car_on_page'),$where);
+            ->get(['name','year','odometer','engine_type','path_to_image'],false,config('settings.cars_on_page'),$where);
 
         return $cars;
     }

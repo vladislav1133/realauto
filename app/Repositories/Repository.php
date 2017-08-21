@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+use App\Page;
 
 abstract class Repository {
 
@@ -33,5 +34,9 @@ abstract class Repository {
         return $result;
     }
 
+    public function getMeta($page){
 
+        $meta = Page::select('meta_title','meta_description','meta_keywords')->where('name',$page)->first();
+        return $meta;
+    }
 }

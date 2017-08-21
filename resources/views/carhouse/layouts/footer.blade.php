@@ -5,15 +5,15 @@
             <div class="footer-item col-lg-4 col-md-4 col-sm-6 col-xs-12" >
                 <a class="footer-item-link" href="#">
                     <i class="fa fa-map-marker"></i>
-                    Raver Croft Drive Knoxville, 37921
+                    @if($info){{$info->address}}@endif
                 </a>
             </div>
             <div class="footer-item col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-                <a class="footer-item-link" href="tel:+55-417-634-7071"><i class="fa fa-phone"></i>  +55 417 634 7071</a>
+                <a class="footer-item-link" href="tel:@if($info){{$info->tel->tel}}@endif"><i class="fa fa-phone"></i>  @if($info){{$info->tel->text}}@endif</a>
             </div>
             <div class="footer-item col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-                <a class="footer-item-link" href="mailto:sales@carhouse.com">
-                    <i class="fa fa-envelope-o "></i> sales@carhouse.com
+                <a class="footer-item-link" href="mailto:@if($info){{$info->email}}@endif">
+                    <i class="fa fa-envelope-o "></i> @if($info){{$info->email}}@endif
                 </a>
             </div>
         </div>

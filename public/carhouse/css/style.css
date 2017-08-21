@@ -2676,6 +2676,10 @@ a.tags {
     margin-bottom: 25px;
 }
 
+.btn-404{
+    float: none;
+}
+
 @media (max-width:450px) {
     .nav-car-link{
         padding-left: 0;
