@@ -14,7 +14,8 @@ $("#contact-us").submit(function (e) {
         url: '/contact-us',
         data: $(this).serialize()
     }).done(function () {
-
     });
+
+    $('.btn-popup').magnificPopup('close');
     return false;
 })

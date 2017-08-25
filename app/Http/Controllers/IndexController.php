@@ -7,8 +7,10 @@ use App\Mail\ContactUsMail;
 use App\Repositories\CarRepository;
 use App\Repositories\GeneralDataRepository;
 use Illuminate\Http\Request;
+
 use Mail;
 use Validator;
+
 class IndexController extends SiteController{
 
     protected $carRepository;
