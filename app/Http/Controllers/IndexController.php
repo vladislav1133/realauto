@@ -54,7 +54,7 @@ class IndexController extends SiteController{
 
             return response()->json(['success'=>'true']);
         }
-
+;;
         return response()->json(['error' => $validator->errors()->all()]);
     }
 

@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     $(".btn-popup").magnificPopup();
 
-
 })
 
 $("#contact-us").submit(function (e) {
@@ -17,5 +16,7 @@ $("#contact-us").submit(function (e) {
     });
 
     $('.btn-popup').magnificPopup('close');
+    $('#email').val('');
+    $('#tel').val('');
     return false;
 })
