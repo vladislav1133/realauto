@@ -17,7 +17,8 @@ class CreateGeneralDatasTable extends Migration
             $table->increments('id');
             $table->text('banner');
             $table->string('email');
-            $table->string('tel');
+            $table->string('tel_text');
+            $table->string('tel_numb');
             $table->string('address');
             $table->timestamps();
         });

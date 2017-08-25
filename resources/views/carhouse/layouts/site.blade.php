@@ -14,7 +14,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/slider.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/font-awesome-4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/font-awesome-4.5.0/css/font-awesome.min.css">
     <!-- Custom stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/style.css">
 

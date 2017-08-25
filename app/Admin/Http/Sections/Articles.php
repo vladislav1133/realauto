@@ -55,6 +55,7 @@ class Articles extends Section implements Initializable
             AdminColumn::link('id', 'ID'),
             AdminColumn::text('title', 'Заголовок'),
         ])->paginate(15);
+
     }
 
     /**
@@ -64,30 +65,23 @@ class Articles extends Section implements Initializable
      */
     public function onEdit($id)
     {
-        return AdminForm::panel()->addBody([
+        $form = AdminForm::panel()->addBody([
             AdminFormElement::text('title', 'Заголовок')->required(),
+            AdminFormElement::textarea('review', 'Краткое описание')->required(),
+            AdminFormElement::text('alias', 'Алиас')->required()->unique(),
+            AdminFormElement::text('meta_title', 'Мета заголовок')->required(),
+            AdminFormElement::textarea('meta_description', 'Мета описание')->required(),
+            AdminFormElement::textarea('meta_keywords', 'Мета ключи')->required(),
             AdminFormElement::image('img', 'Изображение')->required(),
             AdminFormElement::wysiwyg('text', 'Text', 'ckeditor')->required(),
-//            AdminFormElement::select('country_id')->setLabel('Страна')
-//                ->setModelForOptions(\App\Model\Country::class)
-//                ->setHtmlAttribute('placeholder', 'Выберите страну')
-//                ->setDisplay('title')
-//                ->required(),
-//            AdminFormElement::dependentselect('contact_id', 'Контакт', ['country_id'])
-//                ->setModelForOptions(\App\Model\Contact::class)
-//                ->setHtmlAttribute('placeholder', 'Выберите контакт')
-//                ->setDisplay('FullName')
-//                ->setLoadOptionsQueryPreparer(function($item, $query) {
-//                    return $query->where('country_id', $item->getDependValue('country_id'));
-//                }),
         ]);
+        return $form;
     }
 
     /**
      * @return FormInterface
      */
-    public function onCreate()
-    {
+    public function onCreate(){
         return $this->onEdit(null);
     }
 }

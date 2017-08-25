@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="footer-item col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-                <a class="footer-item-link" href="tel:@if($info){{$info->tel->tel}}@endif"><i class="fa fa-phone"></i>  @if($info){{$info->tel->text}}@endif</a>
+                <a class="footer-item-link" href="tel:@if($info){{$info->tel_numb}}@endif"><i class="fa fa-phone"></i>  @if($info){{$info->tel_text}}@endif</a>
             </div>
             <div class="footer-item col-lg-4 col-md-4 col-sm-6 col-xs-12" >
                 <a class="footer-item-link" href="mailto:@if($info){{$info->email}}@endif">

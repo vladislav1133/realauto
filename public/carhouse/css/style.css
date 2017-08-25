@@ -136,17 +136,17 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #686868;
+    transition: all 0.3s ease;
 }
 
 .main-header .navbar-default .nav > li > a:hover {
-    background: #f5f5f5;
-    color: #F34B0A;
+    color: #000;
     border: none;
 }
 
 .main-header .navbar-default .nav > li > .active {
-    color: #F34B0A;
-    background: #f5f5f5;
+    color: #000;
+    border: none;
 }
 
 .main-header .navbar-default .nav {
@@ -542,7 +542,7 @@ body {
     color: #ffffff;
     padding: 7px 13px;
     background-color: #F34B0A;
-    border-radius: 2px;
+    border-radius: 30px;
     text-decoration: none;
     margin: 10px 5px 10px 0px;
 }
@@ -664,7 +664,7 @@ body {
 footer {
     width: 100%;
     background: #2A2A2A;
-    padding: 35px 0 35px 0;
+    padding: 30px 0 0 0;
 }
 
 footer p {
@@ -992,7 +992,7 @@ footer .footer-item .gallery-item {
     color: #ffffff;
     padding: 7px 13px;
     background-color: #F34B0A;
-    border-radius: 2px;
+    border-radius: 30px;
     text-decoration: none;
     margin: 10px 5px 10px 0px;
 }
@@ -2307,6 +2307,7 @@ label:before {
     letter-spacing: 1px;
     font-weight: 700; 
     text-transform: uppercase;
+    border-radius: 30px;
 }
 
 .btn-read-more:hover{

@@ -16,7 +16,7 @@ class ArticlesController extends SiteController
         parent::__construct(new GeneralDataRepository(new GeneralData()));
         $this->articleRepository=$articleRepository;
 
-        $this->indexInfo = $this->generalDataRepository->getInfo(['tel','address','email']);
+        $this->indexInfo = $this->generalDataRepository->getInfo(['tel_numb','tel_text','address','email']);
     }
 
     /**
@@ -32,6 +32,7 @@ class ArticlesController extends SiteController
         $content = view(env('THEME').'.blogContent')
             ->with('articles',$articles)
             ->render();
+
 
         return view(env('THEME').'.blog')
             ->with('info',$this->indexInfo)

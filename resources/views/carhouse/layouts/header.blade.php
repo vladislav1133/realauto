@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/blog" >Блог</a></li>
-                    <li><a  href="tel:@if($info){{$info->tel->tel}}@endif"><i class="fa fa-phone pr-5 pl-10"></i>  @if($info){{$info->tel->text}}@endif</a></li>
+                    <li><a  href="tel:@if($info){{$info->tel_numb}}@endif"><i class="fa fa-phone pr-5 pl-10"></i>  @if($info){{$info->tel_text}}@endif</a></li>
                     <li><a  href="mailto:@if($info){{$info->email}}@endif"><i class="nav-mail-icon fa fa-envelope-o pr-5 pl-10"></i>@if($info){{$info->email}}@endif</a></li>
                 </ul>
             </div>
