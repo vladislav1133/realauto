@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\GeneralData;
+use App\Mail\ContactUsMail;
 use App\Repositories\CarRepository;
 use App\Repositories\GeneralDataRepository;
-
+use Illuminate\Http\Request;
+use Mail;
+use Validator;
 class IndexController extends SiteController{
 
     protected $carRepository;
@@ -34,6 +37,23 @@ class IndexController extends SiteController{
             ->with('carYears',$carYears)
             ->with('info',$this->indexInfo)
             ->with('meta',$meta)->render();
+    }
+
+    public function contactUs(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'tel' => 'required |max:25'
+        ]);
+
+        if ($validator->passes()) {
+
+            Mail::to($this->indexInfo->email)->send(new ContactUsMail($request->tel, $request->email));
+
+            return response()->json(['success'=>'true']);
+        }
+
+        return response()->json(['error' => $validator->errors()->all()]);
     }
 
     protected function getCars(){

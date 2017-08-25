@@ -47,10 +47,55 @@ Version:    1.1
     12. 404 Page / .page-content-404
             12.1. Content / .error404
 -------------------------------------------------------------------*/
+.empty-articles {
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.hidden{
+    display: none;
+}
 
 .btn {
     border-radius: 2px;
 }
+
+
+.cu-form {
+    background-color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding-top: 15px;
+    padding-bottom: 40px;
+}
+
+.cu-form__label {
+    margin-top: 12px;
+}
+
+.cu-form__header {
+    color: #F34B0A;
+}
+
+.cu-form__input{
+    height:30px;
+    font-size: 13px;
+}
+.cu-form__btn {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #ffffff;
+    padding: 7px 13px;
+    background-color: #F34B0A;
+    border-radius: 30px;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
 /** COMMON CSS START **/
 body {
     font-family: 'Lato', sans-serif;

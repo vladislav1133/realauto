@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/slider.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/font-awesome-4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/magnific-popup.css">
     <!-- Custom stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/style.css">
 
@@ -50,6 +51,8 @@
 <!-- Custom javascript -->
 @if(Route::currentRouteName()=='home')
 <script src="{{asset(env('THEME'))}}/js/search.js"></script>
+<script src="{{asset(env('THEME'))}}/js/jquery.magnific-popup.min.js"></script>
+<script src="{{asset(env('THEME'))}}/js/common.js"></script>
 @endif
 <script src="{{asset(env('THEME'))}}/js/bootstrap-select.min.js"></script>
 

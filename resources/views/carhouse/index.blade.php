@@ -29,3 +29,5 @@
 @section('footer')
     @include(env('THEME').'.layouts.footer')
 @endsection
+
+@include(env('THEME').'.contactPopup')

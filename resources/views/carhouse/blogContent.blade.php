@@ -32,7 +32,7 @@
                         @endforeach
                         {{$articles->links()}}
                     @else
-                        <h1>Записей нет</h1>
+                        <h1 class="empty-articles">Записей нет</h1>
                     @endif
                 </div>
             </div>

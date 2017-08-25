@@ -45,7 +45,7 @@
 
                         </div>
 
-                        <a href="car_details.html" class="product-price-link btn details-button">Узнать стоимость</a>
+                        <a href="#contact-us" class="product-price-link btn details-button btn-popup">Узнать стоимость</a>
                     </div>
 
                 </div>
