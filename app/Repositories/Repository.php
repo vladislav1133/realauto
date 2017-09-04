@@ -19,9 +19,15 @@ abstract class Repository {
             $builder->where($where);
         }
 
+        if($orderBy){
+
+            $builder->orderBy($orderBy['col'], $orderBy['sortDir']);
+        }
+
         if($pagination){
             return $builder->paginate($pagination);
         }
+
 
 
         return $builder->get();

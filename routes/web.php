@@ -13,18 +13,18 @@
 
 Route::get('/', ['as'=>'home','uses'=>'IndexController@index']);
 
-Route::post('contact-us','IndexController@contactUs');
-
 Route::resource('blog','ArticlesController',[
     'only' =>['index','show']
 ]);
 
-Route::group(['prefix'=>'ajax'],function (){
-    Route::get('cars/{mark?}/{model?}/{year?}','AjaxCarsController@ajaxCars');
-    Route::get('marks','AjaxCarsController@ajaxMarks');
-    Route::get('models/{mark}','AjaxCarsController@ajaxModels');
-    Route::get('years/{mark?}/{model?}','AjaxCarsController@ajaxYears');
-});
+Route::post('contact-us','IndexController@contactUs');
+
+//CarsController
+Route::get('cars/{mark?}/{model?}/{from?}/{to?}','CarsController@getCars');
+Route::get('car/marks','CarsController@getMarks');
+Route::get('car/models/{mark}','CarsController@getModels');
+Route::get('car/years/{mark?}/{model?}','CarsController@getYears');
+
 
 
 

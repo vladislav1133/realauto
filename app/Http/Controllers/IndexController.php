@@ -25,8 +25,7 @@ class IndexController extends SiteController{
     public function index(){
 
         $meta = $this->carRepository->getMeta('index');
-        //$meta=null;
-        //dd($this->indexInfo);
+
         $cars=$this->getCars();
 
         $carMarks=$this->carRepository->getMarks();
@@ -44,23 +43,24 @@ class IndexController extends SiteController{
     public function contactUs(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'tel' => 'required |max:25'
+            'name' => 'required|max:50',
+            'tel' => 'required|max:50'
         ]);
 
         if ($validator->passes()) {
 
-            Mail::to($this->indexInfo->email)->send(new ContactUsMail($request->tel, $request->email));
+            Mail::to(env('MAIL_ADDRESS'))->send(new ContactUsMail($request->tel, $request->name));
 
             return response()->json(['success'=>'true']);
         }
-;;
+
         return response()->json(['error' => $validator->errors()->all()]);
     }
 
     protected function getCars(){
+
         $cars=$this->carRepository
-            ->get(['name','year','odometer','engine_type','path_to_image'],false,config('settings.cars_on_page'));
+            ->get(['name','year','odometer','engine_type','path_to_image'],false,config('settings.cars_on_page'),false,array('col'=>'createdAt','sortDir'=>'asc'));
 
         return $cars;
     }

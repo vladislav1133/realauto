@@ -1,7 +1,6 @@
-<div id="content">
+
 @if($cars)
     @foreach($cars as $car)
-        <!-- List car start-->
             <div class="list-car-box product">
                 <div class="row">
 
@@ -45,7 +44,7 @@
 
                         </div>
 
-                        <a href="#contact-us" class="product-price-link btn details-button btn-popup">Узнать стоимость</a>
+                        <a href="#contact-us-popup" class="product-price-link btn details-button btn-contact-us-popup">Узнать стоимость</a>
                     </div>
 
                 </div>
@@ -53,5 +52,5 @@
         @endforeach
         {{$cars->links()}}
     @endif
-</div>
+
 

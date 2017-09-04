@@ -87,7 +87,6 @@ class CarRepository extends Repository{
     public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false){
         $cars=parent::get($select,$take,$pagination,$where,$orderBy);
 
-
         $cars=$this->prepareImg($cars);
 
         $cars=$this->prepareMarkAndModel($cars);

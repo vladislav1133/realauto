@@ -1,9 +1,12 @@
-
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700|Oleo+Script:400,700");
 
 // Variables
-@import "variables";
-
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../carhouse/css/bootstrap.min.css";
+@import "../carhouse/css/bootstrap-select.min.css";
+@import "../carhouse/css/animate.min.css";
+@import "../carhouse/css/slider.css";
+@import "../carhouse/css/font-awesome-4.5.0/css/font-awesome.min.css";
+@import "../carhouse/css/magnific-popup.css";
+@import "../carhouse/css/style.css";
+@import "../carhouse/css/ie10-viewport-bug-workaround.css";

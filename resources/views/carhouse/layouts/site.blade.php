@@ -6,23 +6,10 @@
     <meta name="keywords" content="@if($meta['meta_keywords']){{$meta['meta_keywords']}} @else {{'RealAuto'}} @endif">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- External CSS libraries -->
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/bootstrap-select.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/slider.css">
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/font-awesome-4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/magnific-popup.css">
-    <!-- Custom stylesheet -->
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/style.css">
-
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Oleo+Script:400,700" rel="stylesheet">
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="{{asset(env('THEME'))}}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="{{asset(env('THEME'))}}/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -45,16 +32,17 @@
 <script src="{{asset(env('THEME'))}}/js/jquery-2.2.0.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/bootstrap.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/bootstrap-slider.js"></script>
-
+<script src="{{asset(env('THEME'))}}/js/bootstrap-select.min.js"></script>
+<script src="{{asset(env('THEME'))}}/js/jquery.magnific-popup.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{{asset(env('THEME'))}}/js/ie10-viewport-bug-workaround.js"></script>
 <!-- Custom javascript -->
 @if(Route::currentRouteName()=='home')
 <script src="{{asset(env('THEME'))}}/js/search.js"></script>
-<script src="{{asset(env('THEME'))}}/js/jquery.magnific-popup.min.js"></script>
+
 <script src="{{asset(env('THEME'))}}/js/common.js"></script>
 @endif
-<script src="{{asset(env('THEME'))}}/js/bootstrap-select.min.js"></script>
+
 
 </body>
 </html>

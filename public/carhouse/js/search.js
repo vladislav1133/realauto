@@ -2,6 +2,7 @@
 $(document).on('click','.pagination a', function (e) {
     e.preventDefault();
 
+
     var page = $(this).attr('href').split('page=')[1];
 
     getCars(page);
@@ -38,10 +39,10 @@ function getSearchModels(mark) {
 
     $.ajax({
 
-        url:'/ajax/models/'+mark
+        url:'/car/models/'+mark
 
     }).done(function(response){
-
+        console.log(response);
         if(response.models.length!==0){
             response.models.unshift('Любая');
             var models=response.models;
@@ -79,9 +80,10 @@ function getSearchYears(mark,model) {
 
     $.ajax({
 
-        url:'/ajax/years/'+mark+'/'+model
+        url:'/car/years/'+mark+'/'+model
 
     }).done(function(response){
+        console.log(response);
         if(response.years.length!==0) {
 
             var years=response.years;
@@ -107,18 +109,31 @@ function getCars(page) {
 
     var mark=$('#search-marks').val();
     var model=$('#search-models').val();
-    var year=$('#search-years').val();
+    var from=$('#search-from').val();
+    var to=$('#search-to').val();
 
-    if (typeof(mark)==='undefined') mark = 0;
-    if (typeof(model)==='undefined') model = 0;
-    if (typeof(year)==='undefined') year = 0;
 
-    if (mark==='Любая') mark = 0;
-    if (model==='Любая') model = 0;
-    if (year==='Любой') year = 0;
+
+    if (mark === 'Любая') mark = 0;
+    if (model === 'Любая') model = 0;
+    if (to === 'До') to = 0;
+    if (from === 'От') from = 0;
+
+    if (typeof(mark) === 'undefined') mark = 0;
+    if (typeof(model) === 'undefined') model = 0;
+    if (typeof(to) === 'undefined') to = 0;
+    if (typeof(from) === 'undefined') from = 0;
+
+
     $.ajax({
-        url:'/ajax/cars/'+mark+'/'+model+'/'+year+'?page='+page
+        url:'/cars/'+mark+'/'+model+'/'+from+'/'+to+'?page='+page
     }).done(function(data){
-        $('#content').html(data);
+
+        if(data){
+            $('#content').html(data);
+        }
+        else {
+          $('#content').html('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
+        }
     });
 }

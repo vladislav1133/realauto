@@ -8,7 +8,7 @@
 
     @include(env('THEME').'.indexBanner')
 
-    <!-- Car list start-->
+
     <div class="car-list content-area">
         <div class="container">
             <div class="row">
@@ -16,18 +16,23 @@
                     @include(env('THEME').'.indexSideBar')
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div id="content">
+                        <!-- Car list start-->
                     @include(env('THEME').'.indexContent')
-
+                        <!-- Car list end-->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Car list end-->
 
 @endsection
 
 @section('footer')
+    @include(env('THEME').'.contactPopup')
+    @include(env('THEME').'.aboutPopup')
     @include(env('THEME').'.layouts.footer')
 @endsection
 
-@include(env('THEME').'.contactPopup')
+
+
