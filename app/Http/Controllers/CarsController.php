@@ -39,7 +39,7 @@ class CarsController extends Controller
         if($from){$where[]=['year','>=',$from];}
         if($to){$where[]=['year','<=',$to];}
 
-        $orderBy = false;
+        $orderBy = array('col'=>'createdAt','sortDir'=>'desc');
 
         if($to||$from){
             $orderBy=[];
