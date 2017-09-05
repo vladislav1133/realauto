@@ -24,7 +24,7 @@ class ContactUsMail extends Mailable
     public function __construct($tel, $name)
     {
         $this->tel = $tel;
-        $this->email = $name;
+        $this->name = $name;
     }
 
     /**
@@ -37,7 +37,7 @@ class ContactUsMail extends Mailable
         return $this->view(env('THEME').'.mails.contactUs')
             ->with([
                 'tel' => $this->tel,
-                'email' => $this->name
+                'name' => $this->name
             ])
             ->subject('Realauto новый заказ');
     }
