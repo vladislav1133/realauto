@@ -29,13 +29,7 @@
 
 @yield('footer')
 
-<script src="{{asset(env('THEME'))}}/js/jquery-2.2.0.min.js"></script>
-<script src="{{asset(env('THEME'))}}/js/bootstrap.min.js"></script>
-<script src="{{asset(env('THEME'))}}/js/bootstrap-slider.js"></script>
-<script src="{{asset(env('THEME'))}}/js/bootstrap-select.min.js"></script>
-<script src="{{asset(env('THEME'))}}/js/jquery.magnific-popup.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{{asset(env('THEME'))}}/js/ie10-viewport-bug-workaround.js"></script>
+<script src="{{asset('js/app.js')}}"></script>
 <!-- Custom javascript -->
 @if(Route::currentRouteName()=='home')
 <script src="{{asset(env('THEME'))}}/js/search.js"></script>

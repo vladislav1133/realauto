@@ -50,7 +50,6 @@ class IndexController extends SiteController{
         if ($validator->passes()) {
 
             Mail::to(env('MAIL_ADDRESS'))->send(new ContactUsMail($request->tel, $request->name));
-
             return response()->json(['success'=>'true']);
         }
 

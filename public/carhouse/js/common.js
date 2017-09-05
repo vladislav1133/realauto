@@ -23,7 +23,7 @@ $("#contact-us-popup").submit(function (e) {
     });
 
     $('.btn-popup').magnificPopup('close');
-    $('#email').val('');
+    $('#name').val('');
     $('#tel').val('');
     return false;
 });

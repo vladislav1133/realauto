@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', ['as'=>'home','uses'=>'IndexController@index']);
 
-Route::resource('blog','ArticlesController',[
-    'only' =>['index','show']
-]);
+//Pages
+Route::get('/', ['as'=>'home','uses'=>'IndexController@index']);
+Route::resource('blog','ArticlesController',['only' =>['index','show']]);
 
 Route::post('contact-us','IndexController@contactUs');
 
@@ -24,8 +23,6 @@ Route::get('cars/{mark?}/{model?}/{from?}/{to?}','CarsController@getCars');
 Route::get('car/marks','CarsController@getMarks');
 Route::get('car/models/{mark}','CarsController@getModels');
 Route::get('car/years/{mark?}/{model?}','CarsController@getYears');
-
-
 
 
 // Authentication Routes...
@@ -42,6 +39,5 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
 
 Route::get('/home', 'HomeController@index');

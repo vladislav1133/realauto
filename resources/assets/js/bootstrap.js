@@ -9,9 +9,15 @@ window._ = require('lodash');
 
 try {
     window.$ = window.jQuery = require('jquery');
+     // require('../carhouse/js/jquery-2.2.0.min')
 
-    require('bootstrap-sass');
+     require('../carhouse/js/bootstrap')
+     require('../carhouse/js/bootstrap-slider')
+     require('../carhouse/js/bootstrap-select.min')
+     require('../carhouse/js/jquery.magnific-popup.min')
+     require('../carhouse/js/ie10-viewport-bug-workaround')
 } catch (e) {}
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
