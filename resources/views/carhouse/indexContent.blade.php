@@ -21,7 +21,7 @@
 
                         <div class="item">
 
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-pad">
+                            <div class="col-md-6 col-sm-6 col-xs-7 col-pad">
                                 <p>
                                     <span>Марка:</span> {{$car->name->mark}}
                                 </p>
@@ -33,7 +33,7 @@
                                 </p>
                             </div>
 
-                            <div class="col-md-6 col-sm-6 col-xs-12 col-pad">
+                            <div class="col-md-6 col-sm-6 col-xs-5 col-pad">
                                 <p>
                                     <span>Пробег: </span>{{$car->odometer}}
                                 </p>

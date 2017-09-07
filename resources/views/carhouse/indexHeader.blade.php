@@ -1,7 +1,8 @@
 
 <!-- Main header start-->
-<div class="main-header main-header_default">
+<div class="main-header">
     <div class="container main-nav-container">
+
         <nav class="navbar navbar-default main-nav">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -27,6 +28,18 @@
             <!-- /.navbar-collapse -->
             <!-- /.container -->
         </nav>
+        <div class="banner__offer">
+            <div class="banner__bg">
+                <h3 class="banner__title">
+                    Компания REALAUTO обеспечит Вас доступным авто из США
+                </h3>
+                <p class="banner__text">
+                    Вы можете подобрать автомобиль из тех, что уже <a href="#"> есть в наличии</a>, или воспользоваться нашим пакетом услуг по покупке и доставке новых или б/у авто из США.
+                </p>
+
+            </div>
+        </div>
+        <div class="banner__car"></div>
     </div>
     <div id="double-nav-container" class="double-nav-container">
         <div class="container">

@@ -8,7 +8,7 @@ $(document).on('click','.pagination a', function (e) {
     getCars(page);
 
     $('html, body').animate({
-        scrollTop: $("#content").offset().top-50
+        scrollTop: $("#content").offset().top-95
     }, 500)
 });
 

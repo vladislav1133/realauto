@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
 

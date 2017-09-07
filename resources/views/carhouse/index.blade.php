@@ -1,13 +1,10 @@
 @extends(env('THEME').'.layouts.site')
 
 @section('header')
-    @include(env('THEME').'.layouts.header')
+    @include(env('THEME').'.indexHeader')
 @endsection
 
 @section('content')
-
-    @include(env('THEME').'.indexBanner')
-
 
     <div class="car-list content-area">
         <div class="container">
