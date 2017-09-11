@@ -59,7 +59,7 @@ class IndexController extends SiteController{
     protected function getCars(){
 
         $cars=$this->carRepository
-            ->get(['name','year','odometer','engine_type','path_to_image'],false,config('settings.cars_on_page'),false,array('col'=>'createdAt','sortDir'=>'desc'));
+            ->get(['*'],false,config('settings.cars_on_page'),false,array('col'=>'createdAt','sortDir'=>'desc'));
 
         return $cars;
     }

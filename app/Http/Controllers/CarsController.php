@@ -49,7 +49,7 @@ class CarsController extends Controller
 
 
         $cars=$this->carRepository
-            ->get(['name','year','odometer','engine_type','path_to_image'],false,config('settings.cars_on_page'),$where,$orderBy);
+            ->get(['*'],false,config('settings.cars_on_page'),$where,$orderBy);
 
 
         return view(env('THEME').'.indexContent')->with('cars',$cars)->render();

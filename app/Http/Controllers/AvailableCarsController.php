@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ArticleRepository;
+use Illuminate\Http\Request;
+
 use App\Repositories\GeneralDataRepository;
 use App\GeneralData;
 
-use Illuminate\Http\Request;
+use App\Repositories\AvailableCarRepository;
 
-class ArticlesController extends SiteController
+class AvailableCarsController extends SiteController
 {
-    protected $articleRepository;
+    protected $availableCarRepository;
 
-    public function __construct(ArticleRepository $articleRepository, GeneralDataRepository $generalDataRepository){
+    public function __construct(AvailableCarRepository $availableCarRepository, GeneralDataRepository $generalDataRepository){
         parent::__construct(new GeneralDataRepository(new GeneralData()));
-        $this->articleRepository=$articleRepository;
+        $this->availableCarRepository=$availableCarRepository;
 
         $this->indexInfo = $this->generalDataRepository->getInfo('*');
     }
@@ -24,21 +25,55 @@ class ArticlesController extends SiteController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $articles=$this->getArticles();
-        $meta = $this->articleRepository->getMeta('blog');
+    public function index(){
 
-        $content = view(env('THEME').'.blogContent')
-            ->with('articles',$articles)
+        //$articles=$this->getAvailableCars();
+        $meta = $this->availableCarRepository->getMeta('availablecars');
+
+        $content = view(env('THEME').'.availableCarContent')
             ->render();
 
+        return view(env('THEME').'.availableCar')
+            ->with('info',$this->indexInfo)
+            ->with('meta', $meta)
+            ->with('content', $content)
+            ->render();
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $alias
+     * @return \Illuminate\Http\Response
+     */
+    public function show($alias){
+        $article=$this->getAvailableCar($alias);
+
+        $meta['meta_title'] = $article['meta_title'];
+        $meta['meta_description'] = $article['meta_description'];
+        $meta['meta_keywords'] = $article['meta_keywords'];
+
+        $content = view(env('THEME').'.availableCarPage2')->with('article',$article);
 
         return view(env('THEME').'.blog')
-            ->with('info',$this->indexInfo)
             ->with('meta',$meta)
+            ->with('info',$this->indexInfo)
             ->with('content', $content)->render();
+
     }
+
+
+
+    protected function getAvailableCars()
+    {
+        $articles = $this->articleRepository
+            ->get('*', false, config('settings.articles_on_page'));
+
+        return $articles;
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -59,28 +94,6 @@ class ArticlesController extends SiteController
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  alias
-     * @return \Illuminate\Http\Response
-     */
-    public function show($alias)
-    {
-        $article=$this->getArticle($alias);
-
-        $meta['meta_title'] = $article['meta_title'];
-        $meta['meta_description'] = $article['meta_description'];
-        $meta['meta_keywords'] = $article['meta_keywords'];
-
-        $content = view(env('THEME').'.blogPage')->with('article',$article);
-
-        return view(env('THEME').'.blog')
-            ->with('meta',$meta)
-            ->with('info',$this->indexInfo)
-            ->with('content', $content)->render();
     }
 
     /**
@@ -114,21 +127,10 @@ class ArticlesController extends SiteController
      */
     public function destroy($id)
     {
-
+        //
     }
 
-    protected function getArticles()
-    {
-        $articles = $this->articleRepository
-            ->get('*', false, config('settings.articles_on_page'));
-
-        return $articles;
-    }
-
-    protected function getArticle($alias){
-
-        $article = $this->articleRepository->one($alias);
-
-        return $article;
+    protected function getAvailableCar($alias){
+        return null;
     }
 }

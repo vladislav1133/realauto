@@ -15,6 +15,14 @@
 //Pages
 Route::get('/', ['as'=>'home','uses'=>'IndexController@index']);
 Route::resource('blog','ArticlesController',['only' =>['index','show']]);
+Route::resource('availablecars','AvailableCarsController',
+    [
+        'names'=>[
+            'index'=>'availableCars',
+            'show'=>'availableCar'
+            ],
+        'only' =>['index','show']
+    ]);
 
 Route::post('contact-us','IndexController@contactUs');
 

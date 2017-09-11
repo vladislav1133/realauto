@@ -7,6 +7,8 @@ $(document).ready(function () {
     });
     $(".btn-about-popup").magnificPopup();
 
+
+    //Second menu
     var bannerHeight = $('.main-header').height()
     var menuShow=true;
 
@@ -30,6 +32,16 @@ $(document).ready(function () {
             }
         }
     }
+
+    //Custom gallery
+    $('#custom-slider').bxSlider({
+        pagerCustom: '#slider-pager',
+        nextText: '<i class="fa fa-chevron-right"></i>',
+        prevText: '<i class="fa fa-chevron-left"></i>',
+        mode: 'fade',
+        captions: true
+    });
+
 });
 
 $("#contact-us-popup").submit(function (e) {
@@ -51,3 +63,4 @@ $("#contact-us-popup").submit(function (e) {
     $('#tel').val('');
     return false;
 });
+

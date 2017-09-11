@@ -32,11 +32,14 @@
 
 <script src="{{asset('js/app.js')}}"></script>
 <!-- Custom javascript -->
-@if(Route::currentRouteName()=='home')
-<script src="{{asset(env('THEME'))}}/js/search.js"></script>
 
-<script src="{{asset(env('THEME'))}}/js/common.js"></script>
+@if(Route::currentRouteName()=='home')
+    <script src="{{asset(env('THEME'))}}/js/search.js"></script>
 @endif
+<script src="/js/jquery.bxslider.min.js"></script>
+<script src="/carhouse/js/owl.carousel.min.js"></script>
+<script src="{{asset(env('THEME'))}}/js/common.js"></script>
+
 
 
 </body>

@@ -7,7 +7,7 @@
                     <div class="col-lg-12 car-content">
                         <div class="header b-items-cars-one-info-header">
                             <h3>
-                                <a>{{$car->name->mark}} {{$car->name->model}}</a>
+                                <a>{{$car->name}} {{$car->year}}</a>
                             </h3>
                         </div>
                         <div class="line-border"></div>
@@ -21,30 +21,36 @@
 
                         <div class="item">
 
-                            <div class="col-md-6 col-sm-6 col-xs-7 col-pad">
+                            <div class="col-md-6 col-sm-6 col-xs-7 item__details item__details_left">
                                 <p>
-                                    <span>Марка:</span> {{$car->name->mark}}
+                                    <span>Объем:</span> {{$car->engine_type}}
                                 </p>
                                 <p>
-                                    <span>Модель:</span>{{$car->name->model}}
+                                    <span>Пробег:</span>{{$car->odometer}}
                                 </p>
                                 <p>
-                                    <span>Год: </span>{{$car->year}}
+                                    <span>Трансмиссия: </span>{{$car->transmission}}
+                                </p>
+                                <p>
+                                    <span>Лот: </span>{{$car->lot_id}}
+                                </p>
+
+                            </div>
+
+                            <div class="col-md-6 col-sm-6 col-xs-5">
+                                <p>
+                                    <span>Первичные повреждения: </span>{{$car->primary_damage}}
+                                </p>
+                                <p>
+                                    <span>Вторичные повреждения: </span>{{$car->secondary_damage}}
                                 </p>
                             </div>
 
-                            <div class="col-md-6 col-sm-6 col-xs-5 col-pad">
-                                <p>
-                                    <span>Пробег: </span>{{$car->odometer}}
-                                </p>
-                                <p>
-                                    <span>Обьем: </span>{{$car->engine_type}}
-                                </p>
+                            <div class="col-xs-12">
+                                <a href="#contact-us-popup" class="product-price-link btn details-button btn-contact-us-popup">Рассчитать лот</a>
+                                <a href="https://www.copart.com/lot/{{$car->lot_id}}" class="product-price-link btn details-button" target="_blank">Подробнее</a>
                             </div>
-
                         </div>
-
-                        <a href="#contact-us-popup" class="product-price-link btn details-button btn-contact-us-popup">Узнать стоимость</a>
                     </div>
 
                 </div>

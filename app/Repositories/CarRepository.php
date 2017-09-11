@@ -93,6 +93,8 @@ class CarRepository extends Repository{
 
         $cars=$this->prepareOdometer($cars);
 
+        $cars=$this->prepareTransmission($cars);
+
         return $cars;
     }
 
@@ -125,7 +127,7 @@ class CarRepository extends Repository{
                 $arr['mark']=$mark;
                 $arr['model']=$model;
                 $arr=json_encode($arr);
-                $item->name=json_decode($arr);
+                $item->name_delay=json_decode($arr);
             }
             return $item;
         });
@@ -143,7 +145,18 @@ class CarRepository extends Repository{
         });
 
         return $cars;
+    }
 
+    protected function prepareTransmission($cars){
 
+        $cars->transform(function ($item,$key){
+            if($item->transmission==''){$item->transmission='&mdash;';}
+           // if($item->transmission=='Automatic'){$item->transmission='Автомат';}
+           // if($item->transmission=='Manual'){$item->transmission='Механическая';}
+
+            return $item;
+        });
+
+        return $cars;
     }
 }

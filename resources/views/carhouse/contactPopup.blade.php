@@ -1,5 +1,6 @@
 <div class="hidden">
-    <form id="contact-us-popup" class="cu-form col-md-offset-4 col-md-4" action="">
+    <div style="width: 320px"></div>
+    <form id="contact-us-popup" class="cu-form " action="">
         <div class="row">
             <h2 class="cu-form__header col-xs-12">Напишите нам</h2>
             <p>Наш менеджер в ближайщее время свяжется с вами</p>

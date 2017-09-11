@@ -541,8 +541,35 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
+.bx-wrapper {
+    position: relative;
+}
+.bx-next, .bx-prev{
+    top: 39%;
+    position: absolute;
+    color: #000;
+    font-size: 42px;
+    font-weight: 700;
+}
 
+.bx-prev {
+    left: -8%;
+}
+.bx-next{
+    right: -36px;
+}
+.bx-controls-direction>.bx-next:hover, .bx-controls-direction>.bx-prev:hover, .bx-controls-direction>.bx-next:focus, .bx-controls-direction>.bx-prev:focus{
+    text-decoration: none;
+    color: #000;
+}
 
+.btn:focus, .cu-form__btn:focus, .cu-form__btn:hover, .acar-box__btn:focus{
+  color: #fff;
+}
+
+.cu-form__btn:hover{
+    background-color: #890000;
+}
 .empty-articles {
     margin-top: 0;
     margin-bottom: 50px;
@@ -558,12 +585,20 @@ Version:    1.1
 }
 
 
+.cu-form .mfp-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 .cu-form {
+    margin:0 auto;
+    width: 320px;
+    position: relative;
     background-color: #fff;
     text-align: center;
-    border-radius: 2px;
-    padding-top: 15px;
-    padding-bottom: 40px;
+    border-radius: 5px;
+    padding: 15px 10px;
+
 }
 
 .cu-form__label {
@@ -577,6 +612,7 @@ Version:    1.1
 .cu-form__input{
     height:30px;
     font-size: 13px;
+    border: 1px solid #000;
 }
 .cu-form__btn {
     font-size: 11px;
@@ -588,7 +624,7 @@ Version:    1.1
     color: #ffffff;
     padding: 7px 13px;
     background-color: #6a0000;
-    border-radius: 30px;
+    border-radius: 5px;
     text-decoration: none;
     margin-top: 15px;
 }
@@ -664,7 +700,7 @@ body {
     width: 100%;
     max-width: 1900px;
     margin: 0 auto;
-    background-image: url('http://realauto/carhouse/img/banner-bg.jpg');
+    background-image: url('http://realauto.pro/carhouse/img/banner-bg.jpg');
     background-size: 100% 100%;
     height: 720px;
 }
@@ -678,7 +714,7 @@ body {
 
 .banner__car {
     position: absolute;
-    background: url('http://realauto/carhouse/img/banner-car.png') no-repeat;
+    background: url('http://realauto.pro/carhouse/img/banner-car.png') no-repeat;
     background-size: 100%;
     min-width: 300px;
     width: 64%;
@@ -761,7 +797,14 @@ body {
 .navbar-brand-logo {
     float: left;
     padding: 23px 0px;
+
 }
+
+.navbar-brand-logo:focus {
+    outline: none;
+
+}
+
 
 .navbar-brand-logo img {
     height: 50px;
@@ -1636,11 +1679,11 @@ footer .footer-item .gallery-item {
     background-color: #890000;
 }
 .sidebar {
-    border-radius:3px;
     background: #fff;
     padding: 20px;
     margin-bottom: 30px;
     border: solid 1px #E4E3E3;
+    border-radius: 5px;
 }
 
 .search-block .title {
@@ -1926,6 +1969,7 @@ input[type=checkbox]:checked + label:before {
     border: solid 1px #E4E3E3;
     margin-bottom: 30px;
     position: relative;
+    border-radius: 5px;
 }
 
 .list-car-box .list-car-pic img{
@@ -2071,7 +2115,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .panel-default > .panel-heading {
-    color: #333;
+    color: #fff;
     background-color: white;
     border-color: #ddd;
     border-radius: 0px;
@@ -2304,7 +2348,7 @@ ul.blog-post-comments li span.date i {
 }
 
 .btn-send:hover {
-    background: #de460b;
+    background: #890000;
     color: white;
 }
 
@@ -2678,12 +2722,12 @@ iframe {
 }
 
 .contact-us-body form .btn-message:hover{
-    background-color: #de460b;
+    background-color: #890000;
     color:#fff;
 }
 
 .contact-form form .btn-message:hover{
-    background-color: #de460b;
+    background-color: #890000;
     color:#fff;
 }
 
@@ -2876,10 +2920,9 @@ label:before {
 }
 
 .btn-back:hover{
-    background-color: #de460b;
+    background-color: #890000;
     color:#fff;
 }
-
 
 /**BLOG BANNER AREA START **/
 .blog-banner {
@@ -2891,27 +2934,29 @@ label:before {
 }
 
 .blog-body {
-    padding: 150px 0px 50px;
+    padding: 150px 0px 25px;
 }
 
 .blog-box {
+
     margin-bottom: 50px;
-    border-radius: 0px;
-    padding: 0px;
+    padding: 0;
+    padding-top: 40px;
     border: none;
-    color: #7B7B7B;
-    background: transparent;
+    color: #000;
+    background:#ebebeb;
+    border-radius: 15px;
 }
 
 .blog-box .detail {
     padding: 30px 0px 0px;
-    color: #7B7B7B;
+    color: #000;
     width: 100%;
     float: left;
 }
 
 .blog-box .detail h1 {
-    margin: 0 0 20px;
+    margin: 15px 0 20px;
     text-transform: uppercase;
     font-size: 24px;
 }
@@ -2922,17 +2967,17 @@ label:before {
 }
 
 .blog-box .detail h1 a:hover{
-    color:#818a9c;
+    color:#890000;
 }
 
 .blog-box .detail .header {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #000;
     margin-bottom: 20px;
     padding-bottom: 20px;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: .5px;
-    color: #818a9c;
+    color: #000;
     text-transform: uppercase;
 }
 
@@ -2946,11 +2991,13 @@ label:before {
     letter-spacing: 1px;
     font-weight: 700;
     text-transform: uppercase;
-    border-radius: 30px;
+    border-radius: 5px;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s
 }
 
 .btn-read-more:hover{
-    background-color: #de460b;
+    background-color: #890000;
     color:#fff;
 }
 
@@ -2990,6 +3037,9 @@ label:before {
     margin: 0px 0px 20px;
 }
 
+.blog-box .caption {
+    padding: 10px 15px;
+}
 .blog-tags .tags {
     position: relative;
     float: left;
@@ -3211,7 +3261,7 @@ a.tags {
 }
 
 .blog-body .comments-box{
-    padding:0px;
+    padding:0;
     border:none;
     background:transparent;
 }
@@ -3324,6 +3374,161 @@ a.tags {
     width: 150px;
 }
 
+
+/**AVAILABLE CAR**/
+
+.acar-body {
+    padding: 150px 0px 50px;
+}
+
+
+.acar-box {
+    padding: 42px 15px 42px 15px;
+    margin-bottom: 50px;
+    border-radius: 15px;
+    border: none;
+    font-family: "Open sans", sans-serif;
+    color: #000;
+    background: #ebebeb;
+}
+
+.acar-box_full{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.acar-box__img {
+    max-height: 216px;
+    height: auto;
+    width: 100%;
+    max-width: 350px;
+}
+
+.acar-box__title {
+    margin-top: 0;
+    color: #000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.acar-box__text {
+    width: 90%;
+}
+
+.acar-box__price {
+    color: #6a0000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.acar-box__price_full {
+    margin-bottom: 25px;
+}
+
+.acar-box__stats{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.acar-box__stats_full{
+    margin-bottom: 15px;
+}
+
+.acar-box__addition{
+    margin-bottom: 15px;
+}
+
+.acar-box__btn{
+    margin-right: 5px;
+    width: 112px;
+}
+
+.acar-box__btn_price{
+    margin-right: 0;
+    background-color: #22b524;
+}
+
+.acar-box__btn_price:hover{
+    margin-right: 0;
+    background-color: #22D724;
+}
+
+.acar-box__addition{
+    width: 90%;
+}
+
+.acar-box__property{
+
+ }
+
+.acar-box__property-list{
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 8px;
+}
+
+
+.ac-gallery{
+
+}
+
+.ac-gallery__img {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 18px;
+}
+
+.ac-gallery__img img{
+    width: 100%;
+    height: auto;
+}
+
+
+.ac-gallery__list{
+ }
+
+.ac-gallery__body{
+    max-width: 620px;
+    width: 100%;
+}
+
+.ac-gallery__row{
+    width: 90%;
+    margin:0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+
+}
+.ac-gallery__item {
+    display: block;
+    width: 22%;
+    height: auto;
+    max-height: 100px;
+    margin-right: 4%;
+    margin-bottom: 10px;
+
+}
+.ac-gallery__row a .ac-gallery__mini-img {
+    width: 100%;
+    height: auto;
+}
+
+#slider-pager .active {
+    outline: 2px solid #6a0000;
+}
+.ac-gallery__item:nth-child(4n){
+    margin-right: 0;
+}
+
+
 @media (max-width:450px) {
     .nav-car-link{
         padding-left: 0;
@@ -3385,11 +3590,26 @@ a.tags {
     .banner__car{
         display: none;
     }
+
+
 }
 
+
+@media (max-width: 640px) {
+
+    .banner__car {
+        max-height: 185px;
+        width: 70%;
+    }
+}
 @media (max-width: 768px) {
+
+    .item__details_left {
+        padding-left: 0;
+    }
+
     .navbar-brand-logo {
-        padding: 23px 0px;
+        padding: 23px 0;
     }
 
     .nav-car-item {
@@ -3404,7 +3624,7 @@ a.tags {
     }
 
     .product-price-link {
-        float: none;
+        float: right;
     }
 
     .product-img {
@@ -3727,7 +3947,7 @@ a.tags {
     }
 
     .blog-body {
-        padding: 125px 0px 50px;
+        padding: 125px 0px 25px;
     }
 
     .page-section {
@@ -3761,6 +3981,7 @@ a.tags {
 
     .banner__car{
         max-height: 200px;
+        bottom: 0;
     }
 
     .main-nav {
@@ -3774,6 +3995,19 @@ a.tags {
         padding-right: 0;
     }
 
+    .acar-box__img {
+        margin-bottom: 25px;
+    }
+
+    .acar-box__btn {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .acar-box {
+        padding-bottom: 22px;
+    }
+
 
 }
 
@@ -3784,19 +4018,28 @@ a.tags {
     }
 
     .main-header .navbar-default .nav > li > a {
-        margin-left: 0px;
+        margin-left: 0;
         padding: 5px 10px;
+        max-height: 650px;
+        bottom: -50px
+    }
+    .main-header .navbar-default .nav {
+        margin-top: 0;
     }
 
+    .main-header .navbar-default .navbar-right_margin {
+        margin-top: -12px;
+    }
 
 }
 
 @media (max-width: 450px){
     .banner__offer{
-        width: 100%;
+        width: 90%;
         position: relative;
         left: 0;
         margin-top: 15px;
+        height: auto;
     }
 
     .main-header{
@@ -3810,8 +4053,31 @@ a.tags {
     .banner__car {
         display: none
     }
+
+    .banner__text {
+        font-size: 16px;
+    }
+
+    .banner__title {
+        font-size: 20px;
+    }
 }
-/*!
+
+@media (max-width: 550px){
+    .main-header {
+        height: auto
+    }
+}
+
+@media (max-width: 590px){
+
+    .banner__offer {
+        width: 80%;
+        margin: 20px auto;
+        position: unset;
+
+    }
+}/*!
  * IE10 viewport hack for Surface/desktop Windows 8 bug
  * Copyright 2014-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
