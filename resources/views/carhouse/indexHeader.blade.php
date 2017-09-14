@@ -1,5 +1,3 @@
-
-<!-- Main header start-->
 <div class="main-header">
     <div class="container main-nav-container">
 
@@ -12,21 +10,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand-logo" href="/">
+                <a class="navbar-brand-logo" href="{{route('home')}}">
                     <img src="{{asset(env('THEME'))}}/img/logo.png" alt="CAR HOUSE">
                 </a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/" >Главная</a></li>
-                    <li><a href="/availablecars" >Машины в наличии</a></li>
-                    <li><a href="/blog" >Блог</a></li>
-                    <li><a href="/blog" >Контакты</a></li>
+                    <li><a href="{{route('home')}}" >Главная</a></li>
+                    <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
+                    <li><a href="{{route('blog.index')}}" >Блог</a></li>
+                    <li><a href="{{route('contacts')}}" >Контакты</a></li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
-            <!-- /.container -->
         </nav>
         <div class="banner__offer">
             <div class="banner__bg">
@@ -34,7 +29,7 @@
                     Компания REALAUTO обеспечит Вас доступным авто из США
                 </h3>
                 <p class="banner__text">
-                    Вы можете подобрать автомобиль из тех, что уже <a href="{{route('availableCars')}}"> есть в наличии</a>, или воспользоваться нашим пакетом услуг по покупке и доставке новых или б/у авто из США.
+                    Вы можете подобрать автомобиль из тех, что уже <a href="{{route('availablecars.index')}}"> есть в наличии</a>, или воспользоваться нашим пакетом услуг по покупке и доставке новых или б/у авто из США.
                 </p>
 
             </div>
@@ -52,27 +47,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand-logo" href="/">
+                    <a class="navbar-brand-logo" href="{{route('home')}}">
                         <img src="{{asset(env('THEME'))}}/img/logo.png" alt="CAR HOUSE">
                     </a>
                 </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/" >Главная</a></li>
-                        <li><a href="/availablecars" >Машины в наличии</a></li>
-                        <li><a href="/blog" >Блог</a></li>
-                        <li><a href="/blog" >Контакты</a></li>
-
+                        <li><a href="{{route('home')}}" >Главная</a></li>
+                        <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
+                        <li><a href="{{route('blog.index')}}" >Блог</a></li>
+                        <li><a href="{{route('contacts')}}" >Контакты</a></li>
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
-                <!-- /.container -->
             </nav>
         </div>
     </div>
 </div>
-<!-- Main header end-->
+
 
 
 

@@ -5,8 +5,6 @@
 
             <div class="col-lg-12 col-md-12 col-xs-12">
 
-                <!-- acar box start-->
-
                 <div class="acar-box thumbnail clearfix">
                     <div class="row">
                         <div class="col-sm-6 col-lg-offset-1 col-lg-4">
@@ -27,7 +25,7 @@
                                 <div><strong>Цвет: </strong>черный</div>
                                 <div><strong>Пробег: </strong>11000</div>
                             </div>
-                            <a href="{{route('availableCar',['alias'=>1])}}"
+                            <a href="{{route('availablecars.show',['alias'=>1])}}"
                                class="btn btn-read-more acar-box__btn">Подробнее
                             </a>
                             <a href="#"
@@ -35,7 +33,7 @@
                             </a>
 
                         </div>
-                        <!-- acar box end-->
+
                     </div>
                 </div>
                 <div class="acar-box thumbnail clearfix">
@@ -58,7 +56,7 @@
                                 <div><strong>Цвет: </strong>черный</div>
                                 <div><strong>Пробег: </strong>11000</div>
                             </div>
-                            <a href="{{route('availableCar',['alias'=>1])}}"
+                            <a href="{{route('availablecars.show',['alias'=>1])}}"
                                class="btn btn-read-more acar-box__btn">Подробнее
                             </a>
                             <a href="#"
@@ -66,7 +64,7 @@
                             </a>
 
                         </div>
-                        <!-- acar box end-->
+
                     </div>
                 </div>
                 <div class="acar-box thumbnail clearfix">
@@ -89,7 +87,7 @@
                                 <div><strong>Цвет: </strong>черный</div>
                                 <div><strong>Пробег: </strong>11000</div>
                             </div>
-                            <a href="{{route('availableCar',['alias'=>1])}}"
+                            <a href="{{route('availablecars.show',['alias'=>1])}}"
                                class="btn btn-read-more acar-box__btn">Подробнее
                             </a>
                             <a href="#"
@@ -97,7 +95,7 @@
                             </a>
 
                         </div>
-                        <!-- acar box end-->
+
                     </div>
                 </div>
                 <div class="acar-box thumbnail clearfix">
@@ -120,7 +118,7 @@
                                 <div><strong>Цвет: </strong>черный</div>
                                 <div><strong>Пробег: </strong>11000</div>
                             </div>
-                            <a href="{{route('availableCar',['alias'=>1])}}"
+                            <a href="{{route('availablecars.show',['alias'=>1])}}"
                                class="btn btn-read-more acar-box__btn">Подробнее
                             </a>
                             <a href="#"
@@ -128,16 +126,10 @@
                             </a>
 
                         </div>
-                        <!-- acar box end-->
+
                     </div>
                 </div>
-
-                <!-- acar box end-->
             </div>
-
-
-
         </div>
     </div>
 </div>
-<!-- acar-body end-->

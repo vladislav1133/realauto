@@ -6,12 +6,43 @@ use App\Car;
 
 class CarRepository extends Repository{
 
+    private $car_dmg=[
+        'ALL OVER ' => 'повсеместные повреждения',
+        'BURN - ENGINE' => 'пожар — двигатель',
+        'BURN' => 'пожар',
+        'DAMAGE HISTORY' => 'история повреждений',
+        'FRONT END' => 'передняя часть',
+        'MECHANICAL' => 'механические повреждения',
+        'NORMAL WEAR' => 'естественный износ',
+        'REJECTED REPAIR' => 'в ремонте было отказано',
+        'REAR END' => 'задняя часть',
+        'STRIPPED' => 'снята обшивка',
+        'UNKNOWN' => 'неизвестно',
+        'MISSING/ALTERED VIN' => 'отсутствующий/измененный VIN',
+        'REPLACED VIN' => 'замененный VIN',
+        'BIOHAZARDOUS/CHEMICAL' => 'биологическая/химическая опасность',
+        'BURN - INTERIOR' => 'пожар — салон',
+        'CASH FOR CLUNKERS' => 'наличные за старые автомобили',
+        'FRAME DAMAGE REPORTED' => 'заявленное повреждение корпуса',
+        'HAIL' => 'град',
+        'MINOR DENT/SCRATCHES' => 'незначительные выбоины/царапины',
+        'PARTIAL/INCOMPLETE REPAIR' => 'частичный/неполный ремонт',
+        'ROLLOVER' => 'незначительные выбоины/царапины',
+        'SIDE' => 'боковая часть',
+        'TOP/ROOF' => 'верхняя часть/крыша',
+        'UNDERCARRIAGE' => 'ходовая часть',
+        'VANDALISM ' => 'вандализм',
+        'WATER/FLOOD ' => 'затопление/наводнение',
+    ];
+
+
     public function __construct(Car $car){
         $this->model=$car;
     }
 
 
     public function getNames(){
+
         $query=Car::select('name')->get()->toArray();
         $names=array();
 
@@ -95,6 +126,8 @@ class CarRepository extends Repository{
 
         $cars=$this->prepareTransmission($cars);
 
+        $cars=$this->prepareDamage($cars);
+
         return $cars;
     }
 
@@ -150,13 +183,41 @@ class CarRepository extends Repository{
     protected function prepareTransmission($cars){
 
         $cars->transform(function ($item,$key){
-            if($item->transmission==''){$item->transmission='&mdash;';}
-           // if($item->transmission=='Automatic'){$item->transmission='Автомат';}
-           // if($item->transmission=='Manual'){$item->transmission='Механическая';}
+            if($item->transmission=='Automatic'){$item->transmission='Автомат';}
+            if($item->transmission=='Manual'){$item->transmission='Механика';}
 
             return $item;
         });
 
         return $cars;
     }
+
+    protected function prepareDamage($cars) {
+
+        $cars->transform(function ($item,$key){
+            if($item->primary_damage) {
+
+                foreach($this->car_dmg as $k=>$val) {
+                    $item->primary_damage=str_replace($k,$val,$item->primary_damage);
+                }
+
+            }
+            return $item;
+        });
+
+        $cars->transform(function ($item,$key){
+            if($item->secondary_damage) {
+
+                foreach($this->car_dmg as $k=>$val) {
+                    $item->secondary_damage=str_replace($k,$val,$item->secondary_damage);
+                }
+
+            }
+            return $item;
+        });
+
+        return $cars;
+
+    }
+
 }

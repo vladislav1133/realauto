@@ -541,31 +541,10 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
-.bx-wrapper {
-    position: relative;
-}
-.bx-next, .bx-prev{
-    top: 39%;
+.bx-controls-direction{
     position: absolute;
-    color: #000;
-    font-size: 42px;
-    font-weight: 700;
 }
 
-.bx-prev {
-    left: -8%;
-}
-.bx-next{
-    right: -36px;
-}
-.bx-controls-direction>.bx-next:hover, .bx-controls-direction>.bx-prev:hover, .bx-controls-direction>.bx-next:focus, .bx-controls-direction>.bx-prev:focus{
-    text-decoration: none;
-    color: #000;
-}
-
-.btn:focus, .cu-form__btn:focus, .cu-form__btn:hover, .acar-box__btn:focus{
-  color: #fff;
-}
 
 .cu-form__btn:hover{
     background-color: #890000;
@@ -628,6 +607,53 @@ Version:    1.1
     text-decoration: none;
     margin-top: 15px;
 }
+
+
+/** Product **/
+
+.product__head {
+    margin-bottom: 15px;
+}
+
+.product__title {
+    margin: 15px 0 0;
+}
+
+.product__name {
+    text-transform: uppercase;
+    color: #363f48;
+    border-left: 4px solid #6a0000;
+    font-size: 17px;
+    padding: 3px 0 3px 10px;
+    text-decoration: none;
+}
+
+.product__name:hover {
+    color: #000;
+}
+
+.product__name:focus {
+    outline: none;
+    color: #000;
+}
+
+.product__img {
+    margin-bottom: 10px;
+    height: 80px;
+    width: 100px;
+}
+
+.product__list {
+    min-height: 300px;
+}
+.product__property {
+    padding-left: 0;
+}
+
+.product__btn {
+    width: 100%;
+}
+
 
 /** COMMON CSS START **/
 body {
@@ -1221,12 +1247,15 @@ body {
     transition: background-color 0.3s
 }
 
-.details-button:hover {
+.details-button:hover, .details-button:focus {
     background-color: #890000;
     color:#fff;
 }
 
-/**TESTIMONIALS AREA START **/
+.details-button:focus{
+    outline: none;
+}
+    /**TESTIMONIALS AREA START **/
 .testimonials {
     width: 100%;
     padding: 70px 0px 85px;
@@ -1971,25 +2000,6 @@ input[type=checkbox]:checked + label:before {
     position: relative;
     border-radius: 5px;
 }
-
-.list-car-box .list-car-pic img{
-    width: 96px;
-    height: 72px;
-}
-
-.list-car-box .car-content h3 a{
-    text-transform: uppercase;
-    color: #363f48;
-    border-left: 4px solid #6a0000;
-    font-size: 17px;
-    padding: 3px 0px 3px 10px;
-    text-decoration: none;
-}
-
-.list-car-box  .car-content h3{
-    margin:15px 0 0px; 
-}
-
 
 
 .list-car-box  .car-content h3 span {
@@ -3038,7 +3048,7 @@ label:before {
 }
 
 .blog-box .caption {
-    padding: 10px 15px;
+    padding: 30px 15px;
 }
 .blog-tags .tags {
     position: relative;
@@ -3548,11 +3558,15 @@ a.tags {
         width: 100%;
     }
 
+
+
     .product {
         padding-bottom: 5px;
     }
 
-    .product-img{
+
+
+    .product__img{
         margin-bottom: 4px;
     }
 
@@ -3627,7 +3641,7 @@ a.tags {
         float: right;
     }
 
-    .product-img {
+    .product__img {
         margin-bottom: 4px;
     }
 

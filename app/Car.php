@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     protected $fillable= [
-        'name','year','odometer','engine_type','path_to_image','lot_id','transmission','primary_damage','secondary_damage'
+        'name', 'fuel','buy_it_now','year','odometer','engine_type','path_to_image','lot_id','transmission','primary_damage','secondary_damage'
     ];
 
 

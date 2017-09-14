@@ -6,6 +6,7 @@ use App\GeneralData;
 use App\Mail\ContactUsMail;
 use App\Repositories\CarRepository;
 use App\Repositories\GeneralDataRepository;
+
 use Illuminate\Http\Request;
 
 use Mail;
@@ -63,6 +64,7 @@ class IndexController extends SiteController{
 
         return $cars;
     }
+
 
 
 

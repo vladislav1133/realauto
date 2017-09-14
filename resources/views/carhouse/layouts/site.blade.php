@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>@if($meta['meta_title']){{$meta['meta_title']}} @else {{'RealAuto!!'}} @endif</title>
-    <meta name="description" content="@if($meta['meta_description']){{$meta['meta_description']}} @else {{'RealAuto'}} @endif">
+    <title>@if($meta['meta_title']){{$meta['meta_title']}} @else {{'Real auto'}} @endif</title>
+    <meta name="description" content="@if($meta['meta_description']){{$meta['meta_description']}} @else {{'Real auto. '}} @endif">
     <meta name="keywords" content="@if($meta['meta_keywords']){{$meta['meta_keywords']}} @else {{'RealAuto'}} @endif">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -39,7 +39,6 @@
 <script src="/js/jquery.bxslider.min.js"></script>
 <script src="/carhouse/js/owl.carousel.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/common.js"></script>
-
 
 
 </body>

@@ -7,7 +7,6 @@
 
 @section('content')
 
-    <!-- Page content 404 start-->
     <div class="page-content-404">
         <div class="container">
             <div class="col-lg-12 col-md-12 c0p-sm-12 col-xs-12">
@@ -23,7 +22,6 @@
             </div>
         </div>
     </div>
-    <!-- Page content 404 end -->
 
 @endsection
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Repositories\CarRepository;
 
+use Cookie;
+use Response;
+
 class CarsController extends Controller
 {
     protected $carRepository;
@@ -53,5 +56,15 @@ class CarsController extends Controller
 
 
         return view(env('THEME').'.indexContent')->with('cars',$cars)->render();
+    }
+
+    public function getFavoriteCars(){
+
+        $cars=['124','3434','6565'];
+        $cookie = Cookie::forever('favoriteCars',$cars);
+
+        $response = Response::make('Hello World');
+
+        $response->withCookie($cookie);
     }
 }
