@@ -25,6 +25,8 @@ Route::get('cars/{mark?}/{model?}/{from?}/{to?}','CarsController@getCars');
 Route::get('car/marks','CarsController@getMarks');
 Route::get('car/models/{mark}','CarsController@getModels');
 Route::get('car/years/{mark?}/{model?}','CarsController@getYears');
+Route::get('favoritecars','CarsController@getFavoriteCars');
+Route::post('favoritecars','CarsController@getFavoriteCars');
 
 
 // Authentication Routes...

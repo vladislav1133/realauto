@@ -6,6 +6,7 @@ use App\Repositories\CarRepository;
 
 use Cookie;
 use Response;
+use Crypt;
 
 class CarsController extends Controller
 {
@@ -58,13 +59,40 @@ class CarsController extends Controller
         return view(env('THEME').'.indexContent')->with('cars',$cars)->render();
     }
 
+    public function addFavoriteCars(){
+
+    }
     public function getFavoriteCars(){
+//
+//
+//        $where=false;
+//
+//        $where[]=['name','like','%'.$mark.'%'];
+//
+//        $orderBy = array('col'=>'createdAt','sortDir'=>'desc');
+//
+//        if($to||$from){
+//            $orderBy=[];
+//            $orderBy['col']='year';
+//            $orderBy['sortDir']='asc';
+//        }
+//
+//
+//        $cars=$this->carRepository
+//            ->get(['*'],false,config('settings.cars_on_page'),$where,$orderBy);
+//
+//
+//        return view(env('THEME').'.indexContent')->with('cars',$cars)->render();
+//
+//        $cars=['124','3434','6565'];
+//
+//        setcookie('cookie', json_encode($cars), time()+3600);
+//        //$cookie = Cookie::forever('favoriteCars',json_encode($cars),'','');
+//
+//
+//        //$response = Response::make('Hello World');
+//
+//        return 'qw';
 
-        $cars=['124','3434','6565'];
-        $cookie = Cookie::forever('favoriteCars',$cars);
-
-        $response = Response::make('Hello World');
-
-        $response->withCookie($cookie);
     }
 }

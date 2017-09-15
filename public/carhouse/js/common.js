@@ -1,12 +1,6 @@
 $(document).ready(function () {
 
-
-    //MAGNIFIC POPUP
-    $('#content').magnificPopup({
-        delegate: '.btn-contact-us-popup' // child items selector, by clicking on it popup will open
-    });
-    $(".btn-about-popup").magnificPopup();
-
+    updateFavoriteCars()
 
     //Second menu
     var bannerHeight = $('.main-header').height()
@@ -42,6 +36,23 @@ $(document).ready(function () {
         captions: true
     });
 
+
+    //MAGNIFIC POPUP
+
+    $('#content').magnificPopup({
+
+        delegate: '.btn-contact-us-popup' // child items selector, by clicking on it popup will open
+    });
+
+    $('.favorite__btn').click(function () {
+
+        var lotId = $(this).data('lot')
+
+        addFavoriteCar(lotId)
+
+        $(this).blur()
+
+    })
 });
 
 $("#contact-us-popup").submit(function (e) {
@@ -64,3 +75,69 @@ $("#contact-us-popup").submit(function (e) {
     return false;
 });
 
+
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function addFavoriteCar(lotId) {
+
+    var favoriteCars = getCookie('favoriteCars')
+
+    if(favoriteCars===undefined) {
+
+        favoriteCars = [lotId]
+    } else {
+
+        favoriteCars = JSON.parse(favoriteCars)
+
+        var id = favoriteCars.indexOf(lotId);
+
+        if (id === -1) {
+            favoriteCars.push(lotId);
+        } else {
+            favoriteCars.splice(id, 1);
+        }
+    }
+
+    favoriteCars = JSON.stringify(favoriteCars)
+
+    document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
+
+    updateFavoriteCars();
+}
+
+function updateFavoriteCars() {
+
+    var favoriteCars = getCookie('favoriteCars')
+
+    if(favoriteCars === undefined) return false
+
+    favoriteCars = JSON.parse(favoriteCars)
+
+    $('.favorite__btn').text('В избранное')
+
+    $('.favorite__btn').removeClass('favorite__btn_added')
+
+    $('.favorite__btn').each( function (i) {
+
+        var favoriteBtn = $(this)
+
+        var lotId = $(this).data('lot')
+
+
+
+        favoriteCars.forEach(function(item, i) {
+
+            if(lotId === item){
+
+                favoriteBtn.text('добавлено')
+
+                favoriteBtn.addClass('favorite__btn_added')
+            }
+        })
+    })
+}
