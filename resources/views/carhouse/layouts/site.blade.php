@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
+    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/footable.standalone.min.css">
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="{{asset(env('THEME'))}}/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -32,13 +34,19 @@
 
 <script src="{{asset('js/app.js')}}"></script>
 <!-- Custom javascript -->
+<scritp src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></scritp>
+<script src="/js/jquery.bxslider.min.js"></script>
+
+<script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
+
 
 @if(Route::currentRouteName()=='home')
     <script src="{{asset(env('THEME'))}}/js/search.js"></script>
 @endif
-<script src="/js/jquery.bxslider.min.js"></script>
-<script src="/carhouse/js/owl.carousel.min.js"></script>
+
+
 <script src="{{asset(env('THEME'))}}/js/common.js"></script>
+
 
 
 </body>

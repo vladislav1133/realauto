@@ -9,13 +9,18 @@ $(document).on('click','.pagination a', function (e) {
 
     $('html, body').animate({
         scrollTop: $("#content").offset().top-95
-    }, 500)
+    }, 300)
 });
 
 $(document).on('click','#search-auto', function (e) {
     e.preventDefault();
 
-    getCars();
+    $('#body-body').empty()
+
+    $('#body-body').append('<tr><td style="display: table-cell;" ><img src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX81/2f607a16-49dd-4650-88b2-9f257ebfc628.JPG" alt=""></td> <td>1223545</td> <td>2013</td> <td>CHEVROLET</td> <td>TRAX LS</td> <td>1.4L4</td> <td>GAS</td> <td>14783 mi</td> <td>передняя часть</td> <td>Вторичные повреждения: незначительные выбоины/царапины</td> <td>FL - TAMPA SOUTH</td> <td>-</td> <td>SDSDS</td> </tr>')
+
+    $('#body-body').trigger('footable_initialize');
+    //getCars();
 });
 
 //Get models of mark
@@ -113,11 +118,11 @@ function getCars(page) {
     var to=$('#search-to').val();
 
 
-
     if (mark === 'Любая') mark = 0;
     if (model === 'Любая') model = 0;
     if (to === 'До') to = 0;
     if (from === 'От') from = 0;
+
 
     if (typeof(mark) === 'undefined') mark = 0;
     if (typeof(model) === 'undefined') model = 0;
@@ -130,10 +135,22 @@ function getCars(page) {
     }).done(function(data){
 
         if(data){
-            $('#content').html(data);
+
+            $('#hide-table').html(data);
+
+            $('#hide-table .car-table').footable();
+
+            setTimeout(function () {
+                var hideTable = $('#hide-table .row').get(0)
+                $('#main-table').html(hideTable)
+            }, 1000);
+
         }
+
         else {
-          $('#content').html('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
+          $('#content ').html('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
         }
+
     });
+
 }

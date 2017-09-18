@@ -661,10 +661,7 @@ Version:    1.1
     padding-left: 0;
 }
 
-.product__btn {
-    width: 100%;
-    border: none
-}
+
 
 
 
@@ -1260,11 +1257,10 @@ body {
     transition: background-color 0.3s
 }
 
-.favorite__btn_added {
-    background-color: #fff;
-    color: #6a0000;
-    -webkit-box-shadow: 0 0 0 2px #6a0000 inset;
-            box-shadow: 0 0 0 2px #6a0000 inset;
+.product__btn {
+    max-width: 120px;
+    float: left;
+    border: none
 }
 
 
@@ -1276,6 +1272,18 @@ body {
 .details-button:focus{
     outline: none;
 }
+
+
+.favorite__btn {
+    font-size: 10px;
+    margin: 0;
+    padding: 3px 0;
+    width: 20px;
+    float: left;
+    background-color: #fff;
+    color: #6a0000;
+}
+
     /**TESTIMONIALS AREA START **/
 .testimonials {
     width: 100%;
@@ -2529,6 +2537,10 @@ ul.blog-post-comments li span.date i {
     color: #6a0000;
 }
 
+
+.btn-contact-us-popup {
+
+}
 .btn-contact {
     border: 2px solid #6a0000;
     font-size: 12px;

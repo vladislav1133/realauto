@@ -9,7 +9,7 @@
 
             <!--MARK-->
             <div class="search-label">Марка:</div>
-            <select id="search-marks" data-size="5" data-width="240px" class="selectpicker">
+            <select id="search-marks" data-size="5" data-width="220px" class="selectpicker">
                 <option>Любая</option>
                 @if($carMarks)
                     @foreach($carMarks as $mark)
@@ -20,13 +20,13 @@
 
             <!--MODELS-->
             <div class="search-label">Модель:</div>
-            <select id="search-models" data-size="5" data-width="240px" class="selectpicker">
+            <select id="search-models" data-size="5" data-width="220px" class="selectpicker">
                 <option>Любая</option>
             </select>
 
             <!--YEARS-->
             <div class="search-label">Год:</div>
-            <select id="search-from" data-size="5" data-width="118px"  class="selectpicker">
+            <select id="search-from" data-size="5" data-width="220px"  class="selectpicker">
                 <option>От</option>
                 @if($carYears)
                     @foreach($carYears as $year)
@@ -35,7 +35,7 @@
                 @endif
             </select>
 
-            <select id="search-to" data-size="5" data-width="118px"  class="selectpicker">
+            <select id="search-to" data-size="5" data-width="220px"  class="selectpicker">
                 <option>До</option>
                 @if($carYears)
                     @foreach($carYears as $year)
@@ -46,7 +46,12 @@
 
 
         </div>
-        <button id="search-auto" class="btn search-auto">Искать</button>
+        <div class="row">
+            <button id="search-auto" class="col-xs-6 btn search-auto">Искать</button>
+            <button id="sad-auto" class="col-xs-6 btn search-auto">Избранное</button>
+            <button id="seadasadsrch-auto" class="col-xs-12 btn search-auto">Связатся с нами</button>
+        </div>
+
     </div>
 </aside>
 <!-- Sidebar end-->

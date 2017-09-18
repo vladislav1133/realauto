@@ -27,8 +27,9 @@ class IndexController extends SiteController{
 
         $meta = $this->carRepository->getMeta('index');
 
-        $cars=$this->getCars();
 
+        $cars=$this->getCars();
+        //dd($cars);
         $carMarks=$this->carRepository->getMarks();
 
         $carYears=$this->carRepository->getYears();

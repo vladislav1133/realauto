@@ -94,5 +94,20 @@ class CarsController extends Controller
 //
 //        return 'qw';
 
+        return '<tr>
+                    <td><img src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX81/2f607a16-49dd-4650-88b2-9f257ebfc628.JPG" alt=""></td>
+                    <td>1223545</td>
+                    <td>2013</td>
+                    <td>CHEVROLET</td>
+                    <td>TRAX LS</td>
+                    <td>1.4L4</td>
+                    <td>GAS</td>
+                    <td>14783 mi</td>
+                    <td>передняя часть</td>
+                    <td>Вторичные повреждения: незначительные выбоины/царапины</td>
+                    <td>FL - TAMPA SOUTH</td>
+                    <td>-</td>
+                    <td>SDSDS</td>
+                </tr>';
     }
 }

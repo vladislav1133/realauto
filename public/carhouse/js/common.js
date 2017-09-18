@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    $('#main-table .car-table').footable();
+
     updateFavoriteCars()
 
     //Second menu
@@ -44,11 +46,18 @@ $(document).ready(function () {
         delegate: '.btn-contact-us-popup' // child items selector, by clicking on it popup will open
     });
 
-    $('.favorite__btn').click(function () {
+    console.log($('#table-body .favorite__btn'))
+
+
+    $('#main-table').on('click','.favorite__btn',function () {
+
+        console.log('we')
 
         var lotId = $(this).data('lot')
 
         addFavoriteCar(lotId)
+
+
 
         $(this).blur()
 
@@ -85,6 +94,8 @@ function getCookie(name) {
 
 function addFavoriteCar(lotId) {
 
+
+
     var favoriteCars = getCookie('favoriteCars')
 
     if(favoriteCars===undefined) {
@@ -118,10 +129,6 @@ function updateFavoriteCars() {
 
     favoriteCars = JSON.parse(favoriteCars)
 
-    $('.favorite__btn').text('В избранное')
-
-    $('.favorite__btn').removeClass('favorite__btn_added')
-
     $('.favorite__btn').each( function (i) {
 
         var favoriteBtn = $(this)
@@ -129,15 +136,22 @@ function updateFavoriteCars() {
         var lotId = $(this).data('lot')
 
 
+        favoriteCars.forEach(function(item, i) {
+
+                favoriteBtn.html('<i class="fa fa-bookmark-o"></i>')
+        })
 
         favoriteCars.forEach(function(item, i) {
 
             if(lotId === item){
 
-                favoriteBtn.text('добавлено')
+                favoriteBtn.html('<i class="fa fa-bookmark"></i>')
 
-                favoriteBtn.addClass('favorite__btn_added')
             }
         })
+
+
+
+
     })
 }

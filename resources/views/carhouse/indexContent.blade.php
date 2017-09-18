@@ -1,101 +1,60 @@
+
+
 @if($cars)
     <div class="row">
-        @foreach($cars as $k=>$car)
-            <div class="col-lg-6">
-                <div class="list-car-box product ">
-                    <div class="row">
-
-
-                        <div class="product__head">
-                            <h3 class="product__title">
-                                <a href="https://www.copart.com/lot/{{$car->lot_id}}"
-                                   class="product__name">{{$car->year}} {{$car->name}}, №{{$car->lot_id}} </a>
-                            </h3>
+        <table class="table car-table" data-toggle-column="last" data-paging="true" style="background: #fff"
+               data-page-size="15">
+            <thead>
+            <tr>
+                <th data-breakpoints="xs">Фото</th>
+                <th>Лот</th>
+                <th>Год</th>
+                <th data-breakpoints="xs">Марка</th>
+                <th data-breakpoints="xs sm">Модель</th>
+                <th data-breakpoints="xs sm">Двигателя</th>
+                <th data-breakpoints="xs sm">Топливо</th>
+                <th data-breakpoints="xs sm">Трансмисия</th>
+                <th data-breakpoints="xs sm">Одометр</th>
+                <th data-breakpoints="all">Основные повреждения</th>
+                <th data-breakpoints="all">Вторичные повреждения</th>
+                <th data-breakpoints="all">Купить сейчас</th>
+                <th data-breakpoints="all">Дата аукциона</th>
+                <th data-breakpoints="all">Расположение сейчас</th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+            @foreach($cars as $k=>$car)
+                <tr>
+                    <td>
+                        <a href="https://www.copart.com/lot/28004047/{{$car->lot_id}}" target="_blank"><img src="{{$car->path_to_image}}" alt=""></a>
+                    </td>
+                    <td>
+                        <div>
+                            <div>
+                                {{$car->lot_id}}
+                            </div>
+                            <div>
+                                <button class="details-button product__btn favorite__btn" data-lot="{{$car->lot_id}}" title="Добавить в избранное"><i class="fa fa-bookmark-o"></i></button>
+                            </div>
                         </div>
-
-
-                        <div class="col-xs-12">
-                            <a href="https://www.copart.com/lot/{{$car->lot_id}}">
-                                <img class="product__img" src="{{$car['path_to_image']}}"
-                                     alt="car photo">
-                            </a>
-
-                        </div>
-
-                        <div class="col-lg-12 product__list">
-
-                            <p class="col-xs-12 product__property">
-                                <span>Аукцион:</span> copart.com
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Тип Двигателя:</span> {{$car->engine_type}}
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Топливо:</span> {{$car->fuel}}
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Трансмиссия: </span>@if($car->transmission){{$car->transmission}}
-                                @else &mdash; @endif
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Одометр:</span>{{$car->odometer}}
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Основные повреждения: </span>@if($car->primary_damage){{$car->primary_damage}}
-                                @else &mdash; @endif
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Вторичные повреждения: </span>@if($car->secondary_damage){{$car->secondary_damage}}
-                                @else &mdash; @endif
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Расположение сейчас: </span>@if($car->location){{$car->location}}
-                                @else &mdash; @endif
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Дата Аукциона: </span>&mdash;
-                            </p>
-
-                            <p class="col-xs-12 product__property">
-                                <span>Купить сейчас: </span>@if($car->buy_it_now){{$car->buy_it_now}}
-                                @else &mdash; @endif
-                            </p>
-                        </div>
-
-
-                        <div class="col-lg-6">
-                            <a class="details-button product__btn" href="https://www.copart.com/lot/{{$car->lot_id}}"
-                               target="_blank">
-                                Подробнее
-                            </a>
-                        </div>
-                        <div class="col-lg-6">
-                            <button data-lot="{{$car->lot_id}}" class="details-button product__btn favorite__btn" onclick="">
-                                В избранное
-                            </button>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <a class="details-button product__btn btn-contact-us-popup" href="#contact-us-popup">
-                                Рассчитать
-                                лот</a>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-        @endforeach
-            {{$cars->links()}}
+                    </td>
+                    <td>{{$car->year}}</td>
+                    <td>{{$car->name_delay->mark}}</td>
+                    <td>{{$car->name_delay->model}}</td>
+                    <td>{{$car->engine_type}}</td>
+                    <td>{{$car->fuel}}</td>
+                    <td>@if($car->transmission){{$car->transmission}}@else &mdash; @endif</td>
+                    <td>{{$car->odometer}}</td>
+                    <td>@if($car->primary_damage){{$car->primary_damage}}@else &mdash; @endif</td>
+                    <td>@if($car->secondary_damage){{$car->secondary_damage}}@else &mdash; @endif</td>
+                    <td>@if($car->buy_it_now){{$car->buy_it_now}}@else &mdash; @endif</td>
+                    <td>&mdash;</td>
+                    <td>&mdash;</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        {{$cars->links()}}
     </div>
 @endif
 
