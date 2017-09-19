@@ -1,16 +1,4 @@
-//Pagination
-$(document).on('click','.pagination a', function (e) {
-    e.preventDefault();
 
-
-    var page = $(this).attr('href').split('page=')[1];
-
-    getCars(page);
-
-    $('html, body').animate({
-        scrollTop: $("#content").offset().top-95
-    }, 300)
-});
 
 $(document).on('click','#search-auto', function (e) {
     e.preventDefault();
@@ -27,7 +15,8 @@ $(document).on('click','#search-auto', function (e) {
 $(document).on('change','#search-marks', function (e) {
     e.preventDefault();
     var mark=$('#search-marks').val();
-    getSearchModels(mark);
+
+    Search.getSearchModels(mark);
 });
 
 
@@ -41,6 +30,7 @@ $(document).on('change','#search-models', function (e) {
 
 
 function getSearchModels(mark) {
+
 
     $.ajax({
 
@@ -117,12 +107,10 @@ function getCars(page) {
     var from=$('#search-from').val();
     var to=$('#search-to').val();
 
-
     if (mark === 'Любая') mark = 0;
     if (model === 'Любая') model = 0;
     if (to === 'До') to = 0;
     if (from === 'От') from = 0;
-
 
     if (typeof(mark) === 'undefined') mark = 0;
     if (typeof(model) === 'undefined') model = 0;

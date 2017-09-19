@@ -1,5 +1,4 @@
 <div class="hidden">
-    <div style="width: 320px"></div>
     <form id="contact-us-popup" class="cu-form " action="">
         <div class="row">
             <h2 class="cu-form__header col-xs-12">Напишите нам</h2>
@@ -11,6 +10,5 @@
             <input class="col-xs-10 col-xs-offset-1 cu-form__input input-text " type="text" id="name" name="name">
             <button class="col-xs-10 col-xs-offset-1 btn cu-form__btn ">отправить</button>
         </div>
-
     </form>
 </div>

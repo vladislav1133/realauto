@@ -617,7 +617,6 @@ Version:    1.1
 
 #main-table .table-container .car-table {
     margin-bottom: 0;
-    border-collapse: separate;
 }
 
 
@@ -1240,7 +1239,7 @@ body {
 .car-content .car-tags ul li {
     display: inline-block;
     float: left;
-    margin: 0 4px 4px 0px;
+    margin: 0 4px 4px 0;
     border: 1px solid #ebebeb;
     border-radius: 3px;
     font-size: 13px;
@@ -1276,7 +1275,6 @@ body {
     border: none
 }
 
-
 .details-button:hover, .details-button:focus {
     background-color: #890000;
     color:#fff;
@@ -1285,7 +1283,6 @@ body {
 .details-button:focus{
     outline: none;
 }
-
 
 .favorite__btn {
     font-size: 10px;
@@ -1297,6 +1294,12 @@ body {
     color: #6a0000;
 }
 
+.favorite__btn:focus {
+    outline: none;
+}
+#hide-table {
+    display: none;
+}
 .search-from {
     margin-bottom: 10px;
 }
@@ -1744,7 +1747,6 @@ footer .footer-item .gallery-item {
     color: #ffffff;
     padding: 7px 13px;
     background-color: #6a0000;
-    border-radius: 5px;
     text-decoration: none;
     margin: 10px 5px 10px 0px;
     -webkit-transition: background-color 0.3s;
@@ -1759,7 +1761,7 @@ footer .footer-item .gallery-item {
     padding: 20px;
     margin-bottom: 30px;
     border: solid 1px #E4E3E3;
-    border-radius: 5px;
+
 }
 
 .search-block .title {

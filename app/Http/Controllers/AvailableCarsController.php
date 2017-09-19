@@ -15,6 +15,7 @@ class AvailableCarsController extends SiteController
 
     public function __construct(AvailableCarRepository $availableCarRepository, GeneralDataRepository $generalDataRepository){
         parent::__construct(new GeneralDataRepository(new GeneralData()));
+
         $this->availableCarRepository=$availableCarRepository;
 
         $this->indexInfo = $this->generalDataRepository->getInfo('*');
@@ -32,6 +33,7 @@ class AvailableCarsController extends SiteController
 
         $content = view(env('THEME').'.availableCarContent')
             ->render();
+
 
         return view(env('THEME').'.availableCar')
             ->with('info',$this->indexInfo)
@@ -56,6 +58,8 @@ class AvailableCarsController extends SiteController
 
         $content = view(env('THEME').'.availableCarPage2')->with('article',$article);
 
+
+        redirect()->route('home');
         return view(env('THEME').'.blog')
             ->with('meta',$meta)
             ->with('info',$this->indexInfo)

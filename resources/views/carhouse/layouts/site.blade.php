@@ -10,9 +10,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- External CSS libraries -->
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/footable.standalone.min.css">
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
 
+    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
+    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/footable.standalone.min.css">
 
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -40,13 +40,17 @@
 
 <script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
 
+<script src="{{asset(env('THEME'))}}/js/Table.js"></script>
+<script src="{{asset(env('THEME'))}}/js/SearchApp.js"></script>
+<script src="{{asset(env('THEME'))}}/js/indexApp.js"></script>
+
 
 @if(Route::currentRouteName()=='home')
-    <script src="{{asset(env('THEME'))}}/js/search.js"></script>
+   <!--<script src="{{asset(env('THEME'))}}/js/search.js"></script>-->
 @endif
 
+<!--<script src="{{asset(env('THEME'))}}/js/common.js"></script>-->
 
-<script src="{{asset(env('THEME'))}}/js/common.js"></script>
 
 
 

@@ -31,10 +31,12 @@
                     <td>
                         <div>
                             <div>
-                                {{$car->lot_id}}
+                                <a href="https://www.copart.com/lot/28004047/{{$car->lot_id}}" target="_blank">
+                                    {{$car->lot_id}}
+                                </a>
                             </div>
                             <div>
-                                <button class="details-button product__btn favorite__btn" data-lot="{{$car->lot_id}}" title="Добавить в избранное"><i class="fa fa-bookmark-o"></i></button>
+                                <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}" title="Добавить в избранное"><i class="fa fa-bookmark-o"></i></button>
                             </div>
                         </div>
                     </td>
@@ -55,7 +57,7 @@
             </tbody>
         </table>
         </div>
-        <div class="table-pagination">
+    <div class="table-pagination">
             {{$cars->links()}}
         </div>
 @endif

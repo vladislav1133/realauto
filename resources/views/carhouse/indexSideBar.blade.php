@@ -1,7 +1,7 @@
 
 
 <aside class="sidebar">
-    <div class="section-heading">
+    <div id="search" class="section-heading">
         <div>
             <i class="fa fa-search"></i>
             <h2>Поиск</h2>
@@ -52,7 +52,7 @@
 
             <button id="search-auto" class="btn search-auto">Искать</button>
             <button id="sad-auto" class="btn search-auto">Избранное</button>
-            <button id="seadasadsrch-auto" class="btn search-auto">Связатся с нами</button>
+            <a href="#contact-us-popup" id="contact-up-btn" class="btn search-auto">Связатся с нами</a>
         </div>
     </div>
 </aside>
