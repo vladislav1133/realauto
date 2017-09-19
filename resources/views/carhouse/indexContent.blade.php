@@ -1,8 +1,8 @@
 
 
 @if($cars)
-    <div class="row">
-        <table class="table car-table" data-toggle-column="last" data-paging="true" style="background: #fff"
+    <div class="table-container">
+        <table class="table car-table"  data-toggle-column="last" data-paging="true" style="background: #fff"
                data-page-size="15">
             <thead>
             <tr>
@@ -14,7 +14,7 @@
                 <th data-breakpoints="xs sm">Двигателя</th>
                 <th data-breakpoints="xs sm">Топливо</th>
                 <th data-breakpoints="xs sm">Трансмисия</th>
-                <th data-breakpoints="xs sm">Одометр</th>
+                <th class="last-th" data-breakpoints="xs sm">Одометр</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
                 <th data-breakpoints="all">Купить сейчас</th>
@@ -54,8 +54,10 @@
             @endforeach
             </tbody>
         </table>
-        {{$cars->links()}}
-    </div>
+        </div>
+        <div class="table-pagination">
+            {{$cars->links()}}
+        </div>
 @endif
 
 

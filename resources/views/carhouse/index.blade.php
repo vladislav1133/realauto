@@ -14,8 +14,10 @@
                 </div>
                 <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
                     <div id="content">
-                        <div id="main-table">
-                            @include(env('THEME').'.indexContent')
+                        <div class="row">
+                            <div id="main-table">
+                                @include(env('THEME').'.indexContent')
+                            </div>
                         </div>
                         <div id="hide-table" style="display: block">
                         </div>

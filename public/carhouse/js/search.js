@@ -145,6 +145,7 @@ function getCars(page) {
                 $('#main-table').html(hideTable)
             }, 1000);
 
+            updateFavoriteCars()
         }
 
         else {

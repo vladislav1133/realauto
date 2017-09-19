@@ -1,4 +1,5 @@
-<!-- Sidebar start-->
+
+
 <aside class="sidebar">
     <div class="section-heading">
         <div>
@@ -26,32 +27,33 @@
 
             <!--YEARS-->
             <div class="search-label">Год:</div>
-            <select id="search-from" data-size="5" data-width="220px"  class="selectpicker">
-                <option>От</option>
-                @if($carYears)
-                    @foreach($carYears as $year)
-                        <option>{{$year}}</option>
-                    @endforeach
-                @endif
-            </select>
+            <div class="search-from">
+                <select id="search-from" data-size="5" data-width="220px"  class="selectpicker">
+                    <option>От</option>
+                    @if($carYears)
+                        @foreach($carYears as $year)
+                            <option>{{$year}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
 
-            <select id="search-to" data-size="5" data-width="220px"  class="selectpicker">
-                <option>До</option>
-                @if($carYears)
-                    @foreach($carYears as $year)
-                        <option>{{$year}}</option>
-                    @endforeach
-                @endif
-            </select>
+            <div class="search-to">
+                <select id="search-to" data-size="5" data-width="220px"  class="selectpicker">
+                    <option>До</option>
+                    @if($carYears)
+                        @foreach($carYears as $year)
+                            <option>{{$year}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
 
 
+            <button id="search-auto" class="btn search-auto">Искать</button>
+            <button id="sad-auto" class="btn search-auto">Избранное</button>
+            <button id="seadasadsrch-auto" class="btn search-auto">Связатся с нами</button>
         </div>
-        <div class="row">
-            <button id="search-auto" class="col-xs-6 btn search-auto">Искать</button>
-            <button id="sad-auto" class="col-xs-6 btn search-auto">Избранное</button>
-            <button id="seadasadsrch-auto" class="col-xs-12 btn search-auto">Связатся с нами</button>
-        </div>
-
     </div>
 </aside>
-<!-- Sidebar end-->
+

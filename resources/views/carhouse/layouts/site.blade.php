@@ -10,8 +10,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!-- External CSS libraries -->
-    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/footable.standalone.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
+
 
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->

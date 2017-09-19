@@ -94,8 +94,6 @@ function getCookie(name) {
 
 function addFavoriteCar(lotId) {
 
-
-
     var favoriteCars = getCookie('favoriteCars')
 
     if(favoriteCars===undefined) {
@@ -125,6 +123,14 @@ function updateFavoriteCars() {
 
     var favoriteCars = getCookie('favoriteCars')
 
+    console.log(favoriteCars)
+
+    $('.favorite__btn').each( function (i) {
+
+            $(this).html('<i class="fa fa-bookmark-o"></i>')
+    })
+
+
     if(favoriteCars === undefined) return false
 
     favoriteCars = JSON.parse(favoriteCars)
@@ -135,12 +141,6 @@ function updateFavoriteCars() {
 
         var lotId = $(this).data('lot')
 
-
-        favoriteCars.forEach(function(item, i) {
-
-                favoriteBtn.html('<i class="fa fa-bookmark-o"></i>')
-        })
-
         favoriteCars.forEach(function(item, i) {
 
             if(lotId === item){
@@ -149,9 +149,5 @@ function updateFavoriteCars() {
 
             }
         })
-
-
-
-
     })
 }

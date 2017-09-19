@@ -561,9 +561,15 @@ Version:    1.1
 
 .btn {
     border-radius: 2px;
+    outline: none;
+}
+.btn:hover, .btn:focus{
+    outline: none;
 }
 
-
+.table-pagination{
+    text-align: center;
+}
 .cu-form .mfp-close{
     position: absolute;
     top: 0;
@@ -607,6 +613,13 @@ Version:    1.1
     text-decoration: none;
     margin-top: 15px;
 }
+
+
+#main-table .table-container .car-table {
+    margin-bottom: 0;
+    border-collapse: separate;
+}
+
 
 
 /** Product **/
@@ -1284,6 +1297,10 @@ body {
     color: #6a0000;
 }
 
+.search-from {
+    margin-bottom: 10px;
+}
+
     /**TESTIMONIALS AREA START **/
 .testimonials {
     width: 100%;
@@ -1717,6 +1734,7 @@ footer .footer-item .gallery-item {
 /**SIDEBAR AREA START **/
 
 .sidebar .search-auto{
+    width: 100%;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1806,6 +1824,15 @@ footer .footer-item .gallery-item {
     border-radius: 0px;
 }
 
+.footable-header th {
+    background-color: #6a0000;
+    color: #fff;
+    border-right: 1px solid #fff;
+}
+
+.footable-header .last-th {
+    border-right: 1px solid #6a0000;
+}
 /**PRICE-BOX AREA START **/
 .price-box label {
     display: inline-block;
