@@ -40,7 +40,6 @@ class CarRepository extends Repository{
         $this->model=$car;
     }
 
-
     public function getNames(){
 
         $query=Car::select('name')->get()->toArray();
@@ -115,8 +114,8 @@ class CarRepository extends Repository{
             return $years;
     }
 
-    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false){
-        $cars=parent::get($select,$take,$pagination,$where,$orderBy);
+    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false,$whereIn=false){
+        $cars=parent::get($select,$take,$pagination,$where,$orderBy,$whereIn);
 
         $cars=$this->prepareImg($cars);
 

@@ -1736,8 +1736,9 @@ footer .footer-item .gallery-item {
 
 /**SIDEBAR AREA START **/
 
-.sidebar .search-auto{
+.sidebar .search-btn{
     width: 100%;
+    margin-bottom: 10px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1746,16 +1747,17 @@ footer .footer-item .gallery-item {
     letter-spacing: 1px;
     color: #ffffff;
     padding: 7px 13px;
+
     background-color: #6a0000;
     text-decoration: none;
-    margin: 10px 5px 10px 0px;
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s
 }
 
-.sidebar .search-auto:hover {
+.sidebar .search-btn:hover {
     background-color: #890000;
 }
+
 .sidebar {
     background: #fff;
     padding: 20px;
@@ -3438,7 +3440,9 @@ a.tags {
     width: 150px;
 }
 
-
+.search-to {
+    margin-bottom: 10px;
+}
 /**AVAILABLE CAR**/
 
 .acar-body {
@@ -4077,6 +4081,12 @@ a.tags {
     }
 
 
+}
+
+@media (min-width: 970px){
+    .search-btn-slot{
+
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {

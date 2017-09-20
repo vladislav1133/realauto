@@ -7,16 +7,23 @@ abstract class Repository {
 
     protected $model=false;
 
-    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false){
+    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false,$whereIn=false){
 
         $builder=$this->model->select($select);
 
         if($take) {
+
             $builder->take($take);
         }
 
         if($where){
+
             $builder->where($where);
+        }
+
+        if($whereIn){
+
+            $builder->whereIn($whereIn[0],$whereIn[1]);
         }
 
         if($orderBy){
@@ -25,6 +32,7 @@ abstract class Repository {
         }
 
         if($pagination){
+
             return $builder->paginate($pagination);
         }
 

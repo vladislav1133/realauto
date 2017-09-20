@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\CarRepository;
 
 use Cookie;
+use Illuminate\Http\Request;
 use Response;
 use Crypt;
 
@@ -29,14 +30,29 @@ class CarsController extends Controller
 
     public function getYears($mark=false,$model=false){
 
-        $response['years']=$this->carRepository->getYears($mark,$model);
+        $response['years'] = $this->carRepository->getYears($mark,$model);
 
         return response()->json($response);
     }
 
-    public function getCars($mark=false,$model=false,$from=false,$to=false){
+    public function getCars(Request $request){
 
-        $where=false;
+        $where = false;
+
+        $whereIn = false;
+
+        $favoriteCars = json_decode($request->input('favoriteCars'));
+
+        if($favoriteCars){
+
+            $whereIn = ['lot_id', $favoriteCars];
+        }
+
+        $mark = $request->input('mark');
+        $model = $request->input('model');
+        $from = $request->input('from');
+        $to = $request->input('to');
+
 
         if($mark){$where[]=['name','like','%'.$mark.'%'];}
         if($model){$where[]=['name','like','%'.$model.'%'];}
@@ -53,7 +69,7 @@ class CarsController extends Controller
 
 
         $cars=$this->carRepository
-            ->get(['*'],false,config('settings.cars_on_page'),$where,$orderBy);
+            ->get(['*'],false,config('settings.cars_on_page'),$where,$orderBy,$whereIn);
 
 
         return view(env('THEME').'.indexContent')->with('cars',$cars)->render();

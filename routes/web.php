@@ -21,10 +21,10 @@ Route::resource('blog','ArticlesController', ['only' =>['index','show']]);
 Route::post('contact-us','IndexController@contactUs');
 
 //CarsController
-Route::get('cars/{mark?}/{model?}/{from?}/{to?}','CarsController@getCars');
-Route::get('car/marks','CarsController@getMarks');
-Route::get('car/models/{mark}','CarsController@getModels');
-Route::get('car/years/{mark?}/{model?}','CarsController@getYears');
+Route::post('cars','CarsController@getCars');
+Route::get('cars/marks','CarsController@getMarks');
+Route::get('cars/models/{mark}','CarsController@getModels');
+Route::get('cars/years/{mark?}/{model?}','CarsController@getYears');
 
 Route::get('favoritecars','CarsController@getFavoriteCars');
 Route::post('favoritecars','CarsController@getFavoriteCars');

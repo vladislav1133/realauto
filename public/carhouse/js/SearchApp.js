@@ -1,6 +1,12 @@
 var Search = (function () {
 
-    var el = '#search'
+    var el = $('#search')
+
+    var searchBtn = $('#search-auto-btn')
+
+    var favoriteBtn = $('#favorite-search-btn')
+
+    var searchClearBtn = $('#search-clear-btn')
 
     return {
 
@@ -10,17 +16,42 @@ var Search = (function () {
             from: $('#search-from').val()
         },
 
+        showFavorite: false,
+
         init: function () {
 
-            this.event()
+            this.initEvents()
 
             console.log(this.defaultText.any + ' ' + this.defaultText.to + ' ' + this.defaultText.from)
 
         },
 
-        event: function () {
+        initEvents: function () {
 
-            //Get models of mark
+            this.eventGetModels()
+
+            this.eventGetMarks()
+
+            this.eventSearchCars()
+
+            this.eventToggleFavorite()
+
+            this.eventClearSearch()
+        },
+
+        eventGetMarks: function(){
+
+            el.on('change', '#search-models', function (e) {
+                e.preventDefault();
+
+                var mark = $('#search-marks').val();
+                var model = $('#search-models').val();
+                Search.getYears(mark, model);
+            })
+        },
+
+        eventGetModels: function (){
+
             $(el).on('change', '#search-marks', function (e) {
                 e.preventDefault();
 
@@ -28,18 +59,42 @@ var Search = (function () {
 
                 Search.getModels(mark);
             })
+        },
 
-            //Get cars with selected mark and models
-            $(el).on('change', '#search-models', function (e) {
-                e.preventDefault();
+        eventSearchCars: function () {
 
-                var mark = $('#search-marks').val();
-                var model = $('#search-models').val();
-                Search.getYears(mark, model);
+            searchBtn.click(function () {
+                Table.getPage(1)
             })
+        },
 
-            //Search cars
-            $(el).on('click','#search-auto', function (e) {
+        eventClearSearch: function () {
+
+            searchClearBtn.click(function () {
+
+                var mark = $('#search-marks').val(Search.defaultText.any);
+                var model = $('#search-models').val(Search.defaultText.any);
+                var from = $('#search-from').val(Search.defaultText.from);
+                var to = $('#search-to').val(Search.defaultText.to);
+
+            })
+        },
+
+        eventToggleFavorite: function () {
+
+            favoriteBtn.click(function (e) {
+
+                if(!Search.showFavorite){
+
+                    Search.showFavorite = true
+                    favoriteBtn.text('Все')
+                } else {
+
+                    favoriteBtn.text('Избранные')
+                    Search.showFavorite = false
+                }
+
+
                 Table.getPage(1)
             })
         },
@@ -49,7 +104,7 @@ var Search = (function () {
             console.log('getM')
             $.ajax({
 
-                url: '/car/models/' + mark
+                url: '/cars/models/' + mark
 
             }).done(function (response) {
 
@@ -89,7 +144,7 @@ var Search = (function () {
 
             $.ajax({
 
-                url: '/car/years/' + mark + '/' + model
+                url: '/cars/years/' + mark + '/' + model
 
             }).done(function (response) {
 
@@ -114,8 +169,5 @@ var Search = (function () {
             });
         },
 
-        searchCars: function () {
-
-        }
     }
 })()

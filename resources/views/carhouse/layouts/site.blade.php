@@ -40,6 +40,8 @@
 
 <script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
 
+
+<script src="{{asset(env('THEME'))}}/js/SecondMenu.js"></script>
 <script src="{{asset(env('THEME'))}}/js/Table.js"></script>
 <script src="{{asset(env('THEME'))}}/js/SearchApp.js"></script>
 <script src="{{asset(env('THEME'))}}/js/indexApp.js"></script>

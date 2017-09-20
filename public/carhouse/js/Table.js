@@ -2,8 +2,6 @@ var Table = (function () {
 
     var el = '#table'
 
-
-
     return {
 
         init: function () {
@@ -12,39 +10,9 @@ var Table = (function () {
 
             this.updateFavoriteCars()
 
-            this.event()
+            this.initEvents()
 
 
-        },
-
-        event: function () {
-
-            //paginate
-            $(el).on('click', '.pagination a', function (e, data) {
-
-                e.preventDefault();
-
-                var page = $(this).attr('href').split('page=')[1];
-
-                var html = Table.getPage(page);
-
-                Table.render(html)
-
-                $('html, body').animate({
-                    scrollTop: $(el).offset().top - 95
-                }, 300)
-            });
-
-            //add favorite car
-            $(el).on('click','.favorite__btn',function () {
-
-                var lotId = $(this).data('lot')
-
-                Table.addFavoriteCar(lotId)
-
-                $(this).blur()
-
-            })
         },
 
         render: function (html) {
@@ -58,7 +26,7 @@ var Table = (function () {
 
             setTimeout(function () {
                 var hideTable = $('#table #hide-table .table-container').get(0)
-                var hidePaginate = $('#table #hide-table .table-pagination').get(0)
+
                 $('#main-table').html(hideTable)
 
             }, 1000);
@@ -76,7 +44,7 @@ var Table = (function () {
             var to = $('#search-to').val();
 
             if (mark === Search.defaultText.any || typeof(mark) === 'undefined') mark = 0;
-            if (model === Search.defaultText.any || typeof(model) === 'undefined') model = 0;
+            if (model === Search.defaultText.any || typeof(model) === 'undefined') model= 0;
             if (to === Search.defaultText.to || typeof(to) === 'undefined') to = 0;
             if (from === Search.defaultText.from || typeof(from) === 'undefined') from = 0;
 
@@ -85,18 +53,49 @@ var Table = (function () {
 
         getData: function (page, mark, model, from, to) {
 
-            console.log('table getData')
+            var favoriteCars = 0
+
+            if(Search.showFavorite){
+
+                favoriteCars = App.getCookie('favoriteCars')
+
+                console.log(favoriteCars)
+
+                if(favoriteCars === undefined) favoriteCars = 0
+            }
+
+            console.log(favoriteCars)
+            console.log('mark '+mark)
+
+            var data = {
+                'mark': mark,
+                'model': model,
+                'from': from,
+                'to': to,
+                'favoriteCars': favoriteCars,
+                'page':page
+            }
+
             $.ajax({
 
-                url: '/cars/' + mark + '/' + model + '/' + from + '/' + to + '?page=' + page
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+
+                type: "POST",
+
+                url: '/cars',
+
+                data: data
 
             }).done(function (data) {
 
                 if (data) {
-
+                    console.log('table getData done')
                     Table.render(data)
-                }
-                else {
+
+
+                } else {
 
                     Table.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
                 }
@@ -106,12 +105,12 @@ var Table = (function () {
 
         updateFavoriteCars: function () {
 
-            var favoriteCars = this.getCookie('favoriteCars')
-
             $(el + ' .favorite__btn').each(function (i) {
 
                 $(this).html('<i class="fa fa-bookmark-o"></i>')
             })
+
+            var favoriteCars = App.getCookie('favoriteCars')
 
             if (favoriteCars === undefined) return false
 
@@ -128,22 +127,16 @@ var Table = (function () {
                     if (lotId === item) {
 
                         favoriteBtn.html('<i class="fa fa-bookmark"></i>')
-
                     }
                 })
             })
         },
 
-        getCookie: function (name) {
-            var matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        },
+
 
         addFavoriteCar: function (lotId) {
 
-            var favoriteCars = this.getCookie('favoriteCars')
+            var favoriteCars = App.getCookie('favoriteCars')
 
             if (favoriteCars === undefined) {
 
@@ -155,17 +148,66 @@ var Table = (function () {
                 var id = favoriteCars.indexOf(lotId);
 
                 if (id === -1) {
+
                     favoriteCars.push(lotId);
                 } else {
+
                     favoriteCars.splice(id, 1);
                 }
             }
 
-            favoriteCars = JSON.stringify(favoriteCars)
 
-            document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
+
+            if (favoriteCars.length > 0) {
+
+                favoriteCars = JSON.stringify(favoriteCars)
+                document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
+            } else {
+
+                App.deleteCookie('favoriteCars')
+            }
+
+
 
             this.updateFavoriteCars();
-        }
+        },
+
+        initEvents: function () {
+
+            this.eventPaginate()
+
+            this.eventAddFavoriteCar()
+
+
+        },
+
+        eventPaginate: function () {
+
+            $(el).on('click', '.pagination a', function (e, data) {
+
+                e.preventDefault();
+
+                var page = $(this).attr('href').split('page=')[1];
+
+                var html = Table.getPage(page);
+
+                $('html, body').animate({
+                    scrollTop: $(el).offset().top - 95
+                }, 300)
+            });
+        },
+
+        eventAddFavoriteCar: function () {
+
+            $(el).on('click','.favorite__btn',function () {
+
+                var lotId = $(this).data('lot')
+
+                Table.addFavoriteCar(lotId)
+
+                $(this).blur()
+
+            })
+        },
     }
 })()

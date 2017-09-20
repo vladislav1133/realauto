@@ -56,10 +56,11 @@
             @endforeach
             </tbody>
         </table>
-        </div>
-    <div class="table-pagination">
+        <div class="table-pagination">
             {{$cars->links()}}
         </div>
+        </div>
+
 @endif
 
 
