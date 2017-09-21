@@ -68,13 +68,13 @@
                         <button id="search-auto-btn" class="btn search-btn search-btn_search ">Искать</button>
                     </div>
                     <div class="search-btn-col search-btn-slot col-md-12 col-sm-6 col-xs-12 col-lg-12">
-                        <button id="favorite-search-btn" class="btn search-btn ">Избранные</button>
+                        <button id="favorite-search-btn" class="btn search-btn ">Избранное</button>
                     </div>
                     <div class="search-btn-col search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
-                        <button id="search-clear-btn" class="btn search-btn">Сборись</button>
+                        <button id="search-clear-btn" class="btn search-btn">Сбросить</button>
                     </div>
                     <div class="search-btn-col search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
-                        <a id="contact-up-btn" href="#contact-us-popup"  class="btn search-btn ">Связатся с нами</a>
+                        <a id="contact-up-btn" href="#contact-us-popup"  class="btn search-btn ">Связаться с нами</a>
                     </div>
                 </div>
 

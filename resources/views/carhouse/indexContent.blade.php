@@ -7,14 +7,14 @@
             <thead>
             <tr>
                 <th>Фото</th>
-                <th>Лот</th>
+                <th data-breakpoints="xs">Лот</th>
                 <th>Год</th>
-                <th data-breakpoints="xs">Марка</th>
-                <th data-breakpoints="xs">Модель</th>
+                <th>Марка</th>
+                <th >Модель</th>
                 <th data-breakpoints="xs">Двигателя</th>
                 <th data-breakpoints="xs sm">Топливо</th>
                 <th data-breakpoints="xs sm">Трансмисия</th>
-                <th>Одометр</th>
+                <th data-breakpoints="xs">Одометр</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
                 <th data-breakpoints="all">Купить сейчас</th>
