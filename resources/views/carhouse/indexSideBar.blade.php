@@ -13,7 +13,7 @@
             </div>
 
 
-            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
+            <div class="search-col col-xs-12 col-sm-6 col-md-12">
                 <!--MARK-->
                 <div class="search-label">Марка:</div>
                 <select id="search-marks" data-size="5" class="selectpicker search-select">
@@ -33,7 +33,7 @@
 
             </div>
 
-            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
+            <div class="search-col col-xs-12 col-sm-6 col-md-12">
 
                 <!--YEARS-->
                 <div class="search-label">Год:</div>
@@ -64,16 +64,16 @@
 
             <div class="col-xs-12">
                 <div class="row">
-                    <div class="search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
+                    <div class="search-btn-col search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
                         <button id="search-auto-btn" class="btn search-btn search-btn_search ">Искать</button>
                     </div>
-                    <div class="search-btn-slot col-md-12 col-sm-6 col-xs-12 col-lg-12">
+                    <div class="search-btn-col search-btn-slot col-md-12 col-sm-6 col-xs-12 col-lg-12">
                         <button id="favorite-search-btn" class="btn search-btn ">Избранные</button>
                     </div>
-                    <div class="search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
+                    <div class="search-btn-col search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
                         <button id="search-clear-btn" class="btn search-btn">Сборись</button>
                     </div>
-                    <div class="search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
+                    <div class="search-btn-col search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
                         <a id="contact-up-btn" href="#contact-us-popup"  class="btn search-btn ">Связатся с нами</a>
                     </div>
                 </div>

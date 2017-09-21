@@ -3602,6 +3602,7 @@ a.tags {
 }
 
 
+
 @media (max-width:450px) {
     .nav-car-link{
         padding-left: 0;
@@ -3680,6 +3681,14 @@ a.tags {
     }
 }
 @media (max-width: 768px) {
+
+    .search-btn-col {
+        width: 50%;
+    }
+
+    .search-col{
+        width: 50%;
+    }
 
     .item__details_left {
         padding-left: 0;
@@ -4104,6 +4113,16 @@ a.tags {
     }
 }
 
+@media(max-width: 360px){
+    .search-btn-col {
+        width: 100%;
+    }
+
+    .search-col{
+        width: 100%;
+    }
+}
+
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
@@ -4131,6 +4150,9 @@ a.tags {
 }
 
 @media (max-width: 450px){
+
+
+
     .banner__offer{
         width: 90%;
         position: relative;
