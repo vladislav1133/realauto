@@ -8,6 +8,8 @@ var Search = (function () {
 
     var searchClearBtn = $('#search-clear-btn')
 
+
+
     return {
 
         defaultText: {
@@ -72,11 +74,10 @@ var Search = (function () {
 
             searchClearBtn.click(function () {
 
-                var mark = $('#search-marks').val(Search.defaultText.any);
-                var model = $('#search-models').val(Search.defaultText.any);
-                var from = $('#search-from').val(Search.defaultText.from);
-                var to = $('#search-to').val(Search.defaultText.to);
-
+                $('#search-marks').selectpicker('val', Search.defaultText.any);
+                $('#search-models').selectpicker('val', Search.defaultText.any);
+                $('#search-from').selectpicker('val', Search.defaultText.from);
+                $('#search-to').selectpicker('val', Search.defaultText.to);
             })
         },
 

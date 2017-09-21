@@ -121,6 +121,19 @@ Version:    1.1
     margin-top: 15px;
 }
 
+.search-clear-btn{
+    font-weight: 400;
+    font-size: 14px;
+    float: right;
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    right:0;
+}
+
+.search-title{
+    position: relative;
+}
 
 #main-table .table-container .car-table {
     margin-bottom: 0;
@@ -3230,7 +3243,7 @@ a.tags {
         position: relative;
         float: right;
         padding: 9px 10px;
-        margin-top: 32px;
+        margin-top: 25px;
         margin-right: 0px;
         margin-bottom: 8px;
         background-color: transparent;
@@ -3609,6 +3622,7 @@ a.tags {
 }
 
 @media(max-width: 360px){
+
     .search-btn-col {
         width: 100%;
     }

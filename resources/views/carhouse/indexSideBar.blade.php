@@ -7,7 +7,7 @@
 
             <div class="col-xs-12">
                 <i class="fa fa-search"></i>
-                <h2>Поиск</h2>
+                <div class="search-title"><div style="font-size: 27px;">Поиск</div><a id="search-clear-btn" class="search-clear-btn">Сбросить</a></div>
                 <div class="border"></div>
                 <h4>Искать автомобиль</h4>
             </div>
@@ -69,9 +69,6 @@
                     </div>
                     <div class="search-btn-col search-btn-slot col-md-12 col-sm-6 col-xs-12 col-lg-12">
                         <button id="favorite-search-btn" class="btn search-btn ">Избранное</button>
-                    </div>
-                    <div class="search-btn-col search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
-                        <button id="search-clear-btn" class="btn search-btn">Сбросить</button>
                     </div>
                     <div class="search-btn-col search-btn-slot col-md-12 col-sm-6  col-xs-12 col-lg-12">
                         <a id="contact-up-btn" href="#contact-us-popup"  class="btn search-btn ">Связаться с нами</a>
