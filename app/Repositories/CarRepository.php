@@ -69,7 +69,7 @@ class CarRepository extends Repository{
         return $marks;
     }
 
-    public function getModels($mark){
+    public function getModels($mark,$firstName=false){
 
         $names=$this->getNames();
 
@@ -77,9 +77,12 @@ class CarRepository extends Repository{
         $modelsWithKeys=array();
 
         foreach($names as $name){
+
             if(preg_match('/'.$mark.'/',$name)){
+
                 $name=substr($name,strpos($name,' ')+1,strlen($name));
                 $model=substr($name,strpos($name,' ')+1,strlen($name));
+
                 array_push($modelsWithKeys,$model);
             }
 
@@ -90,6 +93,27 @@ class CarRepository extends Repository{
         foreach ($modelsWithKeys as $i){
             array_push($models,$i);
         }
+
+        if($firstName){
+
+            $filterArray=$models;
+
+            foreach ($filterArray as &$model) {
+
+                $model = preg_split('/ /',$model);
+                $model = $model[0];
+            }
+
+            $filterArray = array_unique($filterArray);
+
+            $models=[];
+
+            foreach ($filterArray as $item) {
+
+                array_push($models, $item);
+            }
+        }
+
         return $models;
     }
 

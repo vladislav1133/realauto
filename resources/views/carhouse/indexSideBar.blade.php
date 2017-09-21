@@ -13,10 +13,10 @@
             </div>
 
 
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
                 <!--MARK-->
                 <div class="search-label">Марка:</div>
-                <select id="search-marks" data-size="5" data-width="220px" class="selectpicker">
+                <select id="search-marks" data-size="5" class="selectpicker search-select">
                     <option>Любая</option>
                     @if($carMarks)
                         @foreach($carMarks as $mark)
@@ -27,18 +27,18 @@
 
                 <!--MODELS-->
                 <div class="search-label">Модель:</div>
-                <select id="search-models" data-size="5" data-width="220px" class="selectpicker">
+                <select id="search-models" data-size="5" class="selectpicker search-select">
                     <option>Любая</option>
                 </select>
 
             </div>
 
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
 
                 <!--YEARS-->
                 <div class="search-label">Год:</div>
                 <div class="search-from">
-                    <select id="search-from" data-size="5" data-width="220px"  class="selectpicker">
+                    <select id="search-from" data-size="5"  class="selectpicker search-select">
                         <option>От</option>
                         @if($carYears)
                             @foreach($carYears as $year)
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="search-to">
-                    <select id="search-to" data-size="5" data-width="220px"  class="selectpicker">
+                    <select id="search-to" data-size="5"  class="selectpicker search-select">
                         <option>До</option>
                         @if($carYears)
                             @foreach($carYears as $year)

@@ -6,15 +6,15 @@
                data-page-size="15">
             <thead>
             <tr>
-                <th data-breakpoints="xs">Фото</th>
+                <th>Фото</th>
                 <th>Лот</th>
                 <th>Год</th>
                 <th data-breakpoints="xs">Марка</th>
-                <th data-breakpoints="xs sm">Модель</th>
-                <th data-breakpoints="xs sm">Двигателя</th>
+                <th data-breakpoints="xs">Модель</th>
+                <th data-breakpoints="xs">Двигателя</th>
                 <th data-breakpoints="xs sm">Топливо</th>
                 <th data-breakpoints="xs sm">Трансмисия</th>
-                <th class="last-th" data-breakpoints="xs sm">Одометр</th>
+                <th>Одометр</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
                 <th data-breakpoints="all">Купить сейчас</th>
@@ -26,12 +26,12 @@
             @foreach($cars as $k=>$car)
                 <tr>
                     <td>
-                        <a href="https://www.copart.com/lot/28004047/{{$car->lot_id}}" target="_blank"><img src="{{$car->path_to_image}}" alt=""></a>
+                        <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank"><div><img class="product__img" src="{{$car->path_to_image}}" alt=""></div></a>
                     </td>
                     <td>
                         <div>
                             <div>
-                                <a href="https://www.copart.com/lot/28004047/{{$car->lot_id}}" target="_blank">
+                                <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank">
                                     {{$car->lot_id}}
                                 </a>
                             </div>

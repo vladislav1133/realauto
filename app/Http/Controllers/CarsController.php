@@ -18,12 +18,15 @@ class CarsController extends Controller
     }
 
     public function getMarks(){
+
         $response['marks']=$this->carRepository->getMarks();
+
         return response()->json($response);
     }
 
     public function getModels($mark){
-        $response['models']=$this->carRepository->getModels($mark);
+
+        $response['models']=$this->carRepository->getModels($mark,true);
 
         return response()->json($response);
     }
