@@ -2,13 +2,15 @@ var Search = (function () {
 
     var el = $('#search')
 
-    var searchBtn = $('#search-auto-btn')
-
-    var favoriteBtn = $('#favorite-search-btn')
+    var searchBtn = $('#search-btn')
 
     var searchClearBtn = $('#search-clear-btn')
 
+    var favoriteBtn = '#favorite-search-btn'
 
+    var favoriteClearBtn = '#favorite-clear-btn'
+
+    var favoriteWrapper  = '.favorite-wrapper'
 
     return {
 
@@ -24,80 +26,10 @@ var Search = (function () {
 
             this.initEvents()
 
+            $(window).trigger('disableFavoriteBtn');
+
             console.log(this.defaultText.any + ' ' + this.defaultText.to + ' ' + this.defaultText.from)
 
-        },
-
-        initEvents: function () {
-
-            this.eventGetModels()
-
-            this.eventGetMarks()
-
-            this.eventSearchCars()
-
-            this.eventToggleFavorite()
-
-            this.eventClearSearch()
-        },
-
-        eventGetMarks: function(){
-
-            el.on('change', '#search-models', function (e) {
-                e.preventDefault();
-
-                var mark = $('#search-marks').val();
-                var model = $('#search-models').val();
-                Search.getYears(mark, model);
-            })
-        },
-
-        eventGetModels: function (){
-
-            $(el).on('change', '#search-marks', function (e) {
-                e.preventDefault();
-
-                var mark = $('#search-marks').val();
-
-                Search.getModels(mark);
-            })
-        },
-
-        eventSearchCars: function () {
-
-            searchBtn.click(function () {
-                Table.getPage(1)
-            })
-        },
-
-        eventClearSearch: function () {
-
-            searchClearBtn.click(function () {
-
-                $('#search-marks').selectpicker('val', Search.defaultText.any);
-                $('#search-models').selectpicker('val', Search.defaultText.any);
-                $('#search-from').selectpicker('val', Search.defaultText.from);
-                $('#search-to').selectpicker('val', Search.defaultText.to);
-            })
-        },
-
-        eventToggleFavorite: function () {
-
-            favoriteBtn.click(function (e) {
-
-                if(!Search.showFavorite){
-
-                    Search.showFavorite = true
-                    favoriteBtn.text('Все')
-                } else {
-
-                    favoriteBtn.text('Избранные')
-                    Search.showFavorite = false
-                }
-
-
-                Table.getPage(1)
-            })
         },
 
         getModels: function (mark) {
@@ -169,6 +101,136 @@ var Search = (function () {
                 }
             });
         },
+
+        initEvents: function () {
+
+            this.eventGetModels()
+
+            this.eventGetMarks()
+
+            this.eventSearchCars()
+
+            this.eventToggleFavorite()
+
+            this.eventClearSearch()
+
+            this.eventClearFavorite()
+
+            this.eventDisableFavorite()
+        },
+
+        eventGetMarks: function(){
+
+            el.on('change', '#search-models', function (e) {
+                e.preventDefault();
+
+                var mark = $('#search-marks').val();
+                var model = $('#search-models').val();
+                Search.getYears(mark, model);
+            })
+        },
+
+        eventGetModels: function (){
+
+            $(el).on('change', '#search-marks', function (e) {
+                e.preventDefault();
+
+                var mark = $('#search-marks').val();
+
+                Search.getModels(mark);
+            })
+        },
+
+        eventSearchCars: function () {
+
+            searchBtn.click(function () {
+                Table.getPage(1)
+            })
+        },
+
+        eventClearFavorite: function(){
+
+            $(favoriteWrapper).on('click', '#favorite-clear-btn', function (e) {
+
+                App.deleteCookie('favoriteCars')
+
+
+
+                $(favoriteWrapper).html(
+                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
+
+                $(window).trigger('disableFavoriteBtn');
+
+                Search.showFavorite = false
+
+                Table.getPage(1)
+            })
+
+        },
+
+        eventClearSearch: function () {
+
+            searchClearBtn.click(function () {
+
+                $('#search-marks').selectpicker('val', Search.defaultText.any);
+                $('#search-models').selectpicker('val', Search.defaultText.any);
+                $('#search-from').selectpicker('val', Search.defaultText.from);
+                $('#search-to').selectpicker('val', Search.defaultText.to);
+            })
+        },
+
+        eventToggleFavorite: function () {
+
+            $(favoriteWrapper).on('click','#favorite-search-btn',function (e) {
+
+                var disFavoriteBtn = $('#favorite-search-btn').attr('disabled')
+
+                if('disabled' ===disFavoriteBtn){
+
+                    return false;
+                }
+
+                if(!Search.showFavorite){
+
+                    Search.showFavorite = true
+
+                    $(favoriteWrapper).html(
+                        '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite search-btn_half">Все</a>' +
+                        '<a id="favorite-clear-btn" class="btn search-btn search-btn_favorite search-btn_half">Очистить</a>')
+                } else {
+
+                    $(favoriteWrapper).html(
+                        '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
+                    Search.showFavorite = false
+                }
+
+
+                Table.getPage(1)
+            })
+        },
+
+        eventDisableFavorite: function () {
+
+            $(window).on('disableFavoriteBtn', function(e, data){
+
+
+                var favoriteCars = App.getCookie('favoriteCars')
+
+                if(favoriteCars){
+
+                    $(favoriteBtn).attr('disabled',false)
+                } else {
+
+                    $(favoriteBtn).attr('disabled',true)
+                }
+
+                console.log('Favorite BTN'+favoriteCars)
+            });
+
+
+
+
+        }
 
     }
 })()

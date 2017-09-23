@@ -42,16 +42,17 @@ var Table = (function () {
             var model = $('#search-models').val();
             var from = $('#search-from').val();
             var to = $('#search-to').val();
+            var drive = $('#search-drive').val();
 
             if (mark === Search.defaultText.any || typeof(mark) === 'undefined') mark = 0;
             if (model === Search.defaultText.any || typeof(model) === 'undefined') model= 0;
             if (to === Search.defaultText.to || typeof(to) === 'undefined') to = 0;
             if (from === Search.defaultText.from || typeof(from) === 'undefined') from = 0;
 
-            this.getData(page, mark, model, from, to)
+            this.getData(page, mark, model, from, to, drive)
         },
 
-        getData: function (page, mark, model, from, to) {
+        getData: function (page, mark, model, from, to, drive) {
 
             var favoriteCars = 0
 
@@ -66,14 +67,15 @@ var Table = (function () {
 
             console.log(favoriteCars)
             console.log('mark '+mark)
-
+            console.log('drive '+drive)
             var data = {
                 'mark': mark,
                 'model': model,
                 'from': from,
                 'to': to,
                 'favoriteCars': favoriteCars,
-                'page':page
+                'page': page,
+                'drive': drive,
             }
 
             $.ajax({
@@ -131,8 +133,6 @@ var Table = (function () {
                 })
             })
         },
-
-
 
         addFavoriteCar: function (lotId) {
 
@@ -207,6 +207,7 @@ var Table = (function () {
 
                 $(this).blur()
 
+                $(window).trigger('disableFavoriteBtn');
             })
         },
     }

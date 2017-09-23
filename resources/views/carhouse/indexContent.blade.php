@@ -2,7 +2,7 @@
 
 @if($cars)
     <div class="table-container">
-        <table class="table car-table"  data-toggle-column="last" data-paging="true" style="background: #fff"
+        <table class="table car-table"  data-toggle-column="last" data-paging="true" data-empty="Автомобили не найдеы" style="background: #fff"
                data-page-size="15">
             <thead>
             <tr>
@@ -15,11 +15,14 @@
                 <th data-breakpoints="xs sm">Топливо</th>
                 <th data-breakpoints="xs sm">Трансмисия</th>
                 <th data-breakpoints="xs">Одометр</th>
+                <th data-breakpoints="all">Тип привода</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
                 <th data-breakpoints="all">Купить сейчас</th>
                 <th data-breakpoints="all">Дата аукциона</th>
                 <th data-breakpoints="all">Расположение сейчас</th>
+                <th data-breakpoints="all">Текушая цена</th>
+                <th data-breakpoints="all">Тип документа</th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -47,11 +50,15 @@
                     <td>{{$car->fuel}}</td>
                     <td>@if($car->transmission){{$car->transmission}}@else &mdash; @endif</td>
                     <td>{{$car->odometer}}</td>
-                    <td>@if($car->primary_damage){{$car->primary_damage}}@else &mdash; @endif</td>
-                    <td>@if($car->secondary_damage){{$car->secondary_damage}}@else &mdash; @endif</td>
-                    <td>@if($car->buy_it_now){{$car->buy_it_now}}@else &mdash; @endif</td>
+                    <td>@if($car->drive){{$car->drive}}@else &mdash; @endif</td>
+                    <td>@if($car->primary_damage){{$car->primary_damage}} @else &mdash; @endif</td>
+                    <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
+                    <td>@if($car->buy_it_now){{$car->buy_it_now}} @else &mdash; @endif</td>
                     <td>&mdash;</td>
                     <td>&mdash;</td>
+                    <td>@if($car->current_bid){{$car->current_bid}}@else &mdash; @endif</td>
+                    <td>@if($car->doc_type){{$car->doc_type}}@else &mdash; @endif</td>
+
                 </tr>
             @endforeach
             </tbody>

@@ -44,6 +44,33 @@ class CarsController extends Controller
 
         $whereIn = false;
 
+        $drive = false;
+
+        $drive = $request->input('drive');
+        if($drive){
+
+            switch ($drive) {
+                case 1:
+                    $drive_type = false;
+                    break;
+                case 2:
+                    $drive_type = 'Front-wheel Drive';
+                    break;
+                case 3:
+                    $drive_type = 'Rear-wheel drive';
+                    break;
+                case 4:
+                    $drive_type = 'All wheel drive';
+                    break;
+                default: $drive_type = false;
+            }
+
+            if($drive_type){
+
+                $where[]=['drive','=',$drive_type];
+            }
+        }
+
         $favoriteCars = json_decode($request->input('favoriteCars'));
 
         if($favoriteCars){

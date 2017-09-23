@@ -48,6 +48,8 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
+
+
 .bx-controls-direction{
     position: absolute;
 }
@@ -1255,6 +1257,32 @@ footer .footer-item .gallery-item {
 
 /**SIDEBAR AREA START **/
 
+
+
+.search-btn-title{
+    position: relative;
+
+}
+
+.search-btn-icon {
+    position: absolute;
+    font-size: 15px;
+    left: -17px;
+    z-index: 1000;
+}
+
+.search-btn_favorite {
+    position: relative;
+
+}
+
+.search-btn_favorite span {
+    position: absolute;
+    display: block;
+    font-size: 21px;
+    right: 10px;
+    top: 4px;
+}
 .sidebar .search-btn{
     width: 100%;
     margin-bottom: 10px;
@@ -1266,14 +1294,19 @@ footer .footer-item .gallery-item {
     letter-spacing: 1px;
     color: #ffffff;
     padding: 7px 13px;
-
     background-color: #6a0000;
     text-decoration: none;
-    transition: background-color 0.3s
+    transition: background-color 0.3s;
+    border-radius: 0;
 }
 
 .sidebar .search-btn:hover {
     background-color: #890000;
+}
+
+.sidebar .search-btn_half{
+    width: 50%;
+    float:left
 }
 
 .sidebar {
@@ -1321,6 +1354,14 @@ footer .footer-item .gallery-item {
 
 .round {
     background: #6a0000;
+}
+
+.footable-last-visible{
+
+}
+
+.table thead .footable-last-visible {
+    border-right: 1px solid #6a0000;
 }
 
 .slider.slider-horizontal .slider-track {
@@ -2956,9 +2997,15 @@ a.tags {
 
 }
 
+table tbody td{
+    text-transform: uppercase;
+}
 
+table tbody th{
+    text-transform: none;
+}
 
-.search-to {
+.search-drive {
     margin-bottom: 10px;
 }
 /**AVAILABLE CAR**/
