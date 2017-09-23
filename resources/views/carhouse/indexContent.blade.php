@@ -7,10 +7,10 @@
             <thead>
             <tr>
                 <th>Фото</th>
-                <th data-breakpoints="xs">Лот</th>
+                <th data-breakpoints="">Лот</th>
                 <th data-breakpoints="xs">Год</th>
                 <th>Марка</th>
-                <th data-breakpoints="">Модель</th>
+                <th data-breakpoints="xs">Модель</th>
                 <th data-breakpoints="xs">Двигателя</th>
                 <th data-breakpoints="xs sm">Топливо</th>
                 <th data-breakpoints="xs sm">Трансмисия</th>
