@@ -6,7 +6,7 @@ var Table = (function () {
 
         init: function () {
 
-            $('#main-table .car-table').footable();
+            $('#main-table .car-table').footable({});
 
             this.updateFavoriteCars()
 
@@ -43,16 +43,18 @@ var Table = (function () {
             var from = $('#search-from').val();
             var to = $('#search-to').val();
             var drive = $('#search-drive').val();
+            var fuel = $('#search-fuel').val();
+            var docType = $('#search-doc').val();
 
             if (mark === Search.defaultText.any || typeof(mark) === 'undefined') mark = 0;
             if (model === Search.defaultText.any || typeof(model) === 'undefined') model= 0;
             if (to === Search.defaultText.to || typeof(to) === 'undefined') to = 0;
             if (from === Search.defaultText.from || typeof(from) === 'undefined') from = 0;
 
-            this.getData(page, mark, model, from, to, drive)
+            this.getData(page, mark, model, from, to, drive,fuel,docType)
         },
 
-        getData: function (page, mark, model, from, to, drive) {
+        getData: function (page, mark, model, from, to, drive,fuel,docType) {
 
             var favoriteCars = 0
 
@@ -68,6 +70,7 @@ var Table = (function () {
             console.log(favoriteCars)
             console.log('mark '+mark)
             console.log('drive '+drive)
+
             var data = {
                 'mark': mark,
                 'model': model,
@@ -76,6 +79,8 @@ var Table = (function () {
                 'favoriteCars': favoriteCars,
                 'page': page,
                 'drive': drive,
+                'fuel': fuel,
+                'docType': docType
             }
 
             $.ajax({

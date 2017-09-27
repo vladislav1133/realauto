@@ -14,9 +14,10 @@
 
 
             <div class="search-col col-xs-12 col-sm-6 col-md-12">
+
                 <!--MARK-->
                 <div class="search-label">Марка:</div>
-                <select id="search-marks" data-size="5" class="selectpicker search-select">
+                <select id="search-marks"  class="selectpicker search-select">
                     <option>Любая</option>
                     @if($carMarks)
                         @foreach($carMarks as $mark)
@@ -27,7 +28,7 @@
 
                 <!--MODELS-->
                 <div class="search-label">Модель:</div>
-                <select id="search-models" data-size="5" class="selectpicker search-select">
+                <select id="search-models" class="selectpicker search-select">
                     <option>Любая</option>
                 </select>
 
@@ -38,7 +39,7 @@
                 <!--YEARS-->
                 <div class="search-label">Год:</div>
                 <div class="search-from">
-                    <select id="search-from" data-size="5"  class="selectpicker search-select">
+                    <select id="search-from" class="selectpicker search-select">
                         <option>От</option>
                         @if($carYears)
                             @foreach($carYears as $year)
@@ -49,7 +50,7 @@
                 </div>
 
                 <div class="search-to">
-                    <select id="search-to" data-size="5"  class="selectpicker search-select">
+                    <select id="search-to"  class="selectpicker search-select">
                         <option>До</option>
                         @if($carYears)
                             @foreach($carYears as $year)
@@ -64,14 +65,45 @@
                 <div class="search-label">Привод: </div>
 
                 <div class="search-drive">
-                    <select id="search-drive" data-size="5" class="selectpicker search-select">
-                        <option value="1">Любой</option>
-                        <option value="2">Передний</option>
-                        <option value="3">Задний</option>
-                        <option value="4">Полный</option>
+                    <select multiple id="search-drive" class="selectpicker search-select" title="Не выбрано">
+                        <option value="0">Передний</option>
+                        <option value="1">Задний</option>
+                        <option value="2">Полный</option>
                     </select>
                 </div>
 
+            </div>
+
+            <div class="search-col col-xs-12 col-sm-6 col-md-12">
+                <div class="search-label">Топливо: </div>
+
+                <div class="search-drive">
+                    <select multiple id="search-fuel" data-width="300px" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
+                        <option>Compressed Natural Gas</option>
+                        <option>Convertible To Gaseous Powered</option>
+                        <option>Diesel</option>
+                        <option>Electric</option>
+                        <option>F</option>
+                        <option>Gas</option>
+                        <option>Flexible Fuel</option>
+                        <option>Hybrid Engine</option>
+                        <option>Hydrogen Fuel Cell</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="search-col col-xs-12 col-sm-6 col-md-12">
+                <div class="search-label">Документ: </div>
+
+                <div class="search-drive">
+                    <select multiple id="search-doc" data-width="300px" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
+                        @foreach($doc_type as $doc)
+                            <option>{{$doc}}</option>
+
+                            @endforeach
+
+                    </select>
+                </div>
             </div>
 
             <div class="col-xs-12">

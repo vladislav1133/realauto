@@ -36,11 +36,24 @@ class CarRepository extends Repository
         'WATER/FLOOD ' => 'затопление / наводнение',
     ];
 
-    private $drive_type = [
-        'Front-wheel Drive' => 'Передний привод',
-        'All wheel drive' => 'Полный привод',
-        'Rear-wheel drive' => 'Задний привод',
-    ];
+
+
+
+
+
+
+//    private $drive_type = [
+//
+//        0 => ['Front-wheel Drive'],
+//
+//        1 => ['Rear-wheel Drive'],
+//
+//        2 => ['All Wheel Drive','4fd','4rd','Four By Four','Front Whl Drv W/4x4','Rear Wheel Drv W/4x4 '],
+//
+//       // 'Front-wheel Drive' => 'Передний привод',
+//      //  'All wheel drive' => 'Полный привод',
+//       // 'Rear-wheel drive' => 'Задний привод',
+//    ];
 
     public function __construct(Car $car)
     {
@@ -149,9 +162,9 @@ class CarRepository extends Repository
         return $years;
     }
 
-    public function get($select = '*', $take = false, $pagination = false, $where = false, $orderBy = false, $whereIn = false)
+    public function get($select = '*', $take = false, $pagination = false, $where = false, $orderBy = false, $whereIn = false,$drive=false,$docList=false,$fuelList=false)
     {
-        $cars = parent::get($select, $take, $pagination, $where, $orderBy, $whereIn);
+        $cars = parent::get($select, $take, $pagination, $where, $orderBy, $whereIn,$drive,$docList,$fuelList);
 
         $cars = $this->prepareImg($cars);
 
@@ -164,6 +177,8 @@ class CarRepository extends Repository
         $cars = $this->prepareDamage($cars);
 
         $cars = $this->prepareDrive($cars);
+
+        $cars = $this->prepareSaleDate($cars);
 
         return $cars;
     }
@@ -271,19 +286,21 @@ class CarRepository extends Repository
 
     protected function prepareDrive($cars){
 
+        return $cars;
+    }
+
+    protected function prepareSaleDate($cars) {
+
+
         $cars->transform(function ($item, $key) {
 
-            if ($item->drive) {
+            if ($item->sale_date) {
 
-                foreach ($this->drive_type as $k => $val) {
-
-                    $item->drive = str_replace($k, $val, $item->drive);
-                }
+                $item->sale_date = date('d.m.Y h:i:s',($item->sale_date/ 1000));
             }
             return $item;
         });
 
         return $cars;
     }
-
 }

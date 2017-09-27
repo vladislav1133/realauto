@@ -2998,7 +2998,13 @@ a.tags {
 }
 
 table tbody td{
-    text-transform: uppercase;
+    text-transform: lowercase;
+    font-weight: 700;
+}
+
+table tbody td:first-letter {
+
+    text-transform: uppercase
 }
 
 table tbody th{

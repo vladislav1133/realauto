@@ -11,17 +11,17 @@
                 <th data-breakpoints="xs">Год</th>
                 <th>Марка</th>
                 <th data-breakpoints="xs">Модель</th>
-                <th data-breakpoints="xs">Двигателя</th>
+                <th data-breakpoints="xs">Двигатель</th>
                 <th data-breakpoints="xs sm">Топливо</th>
                 <th data-breakpoints="xs sm">Трансмисия</th>
                 <th data-breakpoints="xs">Одометр</th>
                 <th data-breakpoints="all">Тип привода</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
-                <th data-breakpoints="all">Купить сейчас</th>
-                <th data-breakpoints="all">Дата аукциона</th>
-                <th data-breakpoints="all">Расположение сейчас</th>
-                <th data-breakpoints="all">Текушая цена</th>
+                <th data-breakpoints="md">Дата аукциона</th>
+                <th data-breakpoints="md">Купить сейчас</th>
+                <th data-breakpoints="md">Текушая ставка</th>
+                <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>
             </tr>
             </thead>
@@ -53,13 +53,13 @@
                     <td>@if($car->drive){{$car->drive}}@else &mdash; @endif</td>
                     <td>@if($car->primary_damage){{$car->primary_damage}} @else &mdash; @endif</td>
                     <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
+                    <td>@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
                     <td>@if($car->buy_it_now){{$car->buy_it_now}} @else &mdash; @endif</td>
-                    <td>&mdash;</td>
-                    <td>&mdash;</td>
                     <td>@if($car->current_bid){{$car->current_bid}}@else &mdash; @endif</td>
+                    <td>@if($car->location){{$car->location}}@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->doc_type}}@else &mdash; @endif</td>
-
                 </tr>
+
             @endforeach
             </tbody>
         </table>

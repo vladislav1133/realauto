@@ -1,6 +1,7 @@
 var App = (function () {
 
     return {
+
         init: function () {
 
             SecondMenu.init()
@@ -9,7 +10,6 @@ var App = (function () {
 
             this.initEvents()
         },
-
 
         initEvents: function () {
 

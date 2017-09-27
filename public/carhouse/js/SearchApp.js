@@ -15,14 +15,28 @@ var Search = (function () {
     return {
 
         defaultText: {
+
             any: $('#search-marks').val(),
+
             to: $('#search-to').val(),
+
             from: $('#search-from').val()
         },
 
         showFavorite: false,
 
         init: function () {
+
+            $('.selectpicker').selectpicker({
+                width: 500,
+                selectedTextFormat: 'count > 2',
+                countSelectedText: 'Выбрано {0}',
+                size: 5,
+                selectAllText: 'Выделить все',
+                deselectAllText: 'Убрать все'
+            })
+
+            $('.selectpicker').selectpicker('refresh');
 
             this.initEvents()
 

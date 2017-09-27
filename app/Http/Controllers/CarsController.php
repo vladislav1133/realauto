@@ -13,69 +13,102 @@ class CarsController extends Controller
 {
     protected $carRepository;
 
-    public function __construct(CarRepository $carRepository){
-        $this->carRepository=$carRepository;
+    public function __construct(CarRepository $carRepository)
+    {
+        $this->carRepository = $carRepository;
     }
 
-    public function getMarks(){
+    public function getMarks()
+    {
 
-        $response['marks']=$this->carRepository->getMarks();
+        $response['marks'] = $this->carRepository->getMarks();
 
         return response()->json($response);
     }
 
-    public function getModels($mark){
+    public function getModels($mark)
+    {
 
-        $response['models']=$this->carRepository->getModels($mark,true);
-
-        return response()->json($response);
-    }
-
-    public function getYears($mark=false,$model=false){
-
-        $response['years'] = $this->carRepository->getYears($mark,$model);
+        $response['models'] = $this->carRepository->getModels($mark, true);
 
         return response()->json($response);
     }
 
-    public function getCars(Request $request){
+    public function getYears($mark = false, $model = false)
+    {
+
+        $response['years'] = $this->carRepository->getYears($mark, $model);
+
+        return response()->json($response);
+    }
+
+    public function getCars(Request $request)
+    {
+
 
         $where = false;
 
         $whereIn = false;
 
-        $drive = false;
+        $driveSearch = array();
+
 
         $drive = $request->input('drive');
-        if($drive){
+        $docType = $request->input('docType');
 
-            switch ($drive) {
-                case 1:
-                    $drive_type = false;
-                    break;
-                case 2:
-                    $drive_type = 'Front-wheel Drive';
-                    break;
-                case 3:
-                    $drive_type = 'Rear-wheel drive';
-                    break;
-                case 4:
-                    $drive_type = 'All wheel drive';
-                    break;
-                default: $drive_type = false;
-            }
 
-            if($drive_type){
 
-                $where[]=['drive','=',$drive_type];
+        $docList = array();
+
+        if($docType){
+
+            $docList[0] = 'doc_type';
+            $docList[1] = $docType;
+        }
+
+
+        $drive_type = [
+
+            0 => ['Front-wheel Drive'],
+
+            1 => ['Rear-wheel Drive'],
+
+            2 => ['All Wheel Drive', '4fd', '4rd', 'Four By Four', 'Front Whl Drv W/4x4', 'Rear Wheel Drv W/4x4 '],
+
+        ];
+
+
+        if ($drive) {
+
+            $driveSearch[0] = 'drive';
+
+            $driveSearch[1] = array();
+
+            foreach ($drive as $type) {
+
+                foreach ($drive_type[$type] as $item) {
+
+                    array_push($driveSearch[1], $item);
+                }
             }
         }
 
         $favoriteCars = json_decode($request->input('favoriteCars'));
 
-        if($favoriteCars){
+        if ($favoriteCars) {
 
             $whereIn = ['lot_id', $favoriteCars];
+        }
+
+        $fuel = $request->input('fuel');
+
+
+        $fuelList = array();
+
+        if($fuel){
+
+            $fuelList[0] = 'fuel';
+            $fuelList[1] = $fuel;
         }
 
         $mark = $request->input('mark');
@@ -84,31 +117,43 @@ class CarsController extends Controller
         $to = $request->input('to');
 
 
-        if($mark){$where[]=['name','like','%'.$mark.'%'];}
-        if($model){$where[]=['name','like','%'.$model.'%'];}
-        if($from){$where[]=['year','>=',$from];}
-        if($to){$where[]=['year','<=',$to];}
-
-        $orderBy = array('col'=>'createdAt','sortDir'=>'desc');
-
-        if($to||$from){
-            $orderBy=[];
-            $orderBy['col']='year';
-            $orderBy['sortDir']='asc';
+        if ($mark) {
+            $where[] = ['name', 'like', '%' . $mark . '%'];
+        }
+        if ($model) {
+            $where[] = ['name', 'like', '%' . $model . '%'];
+        }
+        if ($from) {
+            $where[] = ['year', '>=', $from];
+        }
+        if ($to) {
+            $where[] = ['year', '<=', $to];
         }
 
 
-        $cars=$this->carRepository
-            ->get(['*'],false,config('settings.cars_on_page'),$where,$orderBy,$whereIn);
+        $orderBy = array('col' => 'createdAt', 'sortDir' => 'desc');
+
+        if ($to || $from) {
+            $orderBy = [];
+            $orderBy['col'] = 'year';
+            $orderBy['sortDir'] = 'asc';
+        }
 
 
-        return view(env('THEME').'.indexContent')->with('cars',$cars)->render();
+        $cars = $this->carRepository
+            ->get(['*'], false, config('settings.cars_on_page'), $where, $orderBy, $whereIn, $driveSearch, $docList,$fuelList);
+
+
+        return view(env('THEME') . '.indexContent')->with('cars', $cars)->render();
     }
 
-    public function addFavoriteCars(){
+    public function addFavoriteCars()
+    {
 
     }
-    public function getFavoriteCars(){
+
+    public function getFavoriteCars()
+    {
 //
 //
 //        $where=false;
