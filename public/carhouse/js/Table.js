@@ -36,25 +36,24 @@ var Table = (function () {
 
         getPage: function (page) {
 
-            console.log('table getPage')
-
             var mark = $('#search-marks').val();
             var model = $('#search-models').val();
             var from = $('#search-from').val();
             var to = $('#search-to').val();
             var drive = $('#search-drive').val();
             var fuel = $('#search-fuel').val();
-            var docType = $('#search-doc').val();
+            var docAdd = $('#search-doc-add').val();
+            var docRem = $('#search-doc-remove').val();
 
             if (mark === Search.defaultText.any || typeof(mark) === 'undefined') mark = 0;
             if (model === Search.defaultText.any || typeof(model) === 'undefined') model= 0;
             if (to === Search.defaultText.to || typeof(to) === 'undefined') to = 0;
             if (from === Search.defaultText.from || typeof(from) === 'undefined') from = 0;
 
-            this.getData(page, mark, model, from, to, drive,fuel,docType)
+            this.getData(page, mark, model, from, to, drive,fuel,docAdd,docRem)
         },
 
-        getData: function (page, mark, model, from, to, drive,fuel,docType) {
+        getData: function (page, mark, model, from, to, drive,fuel,docAdd,docRem) {
 
             var favoriteCars = 0
 
@@ -62,14 +61,10 @@ var Table = (function () {
 
                 favoriteCars = App.getCookie('favoriteCars')
 
-                console.log(favoriteCars)
-
                 if(favoriteCars === undefined) favoriteCars = 0
             }
 
-            console.log(favoriteCars)
-            console.log('mark '+mark)
-            console.log('drive '+drive)
+
 
             var data = {
                 'mark': mark,
@@ -80,7 +75,8 @@ var Table = (function () {
                 'page': page,
                 'drive': drive,
                 'fuel': fuel,
-                'docType': docType
+                'docAdd': docAdd,
+                'docRem': docRem
             }
 
             $.ajax({
@@ -98,9 +94,8 @@ var Table = (function () {
             }).done(function (data) {
 
                 if (data) {
-                    console.log('table getData done')
-                    Table.render(data)
 
+                    Table.render(data)
 
                 } else {
 

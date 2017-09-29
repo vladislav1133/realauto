@@ -13,21 +13,18 @@ class CarsController extends Controller
 {
     protected $carRepository;
 
-    public function __construct(CarRepository $carRepository)
-    {
+    public function __construct(CarRepository $carRepository) {
         $this->carRepository = $carRepository;
     }
 
-    public function getMarks()
-    {
+    public function getMarks() {
 
         $response['marks'] = $this->carRepository->getMarks();
 
         return response()->json($response);
     }
 
-    public function getModels($mark)
-    {
+    public function getModels($mark) {
 
         $response['models'] = $this->carRepository->getModels($mark, true);
 
@@ -52,19 +49,41 @@ class CarsController extends Controller
 
         $driveSearch = array();
 
+        $docType = array();
+
+        $fuelList = array();
 
         $drive = $request->input('drive');
-        $docType = $request->input('docType');
+        $mark = $request->input('mark');
+        $model = $request->input('model');
+        $from = $request->input('from');
+        $to = $request->input('to');
+        $docAdd = $request->input('docAdd');
+        $docRem = $request->input('docRem');
+
+
+        if($docAdd){
+
+            $docType = $docAdd;
+
+            if($docRem){
+
+                foreach ($docRem as $rem){
+
+                    unset($docType[array_search($rem,$docType)]);
+                }
+            }
+
+            foreach($docType as $doc){
+
+                $where[] = ['doc_type', 'like', '%' .$doc. '%'];
+            }
 
 
 
-        $docList = array();
-
-        if($docType){
-
-            $docList[0] = 'doc_type';
-            $docList[1] = $docType;
         }
+
+
 
 
         $drive_type = [
@@ -103,7 +122,7 @@ class CarsController extends Controller
         $fuel = $request->input('fuel');
 
 
-        $fuelList = array();
+
 
         if($fuel){
 
@@ -111,10 +130,7 @@ class CarsController extends Controller
             $fuelList[1] = $fuel;
         }
 
-        $mark = $request->input('mark');
-        $model = $request->input('model');
-        $from = $request->input('from');
-        $to = $request->input('to');
+
 
 
         if ($mark) {
@@ -139,66 +155,11 @@ class CarsController extends Controller
             $orderBy['sortDir'] = 'asc';
         }
 
-
         $cars = $this->carRepository
-            ->get(['*'], false, config('settings.cars_on_page'), $where, $orderBy, $whereIn, $driveSearch, $docList,$fuelList);
+            ->get(['*'], false, config('settings.cars_on_page'), $where, $orderBy, $whereIn, $driveSearch,$fuelList);
 
 
         return view(env('THEME') . '.indexContent')->with('cars', $cars)->render();
     }
 
-    public function addFavoriteCars()
-    {
-
-    }
-
-    public function getFavoriteCars()
-    {
-//
-//
-//        $where=false;
-//
-//        $where[]=['name','like','%'.$mark.'%'];
-//
-//        $orderBy = array('col'=>'createdAt','sortDir'=>'desc');
-//
-//        if($to||$from){
-//            $orderBy=[];
-//            $orderBy['col']='year';
-//            $orderBy['sortDir']='asc';
-//        }
-//
-//
-//        $cars=$this->carRepository
-//            ->get(['*'],false,config('settings.cars_on_page'),$where,$orderBy);
-//
-//
-//        return view(env('THEME').'.indexContent')->with('cars',$cars)->render();
-//
-//        $cars=['124','3434','6565'];
-//
-//        setcookie('cookie', json_encode($cars), time()+3600);
-//        //$cookie = Cookie::forever('favoriteCars',json_encode($cars),'','');
-//
-//
-//        //$response = Response::make('Hello World');
-//
-//        return 'qw';
-
-        return '<tr>
-                    <td><img src="https://cs.copart.com/v1/AUTH_svc.pdoc00001/PIX81/2f607a16-49dd-4650-88b2-9f257ebfc628.JPG" alt=""></td>
-                    <td>1223545</td>
-                    <td>2013</td>
-                    <td>CHEVROLET</td>
-                    <td>TRAX LS</td>
-                    <td>1.4L4</td>
-                    <td>GAS</td>
-                    <td>14783 mi</td>
-                    <td>передняя часть</td>
-                    <td>Вторичные повреждения: незначительные выбоины/царапины</td>
-                    <td>FL - TAMPA SOUTH</td>
-                    <td>-</td>
-                    <td>SDSDS</td>
-                </tr>';
-    }
 }

@@ -18,9 +18,9 @@
                 <th data-breakpoints="all">Тип привода</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
-                <th data-breakpoints="md">Дата аукциона</th>
-                <th data-breakpoints="md">Купить сейчас</th>
-                <th data-breakpoints="md">Текушая ставка</th>
+                <th data-breakpoints="xs sm md">Дата аукциона</th>
+                <th data-breakpoints="xs sm md">Купить сейчас</th>
+                <th data-breakpoints="xs sm md">Текушая ставка</th>
                 <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>
             </tr>

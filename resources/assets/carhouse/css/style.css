@@ -147,6 +147,11 @@ html body .main-aside .sidebar .section-heading .row .search-select {
 }
 
 
+.main-aside {
+    padding-right: 0;
+    padding-left: 0;
+}
+
 /** Product **/
 
 .product {

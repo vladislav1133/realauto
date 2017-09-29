@@ -7,7 +7,7 @@ abstract class Repository {
 
     protected $model=false;
 
-    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false,$whereIn=false,$drive=false,$docList=false,$fuelList=false){
+    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false,$whereIn=false,$drive=false,$fuelList=false){
 
         $builder=$this->model->select($select);
 
@@ -31,9 +31,6 @@ abstract class Repository {
             $builder->whereIn($drive[0],$drive[1]);
         }
 
-        if($docList){
-            $builder->whereIn($docList[0],$docList[1]);
-        }
 
         if($fuelList){
             $builder->whereIn($fuelList[0],$fuelList[1]);

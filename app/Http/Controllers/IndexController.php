@@ -55,6 +55,14 @@ class IndexController extends SiteController{
             'DC - CERTIFICATE OF TITLE'
         ];
 
+
+        foreach ($doc_type as &$item){
+
+            $item = substr($item,4,strlen($item));
+        }
+
+        $doc_type = array_unique($doc_type);
+
         $cars=$this->getCars();
         //dd($cars);
         $carMarks=$this->carRepository->getMarks();

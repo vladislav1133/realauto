@@ -13,11 +13,11 @@
             </div>
 
 
-            <div class="search-col col-xs-12 col-sm-6 col-md-12">
+            <div class="search-col col-xs-12 col-sm-6 col-md-4">
 
                 <!--MARK-->
                 <div class="search-label">Марка:</div>
-                <select id="search-marks"  class="selectpicker search-select">
+                <select id="search-marks"  class="selectpicker search-select" data-title="Не выбрано">
                     <option>Любая</option>
                     @if($carMarks)
                         @foreach($carMarks as $mark)
@@ -28,19 +28,18 @@
 
                 <!--MODELS-->
                 <div class="search-label">Модель:</div>
-                <select id="search-models" class="selectpicker search-select">
-                    <option>Любая</option>
+                <select id="search-models" class="selectpicker search-select" data-title="Не выбрано">
+
                 </select>
 
             </div>
 
-            <div class="search-col col-xs-12 col-sm-6 col-md-12">
+            <div class="search-col col-xs-12 col-sm-6 col-md-4">
 
                 <!--YEARS-->
                 <div class="search-label">Год:</div>
                 <div class="search-from">
-                    <select id="search-from" class="selectpicker search-select">
-                        <option>От</option>
+                    <select id="search-from" class="selectpicker search-select" data-title="От">
                         @if($carYears)
                             @foreach($carYears as $year)
                                 <option>{{$year}}</option>
@@ -50,8 +49,7 @@
                 </div>
 
                 <div class="search-to">
-                    <select id="search-to"  class="selectpicker search-select">
-                        <option>До</option>
+                    <select id="search-to"  class="selectpicker search-select" data-title="До">
                         @if($carYears)
                             @foreach($carYears as $year)
                                 <option>{{$year}}</option>
@@ -61,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="search-col col-xs-12 col-sm-6 col-md-12">
+            <div class="search-col col-xs-12 col-sm-6 col-md-4">
                 <div class="search-label">Привод: </div>
 
                 <div class="search-drive">
@@ -72,13 +70,9 @@
                     </select>
                 </div>
 
-            </div>
-
-            <div class="search-col col-xs-12 col-sm-6 col-md-12">
                 <div class="search-label">Топливо: </div>
-
                 <div class="search-drive">
-                    <select multiple id="search-fuel" data-width="300px" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
+                    <select multiple id="search-fuel" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
                         <option>Compressed Natural Gas</option>
                         <option>Convertible To Gaseous Powered</option>
                         <option>Diesel</option>
@@ -92,19 +86,32 @@
                 </div>
             </div>
 
-            <div class="search-col col-xs-12 col-sm-6 col-md-12">
+            <div class="search-col col-xs-12 col-sm-6 col-md-4 ">
                 <div class="search-label">Документ: </div>
 
                 <div class="search-drive">
-                    <select multiple id="search-doc" data-width="300px" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
+                    <select multiple id="search-doc-add"  class="selectpicker search-select" data-actions-box="true" title="Добавить">
                         @foreach($doc_type as $doc)
                             <option>{{$doc}}</option>
 
-                            @endforeach
+                        @endforeach
 
                     </select>
                 </div>
+
+                <div class="search-drive">
+                    <select multiple id="search-doc-remove"  class="selectpicker search-select" data-actions-box="true" title="Исключить">
+                        @foreach($doc_type as $doc)
+                            <option>{{$doc}}</option>
+
+                        @endforeach
+
+                    </select>
+                </div>
+
             </div>
+
+           
 
             <div class="col-xs-12">
                 <div class="row">

@@ -28,7 +28,6 @@ var Search = (function () {
         init: function () {
 
             $('.selectpicker').selectpicker({
-                width: 500,
                 selectedTextFormat: 'count > 2',
                 countSelectedText: 'Выбрано {0}',
                 size: 5,
@@ -42,13 +41,10 @@ var Search = (function () {
 
             $(window).trigger('disableFavoriteBtn');
 
-            console.log(this.defaultText.any + ' ' + this.defaultText.to + ' ' + this.defaultText.from)
-
         },
 
         getModels: function (mark) {
 
-            console.log('getM')
             $.ajax({
 
                 url: '/cars/models/' + mark
@@ -75,6 +71,7 @@ var Search = (function () {
 
                     var mark = $('#search-marks').val();
                     var model = $('#search-models').val();
+
                     Search.getYears(mark, model);
                 }
 
@@ -186,10 +183,8 @@ var Search = (function () {
 
             searchClearBtn.click(function () {
 
-                $('#search-marks').selectpicker('val', Search.defaultText.any);
-                $('#search-models').selectpicker('val', Search.defaultText.any);
-                $('#search-from').selectpicker('val', Search.defaultText.from);
-                $('#search-to').selectpicker('val', Search.defaultText.to);
+                $('.selectpicker').selectpicker('val', '');
+
             })
         },
 

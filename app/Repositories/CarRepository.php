@@ -42,19 +42,6 @@ class CarRepository extends Repository
 
 
 
-//    private $drive_type = [
-//
-//        0 => ['Front-wheel Drive'],
-//
-//        1 => ['Rear-wheel Drive'],
-//
-//        2 => ['All Wheel Drive','4fd','4rd','Four By Four','Front Whl Drv W/4x4','Rear Wheel Drv W/4x4 '],
-//
-//       // 'Front-wheel Drive' => 'Передний привод',
-//      //  'All wheel drive' => 'Полный привод',
-//       // 'Rear-wheel drive' => 'Задний привод',
-//    ];
-
     public function __construct(Car $car)
     {
         $this->model = $car;
@@ -162,9 +149,8 @@ class CarRepository extends Repository
         return $years;
     }
 
-    public function get($select = '*', $take = false, $pagination = false, $where = false, $orderBy = false, $whereIn = false,$drive=false,$docList=false,$fuelList=false)
-    {
-        $cars = parent::get($select, $take, $pagination, $where, $orderBy, $whereIn,$drive,$docList,$fuelList);
+    public function get($select = '*', $take = false, $pagination = false, $where = false, $orderBy = false, $whereIn = false,$drive=false,$fuelList=false) {
+        $cars = parent::get($select, $take, $pagination, $where, $orderBy, $whereIn,$drive,$fuelList);
 
         $cars = $this->prepareImg($cars);
 
