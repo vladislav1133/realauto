@@ -15,10 +15,10 @@ var Table = (function () {
 
         },
 
-        render: function (html) {
+        render: function (data) {
 
 
-            $('#hide-table').html(html);
+            $('#hide-table').html(data['table']);
 
             console.log('table render')
 
@@ -28,6 +28,7 @@ var Table = (function () {
                 var hideTable = $('#table #hide-table .table-container').get(0)
 
                 $('#main-table').html(hideTable)
+                $('#total-cars').html(data['carsCount'])
 
             }, 1000);
 
@@ -44,16 +45,17 @@ var Table = (function () {
             var fuel = $('#search-fuel').val();
             var docAdd = $('#search-doc-add').val();
             var docRem = $('#search-doc-remove').val();
+            var highlight = $('#search-highlight').val();
 
             if (mark === Search.defaultText.any || typeof(mark) === 'undefined') mark = 0;
             if (model === Search.defaultText.any || typeof(model) === 'undefined') model= 0;
             if (to === Search.defaultText.to || typeof(to) === 'undefined') to = 0;
             if (from === Search.defaultText.from || typeof(from) === 'undefined') from = 0;
 
-            this.getData(page, mark, model, from, to, drive,fuel,docAdd,docRem)
+            this.getData(page, mark, model, from, to, drive,fuel,docAdd,docRem,highlight)
         },
 
-        getData: function (page, mark, model, from, to, drive,fuel,docAdd,docRem) {
+        getData: function (page, mark, model, from, to, drive,fuel,docAdd,docRem,highlight) {
 
             var favoriteCars = 0
 
@@ -76,7 +78,8 @@ var Table = (function () {
                 'drive': drive,
                 'fuel': fuel,
                 'docAdd': docAdd,
-                'docRem': docRem
+                'docRem': docRem,
+                'highlight': highlight
             }
 
             $.ajax({

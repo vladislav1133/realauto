@@ -18,9 +18,8 @@
                 <!--MARK-->
                 <div class="search-label">Марка:</div>
                 <select id="search-marks"  class="selectpicker search-select" data-title="Не выбрано">
-                    <option>Любая</option>
-                    @if($carMarks)
-                        @foreach($carMarks as $mark)
+                    @if($search['marks'])
+                        @foreach($search['marks'] as $mark)
                             <option>{{$mark}}</option>
                         @endforeach
                     @endif
@@ -40,8 +39,8 @@
                 <div class="search-label">Год:</div>
                 <div class="search-from">
                     <select id="search-from" class="selectpicker search-select" data-title="От">
-                        @if($carYears)
-                            @foreach($carYears as $year)
+                        @if($search['years'])
+                            @foreach($search['years'] as $year)
                                 <option>{{$year}}</option>
                             @endforeach
                         @endif
@@ -50,8 +49,8 @@
 
                 <div class="search-to">
                     <select id="search-to"  class="selectpicker search-select" data-title="До">
-                        @if($carYears)
-                            @foreach($carYears as $year)
+                        @if($search['years'])
+                            @foreach($search['years'] as $year)
                                 <option>{{$year}}</option>
                             @endforeach
                         @endif
@@ -63,7 +62,7 @@
                 <div class="search-label">Привод: </div>
 
                 <div class="search-drive">
-                    <select multiple id="search-drive" class="selectpicker search-select" title="Не выбрано">
+                    <select multiple id="search-drive" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
                         <option value="0">Передний</option>
                         <option value="1">Задний</option>
                         <option value="2">Полный</option>
@@ -73,15 +72,11 @@
                 <div class="search-label">Топливо: </div>
                 <div class="search-drive">
                     <select multiple id="search-fuel" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
-                        <option>Compressed Natural Gas</option>
-                        <option>Convertible To Gaseous Powered</option>
-                        <option>Diesel</option>
-                        <option>Electric</option>
-                        <option>F</option>
-                        <option>Gas</option>
-                        <option>Flexible Fuel</option>
-                        <option>Hybrid Engine</option>
-                        <option>Hydrogen Fuel Cell</option>
+                        @if($search['fuel'])
+                            @foreach($search['fuel'] as $year)
+                                <option>{{$year}}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
             </div>
@@ -90,28 +85,55 @@
                 <div class="search-label">Документ: </div>
 
                 <div class="search-drive">
-                    <select multiple id="search-doc-add"  class="selectpicker search-select" data-actions-box="true" title="Добавить">
-                        @foreach($doc_type as $doc)
-                            <option>{{$doc}}</option>
-
-                        @endforeach
-
+                    <select multiple id="search-doc-add"  data-live-search="true" class="selectpicker search-select" data-actions-box="true" title="Добавить">
+                        @if($search['docType'])
+                            @foreach($search['docType'] as $year)
+                                <option>{{$year}}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
 
                 <div class="search-drive">
-                    <select multiple id="search-doc-remove"  class="selectpicker search-select" data-actions-box="true" title="Исключить">
-                        @foreach($doc_type as $doc)
-                            <option>{{$doc}}</option>
-
-                        @endforeach
-
+                    <select multiple id="search-doc-remove" data-live-search="true"  class="selectpicker search-select" data-actions-box="true" title="Исключить">
+                        @if($search['docType'])
+                            @foreach($search['docType'] as $year)
+                                <option>{{$year}}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
 
             </div>
 
-           
+            <div class="search-col col-xs-12 col-sm-6 col-md-4">
+                <div class="search-label">Основные моменты: </div>
+
+                <div class="search-drive">
+                    <select multiple id="search-highlight" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
+                        <option>ENGINE START PROGRAM</option>
+                        <option>ENHANCED VEHICLES</option>
+                        <option>RUNS AND DRIVES</option>
+                    </select>
+                </div>
+
+                <div class="search-label">Расположение: </div>
+
+                <div class="search-drive">
+                    <select multiple id="search-highlight" data-live-search="true" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
+                        @if($search['location'])
+                            @foreach($search['location'] as $year)
+                                <option>{{$year}}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <b>Total: </b><span id="total-cars">{{$carsTotal}}</span>
+            </div>
+
 
             <div class="col-xs-12">
                 <div class="row">

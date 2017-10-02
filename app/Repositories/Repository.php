@@ -7,7 +7,7 @@ abstract class Repository {
 
     protected $model=false;
 
-    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false,$whereIn=false,$drive=false,$fuelList=false){
+    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false,$whereIn=false,$drive=false){
 
         $builder=$this->model->select($select);
 
@@ -23,17 +23,17 @@ abstract class Repository {
 
         if($whereIn){
 
-            $builder->whereIn($whereIn[0],$whereIn[1]);
+            foreach ($whereIn as $item) {
+
+                $builder->whereIn($item[0], $item[1]);
+            }
+
+
         }
 
         if($drive){
 
             $builder->whereIn($drive[0],$drive[1]);
-        }
-
-
-        if($fuelList){
-            $builder->whereIn($fuelList[0],$fuelList[1]);
         }
 
         if($orderBy){
@@ -53,9 +53,25 @@ abstract class Repository {
 
 
     protected function one($alias,$relation=false){
+
         $result=$this->model->where('alias',$alias)->first();
 
         return $result;
+    }
+
+    public function unique($select,$sortType = 'asc'){
+
+        $builder=$this->model->distinct()->select($select)->orderBy($select,$sortType);
+
+        $uniqueArray = $builder->get()->toArray();
+
+        $response = array();
+
+        foreach ($uniqueArray as $arr){
+
+            array_push($response,$arr[$select]);
+        }
+        return  $response;
     }
 
     public function getMeta($page){

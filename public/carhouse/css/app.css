@@ -1308,7 +1308,7 @@ body {
 }
 
 .favorite__btn {
-    font-size: 10px;
+    font-size: 25px;
     margin: 0;
     padding: 3px 0;
     width: 20px;
@@ -1862,6 +1862,11 @@ footer .footer-item .gallery-item {
 .footable-last-visible{
 
 }
+
+.table {
+    font-size: 16px;
+}
+
 
 .table thead .footable-last-visible {
     border-right: 1px solid #6a0000;

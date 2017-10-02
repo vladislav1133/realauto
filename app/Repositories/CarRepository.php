@@ -74,6 +74,7 @@ class CarRepository extends Repository
 
         $marks = array_unique($marks);
 
+        sort($marks);
 
         return $marks;
     }
@@ -124,6 +125,8 @@ class CarRepository extends Repository
             }
         }
 
+        sort($models);
+
         return $models;
     }
 
@@ -144,13 +147,14 @@ class CarRepository extends Repository
         }
 
         $years = array_unique($years);
+
         sort($years);
 
         return $years;
     }
 
-    public function get($select = '*', $take = false, $pagination = false, $where = false, $orderBy = false, $whereIn = false,$drive=false,$fuelList=false) {
-        $cars = parent::get($select, $take, $pagination, $where, $orderBy, $whereIn,$drive,$fuelList);
+    public function get($select = '*', $take = false, $pagination = false, $where = false, $orderBy = false, $whereIn = false,$drive=false) {
+        $cars = parent::get($select, $take, $pagination, $where, $orderBy, $whereIn,$drive);
 
         $cars = $this->prepareImg($cars);
 
@@ -158,9 +162,9 @@ class CarRepository extends Repository
 
         $cars = $this->prepareOdometer($cars);
 
-        $cars = $this->prepareTransmission($cars);
+        //$cars = $this->prepareTransmission($cars);
 
-        $cars = $this->prepareDamage($cars);
+        //$cars = $this->prepareDamage($cars);
 
         $cars = $this->prepareDrive($cars);
 
@@ -174,6 +178,8 @@ class CarRepository extends Repository
 
         $car = parent::one($alias, $relation);
     }
+
+
 
     protected function prepareImg($cars)
     {

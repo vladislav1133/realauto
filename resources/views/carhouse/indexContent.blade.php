@@ -23,6 +23,7 @@
                 <th data-breakpoints="xs sm md">Текушая ставка</th>
                 <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>
+                <th data-breakpoints="all">Основные моменты</th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -54,10 +55,11 @@
                     <td>@if($car->primary_damage){{$car->primary_damage}} @else &mdash; @endif</td>
                     <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
                     <td>@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
-                    <td>@if($car->buy_it_now){{$car->buy_it_now}} @else &mdash; @endif</td>
-                    <td>@if($car->current_bid){{$car->current_bid}}@else &mdash; @endif</td>
+                    <td>@if($car->buy_it_now){{$car->buy_it_now}}$@else &mdash; @endif</td>
+                    <td>@if($car->current_bid){{$car->current_bid}}$@else &mdash; @endif</td>
                     <td>@if($car->location){{$car->location}}@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->doc_type}}@else &mdash; @endif</td>
+                    <td>@if($car->doc_type){{$car->highlights}}@else &mdash; @endif</td>
                 </tr>
 
             @endforeach

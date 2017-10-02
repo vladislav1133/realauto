@@ -55,24 +55,16 @@ class IndexController extends SiteController{
             'DC - CERTIFICATE OF TITLE'
         ];
 
-
-        foreach ($doc_type as &$item){
-
-            $item = substr($item,4,strlen($item));
-        }
-
-        $doc_type = array_unique($doc_type);
-
         $cars=$this->getCars();
-        //dd($cars);
-        $carMarks=$this->carRepository->getMarks();
 
-        $carYears=$this->carRepository->getYears();
+        $carsTotal = $cars->total();
+
+        $search = $this->getSearch();
 
         return view(env('THEME').'.index')
+            ->with('carsTotal',$carsTotal)
             ->with('cars',$cars)
-            ->with('carMarks',$carMarks)
-            ->with('carYears',$carYears)
+            ->with('search',$search)
             ->with('info',$this->indexInfo)
             ->with('doc_type',$doc_type)
             ->with('meta',$meta)->render();
@@ -99,7 +91,25 @@ class IndexController extends SiteController{
         $cars=$this->carRepository
             ->get(['*'],false,config('settings.cars_on_page'),false,array('col'=>'createdAt','sortDir'=>'desc'));
 
+
         return $cars;
+    }
+
+    protected function getSearch(){
+
+        $search = array();
+
+        $search['marks'] = $this->carRepository->getMarks();
+
+        $search['years'] = $this->carRepository->getYears();
+
+        $search['location'] = $this->carRepository->unique('location');
+
+        $search['fuel'] = config('car_search.fuel');
+
+        $search['docType'] = $this->carRepository->unique('doc_type');
+
+        return $search;
     }
 
 

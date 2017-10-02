@@ -19,7 +19,10 @@ class CarsController extends Controller
 
     public function getMarks() {
 
-        $response['marks'] = $this->carRepository->getMarks();
+        $marks = $this->carRepository->getMarks();
+
+        $response['marks'] = $marks;
+
 
         return response()->json($response);
     }
@@ -39,19 +42,26 @@ class CarsController extends Controller
         return response()->json($response);
     }
 
-    public function getCars(Request $request)
-    {
+    public function getCars(Request $request) {
 
 
         $where = false;
 
-        $whereIn = false;
+        $whereIn = array();
 
         $driveSearch = array();
 
-        $docType = array();
+        $docList = array();
 
-        $fuelList = array();
+        $drive_type = [
+
+            0 => ['Front-wheel Drive'],
+
+            1 => ['Rear-wheel Drive'],
+
+            2 => ['All Wheel Drive', '4fd', '4rd', 'Four By Four', 'Front Whl Drv W/4x4', 'Rear Wheel Drv W/4x4 '],
+
+        ];
 
         $drive = $request->input('drive');
         $mark = $request->input('mark');
@@ -60,7 +70,9 @@ class CarsController extends Controller
         $to = $request->input('to');
         $docAdd = $request->input('docAdd');
         $docRem = $request->input('docRem');
-
+        $highlight = $request->input('highlight');
+        $fuel = $request->input('fuel');
+        $favoriteCars = json_decode($request->input('favoriteCars'));
 
         if($docAdd){
 
@@ -76,25 +88,16 @@ class CarsController extends Controller
 
             foreach($docType as $doc){
 
-                $where[] = ['doc_type', 'like', '%' .$doc. '%'];
+                array_push($docList,$doc);
             }
 
-
-
+            array_push($whereIn,['doc_type',$docList]);
         }
 
 
+        if($fuel) array_push($whereIn,['fuel',$fuel]);
 
-
-        $drive_type = [
-
-            0 => ['Front-wheel Drive'],
-
-            1 => ['Rear-wheel Drive'],
-
-            2 => ['All Wheel Drive', '4fd', '4rd', 'Four By Four', 'Front Whl Drv W/4x4', 'Rear Wheel Drv W/4x4 '],
-
-        ];
+        if($highlight) array_push($whereIn,['highlights',$highlight]);
 
 
         if ($drive) {
@@ -112,24 +115,10 @@ class CarsController extends Controller
             }
         }
 
-        $favoriteCars = json_decode($request->input('favoriteCars'));
-
         if ($favoriteCars) {
 
             $whereIn = ['lot_id', $favoriteCars];
         }
-
-        $fuel = $request->input('fuel');
-
-
-
-
-        if($fuel){
-
-            $fuelList[0] = 'fuel';
-            $fuelList[1] = $fuel;
-        }
-
 
 
 
@@ -150,16 +139,22 @@ class CarsController extends Controller
         $orderBy = array('col' => 'createdAt', 'sortDir' => 'desc');
 
         if ($to || $from) {
+
             $orderBy = [];
             $orderBy['col'] = 'year';
             $orderBy['sortDir'] = 'asc';
         }
 
+
+
         $cars = $this->carRepository
-            ->get(['*'], false, config('settings.cars_on_page'), $where, $orderBy, $whereIn, $driveSearch,$fuelList);
+            ->get(['*'], false, config('settings.cars_on_page'), $where, $orderBy, $whereIn, $driveSearch);
 
+        $carsCount = $cars->total();
 
-        return view(env('THEME') . '.indexContent')->with('cars', $cars)->render();
+        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->render();
+
+        return ['table'=>$carsTable,'carsCount'=>$carsCount];
     }
 
 }
