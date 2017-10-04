@@ -7,13 +7,20 @@ abstract class Repository {
 
     protected $model=false;
 
-    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false,$whereIn=false,$drive=false){
+    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$distinct = false){
 
-        $builder=$this->model->select($select);
+        if($distinct) {
 
-        if($take) {
+            $builder=$this->model->distinct()->select($select);
+        } else {
 
-            $builder->take($take);
+            $builder=$this->model->select($select);
+        }
+
+
+        if($orderBy){
+
+            $builder->orderBy($orderBy[0], $orderBy[1]);
         }
 
         if($where){
@@ -31,22 +38,12 @@ abstract class Repository {
 
         }
 
-        if($drive){
 
-            $builder->whereIn($drive[0],$drive[1]);
-        }
-
-        if($orderBy){
-
-            $builder->orderBy($orderBy['col'], $orderBy['sortDir']);
-        }
 
         if($pagination){
 
             return $builder->paginate($pagination);
         }
-
-
 
         return $builder->get();
     }

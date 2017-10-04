@@ -35,52 +35,28 @@ var Table = (function () {
             this.updateFavoriteCars()
         },
 
-        getPage: function (page) {
+        getPage: function (page, data) {
 
-            var mark = $('#search-marks').val();
-            var model = $('#search-models').val();
-            var from = $('#search-from').val();
-            var to = $('#search-to').val();
-            var drive = $('#search-drive').val();
-            var fuel = $('#search-fuel').val();
-            var docAdd = $('#search-doc-add').val();
-            var docRem = $('#search-doc-remove').val();
-            var highlight = $('#search-highlight').val();
+            var favoriteCars = []
 
-            if (mark === Search.defaultText.any || typeof(mark) === 'undefined') mark = 0;
-            if (model === Search.defaultText.any || typeof(model) === 'undefined') model= 0;
-            if (to === Search.defaultText.to || typeof(to) === 'undefined') to = 0;
-            if (from === Search.defaultText.from || typeof(from) === 'undefined') from = 0;
+            if (Search.showFavorite) {
 
-            this.getData(page, mark, model, from, to, drive,fuel,docAdd,docRem,highlight)
+                favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
+
+                if (favoriteCars === undefined) favoriteCars = []
+            }
+
+
+            data['favoriteCars'] = favoriteCars
+            data['page'] = page
+
+            this.getData(data)
         },
 
-        getData: function (page, mark, model, from, to, drive,fuel,docAdd,docRem,highlight) {
+        getData: function (data) {
 
-            var favoriteCars = 0
-
-            if(Search.showFavorite){
-
-                favoriteCars = App.getCookie('favoriteCars')
-
-                if(favoriteCars === undefined) favoriteCars = 0
-            }
-
-
-
-            var data = {
-                'mark': mark,
-                'model': model,
-                'from': from,
-                'to': to,
-                'favoriteCars': favoriteCars,
-                'page': page,
-                'drive': drive,
-                'fuel': fuel,
-                'docAdd': docAdd,
-                'docRem': docRem,
-                'highlight': highlight
-            }
+            console.log('DATA')
+            console.log(data)
 
             $.ajax({
 
@@ -95,6 +71,7 @@ var Table = (function () {
                 data: data
 
             }).done(function (data) {
+
 
                 if (data) {
 
@@ -160,7 +137,6 @@ var Table = (function () {
             }
 
 
-
             if (favoriteCars.length > 0) {
 
                 favoriteCars = JSON.stringify(favoriteCars)
@@ -171,20 +147,18 @@ var Table = (function () {
             }
 
 
-
             this.updateFavoriteCars();
         },
 
         initEvents: function () {
 
-            this.eventPaginate()
+            this.onPaginate()
 
-            this.eventAddFavoriteCar()
-
+            this.onAddFavoriteCar()
 
         },
 
-        eventPaginate: function () {
+        onPaginate: function () {
 
             $(el).on('click', '.pagination a', function (e, data) {
 
@@ -192,7 +166,9 @@ var Table = (function () {
 
                 var page = $(this).attr('href').split('page=')[1];
 
-                var html = Table.getPage(page);
+                console.log('PAGE ' + page)
+
+                var html = Table.getPage(page, Search.getSearchData());
 
                 $('html, body').animate({
                     scrollTop: $(el).offset().top - 95
@@ -200,9 +176,9 @@ var Table = (function () {
             });
         },
 
-        eventAddFavoriteCar: function () {
+        onAddFavoriteCar: function () {
 
-            $(el).on('click','.favorite__btn',function () {
+            $(el).on('click', '.favorite__btn', function () {
 
                 var lotId = $(this).data('lot')
 
@@ -213,5 +189,7 @@ var Table = (function () {
                 $(window).trigger('disableFavoriteBtn');
             })
         },
+
+
     }
 })()

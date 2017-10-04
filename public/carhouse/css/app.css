@@ -1867,6 +1867,15 @@ footer .footer-item .gallery-item {
     font-size: 16px;
 }
 
+#th-auc-sort {
+    color: rgba(255,255,255,0.5);
+    -webkit-transition: 0.3s color ease;
+    transition: 0.3s color ease;
+}
+
+#th-auc-sort:hover {
+    color: #fff;
+}
 
 .table thead .footable-last-visible {
     border-right: 1px solid #6a0000;

@@ -18,9 +18,9 @@
                 <th data-breakpoints="all">Тип привода</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
-                <th data-breakpoints="xs sm md">Дата аукциона</th>
-                <th data-breakpoints="xs sm md">Купить сейчас</th>
-                <th data-breakpoints="xs sm md">Текушая ставка</th>
+                <th data-breakpoints="xs sm md">Дата аукциона </th>
+                <th data-breakpoints="xs sm md">Купить сейчас, $</th>
+                <th data-breakpoints="xs sm md">Текушая ставка, $</th>
                 <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>
                 <th data-breakpoints="all">Основные моменты</th>
@@ -44,19 +44,19 @@
                             </div>
                         </div>
                     </td>
-                    <td>{{$car->year}}</td>
-                    <td>{{$car->name_delay->mark}}</td>
-                    <td>{{$car->name_delay->model}}</td>
-                    <td>{{$car->engine_type}}</td>
-                    <td>{{$car->fuel}}</td>
+                    <td>@if($car->year){{$car->year}}@else &mdash; @endif</td>
+                    <td>@if($car->mark){{$car->mark}}@else &mdash; @endif</td>
+                    <td>@if($car->model){{$car->model}}@else &mdash; @endif</td>
+                    <td>@if($car->engine_type){{$car->engine_type}}@else &mdash; @endif</td>
+                    <td>@if($car->fuel){{$car->fuel}}@else &mdash; @endif</td>
                     <td>@if($car->transmission){{$car->transmission}}@else &mdash; @endif</td>
-                    <td>{{$car->odometer}}</td>
+                    <td>@if($car->odometer){{$car->odometer}}@else &mdash; @endif</td>
                     <td>@if($car->drive){{$car->drive}}@else &mdash; @endif</td>
-                    <td>@if($car->primary_damage){{$car->primary_damage}} @else &mdash; @endif</td>
+                    <td>@if($car->primary_damage){{$car->primary_damage}}@else &mdash; @endif</td>
                     <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
                     <td>@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
-                    <td>@if($car->buy_it_now){{$car->buy_it_now}}$@else &mdash; @endif</td>
-                    <td>@if($car->current_bid){{$car->current_bid}}$@else &mdash; @endif</td>
+                    <td>@if($car->buy_it_now){{$car->buy_it_now}}@else &mdash; @endif</td>
+                    <td>@if($car->current_bid){{$car->current_bid}}@else &mdash; @endif</td>
                     <td>@if($car->location){{$car->location}}@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->doc_type}}@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->highlights}}@else &mdash; @endif</td>

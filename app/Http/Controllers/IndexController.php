@@ -25,6 +25,8 @@ class IndexController extends SiteController{
 
     public function index(){
 
+       // dd($this->carRepository->get('year','','','','',true)->toArray());
+
         $meta = $this->carRepository->getMeta('index');
 
         $doc_type = [
@@ -89,7 +91,7 @@ class IndexController extends SiteController{
     protected function getCars(){
 
         $cars=$this->carRepository
-            ->get(['*'],false,config('settings.cars_on_page'),false,array('col'=>'createdAt','sortDir'=>'desc'));
+            ->getCars(['*'],config('settings.cars_on_page'),['sale_date','asc']);
 
 
         return $cars;

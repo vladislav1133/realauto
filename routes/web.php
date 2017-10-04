@@ -22,9 +22,10 @@ Route::post('contact-us','IndexController@contactUs');
 
 //CarsController
 Route::post('cars','CarsController@getCars');
-Route::get('cars/marks','CarsController@getMarks');
-Route::get('cars/models/{mark}','CarsController@getModels');
-Route::get('cars/years/{mark?}/{model?}','CarsController@getYears');
+Route::post('cars/marks','CarsController@getMarks');
+Route::post('cars/models','CarsController@getModels');
+Route::post('cars/locations','CarsController@getDocs');
+
 
 Route::get('favoritecars','CarsController@getFavoriteCars');
 Route::post('favoritecars','CarsController@getFavoriteCars');

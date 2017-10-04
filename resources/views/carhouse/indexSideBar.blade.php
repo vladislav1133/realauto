@@ -6,7 +6,8 @@
         <div class="row">
 
             <div class="col-xs-12">
-                <i class="fa fa-search"></i>
+
+                <i id="search-preloader" class="fa fa-search"><img id="search-preloader-img" style="display: none" width="50%" height="50%" src="{{asset('carhouse/img/search_preloader.svg')}}" alt=""></i>
                 <div class="search-title"><div style="font-size: 27px;">Поиск</div><a id="search-clear-btn" class="search-clear-btn">Сбросить</a></div>
                 <div class="border"></div>
                 <h4>Искать автомобиль</h4>
@@ -63,9 +64,9 @@
 
                 <div class="search-drive">
                     <select multiple id="search-drive" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
-                        <option value="0">Передний</option>
-                        <option value="1">Задний</option>
-                        <option value="2">Полный</option>
+                        <option value="0">Front-wheel Drive</option>
+                        <option value="1">Rear-wheel Drive</option>
+                        <option value="2">All Wheel Drive</option>
                     </select>
                 </div>
 
@@ -120,7 +121,7 @@
                 <div class="search-label">Расположение: </div>
 
                 <div class="search-drive">
-                    <select multiple id="search-highlight" data-live-search="true" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
+                    <select multiple id="search-location" data-live-search="true" class="selectpicker search-select" data-actions-box="true" title="Не выбрано">
                         @if($search['location'])
                             @foreach($search['location'] as $year)
                                 <option>{{$year}}</option>

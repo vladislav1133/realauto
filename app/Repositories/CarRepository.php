@@ -4,8 +4,7 @@ namespace App\Repositories;
 
 use App\Car;
 
-class CarRepository extends Repository
-{
+class CarRepository extends Repository {
 
     private $car_dmg = [
         'ALL OVER ' => 'повсеместные повреждения',
@@ -38,17 +37,12 @@ class CarRepository extends Repository
 
 
 
-
-
-
-
     public function __construct(Car $car)
     {
         $this->model = $car;
     }
 
-    public function getNames()
-    {
+    public function getNames() {
 
         $query = Car::select('name')->get()->toArray();
         $names = array();
@@ -60,10 +54,10 @@ class CarRepository extends Repository
         return $names;
     }
 
-    public function getMarks()
-    {
+    public function getMarks() {
 
-        $names = $this->getNames();
+        $names = $this->unique('name');
+
         $marks = array();
 
         foreach ($names as $name) {
@@ -78,6 +72,7 @@ class CarRepository extends Repository
 
         return $marks;
     }
+
 
     public function getModels($mark, $firstName = false)
     {
@@ -130,31 +125,21 @@ class CarRepository extends Repository
         return $models;
     }
 
-    public function getYears($mark = false, $model = false)
-    {
+    public function getYears() {
 
-        $names = $this->getNames();
-        $years = array();
-
-        if ($mark == false) $mark = '';
-        if ($model == false) $model = '';
-
-        foreach ($names as $name) {
-            if (preg_match('/' . $mark . '/', $name) && preg_match('/' . $model . '/', $name)) {
-                $year = substr($name, 0, strpos($name, ' ') + 1);
-                array_push($years, $year);
-            }
-        }
-
-        $years = array_unique($years);
-
-        sort($years);
+        $years = $this->unique('year','asc');
 
         return $years;
     }
 
-    public function get($select = '*', $take = false, $pagination = false, $where = false, $orderBy = false, $whereIn = false,$drive=false) {
-        $cars = parent::get($select, $take, $pagination, $where, $orderBy, $whereIn,$drive);
+    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$distinct = false) {
+        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$distinct);
+
+        return $query;
+    }
+
+    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$distinct = false) {
+        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$distinct);
 
         $cars = $this->prepareImg($cars);
 
@@ -162,13 +147,10 @@ class CarRepository extends Repository
 
         $cars = $this->prepareOdometer($cars);
 
-        //$cars = $this->prepareTransmission($cars);
-
-        //$cars = $this->prepareDamage($cars);
-
         $cars = $this->prepareDrive($cars);
 
         $cars = $this->prepareSaleDate($cars);
+
 
         return $cars;
     }
@@ -200,14 +182,17 @@ class CarRepository extends Repository
     protected function prepareMarkAndModel($cars)
     {
         $cars->transform(function ($item, $key) {
+
             if (is_string($item->name)) {
+
                 $item->name = substr($item->name, strpos($item->name, ' ') + 1, strlen($item->name));
+
                 $mark = substr($item->name, 0, strpos($item->name, ' '));
+
                 $model = substr($item->name, strpos($item->name, ' ') + 1, strlen($item->name));
-                $arr['mark'] = $mark;
-                $arr['model'] = $model;
-                $arr = json_encode($arr);
-                $item->name_delay = json_decode($arr);
+
+                $item['mark'] = $mark;
+                $item['model'] = $model;
             }
             return $item;
         });
