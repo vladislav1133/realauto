@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Car;
+use Carbon\Carbon;
 
 class CarRepository extends Repository {
 
@@ -273,7 +274,7 @@ class CarRepository extends Repository {
 
             if ($item->sale_date) {
 
-                $item->sale_date = date('d.m.Y h:i:s',($item->sale_date/ 1000));
+                $item->sale_date = Carbon::createFromTimestamp($item->sale_date/1000)->format('d/m/Y');
             }
             return $item;
         });

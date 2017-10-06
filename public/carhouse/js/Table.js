@@ -2,6 +2,38 @@ var Table = (function () {
 
     var el = '#table'
 
+    function onPaginate() {
+
+        $(el).on('click', '.pagination a', function (e, data) {
+
+            e.preventDefault();
+
+            var page = $(this).attr('href').split('page=')[1];
+
+            console.log('PAGE ' + page)
+
+            var html = Table.getPage(page, Search.getSearchData());
+
+            $('html, body').animate({
+                scrollTop: $(el).offset().top - 95
+            }, 300)
+        });
+    }
+
+    function onAddFavoriteCar() {
+
+        $(el).on('click', '.favorite__btn', function () {
+
+            var lotId = $(this).data('lot')
+
+            Table.addFavoriteCar(lotId)
+
+            $(this).blur()
+
+            $(window).trigger('disableFavoriteBtn');
+        })
+    }
+
     return {
 
         init: function () {
@@ -17,18 +49,20 @@ var Table = (function () {
 
         render: function (data) {
 
-
             $('#hide-table').html(data['table']);
-
-            console.log('table render')
-
             $('#hide-table .car-table').footable();
 
             setTimeout(function () {
-                var hideTable = $('#table #hide-table .table-container').get(0)
 
-                $('#main-table').html(hideTable)
+                let tBody = $('#table #hide-table .table-container tbody').html();
+                let pagination = $('#hide-table .table-pagination').html()
+
+                console.log(tBody)
+
+                $('#main-table .table-pagination').html(pagination)
+                $('#main-table tbody').html(tBody)
                 $('#total-cars').html(data['carsCount'])
+
 
             }, 1000);
 
@@ -152,43 +186,13 @@ var Table = (function () {
 
         initEvents: function () {
 
-            this.onPaginate()
+            onPaginate()
 
-            this.onAddFavoriteCar()
+            onAddFavoriteCar()
 
         },
 
-        onPaginate: function () {
 
-            $(el).on('click', '.pagination a', function (e, data) {
-
-                e.preventDefault();
-
-                var page = $(this).attr('href').split('page=')[1];
-
-                console.log('PAGE ' + page)
-
-                var html = Table.getPage(page, Search.getSearchData());
-
-                $('html, body').animate({
-                    scrollTop: $(el).offset().top - 95
-                }, 300)
-            });
-        },
-
-        onAddFavoriteCar: function () {
-
-            $(el).on('click', '.favorite__btn', function () {
-
-                var lotId = $(this).data('lot')
-
-                Table.addFavoriteCar(lotId)
-
-                $(this).blur()
-
-                $(window).trigger('disableFavoriteBtn');
-            })
-        },
 
 
     }

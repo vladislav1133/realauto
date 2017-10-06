@@ -640,10 +640,8 @@ html body .main-aside .sidebar .section-heading .row .search-select {
 }
 
 
-.main-aside {
-    padding-right: 0;
-    padding-left: 0;
-}
+
+
 
 /** Product **/
 
@@ -910,7 +908,7 @@ body {
     top: -95px;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 5000;
 }
 
 .double-nav-container_show {
@@ -1111,13 +1109,6 @@ body {
 }
 
 
-.search-label {
-    color: #363f48;
-    display: block;
-    font-weight: bold;
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
 .section-heading i {
     float: left;
     width: 46px;
@@ -1757,6 +1748,48 @@ footer .footer-item .gallery-item {
     border: 0;
 }
 
+
+/** SEARCH **/
+
+.search {
+}
+
+.search__head {
+
+}
+
+.search__icon{
+
+}
+.search__label {
+    color: #363f48;
+    display: block;
+    font-weight: bold;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.search__col {
+
+}
+
+.search__col_left{
+    padding-right: 5px;
+}
+
+.search__col_right{
+    padding-left: 5px;
+}
+
+.search__select {
+    width: 100% !important;
+}
+.search__select .btn, .search__select li a {
+    font-size: 12px;
+}
+
+
+
 /**SIDEBAR AREA START **/
 
 
@@ -1813,8 +1846,9 @@ footer .footer-item .gallery-item {
 }
 
 .sidebar {
+    font-size: 12px;
     background: #fff;
-    padding: 20px;
+    padding: 10px;
     margin-bottom: 30px;
     border: solid 1px #E4E3E3;
 
@@ -1864,7 +1898,7 @@ footer .footer-item .gallery-item {
 }
 
 .table {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 #th-auc-sort {
@@ -4184,10 +4218,7 @@ table tbody th{
 
 @media (max-width: 992px){
 
-    .main-aside{
-        padding-right: 0;
-        padding-left: 0;
-    }
+
 
     .search-from {
         margin-bottom: 24px;

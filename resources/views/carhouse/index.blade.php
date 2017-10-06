@@ -7,27 +7,20 @@
 @section('content')
 
     <div class="car-list content-area">
-        <div class="container">
-            <div class="row">
-                <div class="main-aside col-xs-12">
+        <div class="container-fluid">
+
+                <div class="main-aside col-xs-3">
                     @include(env('THEME').'.indexSideBar')
                 </div>
-                <div class="col-xs-12">
+                <div class="col-xs-9">
                     <div id="table">
-                        <div class="row">
                             <div id="main-table">
                                 @include(env('THEME').'.indexContent')
                             </div>
-                        </div>
-                        <div class="row">
-                            <div id="hide-table">
-
-                            </div>
-                        </div>
-
+                            <div id="hide-table"></div>
                     </div>
                 </div>
-            </div>
+
         </div>
     </div>
 

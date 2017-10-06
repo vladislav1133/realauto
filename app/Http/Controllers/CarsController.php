@@ -222,9 +222,11 @@ class CarsController extends Controller
 
         $where = false;
 
-        $whereIn = array();
+        $whereIn = [];
 
-        $driveSearch = array();
+        $whereNot = [];
+
+        $driveSearch = [];
 
         $drive = $request->input('drive');
         $mark = $request->input('mark');
@@ -236,7 +238,7 @@ class CarsController extends Controller
         $fuel = $request->input('fuel');
         $location = $request->input('location');
         $favoriteCars = $request->input('favoriteCars');
-        $sort = $request->input('sort');
+        //$sort = $request->input('sort');
 
 
         $drive_type = config('car_search.drive_type');
@@ -269,7 +271,6 @@ class CarsController extends Controller
         if ($favoriteCars) array_push($whereIn,['lot_id',$favoriteCars]);
 
 
-
         if ($mark) {
             $where[] = ['name', 'like', '%' . $mark . '%'];
         }
@@ -288,7 +289,6 @@ class CarsController extends Controller
 
 
 
-
         $orderBy = ['sale_date','asc'];
 
 
@@ -300,7 +300,7 @@ class CarsController extends Controller
             $orderBy[1] = 'asc';
         }
 
-        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'),$orderBy,$where,$whereIn);
+        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'),$orderBy,$where,$whereIn,$whereNot);
 
         $carsCount = $cars->total();
 

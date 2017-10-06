@@ -12,6 +12,20 @@ var Search = (function () {
 
     var favoriteWrapper = '.favorite-wrapper'
 
+    function setSelectorsOptions() {
+
+        $('.selectpicker').selectpicker({
+            selectedTextFormat: 'count > 0',
+            countSelectedText: 'Выбрано {0}',
+            size: 5,
+            selectAllText: 'Выделить все',
+            deselectAllText: 'Убрать все'
+        })
+
+        $('.selectpicker').selectpicker('refresh');
+
+    }
+
     function getModels() {
 
         var mark = $('#search-marks').val();
@@ -37,7 +51,6 @@ var Search = (function () {
             yearFrom: yearFrom
         };
 
-        Search.runPreloader()
 
         $.ajax({
 
@@ -68,18 +81,13 @@ var Search = (function () {
                 });
 
                 $('.selectpicker').selectpicker('refresh');
+
             }
-
-            console.log('heelo from models')
-
-            Search.setSearchData()
-            Search.stopPreloader()
         });
     }
 
     function getMarks() {
 
-        Search.runPreloader()
 
         var drive = $('#search-drive').val();
         var fuel = $('#search-fuel').val();
@@ -120,28 +128,26 @@ var Search = (function () {
 
                 var marks = response.marks;
 
-                var el = $("#search-marks");
+                var elMark = $("#search-marks");
+                var elModel = $("#search-models");
 
-                el.empty();
+                elMark.empty();
+                elModel.empty();
 
                 $.each(marks, function (key, value) {
 
-                    el.append($("<option></option>").text(value));
+                    elMark.append($("<option></option>").text(value));
                 });
 
                 $('.selectpicker').selectpicker('refresh');
-            }
 
-            Search.setSearchData()
-            Search.stopPreloader()
+                Search.setSearchData()
+            }
         });
     }
 
-
     function getDocs() {
 
-
-        console.log('GET DOCS')
 
         var location = $('#search-location').val();
 
@@ -181,11 +187,12 @@ var Search = (function () {
                     docRem.append($("<option></option>").text(value));
                 });
 
+                getMarks()
+
                 $('.selectpicker').selectpicker('refresh');
             }
         });
     }
-
 
     function removeFromArray(array, remove) {
 
@@ -196,56 +203,266 @@ var Search = (function () {
         return array
     }
 
+    //EVENTS
+
+    function initEvents() {
+
+        onSearchCars()
+
+        onToggleFavorite()
+
+        onClearSearch()
+
+        onClearFavorite()
+
+        onDisableFavorite()
+
+        //Change selectors
+
+
+        onChangeMark()
+
+        onChangeModel()
+
+        onChangeLocation()
+
+        onChangeDocType()
+
+        onChangeHighLight()
+
+        onChangeDrive()
+
+        onChangeFuel()
+
+        onChangeYears()
+
+    }
+
+
+
+    function onChangeMark() {
+
+
+
+        $(el).on('change', '#search-marks', function (e) {
+            e.preventDefault()
+
+            Search.setSearchData()
+
+            var mark = $('#search-marks').val();
+
+            getModels(mark);
+        })
+
+
+    }
+
+    function onChangeModel() {
+
+        $(el).on('change', '#search-models', function (e) {
+            e.preventDefault()
+
+            Search.setSearchData()
+        })
+    }
+    function onChangeYears() {
+
+        $(el).on('change', '#search-to', function (e) {
+
+            e.preventDefault()
+
+            getMarks()
+        })
+
+        $(el).on('change', '#search-from', function (e) {
+
+            e.preventDefault()
+
+            getMarks()
+        })
+    }
+
+    function onChangeDrive() {
+
+        $(el).on('change', '#search-drive', function (e) {
+
+            e.preventDefault()
+
+            getMarks()
+        })
+    }
+
+    function onChangeFuel() {
+
+        $(el).on('change', '#search-fuel', function (e) {
+
+            e.preventDefault()
+
+            getMarks()
+        })
+    }
+
+    function onChangeHighLight() {
+
+        $(el).on('change', '#search-highlight', function (e) {
+
+            e.preventDefault()
+
+            getMarks()
+        })
+    }
+
+    function onChangeLocation() {
+
+        $(el).on('change', '#search-location', function (e) {
+
+            e.preventDefault()
+
+            getDocs()
+        })
+    }
+
+    function onChangeDocType() {
+
+        $(el).on('change', '#search-doc-add', function (e) {
+
+            e.preventDefault()
+
+            getMarks()
+        })
+
+        $(el).on('change', '#search-doc-remove', function (e) {
+
+            e.preventDefault()
+
+            getMarks()
+        })
+    }
+
+
+
+
+
+    function onSearchCars() {
+
+        searchBtn.click(function () {
+
+
+            Table.getPage(1, Search.getSearchData())
+        })
+    }
+
+    function onClearFavorite() {
+
+        $(favoriteWrapper).on('click', '#favorite-clear-btn', function (e) {
+
+            App.deleteCookie('favoriteCars')
+
+
+            $(favoriteWrapper).html(
+                '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
+
+            $(window).trigger('disableFavoriteBtn');
+
+            Search.showFavorite = false
+
+            Search.clearSearch()
+            Table.getPage(1,Search.getSearchData())
+        })
+
+    }
+
+    function onClearSearch() {
+
+        searchClearBtn.click(function () {
+
+            Search.clearSearch()
+
+        })
+    }
+
+    function onToggleFavorite() {
+
+        $(favoriteWrapper).on('click', '#favorite-search-btn', function (e) {
+
+            var disFavoriteBtn = $('#favorite-search-btn').attr('disabled')
+
+            if ('disabled' === disFavoriteBtn) {
+
+                return false;
+            }
+
+            if (!Search.showFavorite) {
+
+                Search.showFavorite = true
+
+                $(favoriteWrapper).html(
+                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite search-btn_half">Все</a>' +
+                    '<a id="favorite-clear-btn" class="btn search-btn search-btn_favorite search-btn_half">Очистить</a>')
+            } else {
+
+                $(favoriteWrapper).html(
+                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
+                Search.showFavorite = false
+            }
+
+
+            Search.clearSearch()
+            Table.getPage(1, Search.getSearchData())
+        })
+    }
+
+    function onDisableFavorite() {
+
+        $(window).on('disableFavoriteBtn', function (e, data) {
+
+            var favoriteCars = App.getCookie('favoriteCars')
+
+            if (favoriteCars) {
+
+                $(favoriteBtn).attr('disabled', false)
+            } else {
+
+                $(favoriteBtn).attr('disabled', true)
+            }
+        });
+
+
+    }
+
+
+
     return {
-
-        defaultText: {
-
-            any: $('#search-marks').val(),
-
-            to: $('#search-to').val(),
-
-            from: $('#search-from').val()
-        },
 
         showFavorite: false,
 
-        runPreloader: function () {
-
-            $('#search-preloader').removeClass('fa fa-search')
-            $('#search-preloader-img').css('display', 'inline')
-        },
-
-        stopPreloader: function () {
-
-            $('#search-preloader').addClass('fa fa-search')
-            $('#search-preloader-img').css('display', 'none')
-        },
-
         setSearchData: function () {
 
-            var searchAdd = $('#search-doc-add').val()
+        var searchAdd = $('#search-doc-add').val()
 
-            var searchRem = $('#search-doc-remove').val()
+        var searchRem = $('#search-doc-remove').val()
 
-            searchData['docs'] = removeFromArray(searchAdd, searchRem)
+        searchData['docs'] = removeFromArray(searchAdd, searchRem)
 
-            searchData['mark'] = $('#search-marks').val()
+        searchData['mark'] = $('#search-marks').val()
 
-            searchData['model'] = $('#search-models').val()
+        searchData['model'] = $('#search-models').val()
 
-            searchData['yearTo'] = $('#search-to').val()
+        searchData['yearTo'] = $('#search-to').val()
 
-            searchData['yearFrom'] = $('#search-from').val()
+        searchData['yearFrom'] = $('#search-from').val()
 
-            searchData['drive'] = $('#search-drive').val()
+        searchData['drive'] = $('#search-drive').val()
 
-            searchData['fuel'] = $('#search-fuel').val()
+        searchData['fuel'] = $('#search-fuel').val()
 
-            searchData['highlight'] = $('#search-highlight').val()
+        searchData['highlight'] = $('#search-highlight').val()
 
-            searchData['location'] = $('#search-location').val()
+        searchData['location'] = $('#search-location').val()
 
-        },
+            console.log(Search.getSearchData())
+
+    },
 
         getSearchData: function () {
 
@@ -254,42 +471,11 @@ var Search = (function () {
 
         init: function () {
 
+            setSelectorsOptions()
 
-            $('.selectpicker').selectpicker('refresh');
-
-            this.initEvents()
+            initEvents()
 
             $(window).trigger('disableFavoriteBtn');
-
-        },
-
-        initEvents: function () {
-
-            this.onSearchCars()
-
-            this.onToggleFavorite()
-
-            this.onClearSearch()
-
-            this.onClearFavorite()
-
-            this.onDisableFavorite()
-
-            //Change selectors
-
-            this.onChangeMark()
-
-            this.onChangeLocation()
-
-            this.onChangeDocType()
-
-            this.onChangeHighLight()
-
-            this.onChangeDrive()
-
-            this.onChangeFuel()
-
-            this.onChangeYears()
 
         },
 
@@ -305,193 +491,6 @@ var Search = (function () {
 
             Search.setSearchData()
         },
-
-
-
-        onChangeMark: function () {
-
-
-            $(el).on('change', '#search-marks', function (e) {
-                e.preventDefault()
-
-                var mark = $('#search-marks').val();
-
-                getModels(mark);
-            })
-
-
-        },
-
-        onChangeLocation: function () {
-
-            $(el).on('change', '#search-location', function (e) {
-
-                e.preventDefault()
-
-                getDocs()
-
-                getMarks()
-            })
-        },
-
-        onChangeDocType: function () {
-
-            $(el).on('change', '#search-doc-add', function (e) {
-
-                e.preventDefault()
-
-                getMarks()
-            })
-
-            $(el).on('change', '#search-doc-remove', function (e) {
-
-                e.preventDefault()
-
-                getMarks()
-            })
-        },
-
-        onChangeHighLight: function () {
-
-            $(el).on('change', '#search-highlight', function (e) {
-
-                e.preventDefault()
-
-                getMarks()
-            })
-        },
-
-        onChangeDrive: function () {
-
-            $(el).on('change', '#search-drive', function (e) {
-
-                e.preventDefault()
-
-                getMarks()
-            })
-        },
-
-        onChangeFuel: function () {
-
-            $(el).on('change', '#search-fuel', function (e) {
-
-                e.preventDefault()
-
-                getMarks()
-            })
-        },
-
-        onChangeYears: function () {
-
-            $(el).on('change', '#search-to', function (e) {
-
-                e.preventDefault()
-
-                getMarks()
-            })
-
-            $(el).on('change', '#search-from', function (e) {
-
-                e.preventDefault()
-
-                getMarks()
-            })
-        },
-
-
-
-        onSearchCars: function () {
-
-            searchBtn.click(function () {
-
-                console.log('search Table.getPage')
-
-                console.log(Search.getSearchData())
-                Table.getPage(1, Search.getSearchData())
-            })
-        },
-
-        onClearFavorite: function () {
-
-            $(favoriteWrapper).on('click', '#favorite-clear-btn', function (e) {
-
-                App.deleteCookie('favoriteCars')
-
-
-                $(favoriteWrapper).html(
-                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
-
-                $(window).trigger('disableFavoriteBtn');
-
-                Search.showFavorite = false
-
-                Search.clearSearch()
-                Table.getPage(1,Search.getSearchData())
-            })
-
-        },
-
-        onClearSearch: function () {
-
-            searchClearBtn.click(function () {
-
-                Search.clearSearch()
-
-            })
-        },
-
-        onToggleFavorite: function () {
-
-            $(favoriteWrapper).on('click', '#favorite-search-btn', function (e) {
-
-                var disFavoriteBtn = $('#favorite-search-btn').attr('disabled')
-
-                if ('disabled' === disFavoriteBtn) {
-
-                    return false;
-                }
-
-                if (!Search.showFavorite) {
-
-                    Search.showFavorite = true
-
-                    $(favoriteWrapper).html(
-                        '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite search-btn_half">Все</a>' +
-                        '<a id="favorite-clear-btn" class="btn search-btn search-btn_favorite search-btn_half">Очистить</a>')
-                } else {
-
-                    $(favoriteWrapper).html(
-                        '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
-                    Search.showFavorite = false
-                }
-
-
-                Search.clearSearch()
-                Table.getPage(1, Search.getSearchData())
-            })
-        },
-
-        onDisableFavorite: function () {
-
-            $(window).on('disableFavoriteBtn', function (e, data) {
-
-
-                var favoriteCars = App.getCookie('favoriteCars')
-
-                if (favoriteCars) {
-
-                    $(favoriteBtn).attr('disabled', false)
-                } else {
-
-                    $(favoriteBtn).attr('disabled', true)
-                }
-
-                console.log('Favorite BTN' + favoriteCars)
-            });
-
-
-        }
-
     }
 
 

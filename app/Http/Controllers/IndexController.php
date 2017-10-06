@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
 use App\GeneralData;
 use App\Mail\ContactUsMail;
 use App\Repositories\CarRepository;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 
 use Mail;
 use Validator;
+use Carbon\Carbon;
 
 class IndexController extends SiteController{
 
@@ -24,8 +26,6 @@ class IndexController extends SiteController{
     }
 
     public function index(){
-
-       // dd($this->carRepository->get('year','','','','',true)->toArray());
 
         $meta = $this->carRepository->getMeta('index');
 
