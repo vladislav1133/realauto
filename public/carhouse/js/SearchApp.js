@@ -2,15 +2,28 @@ var Search = (function () {
 
     var searchData = {}
 
-    var el = $('#search')
+    var el = '#search'
 
-    var searchBtn = $('#search-btn')
+    var searchBtn = '#search-btn'
 
-    var searchClearBtn = $('#search-clear-btn')
+    var searchClearBtn = '#search-clear-btn'
 
     var favoriteBtn = '#favorite-search-btn'
 
     var favoriteWrapper = '.favorite-wrapper'
+
+
+    var markSelect = '#search-marks'
+    var modelSelect = '#search-models'
+    var fuelSelect = '#search-fuel'
+    var driveSelect = '#search-drive'
+    var locationSelect = '#search-location'
+    var highlightSelect = '#search-location'
+    var yearToSelect = '#search-to'
+    var yearFromSelect = '#search-from'
+    var docAddSelect = '#search-doc-add'
+    var docRemSelect = '#search-doc-remove'
+
 
     function setSelectorsOptions() {
 
@@ -28,15 +41,15 @@ var Search = (function () {
 
     function getModels() {
 
-        var mark = $('#search-marks').val();
-        var drive = $('#search-drive').val();
-        var fuel = $('#search-fuel').val();
-        var docAdd = $('#search-doc-add').val();
-        var docRem = $('#search-doc-remove').val();
-        var location = $('#search-location').val();
-        var highlight = $('#search-highlight').val();
-        var yearTo = $('#search-to').val();
-        var yearFrom = $('#search-from').val();
+        var mark = $(markSelect).val();
+        var drive = $(driveSelect).val();
+        var fuel = $(fuelSelect).val();
+        var docAdd = $(docAddSelect).val();
+        var docRem = $(docRemSelect).val();
+        var location = $(locationSelect).val();
+        var highlight = $(highlightSelect).val();
+        var yearTo = $(yearToSelect).val();
+        var yearFrom = $(yearFromSelect).val();
 
         var data = {
 
@@ -203,6 +216,8 @@ var Search = (function () {
         return array
     }
 
+
+
     //EVENTS
 
     function initEvents() {
@@ -219,6 +234,7 @@ var Search = (function () {
 
         //Change selectors
 
+        onSearchQuerySubmit()
 
         onChangeMark()
 
@@ -265,6 +281,7 @@ var Search = (function () {
             Search.setSearchData()
         })
     }
+
     function onChangeYears() {
 
         $(el).on('change', '#search-to', function (e) {
@@ -339,13 +356,62 @@ var Search = (function () {
         })
     }
 
+    function onSearchQuerySubmit() {
+
+        $('#search-query').submit(function (e) {
+            e.preventDefault()
+
+            var query  = $('#search-query input').val()
+
+            $('#search-query input').val('')
+
+            $.ajax({
+
+                url: '/cars/search/' + query
 
 
+            }).done(function (data) {
 
+              if(data['found'] === true){
+
+                  if(data['col'] === 'lot'){
+
+                      data['lot']=query
+
+                      Table.getPage(1,data)
+                  }
+
+                  if(data['col'] === 'vin'){
+
+                      data['vin']=query
+
+                      Table.getPage(1,data)
+                  }
+
+                  if(data['col'] === 'year'){
+
+                      Search.setYear(query)
+
+                      Table.getPage(1,Search.getSearchData())
+                  }
+
+                  if(data['col'] === 'location'){
+
+                      Search.addLocation(query)
+
+                      //var val = $('#search-doc-add').val()
+
+
+                  }
+
+              }
+            })
+        })
+    }
 
     function onSearchCars() {
 
-        searchBtn.click(function () {
+        $(searchBtn).click(function () {
 
 
             Table.getPage(1, Search.getSearchData())
@@ -374,7 +440,7 @@ var Search = (function () {
 
     function onClearSearch() {
 
-        searchClearBtn.click(function () {
+        $(searchClearBtn).click(function () {
 
             Search.clearSearch()
 
@@ -436,13 +502,53 @@ var Search = (function () {
 
         showFavorite: false,
 
+        addLocation: function (location) {
+
+
+            var options = []
+
+            //get options of select
+            $("#search-location option").each(function() {
+                options.push($(this).val())
+            });
+
+            var founded = options.filter(function (str) {
+
+                return new RegExp('^'+location,"i").test(str);
+
+                });
+
+            var selected = $('#search-location').val()
+            var newSelected = $('#search-location').val()
+
+            founded.forEach(function (item) {
+
+                if(!App.itemExist(selected,item)) newSelected.push(item)
+            })
+
+
+            $('#search-location').val(newSelected)
+
+            $('.selectpicker').selectpicker('refresh');
+        },
+
+        setYear: function (year) {
+
+            searchData['yearTo'] = year
+
+            searchData['yearFrom'] = year
+
+            $(yearToSelect).val(year)
+            $(yearFromSelect).val(year)
+
+            $('.selectpicker').selectpicker('refresh');
+        },
+
         setSearchData: function () {
 
-        var searchAdd = $('#search-doc-add').val()
+        searchData['docAdd'] = $('#search-doc-add').val()
 
-        var searchRem = $('#search-doc-remove').val()
-
-        searchData['docs'] = removeFromArray(searchAdd, searchRem)
+        searchData['docRem'] = $('#search-doc-remove').val()
 
         searchData['mark'] = $('#search-marks').val()
 

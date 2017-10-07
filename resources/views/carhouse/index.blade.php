@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="car-list content-area">
-        <div class="container-fluid">
+        <div class="container">
 
                 <div class="main-aside col-xs-3">
                     @include(env('THEME').'.indexSideBar')

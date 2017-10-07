@@ -34,9 +34,6 @@
 @yield('footer')
 
 <script src="{{asset('js/app.js')}}"></script>
-<!-- Custom javascript -->
-<scritp src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></scritp>
-<script src="/js/jquery.bxslider.min.js"></script>
 
 <script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
 

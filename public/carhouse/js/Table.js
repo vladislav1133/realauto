@@ -49,20 +49,17 @@ var Table = (function () {
 
         render: function (data) {
 
+
             $('#hide-table').html(data['table']);
+
+
             $('#hide-table .car-table').footable();
 
             setTimeout(function () {
+                var hideTable = $('#table #hide-table .table-container').get(0)
 
-                let tBody = $('#table #hide-table .table-container tbody').html();
-                let pagination = $('#hide-table .table-pagination').html()
-
-                console.log(tBody)
-
-                $('#main-table .table-pagination').html(pagination)
-                $('#main-table tbody').html(tBody)
+                $('#main-table').html(hideTable)
                 $('#total-cars').html(data['carsCount'])
-
 
             }, 1000);
 

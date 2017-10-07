@@ -4,6 +4,16 @@
         <div class="row">
 
             <div class="col-xs-12">
+                <form id="search-query" action="">
+                    <input  type="text" placeholder="Искать" title="Поиск:
+                      lot (8 цифр)
+                      vin (17 симв.)
+                      location(2 симв.)
+                      years (4 цифр)">
+                </form>
+            </div>
+
+            <div class="col-xs-12">
                 <div class="search__head">
                    <div class="row">
                        <div class="col-xs-11">

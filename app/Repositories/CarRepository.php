@@ -36,8 +36,6 @@ class CarRepository extends Repository {
         'WATER/FLOOD ' => 'затопление / наводнение',
     ];
 
-
-
     public function __construct(Car $car)
     {
         $this->model = $car;
@@ -133,14 +131,14 @@ class CarRepository extends Repository {
         return $years;
     }
 
-    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$distinct = false) {
-        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$distinct);
+    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn = false,$distinct = false) {
+        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct);
 
         return $query;
     }
 
-    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$distinct = false) {
-        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$distinct);
+    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false) {
+        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct);
 
         $cars = $this->prepareImg($cars);
 
@@ -280,5 +278,23 @@ class CarRepository extends Repository {
         });
 
         return $cars;
+    }
+
+    public function search($query) {
+
+        return $this->searchValidate($query);
+    }
+
+    public function searchValidate($query){
+
+        if(preg_match('/^[a-zA-Z]{2}$/',$query)) return 'location';
+
+        if (preg_match('/^[a-zA-Z0-9]{17}$/',$query)) return 'vin';
+
+        if(preg_match('/^[0-9]{4}$/',$query)) if($query>=2012 and $query<=2018) return 'year';
+
+        if(preg_match('/^[0-9]{8}$/',$query)) return 'lot';
+
+        return 'oops';
     }
 }

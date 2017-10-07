@@ -7,7 +7,7 @@ abstract class Repository {
 
     protected $model=false;
 
-    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$distinct = false){
+    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false){
 
         if($distinct) {
 
@@ -34,11 +34,15 @@ abstract class Repository {
 
                 $builder->whereIn($item[0], $item[1]);
             }
-
-
         }
 
+        if($whereNotIn){
 
+            foreach ($whereNotIn as $item) {
+
+                $builder->whereNotIn($item[0], $item[1]);
+            }
+        }
 
         if($pagination){
 

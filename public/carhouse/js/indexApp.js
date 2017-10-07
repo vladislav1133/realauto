@@ -2,6 +2,14 @@ var App = (function () {
 
     return {
 
+        itemExist: function(arr,item) {
+
+            return arr.some(function(el) {
+
+                return el === item;
+            });
+        },
+
         init: function () {
 
             SecondMenu.init()
