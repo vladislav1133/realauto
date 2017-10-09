@@ -18,8 +18,10 @@
                    <div class="row">
                        <div class="col-xs-11">
                            <b>Искать</b> автомобиль
+                           <div class="">
+                               <a id="search-clear-btn" href="#">Сбросить всё</a>
+                           </div>
                        </div>
-
 
                    </div>
                 </div>
@@ -168,8 +170,10 @@
             <div class="col-xs-12">
                 <a id="contact-up-btn" href="#contact-us-popup" class="btn search-btn ">Связаться с нами</a>
             </div>
-            <div class="col-xs-6">
-                <a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>
+            <div class="col-xs-12">
+                <div class="favorite-wrapper">
+                    <a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>
+                </div>
             </div>
 
         </div>

@@ -1,7 +1,5 @@
 var Search = (function () {
 
-    var searchData = {}
-
     var el = '#search'
 
     var searchBtn = '#search-btn'
@@ -154,7 +152,7 @@ var Search = (function () {
 
                 $('.selectpicker').selectpicker('refresh');
 
-                Search.setSearchData()
+
             }
         });
     }
@@ -180,7 +178,7 @@ var Search = (function () {
 
             data: data,
 
-            url: '/cars/locations'
+            url: '/cars/docs'
 
         }).done(function (response) {
 
@@ -207,14 +205,7 @@ var Search = (function () {
         });
     }
 
-    function removeFromArray(array, remove) {
 
-        array = array.filter(function (el) {
-            return remove.indexOf(el) < 0;
-        });
-
-        return array
-    }
 
 
 
@@ -263,7 +254,7 @@ var Search = (function () {
         $(el).on('change', '#search-marks', function (e) {
             e.preventDefault()
 
-            Search.setSearchData()
+
 
             var mark = $('#search-marks').val();
 
@@ -278,7 +269,7 @@ var Search = (function () {
         $(el).on('change', '#search-models', function (e) {
             e.preventDefault()
 
-            Search.setSearchData()
+
         })
     }
 
@@ -367,6 +358,7 @@ var Search = (function () {
 
             $.ajax({
 
+                method: 'GET',
                 url: '/cars/search/' + query
 
 
@@ -433,6 +425,7 @@ var Search = (function () {
             Search.showFavorite = false
 
             Search.clearSearch()
+
             Table.getPage(1,Search.getSearchData())
         })
 
@@ -440,7 +433,8 @@ var Search = (function () {
 
     function onClearSearch() {
 
-        $(searchClearBtn).click(function () {
+        $(searchClearBtn).click(function (e) {
+            e.preventDefault()
 
             Search.clearSearch()
 
@@ -474,6 +468,9 @@ var Search = (function () {
 
 
             Search.clearSearch()
+
+            console.log('Toggle favorite')
+
             Table.getPage(1, Search.getSearchData())
         })
     }
@@ -507,29 +504,59 @@ var Search = (function () {
 
             var options = []
 
-            //get options of select
+            //Get options of select
             $("#search-location option").each(function() {
                 options.push($(this).val())
             });
 
+            //Found input locs in options
             var founded = options.filter(function (str) {
 
                 return new RegExp('^'+location,"i").test(str);
 
                 });
 
+
             var selected = $('#search-location').val()
+
             var newSelected = $('#search-location').val()
 
+            //Add if not exist
             founded.forEach(function (item) {
 
                 if(!App.itemExist(selected,item)) newSelected.push(item)
             })
 
+            console.log('options: ', options)
+            console.log('founded: ', founded)
+            console.log('selected: ', selected)
+            console.log('newSelected', newSelected)
 
             $('#search-location').val(newSelected)
 
             $('.selectpicker').selectpicker('refresh');
+
+            getDocs()
+        },
+
+        removeDoc: function (doc) {
+
+            var selected = $('#search-doc-remove').val()
+
+            var newSelected = $('#search-doc-remove').val()
+
+            if(!App.itemExist(selected,doc)) newSelected.push(doc)
+
+
+            console.log('selected: ', selected)
+            console.log('newSelected', newSelected)
+
+            $('#search-doc-remove').val(newSelected)
+
+            $('.selectpicker').selectpicker('refresh');
+
+
+
         },
 
         setYear: function (year) {
@@ -544,33 +571,39 @@ var Search = (function () {
             $('.selectpicker').selectpicker('refresh');
         },
 
-        setSearchData: function () {
-
-        searchData['docAdd'] = $('#search-doc-add').val()
-
-        searchData['docRem'] = $('#search-doc-remove').val()
-
-        searchData['mark'] = $('#search-marks').val()
-
-        searchData['model'] = $('#search-models').val()
-
-        searchData['yearTo'] = $('#search-to').val()
-
-        searchData['yearFrom'] = $('#search-from').val()
-
-        searchData['drive'] = $('#search-drive').val()
-
-        searchData['fuel'] = $('#search-fuel').val()
-
-        searchData['highlight'] = $('#search-highlight').val()
-
-        searchData['location'] = $('#search-location').val()
-
-            console.log(Search.getSearchData())
-
-    },
-
         getSearchData: function () {
+
+            var searchData = {}
+
+            searchData['docAdd'] = $('#search-doc-add').val()
+
+            searchData['docRem'] = $('#search-doc-remove').val()
+
+            searchData['mark'] = $('#search-marks').val()
+
+            searchData['model'] = $('#search-models').val()
+
+            searchData['yearTo'] = $('#search-to').val()
+
+            searchData['yearFrom'] = $('#search-from').val()
+
+            searchData['drive'] = $('#search-drive').val()
+
+            searchData['fuel'] = $('#search-fuel').val()
+
+            searchData['highlight'] = $('#search-highlight').val()
+
+            searchData['location'] = $('#search-location').val()
+
+
+            if (Search.showFavorite) {
+
+                var favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
+
+                if (favoriteCars === undefined) favoriteCars = []
+            }
+
+            searchData['favoriteCars'] = favoriteCars
 
             return searchData
         },
@@ -593,9 +626,6 @@ var Search = (function () {
 
             getMarks()
 
-
-
-            Search.setSearchData()
         },
     }
 

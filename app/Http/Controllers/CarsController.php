@@ -205,7 +205,7 @@ class CarsController extends Controller {
         }
 
 
-        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], '', $whereIn, true);
+        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], '', $whereIn);
 
         foreach ($queryArr as $arr) {
 
@@ -265,8 +265,23 @@ class CarsController extends Controller {
             $whereIn[] = $driveSearch;
         }
 
-        if ($docAdd) array_push($whereIn, ['doc_type', $docAdd]);
+
         if ($docRem) array_push($whereNotIn, ['doc_type', $docRem]);
+
+
+        if ($docAdd){
+
+            if($docRem){
+                foreach ($docRem as $doc){
+                    if(($key = array_search($doc, $docAdd)) !== false) {
+                        unset($docAdd[$key]);
+                    }
+                }
+            }
+
+            if ($docAdd) array_push($whereIn, ['doc_type', $docAdd]);
+        }
+
 
         if ($fuel) array_push($whereIn, ['fuel', $fuel]);
 
@@ -304,6 +319,7 @@ class CarsController extends Controller {
         $orderBy = ['sale_date', 'asc'];
 
 
+
         if ($yearTo || $yearFrom) {
 
             $orderBy = [];
@@ -320,13 +336,14 @@ class CarsController extends Controller {
         return ['table' => $carsTable, 'carsCount' => $carsCount];
     }
 
-    public function search($query)
-    {
+    public function search($query) {
 
         $res = $this->carRepository->search($query);
 
         return response()->json(['found'=>true,'col'=>$res]);
     }
+
+
 
 
 }

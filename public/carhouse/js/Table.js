@@ -2,6 +2,8 @@ var Table = (function () {
 
     var el = '#table'
 
+    var remDocBtn = '.btn-rem-doc'
+
     function onPaginate() {
 
         $(el).on('click', '.pagination a', function (e, data) {
@@ -34,6 +36,13 @@ var Table = (function () {
         })
     }
 
+    function onRemoveDoc() {
+
+        $(el).on('click', remDocBtn, function (e) {
+
+            Search.removeDoc($(this).data('doc'))
+        })
+    }
     return {
 
         init: function () {
@@ -68,26 +77,15 @@ var Table = (function () {
 
         getPage: function (page, data) {
 
-            var favoriteCars = []
-
-            if (Search.showFavorite) {
-
-                favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
-
-                if (favoriteCars === undefined) favoriteCars = []
-            }
+            console.log('get page')
 
 
-            data['favoriteCars'] = favoriteCars
             data['page'] = page
 
             this.getData(data)
         },
 
         getData: function (data) {
-
-            console.log('DATA')
-            console.log(data)
 
             $.ajax({
 
@@ -186,6 +184,8 @@ var Table = (function () {
             onPaginate()
 
             onAddFavoriteCar()
+
+            onRemoveDoc()
 
         },
 

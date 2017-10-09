@@ -2,9 +2,9 @@ var App = (function () {
 
     return {
 
-        itemExist: function(arr,item) {
+        itemExist: function (arr, item) {
 
-            return arr.some(function(el) {
+            return arr.some(function (el) {
 
                 return el === item;
             });
@@ -15,6 +15,15 @@ var App = (function () {
             SecondMenu.init()
             Search.init()
             Table.init()
+
+            //Custom gallery
+            $('#custom-slider').bxSlider({
+                pagerCustom: '#slider-pager',
+                nextText: '<i class="fa fa-chevron-right"></i>',
+                prevText: '<i class="fa fa-chevron-left"></i>',
+                mode: 'fade',
+                captions: true
+            });
 
             this.initEvents()
         },
@@ -44,7 +53,7 @@ var App = (function () {
 
         },
 
-        setCookie: function(name,value,options){
+        setCookie: function (name, value, options) {
             options = options || {};
 
             var expires = options.expires;
@@ -72,6 +81,16 @@ var App = (function () {
 
             document.cookie = updatedCookie;
         },
+
+
+        removeFromArray: function (array, remove) {
+
+            array = array.filter(function (el) {
+                return remove.indexOf(el) < 0;
+            });
+
+            return array
+        }
     }
 })()
 

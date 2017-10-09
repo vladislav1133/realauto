@@ -44,16 +44,23 @@ class Articles extends Section implements Initializable
         $this->addToNavigation()->setIcon('fa fa-globe');
     }
 
+    public function scopeLast($query)
+    {
+        $query->orderBy('id', 'asc');
+    }
 
     /**
      * @return DisplayInterface
      */
     public function onDisplay()
     {
-        //id title text
-        return AdminDisplay::table()->setColumns([
+
+        return AdminDisplay::table()->setApply(function($query) {
+            $query->orderBy('created_at', 'desc');
+        })->setColumns([
             AdminColumn::link('id', 'ID'),
-            AdminColumn::text('title', 'Заголовок'),
+            AdminColumn::text('title', 'Заголовок')
+
         ])->paginate(15);
 
     }
@@ -84,4 +91,6 @@ class Articles extends Section implements Initializable
     public function onCreate(){
         return $this->onEdit(null);
     }
+
+
 }

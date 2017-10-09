@@ -29,14 +29,7 @@ $(document).ready(function () {
         }
     }
 
-    //Custom gallery
-    $('#custom-slider').bxSlider({
-        pagerCustom: '#slider-pager',
-        nextText: '<i class="fa fa-chevron-right"></i>',
-        prevText: '<i class="fa fa-chevron-left"></i>',
-        mode: 'fade',
-        captions: true
-    });
+
 
 
     //MAGNIFIC POPUP

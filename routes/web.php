@@ -16,7 +16,7 @@
 Route::get('/', ['as'=>'home','uses'=>'IndexController@index']);
 Route::get('contacts', ['as'=>'contacts','uses'=>'ContactController@index']);
 Route::resource('blog','ArticlesController', ['only' =>['index','show']]);
-//Route::resource('availablecars', 'AvailableCarsController', ['only' => ['index', 'show']]);
+Route::resource('availablecars', 'AvailableCarsController', ['only' => ['index', 'show']]);
 
 Route::post('contact-us','IndexController@contactUs');
 
@@ -24,7 +24,7 @@ Route::post('contact-us','IndexController@contactUs');
 Route::post('cars','CarsController@getCars');
 Route::post('cars/marks','CarsController@getMarks');
 Route::post('cars/models','CarsController@getModels');
-Route::post('cars/locations','CarsController@getDocs');
+Route::post('cars/docs','CarsController@getDocs');
 Route::get('cars/search/{query}','CarsController@search');
 
 Route::get('favoritecars','CarsController@getFavoriteCars');

@@ -10,11 +10,6 @@ class ArticleRepository extends Repository{
         $this->model=$article;
     }
 
-    public function get($select='*',$take=false,$pagination=false,$where=false,$orderBy=false){
-        $articles=parent::get($select,$take,$pagination,$where,$orderBy);
-
-        return $articles;
-    }
 
     public function one($alias,$relation=false){
 

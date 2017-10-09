@@ -17,7 +17,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{route('home')}}" >Главная</a></li>
-                    <li><a href="/" >Машины в наличии</a></li>
+                    <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
                     <li><a href="{{route('blog.index')}}" >Блог</a></li>
                     <li><a href="{{route('contacts')}}" >Контакты</a></li>
                 </ul>
@@ -29,7 +29,7 @@
                     Компания REALAUTO обеспечит Вас доступным авто из США
                 </h3>
                 <p class="banner__text">
-                    Вы можете подобрать автомобиль из тех, что уже <a href="/"> есть в наличии</a>, или воспользоваться нашим пакетом услуг по покупке и доставке новых или б/у авто из США.
+                    Вы можете подобрать автомобиль из тех, что уже <a href="{{route('availablecars.index')}}"> есть в наличии</a>, или воспользоваться нашим пакетом услуг по покупке и доставке новых или б/у авто из США.
                 </p>
 
             </div>
@@ -54,7 +54,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{route('home')}}" >Главная</a></li>
-                        <li><a href="/" >Машины в наличии</a></li>
+                        <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
                         <li><a href="{{route('blog.index')}}" >Блог</a></li>
                         <li><a href="{{route('contacts')}}" >Контакты</a></li>
                     </ul>
