@@ -88,94 +88,10 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
-    public function getModels(Request $request)
+    public function getModels($mark)
     {
 
-        $whereIn = [];
-        $where = [];
-
-        $mark = $request->input('mark');
-        $drive = $request->input('drive');
-        $fuel = $request->input('fuel');
-        $docAdd = $request->input('docAdd');
-        $docRem = $request->input('docRem');
-        $location = $request->input('location');
-        $highlight = $request->input('highlight');
-        $yearTo = $request->input('yearTo');
-        $yearFrom = $request->input('yearFrom');
-
-
-        if ($mark) {
-            $where[] = ['name', 'like', '%' . $mark . '%'];
-        }
-        if ($yearFrom) {
-            $where[] = ['year', '>=', $yearFrom];
-        }
-        if ($yearTo) {
-            $where[] = ['year', '<=', $yearTo];
-        }
-        if ($fuel) array_push($whereIn, ['fuel', $fuel]);
-        if ($docAdd) {
-
-            $docList = [];
-
-            $docType = $docAdd;
-
-            if ($docRem) {
-
-                foreach ($docRem as $rem) {
-
-                    unset($docType[array_search($rem, $docType)]);
-                }
-            }
-
-            foreach ($docType as $doc) {
-
-                array_push($docList, $doc);
-            }
-
-            array_push($whereIn, ['doc_type', $docList]);
-        }
-        if ($location) array_push($whereIn, ['location', $location]);
-        if ($highlight) array_push($whereIn, ['highlights', $highlight]);
-        if ($drive) {
-
-            $drive_type = config('car_search.drive_type');
-
-            $driveSearch[0] = 'drive';
-
-            $driveSearch[1] = array();
-
-            foreach ($drive as $type) {
-
-                foreach ($drive_type[$type] as $item) {
-
-                    array_push($driveSearch[1], $item);
-                }
-            }
-
-            $whereIn[] = $driveSearch;
-        }
-
-        $names = $this->carRepository->get('name', '', false, $where, $whereIn, '')->toArray();
-
-        $models = [];
-
-        foreach ($names as $arr) {
-
-            array_push($models, $arr['name']);
-        }
-
-        foreach ($models as &$item) {
-
-            $item = preg_split('#[ /]#', $item);
-            $item = $item[2];
-
-        }
-
-        $models = array_unique($models);
-
-        sort($models);
+        $models = $this->carRepository->getModels($mark,true);
 
         $response['models'] = $models;
 
@@ -193,19 +109,20 @@ class CarsController extends Controller {
     {
 
         $location = $request->input('location');
+        $mark = $request->input('mark');
+        $model = $request->input('model');
+
 
         $docs = array();
 
         $whereIn = false;
+        $where = false;
 
-        if ($location) {
+        if ($location) $whereIn[] = ['location', $location];
+        if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
+        if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
 
-
-            $whereIn[] = ['location', $location];
-        }
-
-
-        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], '', $whereIn);
+        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], $where, $whereIn,'',true);
 
         foreach ($queryArr as $arr) {
 
@@ -220,7 +137,6 @@ class CarsController extends Controller {
 
     public function getCars(Request $request)
     {
-
 
         $where = false;
 
@@ -299,13 +215,9 @@ class CarsController extends Controller {
             $where[] = ['vin', '=', $vin];
         }
 
-        if ($mark) {
-            $where[] = ['name', 'like', '%' . $mark . '%'];
-        }
+        if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
+        if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
 
-        if ($model) {
-            $where[] = ['name', 'like', '%' . $model . '%'];
-        }
 
         if ($yearFrom) {
             $where[] = ['year', '>=', $yearFrom];
@@ -338,12 +250,29 @@ class CarsController extends Controller {
 
     public function search($query) {
 
-        $res = $this->carRepository->search($query);
+        $query = $this->carRepository->search($query);
 
-        return response()->json(['found'=>true,'col'=>$res]);
+        $res = [];
+
+        if($query){
+
+            $res['found'] = true;
+            $res['col'] = $query;
+        } else {
+
+            $res['found'] = false;
+        }
+
+        return response()->json($res);
     }
 
+    public function getSearchProperty($mark,$model = false){
 
+        $property = $this->carRepository->getSearchProperty($mark,$model);
+
+
+        return response()->json($property);
+    }
 
 
 }

@@ -79,6 +79,7 @@ class CarRepository extends Repository {
         $names = $this->getNames();
 
         $models = array();
+
         $modelsWithKeys = array();
 
         foreach ($names as $name) {
@@ -153,14 +154,6 @@ class CarRepository extends Repository {
 
         return $cars;
     }
-
-    public function one($alias, $relation = false)
-    {
-
-        $car = parent::one($alias, $relation);
-    }
-
-
 
     protected function prepareImg($cars)
     {
@@ -287,6 +280,7 @@ class CarRepository extends Repository {
 
     public function searchValidate($query){
 
+
         if(preg_match('/^[a-zA-Z]{2}$/',$query)) return 'location';
 
         if (preg_match('/^[a-zA-Z0-9]{17}$/',$query)) return 'vin';
@@ -295,6 +289,30 @@ class CarRepository extends Repository {
 
         if(preg_match('/^[0-9]{8}$/',$query)) return 'lot';
 
-        return 'oops';
+        return false;
+    }
+
+    public function getSearchProperty ($mark,$model = false){
+
+        $where = [];
+        $where[] = ['name', 'like', '%' . $mark . '%'];
+
+        if ($model) {
+            $where[] = ['name', 'like', '%' . $model . '%'];
+        }
+
+        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type'],'','',$where);
+
+        $property = [];
+
+        $property['years'] = array_filter(array_unique($cars->sortBy('year')->pluck('year')->toArray()));
+        $property['highlights'] = array_filter(array_unique($cars->sortBy('highlights')->pluck('highlights')->toArray()));
+        $property['fuel'] = array_filter(array_unique($cars->sortBy('fuel')->pluck('fuel')->toArray()));
+        $property['drive'] = array_filter(array_unique($cars->sortBy('drive')->pluck('drive')->toArray()));
+        $property['location'] = array_filter(array_unique($cars->sortBy('location')->pluck('location')->toArray()));
+        $property['doc_type'] = array_filter(array_unique($cars->sortBy('doc_type')->pluck('doc_type')->toArray()));
+
+        return $property;
+
     }
 }

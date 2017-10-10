@@ -1,26 +1,27 @@
-var Search = (function () {
+let Search = (function () {
 
-    var el = '#search'
+    let options = {}
 
-    var searchBtn = '#search-btn'
+    let el = '#search'
 
-    var searchClearBtn = '#search-clear-btn'
+    let searchBtn = '#search-btn'
 
-    var favoriteBtn = '#favorite-search-btn'
+    let searchClearBtn = '#search-clear-btn'
 
-    var favoriteWrapper = '.favorite-wrapper'
+    let favoriteBtn = '#favorite-search-btn'
 
+    let favoriteWrapper = '.favorite-wrapper'
 
-    var markSelect = '#search-marks'
-    var modelSelect = '#search-models'
-    var fuelSelect = '#search-fuel'
-    var driveSelect = '#search-drive'
-    var locationSelect = '#search-location'
-    var highlightSelect = '#search-location'
-    var yearToSelect = '#search-to'
-    var yearFromSelect = '#search-from'
-    var docAddSelect = '#search-doc-add'
-    var docRemSelect = '#search-doc-remove'
+    let markSelect = '#search-marks'
+    let modelSelect = '#search-models'
+    let fuelSelect = '#search-fuel'
+    let driveSelect = '#search-drive'
+    let locationSelect = '#search-location'
+    let highlightSelect = '#search-highlight'
+    let yearToSelect = '#search-to'
+    let yearFromSelect = '#search-from'
+    let docAddSelect = '#search-doc-add'
+    let docRemSelect = '#search-doc-remove'
 
 
     function setSelectorsOptions() {
@@ -39,134 +40,33 @@ var Search = (function () {
 
     function getModels() {
 
-        var mark = $(markSelect).val();
-        var drive = $(driveSelect).val();
-        var fuel = $(fuelSelect).val();
-        var docAdd = $(docAddSelect).val();
-        var docRem = $(docRemSelect).val();
-        var location = $(locationSelect).val();
-        var highlight = $(highlightSelect).val();
-        var yearTo = $(yearToSelect).val();
-        var yearFrom = $(yearFromSelect).val();
+        let mark = $(markSelect).val()
 
-        var data = {
+        $.get({
 
-            mark: mark,
-            drive: drive,
-            fuel: fuel,
-            docAdd: docAdd,
-            docRem: docRem,
-            location: location,
-            highlight: highlight,
-            yearTo: yearTo,
-            yearFrom: yearFrom
-        };
-
-
-        $.ajax({
-
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-
-            method: 'POST',
-
-            data: data,
-
-            url: '/cars/models'
+            url: '/cars/models/' + mark
 
         }).done(function (response) {
 
+            let models = response.models;
 
-            if (response.models.length !== 0) {
+            if (models.length !== 0) {
 
-                var models = response.models;
-
-                var el = $("#search-models");
-
-                el.empty();
-
-                $.each(models, function (key, value) {
-
-                    el.append($("<option></option>").text(value));
-                });
+                Search.setSelectOptions(modelSelect,models)
 
                 $('.selectpicker').selectpicker('refresh');
-
-            }
-        });
-    }
-
-    function getMarks() {
-
-
-        var drive = $('#search-drive').val();
-        var fuel = $('#search-fuel').val();
-        var docAdd = $('#search-doc-add').val();
-        var docRem = $('#search-doc-remove').val();
-        var location = $('#search-location').val();
-        var highlight = $('#search-highlight').val();
-        var yearTo = $('#search-to').val();
-        var yearFrom = $('#search-from').val();
-
-        var data = {
-
-            drive: drive,
-            fuel: fuel,
-            docAdd: docAdd,
-            docRem: docRem,
-            location: location,
-            highlight: highlight,
-            yearTo: yearTo,
-            yearFrom: yearFrom
-        };
-
-        $.ajax({
-
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-
-            method: 'POST',
-
-            data: data,
-
-            url: '/cars/marks'
-
-        }).done(function (response) {
-
-            if (response.marks.length !== 0) {
-
-                var marks = response.marks;
-
-                var elMark = $("#search-marks");
-                var elModel = $("#search-models");
-
-                elMark.empty();
-                elModel.empty();
-
-                $.each(marks, function (key, value) {
-
-                    elMark.append($("<option></option>").text(value));
-                });
-
-                $('.selectpicker').selectpicker('refresh');
-
-
             }
         });
     }
 
     function getDocs() {
 
+        let data = {
 
-        var location = $('#search-location').val();
-
-
-        var data = {
-
-            location: location
-        };
+            location: $(locationSelect).val(),
+            mark: $(markSelect).val(),
+            model: $(modelSelect).val()
+        }
 
         $.ajax({
 
@@ -182,42 +82,29 @@ var Search = (function () {
 
         }).done(function (response) {
 
-            if (response.docType.length !== 0) {
+            let docType = response.docType;
 
-                var docType = response.docType;
+            if (docType.length !== 0) {
 
-                var docAdd = $("#search-doc-add");
-                var docRem = $("#search-doc-remove");
+                $(docAddSelect).selectpicker('val', '');
+                $(docRemSelect).selectpicker('val', '');
 
-                docAdd.empty();
-                docRem.empty();
-
-                $.each(docType, function (key, value) {
-
-                    docAdd.append($("<option></option>").text(value));
-                    docRem.append($("<option></option>").text(value));
-                });
-
-                getMarks()
+                Search.setSelectOptions(docAddSelect,docType)
+                Search.setSelectOptions(docRemSelect,docType)
 
                 $('.selectpicker').selectpicker('refresh');
             }
         });
     }
 
-
-
-
-
     //EVENTS
-
     function initEvents() {
 
         onSearchCars()
 
         onToggleFavorite()
 
-        onClearSearch()
+        onClickClearSearch()
 
         onClearFavorite()
 
@@ -232,118 +119,43 @@ var Search = (function () {
         onChangeModel()
 
         onChangeLocation()
-
-        onChangeDocType()
-
-        onChangeHighLight()
-
-        onChangeDrive()
-
-        onChangeFuel()
-
-        onChangeYears()
-
     }
-
-
 
     function onChangeMark() {
 
-
-
-        $(el).on('change', '#search-marks', function (e) {
+        $(el).on('change', markSelect, function (e) {
             e.preventDefault()
 
+            let mark = $(markSelect).val();
+
+            Search.clearSearch(['mark'])
 
 
-            var mark = $('#search-marks').val();
+            Search.setSearchOptions()
 
             getModels(mark);
         })
-
-
     }
 
     function onChangeModel() {
 
-        $(el).on('change', '#search-models', function (e) {
+        $(el).on('change', modelSelect, function (e) {
             e.preventDefault()
 
+            let mark = $(markSelect).val();
 
-        })
-    }
+            Search.clearSearch(['mark','model'])
 
-    function onChangeYears() {
-
-        $(el).on('change', '#search-to', function (e) {
-
-            e.preventDefault()
-
-            getMarks()
-        })
-
-        $(el).on('change', '#search-from', function (e) {
-
-            e.preventDefault()
-
-            getMarks()
-        })
-    }
-
-    function onChangeDrive() {
-
-        $(el).on('change', '#search-drive', function (e) {
-
-            e.preventDefault()
-
-            getMarks()
-        })
-    }
-
-    function onChangeFuel() {
-
-        $(el).on('change', '#search-fuel', function (e) {
-
-            e.preventDefault()
-
-            getMarks()
-        })
-    }
-
-    function onChangeHighLight() {
-
-        $(el).on('change', '#search-highlight', function (e) {
-
-            e.preventDefault()
-
-            getMarks()
+            Search.setSearchOptions()
         })
     }
 
     function onChangeLocation() {
 
-        $(el).on('change', '#search-location', function (e) {
-
+        $(el).on('change', locationSelect, function (e) {
             e.preventDefault()
 
             getDocs()
-        })
-    }
-
-    function onChangeDocType() {
-
-        $(el).on('change', '#search-doc-add', function (e) {
-
-            e.preventDefault()
-
-            getMarks()
-        })
-
-        $(el).on('change', '#search-doc-remove', function (e) {
-
-            e.preventDefault()
-
-            getMarks()
         })
     }
 
@@ -352,7 +164,7 @@ var Search = (function () {
         $('#search-query').submit(function (e) {
             e.preventDefault()
 
-            var query  = $('#search-query input').val()
+            var query = $('#search-query input').val()
 
             $('#search-query input').val('')
 
@@ -364,39 +176,50 @@ var Search = (function () {
 
             }).done(function (data) {
 
-              if(data['found'] === true){
+                Search.clearSearch()
 
-                  if(data['col'] === 'lot'){
+                var request = {}
 
-                      data['lot']=query
+                if (data['found'] === true) {
 
-                      Table.getPage(1,data)
-                  }
+                    if (data['col'] === 'lot') {
 
-                  if(data['col'] === 'vin'){
+                        request['lot'] = query
+                    }
 
-                      data['vin']=query
+                    if (data['col'] === 'vin') {
 
-                      Table.getPage(1,data)
-                  }
+                        request['vin'] = query
+                    }
 
-                  if(data['col'] === 'year'){
+                    if (data['col'] === 'year') {
 
-                      Search.setYear(query)
+                        request['yearTo'] = query
+                        request['yearFrom'] = query
+                    }
 
-                      Table.getPage(1,Search.getSearchData())
-                  }
+                    if (data['col'] === 'location') {
 
-                  if(data['col'] === 'location'){
+                        var locs = Search.getOptions()['location'].filter(function (item) {
 
-                      Search.addLocation(query)
+                            return new RegExp('^' + query, "i").test(item);
 
-                      //var val = $('#search-doc-add').val()
+                        });
+
+                        if (locs.length === 0) Table.renderError()
+                        else request['location'] = locs
 
 
-                  }
+                        console.log(request)
+                    }
 
-              }
+                    Table.getPage(1, request)
+
+                } else if (data['found'] === false) {
+
+                    Table.renderError()
+
+                }
             })
         })
     }
@@ -426,17 +249,40 @@ var Search = (function () {
 
             Search.clearSearch()
 
-            Table.getPage(1,Search.getSearchData())
+            Table.getPage(1, Search.getSearchData())
         })
 
     }
 
-    function onClearSearch() {
+    function onClickClearSearch() {
 
         $(searchClearBtn).click(function (e) {
             e.preventDefault()
 
+
+
+            Search.setSelectOptions(yearToSelect,Search.getOptions()['years'])
+            Search.setSelectOptions(yearFromSelect,Search.getOptions()['years'])
+
+            Search.setSelectOptions(driveSelect,Search.getOptions()['drive'])
+
+            Search.setSelectOptions(yearFromSelect,Search.getOptions()['years'])
+
+            Search.setSelectOptions(fuelSelect,Search.getOptions()['fuel'])
+
+            Search.setSelectOptions(locationSelect,Search.getOptions()['location'])
+
+            console.log(Search.getOptions()['location'])
+
+            Search.setSelectOptions(highlightSelect,Search.getOptions()['highlight'])
+
+            Search.setSelectOptions(docAddSelect,Search.getOptions()['doc_type'])
+            Search.setSelectOptions(docRemSelect,Search.getOptions()['doc_type'])
+
             Search.clearSearch()
+
+            $('.selectpicker').selectpicker('refresh');
+
 
         })
     }
@@ -493,11 +339,51 @@ var Search = (function () {
 
     }
 
+    function initSelectOptions() {
 
+        options['location'] = Search.getSelectOptions(locationSelect)
+        options['years'] = Search.getSelectOptions(yearToSelect)
+        options['drive'] = Search.getSelectOptions(driveSelect)
+        options['fuel'] = Search.getSelectOptions(fuelSelect)
+        options['highlight'] = Search.getSelectOptions(highlightSelect)
+        options['doc_type'] = Search.getSelectOptions(docAddSelect)
+
+
+      //  console.log(options)
+    }
 
     return {
 
         showFavorite: false,
+
+        getSelectOptions: function (select) {
+
+            let options = []
+
+            $(select + ' option').each(function () {
+                options.push($(this).val())
+            })
+
+            return options
+
+        },
+
+        setSelectOptions: function (select, array) {
+
+            let el = $(select);
+
+            el.empty();
+
+            $.each(array, function (key, value) {
+
+                el.append($("<option></option>").text(value));
+            });
+        },
+
+        getOptions: function () {
+
+            return options
+        },
 
         addLocation: function (location) {
 
@@ -505,16 +391,16 @@ var Search = (function () {
             var options = []
 
             //Get options of select
-            $("#search-location option").each(function() {
+            $("#search-location option").each(function () {
                 options.push($(this).val())
             });
 
             //Found input locs in options
             var founded = options.filter(function (str) {
 
-                return new RegExp('^'+location,"i").test(str);
+                return new RegExp('^' + location, "i").test(str);
 
-                });
+            });
 
 
             var selected = $('#search-location').val()
@@ -524,7 +410,7 @@ var Search = (function () {
             //Add if not exist
             founded.forEach(function (item) {
 
-                if(!App.itemExist(selected,item)) newSelected.push(item)
+                if (!App.itemExist(selected, item)) newSelected.push(item)
             })
 
             console.log('options: ', options)
@@ -539,36 +425,54 @@ var Search = (function () {
             getDocs()
         },
 
+        setSearchOptions: function () {
+
+            let mark = $(markSelect).val()
+            let model = $(modelSelect).val()
+
+            if (model) model = '/' + model
+
+            $.get({
+
+                url: '/cars/property/' + mark + model
+
+            }).done(function (data) {
+
+                Search.setSelectOptions(docAddSelect,data['doc_type'])
+                Search.setSelectOptions(docRemSelect,data['doc_type'])
+
+                Search.setSelectOptions(driveSelect,data['drive'])
+
+                Search.setSelectOptions(fuelSelect,data['fuel'])
+
+                Search.setSelectOptions(highlightSelect,data['highlights'])
+
+                Search.setSelectOptions(locationSelect,data['location'])
+
+                Search.setSelectOptions(yearToSelect,data['years'])
+                Search.setSelectOptions(yearFromSelect,data['years'])
+
+                $('.selectpicker').selectpicker('refresh');
+            })
+        },
+
         removeDoc: function (doc) {
 
-            var selected = $('#search-doc-remove').val()
+            let selected = $(docRemSelect).val()
 
-            var newSelected = $('#search-doc-remove').val()
+            let newSelected = $(docRemSelect).val()
 
-            if(!App.itemExist(selected,doc)) newSelected.push(doc)
+            if (!App.itemExist(selected, doc)) newSelected.push(doc)
 
 
             console.log('selected: ', selected)
             console.log('newSelected', newSelected)
 
-            $('#search-doc-remove').val(newSelected)
+            $(docRemSelect).val(newSelected)
 
             $('.selectpicker').selectpicker('refresh');
 
 
-
-        },
-
-        setYear: function (year) {
-
-            searchData['yearTo'] = year
-
-            searchData['yearFrom'] = year
-
-            $(yearToSelect).val(year)
-            $(yearFromSelect).val(year)
-
-            $('.selectpicker').selectpicker('refresh');
         },
 
         getSearchData: function () {
@@ -610,6 +514,8 @@ var Search = (function () {
 
         init: function () {
 
+            initSelectOptions()
+
             setSelectorsOptions()
 
             initEvents()
@@ -618,15 +524,21 @@ var Search = (function () {
 
         },
 
-        clearSearch: function () {
+        clearSearch: function (except = []) {
 
-            $('.selectpicker').selectpicker('val', '');
-
-            getDocs()
-
-            getMarks()
-
+            if (!App.itemExist(except, 'mark')) $(markSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'model')) $(modelSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'fuel')) $(fuelSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'drive')) $(driveSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'location')) $(locationSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'highlight')) $(highlightSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'yearTo')) $(yearToSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'yearFrom')) $(yearFromSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'docAdd')) $(docAddSelect).selectpicker('val', '');
+            if (!App.itemExist(except, 'docRem')) $(docRemSelect).selectpicker('val', '');
         },
+
+
     }
 
 

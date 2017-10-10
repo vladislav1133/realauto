@@ -4,6 +4,8 @@ var Table = (function () {
 
     var remDocBtn = '.btn-rem-doc'
 
+    var errNotFound = '<tbody id="table-body"><tr class="footable-empty"><td colspan="11">Автомобили не найдеы</td></tr></tbody>'
+
     function onPaginate() {
 
         $(el).on('click', '.pagination a', function (e, data) {
@@ -41,6 +43,8 @@ var Table = (function () {
         $(el).on('click', remDocBtn, function (e) {
 
             Search.removeDoc($(this).data('doc'))
+
+            Table.getPage(1,Search.getSearchData())
         })
     }
     return {
@@ -67,12 +71,21 @@ var Table = (function () {
             setTimeout(function () {
                 var hideTable = $('#table #hide-table .table-container').get(0)
 
-                $('#main-table').html(hideTable)
+                if(data['carsCount'] === 0) Table.renderError()
+                else {
+                    $('#main-table').html(hideTable)
+                }
+
                 $('#total-cars').html(data['carsCount'])
 
             }, 1000);
 
             this.updateFavoriteCars()
+        },
+
+        renderError: function () {
+
+            $('#main-table').html('<h2 style="text-align:center; color:#fff">По запросу автомобили не найдены</h2>')
         },
 
         getPage: function (page, data) {
@@ -86,6 +99,8 @@ var Table = (function () {
         },
 
         getData: function (data) {
+
+
 
             $.ajax({
 
@@ -188,9 +203,6 @@ var Table = (function () {
             onRemoveDoc()
 
         },
-
-
-
 
     }
 })()

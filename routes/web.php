@@ -23,12 +23,10 @@ Route::post('contact-us','IndexController@contactUs');
 //CarsController
 Route::post('cars','CarsController@getCars');
 Route::post('cars/marks','CarsController@getMarks');
-Route::post('cars/models','CarsController@getModels');
+Route::get('cars/models/{mark}','CarsController@getModels');
 Route::post('cars/docs','CarsController@getDocs');
 Route::get('cars/search/{query}','CarsController@search');
-
-Route::get('favoritecars','CarsController@getFavoriteCars');
-Route::post('favoritecars','CarsController@getFavoriteCars');
+Route::get('cars/property/{mark}/{model?}','CarsController@getSearchProperty');
 
 
 // Authentication Routes...

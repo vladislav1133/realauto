@@ -13,7 +13,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
     protected $sections = [
         \App\Article::class => 'App\Http\Sections\Articles',
         \App\Page::class => 'App\Http\Sections\Pages',
-        \App\GeneralData::class => 'App\Http\Sections\GeneralDatas',
+        //\App\GeneralData::class => 'App\Http\Sections\GeneralDatas',
     ];
 
     /**

@@ -31,7 +31,7 @@
             </div>
 
             <div class="search__col col-xs-12">
-                <select id="search-marks" class="selectpicker search__select" data-title="Все">
+                <select id="search-marks" data-live-search="true" class="selectpicker search__select" data-title="Все">
                     @if($search['marks'])
                         @foreach($search['marks'] as $mark)
                             <option>{{$mark}}</option>
