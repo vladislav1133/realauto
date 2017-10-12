@@ -1,10 +1,11 @@
-var Table = (function () {
+let Table = (function () {
 
-    var el = '#table'
+    let el = '#table'
 
-    var remDocBtn = '.btn-rem-doc'
+    let remDocBtn = '.btn-rem-doc'
+    let remLocBtn = '.btn-rem-loc'
 
-    var errNotFound = '<tbody id="table-body"><tr class="footable-empty"><td colspan="11">Автомобили не найдеы</td></tr></tbody>'
+    let errNotFound = '<tbody id="table-body"><tr class="footable-empty"><td colspan="11">Автомобили не найдеы</td></tr></tbody>'
 
     function onPaginate() {
 
@@ -12,11 +13,11 @@ var Table = (function () {
 
             e.preventDefault();
 
-            var page = $(this).attr('href').split('page=')[1];
+            let page = $(this).attr('href').split('page=')[1];
 
             console.log('PAGE ' + page)
 
-            var html = Table.getPage(page, Search.getSearchData());
+            let html = Table.getPage(page, Search.getSearchData());
 
             $('html, body').animate({
                 scrollTop: $(el).offset().top - 95
@@ -38,15 +39,27 @@ var Table = (function () {
         })
     }
 
-    function onRemoveDoc() {
+    function onClickRemoveDoc() {
 
         $(el).on('click', remDocBtn, function (e) {
 
-            Search.removeDoc($(this).data('doc'))
+            Search.removeDoc($(this).data('doc'),true)
 
-            Table.getPage(1,Search.getSearchData())
+
         })
     }
+
+    function onClickRemoveLoc() {
+
+        $(el).on('click', remLocBtn, function (e) {
+
+
+            Search.removeLoc($(this).data('loc'))
+
+
+        })
+    }
+
     return {
 
         init: function () {
@@ -90,8 +103,7 @@ var Table = (function () {
 
         getPage: function (page, data) {
 
-            console.log('get page')
-
+            console.log(data)
 
             data['page'] = page
 
@@ -200,7 +212,9 @@ var Table = (function () {
 
             onAddFavoriteCar()
 
-            onRemoveDoc()
+            onClickRemoveDoc()
+
+            onClickRemoveLoc()
 
         },
 

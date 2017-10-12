@@ -75,6 +75,36 @@
                 </select>
             </div>
 
+            <div class="col-xs-12 search__col">
+                <div class="search__label">Осн. повриждение:</div>
+            </div>
+
+            <div class="search__col col-xs-12">
+                <select id="search-damage" data-actions-box="true" multiple data-live-search="true" class="selectpicker search__select" data-title="Все">
+                    @if($search['damage'])
+                        @foreach($search['damage'] as $pDamage)
+                            <option>{{$pDamage}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+
+            <div class="col-xs-12 search__col">
+                <div class="search__label">Осн. моменты:</div>
+            </div>
+
+            <div class="search__col search__col col-xs-12">
+                <select multiple id="search-highlight" class="selectpicker search__select" data-actions-box="true"
+                        title="Все">
+                    @if($search['highlights'])
+                        @foreach($search['highlights'] as $highlight)
+                            <option>{{$highlight}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+
+
             <div class="col-xs-6">
                 <div class="search__label">Привод:</div>
             </div>
@@ -86,9 +116,11 @@
             <div class="search__col search__col_left col-xs-6">
                 <select multiple id="search-drive" class="selectpicker search__select" data-actions-box="true"
                         title="Все">
-                    <option value="0">Front-wheel Drive</option>
-                    <option value="1">Rear-wheel Drive</option>
-                    <option value="2">All Wheel Drive</option>
+                    @if($search['drive'])
+                        @foreach($search['drive'] as $drive)
+                            <option>{{$drive}}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
 
@@ -96,41 +128,41 @@
                 <select multiple id="search-fuel" class="selectpicker search__select" data-actions-box="true"
                         title="Все">
                     @if($search['fuel'])
-                        @foreach($search['fuel'] as $year)
-                            <option>{{$year}}</option>
+                        @foreach($search['fuel'] as $fuel)
+                            <option>{{$fuel}}</option>
                         @endforeach
                     @endif
                 </select>
             </div>
 
-            <div class="col-xs-6">
+
+            <div class="col-xs-12 search__col">
                 <div class="search__label">Расположение:</div>
             </div>
-
-            <div class="col-xs-6 search__col_right">
-                <div class="search__label">Осн. моменты:</div>
-            </div>
-
-            <div class="search__col search__col_left col-xs-6">
-                <select multiple id="search-location" data-live-search="true" class="selectpicker search__select"
-                        data-actions-box="true" title="Все">
+            <div class="search__col search__col_left col-xs-6 ">
+                <select multiple id="search-loc-add" data-live-search="true" class="selectpicker search__select"
+                        data-actions-box="true" title="Добавить">
                     @if($search['location'])
-                        @foreach($search['location'] as $year)
-                            <option>{{$year}}</option>
+                        @foreach($search['location'] as $locAdd)
+                            <option>{{$locAdd}}</option>
                         @endforeach
                     @endif
                 </select>
             </div>
 
-            <div class="search__col search__col_right col-xs-6">
+            <div class="search__col search__col_right col-xs-6 ">
 
-                    <select multiple id="search-highlight" class="selectpicker search__select" data-actions-box="true"
-                            title="Все">
-                        <option>ENGINE START PROGRAM</option>
-                        <option>ENHANCED VEHICLES</option>
-                        <option>RUNS AND DRIVES</option>
-                    </select>
+                <select multiple id="search-loc-rem" data-live-search="true" class="selectpicker search__select"
+                        data-actions-box="true" title="Исключить">
+                    @if($search['location'])
+                        @foreach($search['location'] as $locRem)
+                            <option>{{$locRem}}</option>
+                        @endforeach
+                    @endif
+                </select>
             </div>
+
+
 
             <div class="col-xs-12">
                 <div class="search__label">Документы:</div>
@@ -140,8 +172,8 @@
                 <select multiple id="search-doc-add" data-live-search="true" class="selectpicker search__select"
                         data-actions-box="true" title="Добавить">
                     @if($search['docType'])
-                        @foreach($search['docType'] as $year)
-                            <option>{{$year}}</option>
+                        @foreach($search['docType'] as $docAdd)
+                            <option>{{$docAdd}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -149,15 +181,14 @@
 
             <div class="search__col search__col_right col-xs-6 ">
 
-                <select multiple id="search-doc-remove" data-live-search="true" class="selectpicker search__select"
+                <select multiple id="search-doc-rem" data-live-search="true" class="selectpicker search__select"
                         data-actions-box="true" title="Исключить">
                     @if($search['docType'])
-                        @foreach($search['docType'] as $year)
-                            <option>{{$year}}</option>
+                        @foreach($search['docType'] as $docRem)
+                            <option>{{$docRem}}</option>
                         @endforeach
                     @endif
                 </select>
-
             </div>
 
             <div class="col-xs-12">

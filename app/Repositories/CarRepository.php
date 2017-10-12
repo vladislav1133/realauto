@@ -73,8 +73,7 @@ class CarRepository extends Repository {
     }
 
 
-    public function getModels($mark, $firstName = false)
-    {
+    public function getModels($mark, $firstName = false) {
 
         $names = $this->getNames();
 
@@ -301,14 +300,38 @@ class CarRepository extends Repository {
             $where[] = ['name', 'like', '%' . $model . '%'];
         }
 
-        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type'],'','',$where);
+        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type','primary_damage'],'','',$where);
 
         $property = [];
 
+
+
         $property['years'] = array_filter(array_unique($cars->sortBy('year')->pluck('year')->toArray()));
+        $property['damage'] = array_filter(array_unique($cars->sortBy('primary_damage')->pluck('primary_damage')->toArray()));
         $property['highlights'] = array_filter(array_unique($cars->sortBy('highlights')->pluck('highlights')->toArray()));
         $property['fuel'] = array_filter(array_unique($cars->sortBy('fuel')->pluck('fuel')->toArray()));
-        $property['drive'] = array_filter(array_unique($cars->sortBy('drive')->pluck('drive')->toArray()));
+
+
+        $property['drive'] = [];
+
+        $drives = array_filter(array_unique($cars->sortBy('drive')->pluck('drive')->toArray()));
+
+        $driveType = config('car_search.drive_type');
+
+
+
+           foreach ($driveType as $k=>$type){
+
+
+              foreach ($type as $item){
+
+                  if(in_array($item,$drives)){
+
+                      array_push($property['drive'],$k);
+                  }
+              }
+           }
+
         $property['location'] = array_filter(array_unique($cars->sortBy('location')->pluck('location')->toArray()));
         $property['doc_type'] = array_filter(array_unique($cars->sortBy('doc_type')->pluck('doc_type')->toArray()));
 

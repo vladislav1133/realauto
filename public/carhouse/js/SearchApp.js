@@ -6,25 +6,61 @@ let Search = (function () {
 
     let searchBtn = '#search-btn'
 
+    let queryForm = '#search-query'
+
     let searchClearBtn = '#search-clear-btn'
 
     let favoriteBtn = '#favorite-search-btn'
 
     let favoriteWrapper = '.favorite-wrapper'
 
-    let markSelect = '#search-marks'
-    let modelSelect = '#search-models'
-    let fuelSelect = '#search-fuel'
-    let driveSelect = '#search-drive'
-    let locationSelect = '#search-location'
-    let highlightSelect = '#search-highlight'
-    let yearToSelect = '#search-to'
-    let yearFromSelect = '#search-from'
-    let docAddSelect = '#search-doc-add'
-    let docRemSelect = '#search-doc-remove'
+    let selects = {
+
+        'mark':'#search-marks',
+
+        'model':'#search-models',
+
+        'yearTo':'#search-to',
+        'yearFrom':'#search-from',
+
+        'damage': '#search-damage',
+
+        'locAdd': '#search-loc-add',
+        'locRem': '#search-loc-rem',
+
+        'drive':'#search-drive',
+
+        'fuel':'#search-fuel',
+
+        'location':'#search-location',
+
+        'highlight':'#search-highlight',
+
+        'docAdd':'#search-doc-add',
+        'docRem':'#search-doc-rem'
+    }
+
+    function initSearchOptions() {
+
+        options['years'] = Search.getSelectOptions(selects['yearTo'])
+
+        options['damage'] = Search.getSelectOptions(selects['damage'])
+
+        options['drive'] = Search.getSelectOptions(selects['drive'])
+
+        options['fuel'] = Search.getSelectOptions(selects['fuel'])
+
+        options['location'] = Search.getSelectOptions(selects['locAdd'])
+
+        options['highlight'] = Search.getSelectOptions(selects['highlight'])
+
+        options['doc_type'] = Search.getSelectOptions(selects['docAdd'])
 
 
-    function setSelectorsOptions() {
+          console.log(options)
+    }
+
+    function initSelectSetting() {
 
         $('.selectpicker').selectpicker({
             selectedTextFormat: 'count > 0',
@@ -38,66 +74,6 @@ let Search = (function () {
 
     }
 
-    function getModels() {
-
-        let mark = $(markSelect).val()
-
-        $.get({
-
-            url: '/cars/models/' + mark
-
-        }).done(function (response) {
-
-            let models = response.models;
-
-            if (models.length !== 0) {
-
-                Search.setSelectOptions(modelSelect,models)
-
-                $('.selectpicker').selectpicker('refresh');
-            }
-        });
-    }
-
-    function getDocs() {
-
-        let data = {
-
-            location: $(locationSelect).val(),
-            mark: $(markSelect).val(),
-            model: $(modelSelect).val()
-        }
-
-        $.ajax({
-
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-
-            method: 'POST',
-
-            data: data,
-
-            url: '/cars/docs'
-
-        }).done(function (response) {
-
-            let docType = response.docType;
-
-            if (docType.length !== 0) {
-
-                $(docAddSelect).selectpicker('val', '');
-                $(docRemSelect).selectpicker('val', '');
-
-                Search.setSelectOptions(docAddSelect,docType)
-                Search.setSelectOptions(docRemSelect,docType)
-
-                $('.selectpicker').selectpicker('refresh');
-            }
-        });
-    }
-
-    //EVENTS
     function initEvents() {
 
         onSearchCars()
@@ -121,17 +97,19 @@ let Search = (function () {
         onChangeLocation()
     }
 
+    //EVENTS
+
     function onChangeMark() {
 
-        $(el).on('change', markSelect, function (e) {
+        $(el).on('change', selects['mark'], function (e) {
             e.preventDefault()
 
-            let mark = $(markSelect).val();
+            let mark = $(selects['mark']).val();
 
-            Search.clearSearch(['mark'])
+            Search.clearSearch([selects['mark']])
 
 
-            Search.setSearchOptions()
+            Search.setSearchCarOptions()
 
             getModels(mark);
         })
@@ -139,20 +117,26 @@ let Search = (function () {
 
     function onChangeModel() {
 
-        $(el).on('change', modelSelect, function (e) {
+        $(el).on('change', selects['model'], function (e) {
             e.preventDefault()
 
-            let mark = $(markSelect).val();
+            let mark = $(selects['mark']).val();
 
-            Search.clearSearch(['mark','model'])
+            Search.clearSearch([selects['mark'],selects['model']])
 
-            Search.setSearchOptions()
+            Search.setSearchCarOptions()
         })
     }
 
     function onChangeLocation() {
 
-        $(el).on('change', locationSelect, function (e) {
+        $(el).on('change', selects['locAdd'], function (e) {
+            e.preventDefault()
+
+            getDocs()
+        })
+
+        $(el).on('change', selects['locRem'], function (e) {
             e.preventDefault()
 
             getDocs()
@@ -164,9 +148,9 @@ let Search = (function () {
         $('#search-query').submit(function (e) {
             e.preventDefault()
 
-            var query = $('#search-query input').val()
+            let query = $(queryForm + ' input').val()
 
-            $('#search-query input').val('')
+            $(queryForm + ' input').val('')
 
             $.ajax({
 
@@ -178,7 +162,9 @@ let Search = (function () {
 
                 Search.clearSearch()
 
-                var request = {}
+                $('.selectpicker').selectpicker('refresh');
+
+                let request = {}
 
                 if (data['found'] === true) {
 
@@ -220,6 +206,8 @@ let Search = (function () {
                     Table.renderError()
 
                 }
+
+                Search.setSearchDefaultOptions()
             })
         })
     }
@@ -259,31 +247,7 @@ let Search = (function () {
         $(searchClearBtn).click(function (e) {
             e.preventDefault()
 
-
-
-            Search.setSelectOptions(yearToSelect,Search.getOptions()['years'])
-            Search.setSelectOptions(yearFromSelect,Search.getOptions()['years'])
-
-            Search.setSelectOptions(driveSelect,Search.getOptions()['drive'])
-
-            Search.setSelectOptions(yearFromSelect,Search.getOptions()['years'])
-
-            Search.setSelectOptions(fuelSelect,Search.getOptions()['fuel'])
-
-            Search.setSelectOptions(locationSelect,Search.getOptions()['location'])
-
-            console.log(Search.getOptions()['location'])
-
-            Search.setSelectOptions(highlightSelect,Search.getOptions()['highlight'])
-
-            Search.setSelectOptions(docAddSelect,Search.getOptions()['doc_type'])
-            Search.setSelectOptions(docRemSelect,Search.getOptions()['doc_type'])
-
-            Search.clearSearch()
-
-            $('.selectpicker').selectpicker('refresh');
-
-
+            Search.setSearchDefaultOptions()
         })
     }
 
@@ -339,22 +303,131 @@ let Search = (function () {
 
     }
 
-    function initSelectOptions() {
+    function getModels() {
 
-        options['location'] = Search.getSelectOptions(locationSelect)
-        options['years'] = Search.getSelectOptions(yearToSelect)
-        options['drive'] = Search.getSelectOptions(driveSelect)
-        options['fuel'] = Search.getSelectOptions(fuelSelect)
-        options['highlight'] = Search.getSelectOptions(highlightSelect)
-        options['doc_type'] = Search.getSelectOptions(docAddSelect)
+        let mark = $(selects['mark']).val()
+
+        $.get({
+
+            url: '/cars/models/' + mark
+
+        }).done(function (response) {
+
+            let models = response.models;
+
+            if (models.length !== 0) Search.setSelectOptions(selects['model'],models)
+
+        });
+    }
+
+    function getDocs(updatePage = false) {
+
+        let data = {
+
+            mark: $(selects['mark']).val(),
+            model: $(selects['model']).val(),
+            locAdd: $(selects['locAdd']).val(),
+            locRem: $(selects['locRem']).val(),
+        }
+
+        $.ajax({
+
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            method: 'POST',
+
+            data: data,
+
+            url: '/cars/docs'
+
+        }).done(function (response) {
+
+            let docType = response.docType;
+
+            if (docType.length !== 0) {
 
 
-      //  console.log(options)
+
+                $(selects['docAdd']).selectpicker('val', '');
+                $(selects['docRem']).selectpicker('val', '');
+
+                Search.setSelectOptions(selects['docAdd'],docType)
+                Search.setSelectOptions(selects['docRem'],docType)
+
+                $('.selectpicker').selectpicker('refresh');
+
+                if(updatePage === true) Table.getPage(1,Search.getSearchData())
+            }
+        });
     }
 
     return {
 
         showFavorite: false,
+
+        init: function () {
+
+            initSearchOptions()
+
+            initSelectSetting()
+
+            initEvents()
+
+            $(window).trigger('disableFavoriteBtn');
+
+        },
+
+        getSelects: function () {
+
+            return selects
+        },
+
+        getOptions: function () {
+
+            return options
+        },
+        getSearchData: function () {
+
+            let searchData = {}
+
+
+
+            searchData['mark'] = $(selects['mark']).val()
+
+            searchData['model'] = $(selects['model']).val()
+
+            searchData['yearTo'] = $(selects['yearTo']).val()
+
+            searchData['yearFrom'] = $(selects['yearFrom']).val()
+
+            searchData['damage'] = $(selects['damage']).val()
+
+            searchData['drive'] = $(selects['drive']).val()
+
+            searchData['fuel'] = $(selects['fuel']).val()
+
+            searchData['highlight'] = $(selects['highlight']).val()
+
+            searchData['locAdd'] = $(selects['locAdd']).val()
+            searchData['locRem'] = $(selects['locRem']).val()
+
+            searchData['docAdd'] = $(selects['docAdd']).val()
+
+            searchData['docRem'] = $(selects['docRem']).val()
+
+            if (Search.showFavorite) {
+
+                let favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
+
+                if (favoriteCars === undefined) favoriteCars = []
+
+                searchData['favoriteCars'] = favoriteCars
+            }
+
+            return searchData
+        },
 
         getSelectOptions: function (select) {
 
@@ -378,57 +451,44 @@ let Search = (function () {
 
                 el.append($("<option></option>").text(value));
             });
+
+            $('.selectpicker').selectpicker('refresh');
         },
 
-        getOptions: function () {
+        removeDoc: function (doc,updatePage = false) {
 
-            return options
-        },
+            let selected = $(selects['docRem']).val()
 
-        addLocation: function (location) {
+            let newSelected = $(selects['docRem']).val()
 
+            if (!App.itemExist(selected, doc)) newSelected.push(doc)
 
-            var options = []
-
-            //Get options of select
-            $("#search-location option").each(function () {
-                options.push($(this).val())
-            });
-
-            //Found input locs in options
-            var founded = options.filter(function (str) {
-
-                return new RegExp('^' + location, "i").test(str);
-
-            });
-
-
-            var selected = $('#search-location').val()
-
-            var newSelected = $('#search-location').val()
-
-            //Add if not exist
-            founded.forEach(function (item) {
-
-                if (!App.itemExist(selected, item)) newSelected.push(item)
-            })
-
-            console.log('options: ', options)
-            console.log('founded: ', founded)
-            console.log('selected: ', selected)
-            console.log('newSelected', newSelected)
-
-            $('#search-location').val(newSelected)
+            $(selects['docRem']).val(newSelected)
 
             $('.selectpicker').selectpicker('refresh');
 
-            getDocs()
+            if(updatePage === true) Table.getPage(1,Search.getSearchData())
         },
 
-        setSearchOptions: function () {
+        removeLoc: function (loc) {
 
-            let mark = $(markSelect).val()
-            let model = $(modelSelect).val()
+            let selected = $(selects['locRem']).val()
+
+            let newSelected = $(selects['locRem']).val()
+
+            if (!App.itemExist(selected, loc)) newSelected.push(loc)
+
+            $(selects['locRem']).val(newSelected)
+
+            $('.selectpicker').selectpicker('refresh');
+
+            getDocs(true)
+        },
+
+        setSearchCarOptions: function () {
+
+            let mark = $(selects['mark']).val()
+            let model = $(selects['model']).val()
 
             if (model) model = '/' + model
 
@@ -438,108 +498,65 @@ let Search = (function () {
 
             }).done(function (data) {
 
-                Search.setSelectOptions(docAddSelect,data['doc_type'])
-                Search.setSelectOptions(docRemSelect,data['doc_type'])
+                Search.setSelectOptions(selects['docAdd'],data['doc_type'])
+                Search.setSelectOptions(selects['docRem'],data['doc_type'])
 
-                Search.setSelectOptions(driveSelect,data['drive'])
+                Search.setSelectOptions(selects['damage'],data['damage'])
 
-                Search.setSelectOptions(fuelSelect,data['fuel'])
+                Search.setSelectOptions(selects['drive'],data['drive'])
 
-                Search.setSelectOptions(highlightSelect,data['highlights'])
+                Search.setSelectOptions(selects['fuel'],data['fuel'])
 
-                Search.setSelectOptions(locationSelect,data['location'])
+                Search.setSelectOptions(selects['highlight'],data['highlights'])
 
-                Search.setSelectOptions(yearToSelect,data['years'])
-                Search.setSelectOptions(yearFromSelect,data['years'])
+                Search.setSelectOptions(selects['locAdd'],data['location'])
+                Search.setSelectOptions(selects['locRem'],data['location'])
+
+                Search.setSelectOptions(selects['yearTo'],data['years'])
+                Search.setSelectOptions(selects['yearFrom'],data['years'])
 
                 $('.selectpicker').selectpicker('refresh');
             })
         },
 
-        removeDoc: function (doc) {
+        setSearchDefaultOptions: function () {
 
-            let selected = $(docRemSelect).val()
+            let options = Search.getOptions()
 
-            let newSelected = $(docRemSelect).val()
+            Search.setSelectOptions(selects['model'],'')
 
-            if (!App.itemExist(selected, doc)) newSelected.push(doc)
+            Search.setSelectOptions(selects['yearTo'],options['years'])
+            Search.setSelectOptions(selects['yearFrom'],options['years'])
 
+            Search.setSelectOptions(selects['damage'],options['damage'])
 
-            console.log('selected: ', selected)
-            console.log('newSelected', newSelected)
+            Search.setSelectOptions(selects['locAdd'],options['location'])
+            Search.setSelectOptions(selects['locRem'],options['location'])
 
-            $(docRemSelect).val(newSelected)
+            Search.setSelectOptions(selects['drive'],options['drive'])
+
+            Search.setSelectOptions(selects['fuel'],options['fuel'])
+
+            Search.setSelectOptions(selects['highlight'],options['highlight'])
+
+            Search.setSelectOptions(selects['docAdd'],options['doc_type'])
+            Search.setSelectOptions(selects['docRem'],options['doc_type'])
+
+            Search.clearSearch()
+
+        },
+
+        clearSearch: function (exceptClear = []) {
+
+            let selects = Object.values(Search.getSelects());
+
+            selects.forEach(function (item) {
+
+                if (!App.itemExist(exceptClear, item)) $(item).selectpicker('val', '')
+            })
 
             $('.selectpicker').selectpicker('refresh');
-
-
         },
-
-        getSearchData: function () {
-
-            var searchData = {}
-
-            searchData['docAdd'] = $('#search-doc-add').val()
-
-            searchData['docRem'] = $('#search-doc-remove').val()
-
-            searchData['mark'] = $('#search-marks').val()
-
-            searchData['model'] = $('#search-models').val()
-
-            searchData['yearTo'] = $('#search-to').val()
-
-            searchData['yearFrom'] = $('#search-from').val()
-
-            searchData['drive'] = $('#search-drive').val()
-
-            searchData['fuel'] = $('#search-fuel').val()
-
-            searchData['highlight'] = $('#search-highlight').val()
-
-            searchData['location'] = $('#search-location').val()
-
-
-            if (Search.showFavorite) {
-
-                var favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
-
-                if (favoriteCars === undefined) favoriteCars = []
-            }
-
-            searchData['favoriteCars'] = favoriteCars
-
-            return searchData
-        },
-
-        init: function () {
-
-            initSelectOptions()
-
-            setSelectorsOptions()
-
-            initEvents()
-
-            $(window).trigger('disableFavoriteBtn');
-
-        },
-
-        clearSearch: function (except = []) {
-
-            if (!App.itemExist(except, 'mark')) $(markSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'model')) $(modelSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'fuel')) $(fuelSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'drive')) $(driveSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'location')) $(locationSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'highlight')) $(highlightSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'yearTo')) $(yearToSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'yearFrom')) $(yearFromSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'docAdd')) $(docAddSelect).selectpicker('val', '');
-            if (!App.itemExist(except, 'docRem')) $(docRemSelect).selectpicker('val', '');
-        },
-
-
     }
-
 
 })()

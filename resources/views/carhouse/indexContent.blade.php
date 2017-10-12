@@ -57,11 +57,10 @@
                     <td>@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
                     <td>@if($car->buy_it_now)${{$car->buy_it_now}}@else &mdash; @endif</td>
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
-                    <td>@if($car->location){{$car->location}}@else &mdash; @endif</td>
+                    <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc" data-loc="{{$car->location}}">Исключить</button>@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc" data-doc="{{$car->doc_type}}">Исключить</button>@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->highlights}}@else &mdash; @endif</td>
                 </tr>
-
             @endforeach
             </tbody>
         </table>

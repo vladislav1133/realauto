@@ -88,8 +88,7 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
-    public function getModels($mark)
-    {
+    public function getModels($mark) {
 
         $models = $this->carRepository->getModels($mark,true);
 
@@ -107,22 +106,40 @@ class CarsController extends Controller {
 
     public function getDocs(Request $request)
     {
-
-        $location = $request->input('location');
         $mark = $request->input('mark');
+
         $model = $request->input('model');
 
+        $locAdd = $request->input('locAdd');
+        $locRem = $request->input('locRem');
 
-        $docs = array();
+        $docs = [];
+        $whereNotIn = [];
+        $whereIn = [];
+        $where = [];
+        
 
-        $whereIn = false;
-        $where = false;
-
-        if ($location) $whereIn[] = ['location', $location];
         if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
         if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
 
-        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], $where, $whereIn,'',true);
+        if ($locRem) array_push($whereNotIn, ['location', $locRem]);
+
+        if ($locAdd){
+
+            if($locRem){
+                foreach ($locRem as $key=>$loc){
+
+                    if(($key = array_search($loc, $locAdd)) !== false) {
+
+                        unset($locAdd[$key]);
+                    }
+                }
+            }
+
+            if ($locAdd) array_push($whereIn, ['location', $locAdd]);
+        }
+
+        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], $where, $whereIn,$whereNotIn,true);
 
         foreach ($queryArr as $arr) {
 
@@ -146,6 +163,8 @@ class CarsController extends Controller {
 
         $driveSearch = [];
 
+        $drive_type = config('car_search.drive_type');
+
         $drive = $request->input('drive');
         $mark = $request->input('mark');
         $model = $request->input('model');
@@ -155,14 +174,27 @@ class CarsController extends Controller {
         $docRem = $request->input('docRem');
         $highlight = $request->input('highlight');
         $fuel = $request->input('fuel');
-        $location = $request->input('location');
+        $locAdd = $request->input('locAdd');
+        $locRem = $request->input('locRem');
         $favoriteCars = $request->input('favoriteCars');
         $lot = $request->input('lot');
         $vin = $request->input('vin');
-        //$sort = $request->input('sort');
+        $damage = $request->input('damage');
 
 
-        $drive_type = config('car_search.drive_type');
+
+        if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
+        if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
+
+        if ($yearFrom) {
+            $where[] = ['year', '>=', $yearFrom];
+        }
+
+        if ($yearTo) {
+            $where[] = ['year', '<=', $yearTo];
+        }
+
+        if ($damage) array_push($whereIn, ['primary_damage', $damage]);
 
         if ($drive) {
 
@@ -181,15 +213,17 @@ class CarsController extends Controller {
             $whereIn[] = $driveSearch;
         }
 
+        if ($fuel) array_push($whereIn, ['fuel', $fuel]);
 
         if ($docRem) array_push($whereNotIn, ['doc_type', $docRem]);
-
 
         if ($docAdd){
 
             if($docRem){
-                foreach ($docRem as $doc){
+                foreach ($docRem as $key=>$doc){
+
                     if(($key = array_search($doc, $docAdd)) !== false) {
+
                         unset($docAdd[$key]);
                     }
                 }
@@ -198,12 +232,25 @@ class CarsController extends Controller {
             if ($docAdd) array_push($whereIn, ['doc_type', $docAdd]);
         }
 
+        if ($locRem) array_push($whereNotIn, ['location', $locRem]);
 
-        if ($fuel) array_push($whereIn, ['fuel', $fuel]);
+        if ($locAdd){
+
+            if($locRem){
+                foreach ($locRem as $loc){
+
+                    if(($key = array_search($loc, $locAdd)) !== false) {
+
+                        unset($locAdd[$key]);
+                    }
+                }
+            }
+
+            if ($locAdd) array_push($whereIn, ['location', $locAdd]);
+        }
 
         if ($highlight) array_push($whereIn, ['highlights', $highlight]);
 
-        if ($location) array_push($whereIn, ['location', $location]);
 
         if ($favoriteCars) array_push($whereIn, ['lot_id', $favoriteCars]);
 
@@ -215,22 +262,7 @@ class CarsController extends Controller {
             $where[] = ['vin', '=', $vin];
         }
 
-        if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
-        if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
-
-
-        if ($yearFrom) {
-            $where[] = ['year', '>=', $yearFrom];
-        }
-
-        if ($yearTo) {
-            $where[] = ['year', '<=', $yearTo];
-        }
-
-
         $orderBy = ['sale_date', 'asc'];
-
-
 
         if ($yearTo || $yearFrom) {
 
@@ -239,9 +271,11 @@ class CarsController extends Controller {
             $orderBy[1] = 'asc';
         }
 
+
         $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn);
 
         $carsCount = $cars->total();
+
 
         $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->render();
 

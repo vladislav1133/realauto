@@ -109,8 +109,13 @@ class IndexController extends SiteController{
 
         $search['fuel'] = config('car_search.fuel');
 
+        $search['drive'] = array_keys(config('car_search.drive_type'));
+
         $search['docType'] = $this->carRepository->unique('doc_type');
 
+        $search['damage'] = $this->carRepository->unique('primary_damage');
+
+        $search['highlights'] = config('car_search.highlights');
         return $search;
     }
 

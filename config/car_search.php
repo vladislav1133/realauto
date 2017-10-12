@@ -17,13 +17,16 @@ return [
 
     'drive_type' => [
 
-        0 => ['Front-wheel Drive'],
+        'Front-wheel Drive' => ['Front-wheel Drive'],
 
-        1 => ['Rear-wheel Drive'],
+        'Rear-wheel Drive' => ['Rear-wheel drive'],
 
-        2 => ['All Wheel Drive', '4fd', '4rd', 'Four By Four', 'Front Whl Drv W/4x4', 'Rear Wheel Drv W/4x4 '],
+        'All Wheel Drive' => ['All wheel drive', '4fd', '4rd', 'Four by Four', 'FRONT WHL DRV W/4X4', '4x4 w/Rear Wheel Drv', '4x4 w/Front Whl Drv'],
+    ],
+
+    'highlights' => [
+        'ENGINE START PROGRAM',
+        'ENHANCED VEHICLES',
+        'RUNS AND DRIVES'
     ]
-
 ];
-
-
