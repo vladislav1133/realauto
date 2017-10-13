@@ -24,7 +24,10 @@
         </div>
     </div>
 
+
 @endsection
+
+
 
 @section('footer')
     @include(env('THEME').'.contactPopup')

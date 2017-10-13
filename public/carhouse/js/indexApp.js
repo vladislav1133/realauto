@@ -15,6 +15,7 @@ var App = (function () {
             SecondMenu.init()
             Search.init()
             Table.init()
+            CustomsCalculator.init()
 
             //Custom gallery
             $('#custom-slider').bxSlider({

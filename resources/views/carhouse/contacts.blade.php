@@ -6,6 +6,7 @@
 
 @section('content')
     {!!$content!!}
+    @include('widgets.customsCalculator')
 @endsection
 
 @section('footer')

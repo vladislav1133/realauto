@@ -117,7 +117,7 @@ class CarsController extends Controller {
         $whereNotIn = [];
         $whereIn = [];
         $where = [];
-        
+
 
         if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
         if ($model) $where[] = ['name', 'like', '%' . $model . '%'];

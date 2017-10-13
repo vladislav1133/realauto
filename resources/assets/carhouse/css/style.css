@@ -48,6 +48,17 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
+.custom-calc{
+    padding: 20px 10px;
+    background-color: #ccc;
+    color : #000;
+
+}
+
+.custom-calc__input {
+
+
+}
 
 
 .bx-controls-direction{

@@ -392,8 +392,6 @@ let Search = (function () {
 
             let searchData = {}
 
-
-
             searchData['mark'] = $(selects['mark']).val()
 
             searchData['model'] = $(selects['model']).val()
