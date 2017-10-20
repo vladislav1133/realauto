@@ -6,9 +6,8 @@
 
 @section('content')
 
-    <div class="car-list content-area">
+    <div id="main-content" class="car-list content-area">
         <div class="container">
-
                 <div class="main-aside col-xs-3">
                     @include(env('THEME').'.indexSideBar')
                 </div>
@@ -20,10 +19,8 @@
                             <div id="hide-table"></div>
                     </div>
                 </div>
-
         </div>
     </div>
-
 
 @endsection
 

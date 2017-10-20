@@ -193,7 +193,7 @@ let Search = (function () {
                         });
 
                         if (locs.length === 0) Table.renderError()
-                        else request['location'] = locs
+                        else request['locAdd'] = locs
 
 
                         console.log(request)

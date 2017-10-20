@@ -20,6 +20,7 @@
                     <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
                     <li><a href="{{route('blog.index')}}" >Блог</a></li>
                     <li><a href="{{route('contacts')}}" >Контакты</a></li>
+                    <li><a href="{{route('rastamozhka')}}" >Растаможка</a></li>
                 </ul>
             </div>
         </nav>

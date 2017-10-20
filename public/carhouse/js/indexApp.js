@@ -1,4 +1,20 @@
-var App = (function () {
+let App = (function () {
+
+    function initEvents() {
+
+        eventContactPopup()
+
+    }
+
+    function eventContactPopup() {
+        $('#contact-up-btn').magnificPopup({})
+    }
+
+    function onChangePage () {
+
+        $('.sale_date')
+
+    }
 
     return {
 
@@ -26,17 +42,13 @@ var App = (function () {
                 captions: true
             });
 
-            this.initEvents()
-        },
+            var sidebar = new StickySidebar('.main-aside', {
+                topSpacing: 105,
+                containerSelector: '#main-content .container',
 
-        initEvents: function () {
+            });
 
-            this.eventContactPopup()
-
-        },
-
-        eventContactPopup: function () {
-            $('#contact-up-btn').magnificPopup({})
+            initEvents()
         },
 
         getCookie: function (name) {
@@ -83,7 +95,6 @@ var App = (function () {
             document.cookie = updatedCookie;
         },
 
-
         removeFromArray: function (array, remove) {
 
             array = array.filter(function (el) {
@@ -91,6 +102,27 @@ var App = (function () {
             });
 
             return array
+        },
+
+        getFormatedDate: function () {
+
+            let today = new Date();
+            let dd = today.getDate();
+
+            let mm = today.getMonth()+1;
+            let yyyy = today.getFullYear();
+
+            if(dd<10)
+            {
+                dd='0'+dd;
+            }
+
+            if(mm<10)
+            {
+                mm='0'+mm;
+            }
+
+            return dd+ '/' + mm + '/' + yyyy
         }
     }
 })()

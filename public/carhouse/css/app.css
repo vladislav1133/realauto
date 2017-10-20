@@ -553,6 +553,9 @@ Version:    1.1
 
 }
 
+.today {
+    color:green;
+}
 
 .bx-controls-direction{
     position: absolute;
@@ -651,7 +654,10 @@ html body .main-aside .sidebar .section-heading .row .search-select {
 }
 
 
-
+.main-aside {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 
 /** Product **/

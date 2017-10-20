@@ -13,14 +13,14 @@
                 <th data-breakpoints="xs">Модель</th>
                 <th data-breakpoints="xs">Двигатель</th>
                 <th data-breakpoints="xs sm">Топливо</th>
-                <th data-breakpoints="xs sm">Трансмисия</th>
+                <th data-breakpoints="xs sm">Трансмиссия</th>
                 <th data-breakpoints="xs">Одометр</th>
                 <th data-breakpoints="all">Тип привода</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
                 <th data-breakpoints="xs sm md">Дата аукциона </th>
-                <th data-breakpoints="all">Купить сейчас</th>
-                <th data-breakpoints="xs sm md">Текушая ставка</th>
+                <th>Купить сейчас</th>
+                <th data-breakpoints="all">Текушая ставка</th>
                 <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>
                 <th data-breakpoints="all">Основные моменты</th>
@@ -54,7 +54,7 @@
                     <td>@if($car->drive){{$car->drive}}@else &mdash; @endif</td>
                     <td>@if($car->primary_damage){{$car->primary_damage}}@else &mdash; @endif</td>
                     <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
-                    <td>@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
+                    <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
                     <td>@if($car->buy_it_now)${{$car->buy_it_now}}@else &mdash; @endif</td>
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
                     <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc" data-loc="{{$car->location}}">Исключить</button>@else &mdash; @endif</td>

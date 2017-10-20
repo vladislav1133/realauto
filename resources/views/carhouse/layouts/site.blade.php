@@ -37,7 +37,7 @@
 
 <script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/jquery.bxslider.min.js"></script>
-
+<script src="{{asset(env('THEME'))}}/js/jquery.sticky-sidebar.min.js"></script>
 
 <script src="{{asset(env('THEME'))}}/js/SecondMenu.js"></script>
 <script src="{{asset(env('THEME'))}}/js/CustomsCalculator.js"></script>

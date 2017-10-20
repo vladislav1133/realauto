@@ -119,6 +119,15 @@ class IndexController extends SiteController{
         return $search;
     }
 
+    public function rastamozhka()
+    {
+        $meta = $this->carRepository->getMeta('index');
+
+
+
+        return view(env('THEME').'.rastamozhka')
+            ->with('meta',$meta)->render();
+    }
 
 
 

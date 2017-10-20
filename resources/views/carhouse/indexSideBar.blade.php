@@ -4,13 +4,15 @@
         <div class="row">
 
             <div class="col-xs-12">
-                <form id="search-query" action="">
-                    <input  type="text" placeholder="Искать" title="Поиск:
+                <form id="search-query" action="" style="width: 80%;">
+                    <input  type="text" placeholder="Глобальный поиск" title="Поиск:
                       lot (8 цифр)
                       vin (17 симв.)
                       location(2 симв.)
                       years (4 цифр)">
+                      <button type="submit" name="button" class="btn search-btn" style="width: 17%;height: 10px;float: right;margin: 0;text-align: center;padding-bottom: 19px;"><i class="fa fa-arrow-right"></i></button>
                 </form>
+
             </div>
 
             <div class="col-xs-12">
@@ -76,7 +78,7 @@
             </div>
 
             <div class="col-xs-12 search__col">
-                <div class="search__label">Осн. повриждение:</div>
+                <div class="search__label">Основные повреждения:</div>
             </div>
 
             <div class="search__col col-xs-12">
@@ -90,7 +92,7 @@
             </div>
 
             <div class="col-xs-12 search__col">
-                <div class="search__label">Осн. моменты:</div>
+                <div class="search__label">Основные. моменты:</div>
             </div>
 
             <div class="search__col search__col col-xs-12">
@@ -210,4 +212,3 @@
         </div>
     </div>
 </aside>
-
