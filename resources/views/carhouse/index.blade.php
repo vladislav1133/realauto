@@ -8,7 +8,7 @@
 
     <div id="main-content" class="car-list content-area">
         <div class="container">
-                <div class="main-aside col-xs-3">
+                <div id="main-aside" class="main-aside col-xs-3">
                     @include(env('THEME').'.indexSideBar')
                 </div>
                 <div class="col-xs-9">

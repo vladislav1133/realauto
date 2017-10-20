@@ -161,6 +161,8 @@ class CarsController extends Controller {
 
         $whereNotIn = [];
 
+        $whereNotNull = [];
+
         $driveSearch = [];
 
         $drive_type = config('car_search.drive_type');
@@ -179,9 +181,14 @@ class CarsController extends Controller {
         $favoriteCars = $request->input('favoriteCars');
         $lot = $request->input('lot');
         $vin = $request->input('vin');
+        $buyNow = $request->input('buyNow');
         $damage = $request->input('damage');
 
+        if($buyNow !== null) {
+            $where[] = ['buy_it_now', '!=',''];
+        }
 
+        $where[] = ['drive', '=',''];
 
         if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
         if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
@@ -249,8 +256,13 @@ class CarsController extends Controller {
             if ($locAdd) array_push($whereIn, ['location', $locAdd]);
         }
 
-        if ($highlight) array_push($whereIn, ['highlights', $highlight]);
+        if ($highlight) {
 
+            $key = array_search('RUN AND DRIVE',$highlight);
+            if($key !== false) $highlight[$key] = 'RUNS AND DRIVES';
+
+            array_push($whereIn, ['highlights', $highlight]);
+        }
 
         if ($favoriteCars) array_push($whereIn, ['lot_id', $favoriteCars]);
 
@@ -272,7 +284,7 @@ class CarsController extends Controller {
         }
 
 
-        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn);
+        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull);
 
         $carsCount = $cars->total();
 

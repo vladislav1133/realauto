@@ -27,6 +27,6 @@ return [
     'highlights' => [
         'ENGINE START PROGRAM',
         'ENHANCED VEHICLES',
-        'RUNS AND DRIVES'
+        'RUN AND DRIVE'
     ]
 ];

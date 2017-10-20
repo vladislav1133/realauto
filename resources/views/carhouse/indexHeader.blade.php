@@ -20,7 +20,7 @@
                     <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
                     <li><a href="{{route('blog.index')}}" >Блог</a></li>
                     <li><a href="{{route('contacts')}}" >Контакты</a></li>
-                    <li><a href="{{route('rastamozhka')}}" >Растаможка</a></li>
+                    <li><a href="{{route('rastamozhka')}}" >Таможенный калькулятор</a></li>
                 </ul>
             </div>
         </nav>
@@ -58,7 +58,7 @@
                         <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
                         <li><a href="{{route('blog.index')}}" >Блог</a></li>
                         <li><a href="{{route('contacts')}}" >Контакты</a></li>
-                        <li><a href="{{route('rastamozhka')}}" >Растаможка</a></li>
+                        <li><a href="{{route('rastamozhka')}}" >Таможенный калькулятор</a></li>
                     </ul>
                 </div>
             </nav>

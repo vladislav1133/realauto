@@ -131,14 +131,14 @@ class CarRepository extends Repository {
         return $years;
     }
 
-    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn = false,$distinct = false) {
-        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct);
+    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn = false,$distinct = false,$whereNotNull = false) {
+        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull);
 
         return $query;
     }
 
-    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false) {
-        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct);
+    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false,$whereNotNull = false) {
+        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull);
 
         $cars = $this->prepareImg($cars);
 
@@ -150,6 +150,24 @@ class CarRepository extends Repository {
 
         $cars = $this->prepareSaleDate($cars);
 
+        $cars = $this->prepareHighlights($cars);
+
+
+        return $cars;
+    }
+
+
+    protected function prepareHighlights($cars) {
+
+        $cars->transform(function ($item, $key) {
+
+            if ($item->highlights === 'RUNS AND DRIVES') {
+
+                $item->highlights = 'RUN AND DRIVE';
+            }
+
+            return $item;
+        });
 
         return $cars;
     }

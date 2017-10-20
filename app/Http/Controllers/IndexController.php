@@ -116,6 +116,8 @@ class IndexController extends SiteController{
         $search['damage'] = $this->carRepository->unique('primary_damage');
 
         $search['highlights'] = config('car_search.highlights');
+
+
         return $search;
     }
 

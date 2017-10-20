@@ -1,34 +1,37 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Page;
 
-abstract class Repository {
+abstract class Repository
+{
 
-    protected $model=false;
+    protected $model = false;
 
-    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false){
+    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false)
+    {
 
-        if($distinct) {
+        if ($distinct) {
 
-            $builder=$this->model->distinct()->select($select);
+            $builder = $this->model->distinct()->select($select);
         } else {
 
-            $builder=$this->model->select($select);
+            $builder = $this->model->select($select);
         }
 
 
-        if($orderBy){
+        if ($orderBy) {
 
             $builder->orderBy($orderBy[0], $orderBy[1]);
         }
 
-        if($where){
+        if ($where) {
 
             $builder->where($where);
         }
 
-        if($whereIn){
+        if ($whereIn) {
 
             foreach ($whereIn as $item) {
 
@@ -36,7 +39,15 @@ abstract class Repository {
             }
         }
 
-        if($whereNotIn){
+        if($whereNotNull){
+
+            foreach($whereNotNull as $item){
+
+                $builder->whereNotNull($item);
+            }
+        }
+
+        if ($whereNotIn) {
 
             foreach ($whereNotIn as $item) {
 
@@ -44,7 +55,7 @@ abstract class Repository {
             }
         }
 
-        if($pagination){
+        if ($pagination) {
 
             return $builder->paginate($pagination);
         }
@@ -53,31 +64,34 @@ abstract class Repository {
     }
 
 
-    protected function one($alias,$relation=false){
+    protected function one($alias, $relation = false)
+    {
 
-        $result=$this->model->where('alias',$alias)->first();
+        $result = $this->model->where('alias', $alias)->first();
 
         return $result;
     }
 
-    public function unique($select,$sortType = 'asc'){
+    public function unique($select, $sortType = 'asc')
+    {
 
-        $builder=$this->model->distinct()->select($select)->orderBy($select,$sortType);
+        $builder = $this->model->distinct()->select($select)->orderBy($select, $sortType);
 
         $uniqueArray = $builder->get()->toArray();
 
         $response = array();
 
-        foreach ($uniqueArray as $arr){
+        foreach ($uniqueArray as $arr) {
 
-            array_push($response,$arr[$select]);
+            array_push($response, $arr[$select]);
         }
-        return  $response;
+        return $response;
     }
 
-    public function getMeta($page){
+    public function getMeta($page)
+    {
 
-        $meta = Page::select('meta_title','meta_description','meta_keywords')->where('name',$page)->first();
+        $meta = Page::select('meta_title', 'meta_description', 'meta_keywords')->where('name', $page)->first();
         return $meta;
     }
 }

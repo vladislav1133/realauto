@@ -49,11 +49,14 @@ let App = (function () {
                 captions: true
             });
 
-            var sidebar = new StickySidebar('.main-aside', {
-                topSpacing: 105,
-                containerSelector: '#main-content .container',
 
-            });
+            if($('#main-aside').hasClass('main-aside')){
+                let sidebar = new StickySidebar('.main-aside', {
+                    topSpacing: 105,
+                    containerSelector: '#main-content .container',
+
+                });
+            }
 
             initEvents()
 
@@ -132,7 +135,7 @@ let App = (function () {
             }
 
             let response = dd+ '/' + mm + '/' + yyyy
-            
+
             return response
         }
     }

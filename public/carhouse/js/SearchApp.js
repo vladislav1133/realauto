@@ -40,6 +40,8 @@ let Search = (function () {
         'docRem':'#search-doc-rem'
     }
 
+    let buyNowInput = '#search-buy-now'
+
     function initSearchOptions() {
 
         options['years'] = Search.getSelectOptions(selects['yearTo'])
@@ -415,6 +417,12 @@ let Search = (function () {
 
             searchData['docRem'] = $(selects['docRem']).val()
 
+
+
+            if ($(buyNowInput).is(":checked")){
+                searchData['buyNow'] = 1
+            }
+
             if (Search.showFavorite) {
 
                 let favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
@@ -552,6 +560,9 @@ let Search = (function () {
 
                 if (!App.itemExist(exceptClear, item)) $(item).selectpicker('val', '')
             })
+
+
+            $(buyNowInput).prop( "checked", false );
 
             $('.selectpicker').selectpicker('refresh');
         },

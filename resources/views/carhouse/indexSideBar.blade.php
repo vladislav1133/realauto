@@ -12,7 +12,6 @@
                       years (4 цифр)">
                       <button type="submit" name="button" class="btn search-btn" style="width: 17%;height: 10px;float: right;margin: 0;text-align: center;padding-bottom: 19px;"><i class="fa fa-arrow-right"></i></button>
                 </form>
-
             </div>
 
             <div class="col-xs-12">
@@ -28,6 +27,18 @@
                    </div>
                 </div>
             </div>
+
+            <div class="col-xs-12">
+                <div class="search__label">Тип транспорта:</div>
+            </div>
+
+            <div class="search__col col-xs-12">
+                <select id="search-type" class="selectpicker search__select">
+                    <option value="car">Car</option>
+                    <option value="moto">Moto</option>
+                </select>
+            </div>
+
             <div class="col-xs-12">
                 <div class="search__label">Марка:</div>
             </div>
@@ -192,7 +203,10 @@
                     @endif
                 </select>
             </div>
-
+            <div class="col-xs-12">
+                <input id="search-buy-now" style="display: inline-block" type="checkbox"><label
+                        for="search-buy-now">Купить сейчас</label>
+            </div>
             <div class="col-xs-12">
                 <b>Всего: </b><span id="total-cars">{{$carsTotal}}</span>
             </div>

@@ -16,6 +16,7 @@
                 <th data-breakpoints="xs sm">Трансмиссия</th>
                 <th data-breakpoints="xs">Одометр</th>
                 <th data-breakpoints="all">Тип привода</th>
+                <th data-breakpoints="all">Основные моменты</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
                 <th data-breakpoints="xs sm md">Дата аукциона </th>
@@ -23,7 +24,7 @@
                 <th data-breakpoints="all">Текушая ставка</th>
                 <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>
-                <th data-breakpoints="all">Основные моменты</th>
+
             </tr>
             </thead>
             <tbody id="table-body">
@@ -52,6 +53,7 @@
                     <td>@if($car->transmission){{$car->transmission}}@else &mdash; @endif</td>
                     <td>@if($car->odometer){{$car->odometer}}@else &mdash; @endif</td>
                     <td>@if($car->drive){{$car->drive}}@else &mdash; @endif</td>
+                    <td>@if($car->highlights){{$car->highlights}}@else &mdash; @endif</td>
                     <td>@if($car->primary_damage){{$car->primary_damage}}@else &mdash; @endif</td>
                     <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
                     <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
@@ -59,7 +61,6 @@
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
                     <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc" data-loc="{{$car->location}}">Исключить</button>@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc" data-doc="{{$car->doc_type}}">Исключить</button>@else &mdash; @endif</td>
-                    <td>@if($car->doc_type){{$car->highlights}}@else &mdash; @endif</td>
                 </tr>
             @endforeach
             </tbody>
