@@ -548,6 +548,15 @@ Version:    1.1
 
 }
 
+
+.sale_date {
+
+}
+
+.sale_date_today {
+    color: #00801f;
+}
+
 .custom-calc__input {
 
 
@@ -882,7 +891,7 @@ body {
 
 .navbar-brand-logo {
     float: left;
-    padding: 23px 0px;
+    padding: 8px 0px;
 
 }
 
@@ -893,7 +902,7 @@ body {
 
 
 .navbar-brand-logo img {
-    height: 50px;
+    height: 80px;
 }
 
 .dropdown-menu > li > a {

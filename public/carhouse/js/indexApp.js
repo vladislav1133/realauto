@@ -3,7 +3,7 @@ let App = (function () {
     function initEvents() {
 
         eventContactPopup()
-
+        onChangePage()
     }
 
     function eventContactPopup() {
@@ -12,7 +12,14 @@ let App = (function () {
 
     function onChangePage () {
 
-        $('.sale_date')
+        $(window).on('changePage', function () {
+
+            $('.sale_date').each(function () {
+                if($(this).text() === App.getFormatedDate()) {
+                    $(this).addClass('sale_date_today')
+                }
+            })
+        })
 
     }
 
@@ -49,6 +56,8 @@ let App = (function () {
             });
 
             initEvents()
+
+            $(window).trigger('changePage')
         },
 
         getCookie: function (name) {
@@ -122,7 +131,9 @@ let App = (function () {
                 mm='0'+mm;
             }
 
-            return dd+ '/' + mm + '/' + yyyy
+            let response = dd+ '/' + mm + '/' + yyyy
+            
+            return response
         }
     }
 })()

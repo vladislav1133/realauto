@@ -70,7 +70,6 @@ let Table = (function () {
 
             this.initEvents()
 
-
         },
 
         render: function (data) {
@@ -94,6 +93,8 @@ let Table = (function () {
             }, 1000);
 
             this.updateFavoriteCars()
+            $(window).trigger('changePage')
+
         },
 
         renderError: function () {
