@@ -41,21 +41,40 @@ class CarRepository extends Repository {
         $this->model = $car;
     }
 
-    public function getNames() {
+    public function getNames($type = false) {
 
-        $query = Car::select('name')->get()->toArray();
-        $names = array();
+        $whereIn = [];
+        $whereNotIn = [];
 
-        foreach ($query as $i) {
-            array_push($names, $i['name']);
+        $motoBodyStyle = config('car_search.body_style.moto');
+
+        if($type === 'car') {
+
+            $whereNotIn[] = ['body_style', $motoBodyStyle];
         }
+
+        if($type === 'moto'){
+
+            $whereIn[] = ['body_style', $motoBodyStyle];
+        }
+
+
+        $names = $this->get('name','','','',$whereIn,$whereNotIn)->toArray();
+
+
+
+        $names = array_pluck($names, 'name');
 
         return $names;
     }
 
-    public function getMarks() {
+    public function getMarks($type = false) {
 
-        $names = $this->unique('name');
+        //$names = $this->unique('name');
+
+        $names = $this->getNames($type);
+
+
 
         $marks = array();
 
@@ -309,9 +328,16 @@ class CarRepository extends Repository {
         return false;
     }
 
-    public function getSearchProperty ($mark,$model = false){
+    public function getSearchProperty ($type,$mark,$model = false){
 
-        $where = [];
+//        $where = [];
+//        $type = 'moto';
+//
+//        if($type === 'moto') {
+//            $where[] = ['drive', '=',''];
+//        }
+
+
         $where[] = ['name', 'like', '%' . $mark . '%'];
 
         if ($model) {
@@ -355,5 +381,19 @@ class CarRepository extends Repository {
 
         return $property;
 
+    }
+
+    public function getDefaultSearchProperty() {
+
+        $searchProperty = [];
+
+        $car = $this->getMarks('car');
+        $moto = $this->getMarks('moto');
+
+        $searchProperty['car'] = $car;
+
+        $searchProperty['moto'] = $moto;
+
+        return $searchProperty ['car'];
     }
 }

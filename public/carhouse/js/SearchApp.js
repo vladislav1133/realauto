@@ -16,33 +16,37 @@ let Search = (function () {
 
     let selects = {
 
-        'mark':'#search-marks',
+        'type': '#search-type',
 
-        'model':'#search-models',
+        'mark': '#search-marks',
 
-        'yearTo':'#search-to',
-        'yearFrom':'#search-from',
+        'model': '#search-models',
+
+        'yearTo': '#search-to',
+        'yearFrom': '#search-from',
 
         'damage': '#search-damage',
 
         'locAdd': '#search-loc-add',
         'locRem': '#search-loc-rem',
 
-        'drive':'#search-drive',
+        'drive': '#search-drive',
 
-        'fuel':'#search-fuel',
+        'fuel': '#search-fuel',
 
-        'location':'#search-location',
+        'location': '#search-location',
 
-        'highlight':'#search-highlight',
+        'highlight': '#search-highlight',
 
-        'docAdd':'#search-doc-add',
-        'docRem':'#search-doc-rem'
+        'docAdd': '#search-doc-add',
+        'docRem': '#search-doc-rem'
     }
 
     let buyNowInput = '#search-buy-now'
 
     function initSearchOptions() {
+
+        options['mark'] = Search.getSelectOptions(selects['mark'])
 
         options['years'] = Search.getSelectOptions(selects['yearTo'])
 
@@ -78,6 +82,8 @@ let Search = (function () {
 
     function initEvents() {
 
+        onChangeType()
+
         onSearchCars()
 
         onToggleFavorite()
@@ -101,6 +107,26 @@ let Search = (function () {
 
     //EVENTS
 
+    function getDefaultSearchOptions() {
+
+
+    }
+
+
+    function onChangeType() {
+
+        $(el).on('change', selects['type'], function (e) {
+            e.preventDefault()
+
+           // let mark = $(selects['mark']).val();
+
+            getMarks()
+
+            Search.setSearchDefaultOptions([selects['type']])
+
+        })
+    }
+
     function onChangeMark() {
 
         $(el).on('change', selects['mark'], function (e) {
@@ -108,7 +134,7 @@ let Search = (function () {
 
             let mark = $(selects['mark']).val();
 
-            Search.clearSearch([selects['mark']])
+            Search.clearSearch([selects['mark'],selects['type']])
 
 
             Search.setSearchCarOptions()
@@ -124,7 +150,7 @@ let Search = (function () {
 
             let mark = $(selects['mark']).val();
 
-            Search.clearSearch([selects['mark'],selects['model']])
+            Search.clearSearch([selects['type'],selects['mark'],selects['model']])
 
             Search.setSearchCarOptions()
         })
@@ -249,6 +275,8 @@ let Search = (function () {
         $(searchClearBtn).click(function (e) {
             e.preventDefault()
 
+            $(selects['type']).val('Car')
+
             Search.setSearchDefaultOptions()
         })
     }
@@ -305,6 +333,23 @@ let Search = (function () {
 
     }
 
+    function getMarks() {
+
+        let type = $(selects['type']).val()
+
+        $.get({
+
+            url: '/cars/marks/' + type
+
+        }).done(function (response) {
+
+            let marks = response.marks;
+
+            if (marks.length !== 0) Search.setSelectOptions(selects['mark'],marks)
+
+        });
+    }
+    
     function getModels() {
 
         let mark = $(selects['mark']).val()
@@ -390,9 +435,12 @@ let Search = (function () {
 
             return options
         },
+
         getSearchData: function () {
 
             let searchData = {}
+
+            searchData['type'] = $(selects['type']).val()
 
             searchData['mark'] = $(selects['mark']).val()
 
@@ -416,7 +464,6 @@ let Search = (function () {
             searchData['docAdd'] = $(selects['docAdd']).val()
 
             searchData['docRem'] = $(selects['docRem']).val()
-
 
 
             if ($(buyNowInput).is(":checked")){
@@ -525,9 +572,16 @@ let Search = (function () {
             })
         },
 
-        setSearchDefaultOptions: function () {
+        //Set common selects options
+        setSearchDefaultOptions: function (exceptClear = []) {
 
             let options = Search.getOptions()
+
+            console.log('SetSearchDefaultOptions')
+
+            console.log(options['mark'])
+
+            Search.setSelectOptions(selects['mark'],options['mark'])
 
             Search.setSelectOptions(selects['model'],'')
 
@@ -548,15 +602,15 @@ let Search = (function () {
             Search.setSelectOptions(selects['docAdd'],options['doc_type'])
             Search.setSelectOptions(selects['docRem'],options['doc_type'])
 
-            Search.clearSearch()
+            Search.clearSearch(exceptClear)
 
         },
 
         clearSearch: function (exceptClear = []) {
 
-            let selects = Object.values(Search.getSelects());
+            let selectsArray = Object.values(selects);
 
-            selects.forEach(function (item) {
+            selectsArray.forEach(function (item) {
 
                 if (!App.itemExist(exceptClear, item)) $(item).selectpicker('val', '')
             })

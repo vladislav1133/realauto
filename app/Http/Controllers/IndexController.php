@@ -14,18 +14,21 @@ use Mail;
 use Validator;
 use Carbon\Carbon;
 
-class IndexController extends SiteController{
+class IndexController extends SiteController
+{
 
     protected $carRepository;
 
-    public function __construct(CarRepository $carRepository,GeneralDataRepository $generalDataRepository){
+    public function __construct(CarRepository $carRepository, GeneralDataRepository $generalDataRepository)
+    {
         parent::__construct(new GeneralDataRepository(new GeneralData()));
-        $this->carRepository=$carRepository;
+        $this->carRepository = $carRepository;
 
         $this->indexInfo = $this->generalDataRepository->getInfo('*');
     }
 
-    public function index(){
+    public function index()
+    {
 
         $meta = $this->carRepository->getMeta('index');
 
@@ -57,22 +60,23 @@ class IndexController extends SiteController{
             'DC - CERTIFICATE OF TITLE'
         ];
 
-        $cars=$this->getCars();
+        $cars = $this->getCars();
 
         $carsTotal = $cars->total();
 
         $search = $this->getSearch();
 
-        return view(env('THEME').'.index')
-            ->with('carsTotal',$carsTotal)
-            ->with('cars',$cars)
-            ->with('search',$search)
-            ->with('info',$this->indexInfo)
-            ->with('doc_type',$doc_type)
-            ->with('meta',$meta)->render();
+        return view(env('THEME') . '.index')
+            ->with('carsTotal', $carsTotal)
+            ->with('cars', $cars)
+            ->with('search', $search)
+            ->with('info', $this->indexInfo)
+            ->with('doc_type', $doc_type)
+            ->with('meta', $meta)->render();
     }
 
-    public function contactUs(Request $request) {
+    public function contactUs(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:50',
@@ -82,26 +86,32 @@ class IndexController extends SiteController{
         if ($validator->passes()) {
 
             Mail::to(env('MAIL_ADDRESS'))->send(new ContactUsMail($request->tel, $request->name));
-            return response()->json(['success'=>'true']);
+            return response()->json(['success' => 'true']);
         }
 
         return response()->json(['error' => $validator->errors()->all()]);
     }
 
-    protected function getCars(){
+    protected function getCars()
+    {
 
-        $cars=$this->carRepository
-            ->getCars(['*'],config('settings.cars_on_page'),['sale_date','asc']);
+        $motoBodyStyle = config('car_search.body_style.moto');
+
+        $whereNotIn[] = ['body_style', $motoBodyStyle];
+
+        $cars = $this->carRepository
+            ->getCars(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'], '', '', $whereNotIn);
 
 
         return $cars;
     }
 
-    protected function getSearch(){
+    protected function getSearch()
+    {
 
         $search = array();
 
-        $search['marks'] = $this->carRepository->getMarks();
+        $search['marks'] = $this->carRepository->getMarks('car');
 
         $search['years'] = $this->carRepository->getYears();
 
@@ -126,11 +136,9 @@ class IndexController extends SiteController{
         $meta = $this->carRepository->getMeta('index');
 
 
-
-        return view(env('THEME').'.rastamozhka')
-            ->with('meta',$meta)->render();
+        return view(env('THEME') . '.rastamozhka')
+            ->with('meta', $meta)->render();
     }
-
 
 
 }

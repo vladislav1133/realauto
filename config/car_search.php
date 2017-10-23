@@ -28,5 +28,16 @@ return [
         'ENGINE START PROGRAM',
         'ENHANCED VEHICLES',
         'RUN AND DRIVE'
+    ],
+
+    'body_style' => [
+        'moto' => [
+            'ALL TERR',
+            'DIRT',
+            'ENDURO',
+            'MOTO CRO',
+            'RACER',
+            'ROAD/STR'
+        ]
     ]
 ];

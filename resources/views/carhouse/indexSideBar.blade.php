@@ -4,27 +4,32 @@
         <div class="row">
 
             <div class="col-xs-12">
-                <form id="search-query" action="" style="width: 80%;">
-                    <input  type="text" placeholder="Глобальный поиск" title="Поиск:
-                      lot (8 цифр)
-                      vin (17 симв.)
-                      location(2 симв.)
-                      years (4 цифр)">
-                      <button type="submit" name="button" class="btn search-btn" style="width: 17%;height: 10px;float: right;margin: 0;text-align: center;padding-bottom: 19px;"><i class="fa fa-arrow-right"></i></button>
+                <form id="search-query" action="">
+
+                    <!-- -------------------------->
+                    <div class="input-group">
+                        <input id="search-query" type="text" placeholder="Глобальный поиск" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+                    <!-- -------------------------->
                 </form>
             </div>
 
             <div class="col-xs-12">
                 <div class="search__head">
-                   <div class="row">
-                       <div class="col-xs-11">
-                           <b>Искать</b> автомобиль
-                           <div class="">
-                               <a id="search-clear-btn" href="#">Сбросить всё</a>
-                           </div>
-                       </div>
+                    <div class="row">
+                        <div class="col-xs-11">
+                            <b>Искать</b> автомобиль
+                            <div class="">
+                                <a id="search-clear-btn" href="#">Сбросить всё</a>
+                            </div>
+                        </div>
 
-                   </div>
+                    </div>
                 </div>
             </div>
 
@@ -93,7 +98,8 @@
             </div>
 
             <div class="search__col col-xs-12">
-                <select id="search-damage" data-actions-box="true" multiple data-live-search="true" class="selectpicker search__select" data-title="Все">
+                <select id="search-damage" data-actions-box="true" multiple data-live-search="true"
+                        class="selectpicker search__select" data-title="Все">
                     @if($search['damage'])
                         @foreach($search['damage'] as $pDamage)
                             <option>{{$pDamage}}</option>
@@ -176,7 +182,6 @@
             </div>
 
 
-
             <div class="col-xs-12">
                 <div class="search__label">Документы:</div>
             </div>
@@ -207,6 +212,7 @@
                 <input id="search-buy-now" style="display: inline-block" type="checkbox"><label
                         for="search-buy-now">Купить сейчас</label>
             </div>
+
             <div class="col-xs-12">
                 <b>Всего: </b><span id="total-cars">{{$carsTotal}}</span>
             </div>

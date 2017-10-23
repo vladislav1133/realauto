@@ -17,71 +17,9 @@ class CarsController extends Controller {
         $this->carRepository = $carRepository;
     }
 
-    public function getMarks(Request $request)
+    public function getMarks($type)
     {
-
-        $whereIn = [];
-        $where = [];
-
-        $drive = $request->input('drive');
-        $fuel = $request->input('fuel');
-        $docs = $request->input('docs');
-        $location = $request->input('location');
-        $highlight = $request->input('highlight');
-        $yearTo = $request->input('yearTo');
-        $yearFrom = $request->input('yearFrom');
-
-
-        if ($yearFrom) {
-            $where[] = ['year', '>=', $yearFrom];
-        }
-        if ($yearTo) {
-            $where[] = ['year', '<=', $yearTo];
-        }
-        if ($fuel) array_push($whereIn, ['fuel', $fuel]);
-        if ($docs) array_push($whereIn, ['doc_type', $docs]);
-
-
-        if ($location) array_push($whereIn, ['location', $location]);
-        if ($highlight) array_push($whereIn, ['highlights', $highlight]);
-        if ($drive) {
-
-            $drive_type = config('car_search.drive_type');
-
-            $driveSearch[0] = 'drive';
-
-            $driveSearch[1] = array();
-
-            foreach ($drive as $type) {
-
-                foreach ($drive_type[$type] as $item) {
-
-                    array_push($driveSearch[1], $item);
-                }
-            }
-
-            $whereIn[] = $driveSearch;
-        }
-
-        $names = $this->carRepository->get('name', '', false, $where, $whereIn, '')->toArray();
-
-        $marks = [];
-
-        foreach ($names as $arr) {
-
-            array_push($marks, $arr['name']);
-        }
-
-        foreach ($marks as &$item) {
-
-            $item = preg_split('#[ /]#', $item);
-            $item = $item[1];
-
-        }
-
-        $marks = array_unique($marks);
-
-        sort($marks);
+        $marks = $this->carRepository->getMarks($type);
 
         $response['marks'] = $marks;
 
@@ -167,31 +105,53 @@ class CarsController extends Controller {
 
         $drive_type = config('car_search.drive_type');
 
-        $drive = $request->input('drive');
-        $mark = $request->input('mark');
-        $model = $request->input('model');
-        $yearFrom = $request->input('yearFrom');
-        $yearTo = $request->input('yearTo');
-        $docAdd = $request->input('docAdd');
-        $docRem = $request->input('docRem');
-        $highlight = $request->input('highlight');
-        $fuel = $request->input('fuel');
-        $locAdd = $request->input('locAdd');
-        $locRem = $request->input('locRem');
-        $favoriteCars = $request->input('favoriteCars');
-        $lot = $request->input('lot');
-        $vin = $request->input('vin');
-        $buyNow = $request->input('buyNow');
-        $damage = $request->input('damage');
+        $drive = $request->drive;
+        $mark = $request->mark;
+        $model = $request->model;
+        $yearFrom = $request->yearFrom;
+        $yearTo = $request->yearTo;
+        $docAdd = $request->docAdd;
+        $docRem = $request->docRem;
+        $highlight = $request->highlight;
+        $fuel = $request->fuel;
+        $locAdd = $request->locAdd;
+        $locRem = $request->locRem;
+        $favoriteCars = $request->favoriteCars;
+        $lot = $request->lot;
+        $vin = $request->vin;
+        $buyNow = $request->buyNow;
+        $damage = $request->damage;
+        $type = $request->type;
+
+
 
         if($buyNow !== null) {
             $where[] = ['buy_it_now', '!=',''];
         }
 
-        $where[] = ['drive', '=',''];
+
 
         if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
         if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
+
+        if ($type) {
+
+            $type = strtolower($type);
+
+            $motoBodyStyle = config('car_search.body_style.moto');
+
+            if($type === 'car') {
+
+                $whereNotIn[] = ['body_style', $motoBodyStyle];
+            }
+
+            if($type === 'moto'){
+
+                $whereIn[] = ['body_style', $motoBodyStyle];
+            }
+        }
+
+
 
         if ($yearFrom) {
             $where[] = ['year', '>=', $yearFrom];
@@ -319,6 +279,16 @@ class CarsController extends Controller {
 
         return response()->json($property);
     }
+
+    public function getDefaultSearchProperty() {
+
+        $property = $this->carRepository->getDefaultSearchProperty();
+
+
+        return $property;
+    }
+
+
 
 
 }
