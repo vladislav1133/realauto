@@ -29,7 +29,7 @@
             </thead>
             <tbody id="table-body">
             @foreach($cars as $k=>$car)
-                <tr>
+                <tr @if(($k +1)%2 === 0)class="second-row"@endif>
                     <td>
                         <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank"><div><img class="product__img" src="{{$car->path_to_image}}" alt=""></div></a>
                     </td>
@@ -59,8 +59,8 @@
                     <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
                     <td>@if($car->buy_it_now)${{$car->buy_it_now}}@else &mdash; @endif</td>
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
-                    <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc" data-loc="{{$car->location}}">Исключить</button>@else &mdash; @endif</td>
-                    <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc" data-doc="{{$car->doc_type}}">Исключить</button>@else &mdash; @endif</td>
+                    <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">Исключить</button>@else &mdash; @endif</td>
+                    <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">Исключить</button>@else &mdash; @endif</td>
                 </tr>
             @endforeach
             </tbody>

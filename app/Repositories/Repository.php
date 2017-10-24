@@ -74,7 +74,6 @@ abstract class Repository
 
     public function unique($select, $sortType = 'asc')
     {
-
         $builder = $this->model->distinct()->select($select)->orderBy($select, $sortType);
 
         $uniqueArray = $builder->get()->toArray();
@@ -88,10 +87,27 @@ abstract class Repository
         return $response;
     }
 
+    public function uniqueArray($col,$sortType = 'asc') {
+
+        $query = $this->model->distinct()->select($col)->orderBy($col, $sortType)
+            ->get()->toArray();
+
+        $array = array_pluck($query, $col);
+
+        $array = array_filter($array);
+
+        return $array;
+    }
+
     public function getMeta($page)
     {
 
         $meta = Page::select('meta_title', 'meta_description', 'meta_keywords')->where('name', $page)->first();
         return $meta;
+    }
+
+    public function pluck($col) {
+
+        return $this->model->pluck($col);
     }
 }

@@ -151,8 +151,6 @@ class CarsController extends Controller {
             }
         }
 
-
-
         if ($yearFrom) {
             $where[] = ['year', '>=', $yearFrom];
         }
@@ -272,10 +270,9 @@ class CarsController extends Controller {
         return response()->json($res);
     }
 
-    public function getSearchProperty($mark,$model = false){
+    public function getSearchProperty($type, $mark = false, $model = false){
 
-        $property = $this->carRepository->getSearchProperty($mark,$model);
-
+        $property = $this->carRepository->getSearchProperty($type, $mark, $model);
 
         return response()->json($property);
     }
@@ -284,11 +281,23 @@ class CarsController extends Controller {
 
         $property = $this->carRepository->getDefaultSearchProperty();
 
-
         return $property;
     }
 
+    public function removeFavorite(Request $request) {
 
+        $favoriteCars = $request->favoriteCars;
+
+        $favoriteCars = json_decode($favoriteCars);
+
+        if(!is_array($favoriteCars))  return response()->json('Invalid array');
+
+        $lots = $this->carRepository->pluck('lot_id')->toArray();
+
+        $response['favoriteCars'] = array_intersect($favoriteCars, $lots);
+
+        return response()->json($response);
+    }
 
 
 }

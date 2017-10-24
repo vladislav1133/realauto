@@ -70,11 +70,7 @@ class CarRepository extends Repository {
 
     public function getMarks($type = false) {
 
-        //$names = $this->unique('name');
-
         $names = $this->getNames($type);
-
-
 
         $marks = array();
 
@@ -84,7 +80,7 @@ class CarRepository extends Repository {
             $marks[] = substr($name, 0, strpos($name, ' '));
         }
 
-        $marks = array_unique($marks);
+        $marks = array_filter(array_unique($marks));
 
         sort($marks);
 
@@ -138,6 +134,7 @@ class CarRepository extends Repository {
             }
         }
 
+        $models = array_filter($models);
         sort($models);
 
         return $models;
@@ -316,7 +313,6 @@ class CarRepository extends Repository {
 
     public function searchValidate($query){
 
-
         if(preg_match('/^[a-zA-Z]{2}$/',$query)) return 'location';
 
         if (preg_match('/^[a-zA-Z0-9]{17}$/',$query)) return 'vin';
@@ -328,15 +324,26 @@ class CarRepository extends Repository {
         return false;
     }
 
-    public function getSearchProperty ($type,$mark,$model = false){
+    public function getSearchProperty ($type, $mark = false, $model = false){
 
-//        $where = [];
-//        $type = 'moto';
-//
-//        if($type === 'moto') {
-//            $where[] = ['drive', '=',''];
-//        }
+        $whereIn = [];
+        $whereNotIn = [];
+        $property = [];
 
+        $type = strtolower($type);
+
+        $motoBodyStyle = config('car_search.body_style.moto');
+
+
+        if($type === 'car') {
+
+            $whereNotIn[] = ['body_style', $motoBodyStyle];
+        }
+
+        if($type === 'moto'){
+
+            $whereIn[] = ['body_style', $motoBodyStyle];
+        }
 
         $where[] = ['name', 'like', '%' . $mark . '%'];
 
@@ -344,24 +351,30 @@ class CarRepository extends Repository {
             $where[] = ['name', 'like', '%' . $model . '%'];
         }
 
-        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type','primary_damage'],'','',$where);
-
-        $property = [];
+        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type','primary_damage'],'','',$where,$whereIn,$whereNotIn);
 
 
+        if(!$mark) {
+            $property['marks'] = $this->getMarks($type);
+        }
 
         $property['years'] = array_filter(array_unique($cars->sortBy('year')->pluck('year')->toArray()));
         $property['damage'] = array_filter(array_unique($cars->sortBy('primary_damage')->pluck('primary_damage')->toArray()));
-        $property['highlights'] = array_filter(array_unique($cars->sortBy('highlights')->pluck('highlights')->toArray()));
         $property['fuel'] = array_filter(array_unique($cars->sortBy('fuel')->pluck('fuel')->toArray()));
+        $property['highlights'] = array_filter(array_unique($cars->sortBy('highlights')->pluck('highlights')->toArray()));
+
+        foreach ($property['highlights'] as &$highlight){
+            if($highlight === 'RUNS AND DRIVES') $highlight = 'RUN AND DRIVE';
+        }
 
 
         $property['drive'] = [];
 
         $drives = array_filter(array_unique($cars->sortBy('drive')->pluck('drive')->toArray()));
 
-        $driveType = config('car_search.drive_type');
 
+
+        $driveType = config('car_search.drive_type');
 
 
            foreach ($driveType as $k=>$type){
@@ -375,6 +388,8 @@ class CarRepository extends Repository {
                   }
               }
            }
+
+        $property['drive'] = array_unique($property['drive']);
 
         $property['location'] = array_filter(array_unique($cars->sortBy('location')->pluck('location')->toArray()));
         $property['doc_type'] = array_filter(array_unique($cars->sortBy('doc_type')->pluck('doc_type')->toArray()));

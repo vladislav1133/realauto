@@ -2,11 +2,15 @@ let Search = (function () {
 
     let options = {}
 
+    let searchType = 'main'
+
     let el = '#search'
 
     let searchBtn = '#search-btn'
 
-    let queryForm = '#search-query'
+    let searchGlobal = '#search-query'
+
+    let searchGlobalQuery = {}
 
     let searchClearBtn = '#search-clear-btn'
 
@@ -44,6 +48,7 @@ let Search = (function () {
 
     let buyNowInput = '#search-buy-now'
 
+    //Just car options
     function initSearchOptions() {
 
         options['mark'] = Search.getSelectOptions(selects['mark'])
@@ -61,9 +66,6 @@ let Search = (function () {
         options['highlight'] = Search.getSelectOptions(selects['highlight'])
 
         options['doc_type'] = Search.getSelectOptions(selects['docAdd'])
-
-
-          console.log(options)
     }
 
     function initSelectSetting() {
@@ -78,6 +80,63 @@ let Search = (function () {
 
         $('.selectpicker').selectpicker('refresh');
 
+    }
+
+
+    function onSubmitContactForm() {
+
+
+        $('#contact-us-popup').submit(function (e) {
+            e.preventDefault()
+
+            let form = $(this).serializeArray()
+            let data = {}
+
+            for (let i = 0; i < form.length; i++){
+                data[form[i]['name']] = form[i]['value'];
+            }
+
+            if(data.favoriteCars === 'on') {
+
+                let favoriteCars =  App.getCookie('favoriteCars')
+                console.log('favs ' + favoriteCars)
+
+                if(favoriteCars === undefined) {
+
+                    data.favoriteCars = null
+                } else {
+
+                    data.favoriteCars =  JSON.parse(favoriteCars)
+                }
+            }
+
+
+            $.ajax({
+                type: 'POST',
+
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+
+                url: '/contact-us',
+
+                data: data
+
+            }).done(function (data) {
+
+                $('.btn-popup').magnificPopup('close');
+
+                $('#contact-us-popup input').val('');
+                $('#contact-us-popup input').val('');
+                $('#contact-us-popup textarea').val('');
+                $('#contact-us-popup textarea').val('');
+                $('#contact-us-popup input:checkbox').prop( "checked", false );
+
+                return false;
+            });
+
+
+        })
     }
 
     function initEvents() {
@@ -96,7 +155,7 @@ let Search = (function () {
 
         //Change selectors
 
-        onSearchQuerySubmit()
+        onSearchGlobal()
 
         onChangeMark()
 
@@ -105,233 +164,7 @@ let Search = (function () {
         onChangeLocation()
     }
 
-    //EVENTS
 
-    function getDefaultSearchOptions() {
-
-
-    }
-
-
-    function onChangeType() {
-
-        $(el).on('change', selects['type'], function (e) {
-            e.preventDefault()
-
-           // let mark = $(selects['mark']).val();
-
-            getMarks()
-
-            Search.setSearchDefaultOptions([selects['type']])
-
-        })
-    }
-
-    function onChangeMark() {
-
-        $(el).on('change', selects['mark'], function (e) {
-            e.preventDefault()
-
-            let mark = $(selects['mark']).val();
-
-            Search.clearSearch([selects['mark'],selects['type']])
-
-
-            Search.setSearchCarOptions()
-
-            getModels(mark);
-        })
-    }
-
-    function onChangeModel() {
-
-        $(el).on('change', selects['model'], function (e) {
-            e.preventDefault()
-
-            let mark = $(selects['mark']).val();
-
-            Search.clearSearch([selects['type'],selects['mark'],selects['model']])
-
-            Search.setSearchCarOptions()
-        })
-    }
-
-    function onChangeLocation() {
-
-        $(el).on('change', selects['locAdd'], function (e) {
-            e.preventDefault()
-
-            getDocs()
-        })
-
-        $(el).on('change', selects['locRem'], function (e) {
-            e.preventDefault()
-
-            getDocs()
-        })
-    }
-
-    function onSearchQuerySubmit() {
-
-        $('#search-query').submit(function (e) {
-            e.preventDefault()
-
-            let query = $(queryForm + ' input').val()
-
-            $(queryForm + ' input').val('')
-
-            $.ajax({
-
-                method: 'GET',
-                url: '/cars/search/' + query
-
-
-            }).done(function (data) {
-
-                Search.clearSearch()
-
-                $('.selectpicker').selectpicker('refresh');
-
-                let request = {}
-
-                if (data['found'] === true) {
-
-                    if (data['col'] === 'lot') {
-
-                        request['lot'] = query
-                    }
-
-                    if (data['col'] === 'vin') {
-
-                        request['vin'] = query
-                    }
-
-                    if (data['col'] === 'year') {
-
-                        request['yearTo'] = query
-                        request['yearFrom'] = query
-                    }
-
-                    if (data['col'] === 'location') {
-
-                        var locs = Search.getOptions()['location'].filter(function (item) {
-
-                            return new RegExp('^' + query, "i").test(item);
-
-                        });
-
-                        if (locs.length === 0) Table.renderError()
-                        else request['locAdd'] = locs
-
-
-                        console.log(request)
-                    }
-
-                    Table.getPage(1, request)
-
-                } else if (data['found'] === false) {
-
-                    Table.renderError()
-
-                }
-
-                Search.setSearchDefaultOptions()
-            })
-        })
-    }
-
-    function onSearchCars() {
-
-        $(searchBtn).click(function () {
-
-
-            Table.getPage(1, Search.getSearchData())
-        })
-    }
-
-    function onClearFavorite() {
-
-        $(favoriteWrapper).on('click', '#favorite-clear-btn', function (e) {
-
-            App.deleteCookie('favoriteCars')
-
-
-            $(favoriteWrapper).html(
-                '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
-
-            $(window).trigger('disableFavoriteBtn');
-
-            Search.showFavorite = false
-
-            Search.clearSearch()
-
-            Table.getPage(1, Search.getSearchData())
-        })
-
-    }
-
-    function onClickClearSearch() {
-
-        $(searchClearBtn).click(function (e) {
-            e.preventDefault()
-
-            $(selects['type']).val('Car')
-
-            Search.setSearchDefaultOptions()
-        })
-    }
-
-    function onToggleFavorite() {
-
-        $(favoriteWrapper).on('click', '#favorite-search-btn', function (e) {
-
-            var disFavoriteBtn = $('#favorite-search-btn').attr('disabled')
-
-            if ('disabled' === disFavoriteBtn) {
-
-                return false;
-            }
-
-            if (!Search.showFavorite) {
-
-                Search.showFavorite = true
-
-                $(favoriteWrapper).html(
-                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite search-btn_half">Все</a>' +
-                    '<a id="favorite-clear-btn" class="btn search-btn search-btn_favorite search-btn_half">Очистить</a>')
-            } else {
-
-                $(favoriteWrapper).html(
-                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
-                Search.showFavorite = false
-            }
-
-
-            Search.clearSearch()
-
-            console.log('Toggle favorite')
-
-            Table.getPage(1, Search.getSearchData())
-        })
-    }
-
-    function onDisableFavorite() {
-
-        $(window).on('disableFavoriteBtn', function (e, data) {
-
-            var favoriteCars = App.getCookie('favoriteCars')
-
-            if (favoriteCars) {
-
-                $(favoriteBtn).attr('disabled', false)
-            } else {
-
-                $(favoriteBtn).attr('disabled', true)
-            }
-        });
-
-
-    }
 
     function getMarks() {
 
@@ -349,7 +182,7 @@ let Search = (function () {
 
         });
     }
-    
+
     function getModels() {
 
         let mark = $(selects['mark']).val()
@@ -410,6 +243,239 @@ let Search = (function () {
         });
     }
 
+    //EVENTS
+
+    function onChangeType() {
+
+        $(el).on('change', selects['type'], function (e) {
+            e.preventDefault()
+
+           // let mark = $(selects['mark']).val();
+
+            //
+            // getMarks()
+            //
+            // Search.setSearchDefaultOptions([selects['type']])
+            //
+            ////////////////////////////////////////////
+
+           // let mark = $(selects['mark']).val();
+
+            Search.clearSearchValue([selects['type']])
+
+            Search.setSearchCarOptions()
+
+           // getModels(mark);
+
+        })
+    }
+
+    function onChangeMark() {
+
+        $(el).on('change', selects['mark'], function (e) {
+            e.preventDefault()
+
+            let mark = $(selects['mark']).val();
+
+            Search.clearSearchValue([selects['type'],selects['mark']])
+
+            Search.setSearchCarOptions()
+
+            getModels(mark);
+        })
+    }
+
+    function onChangeModel() {
+
+        $(el).on('change', selects['model'], function (e) {
+            e.preventDefault()
+
+            let mark = $(selects['mark']).val();
+
+            Search.clearSearchValue([selects['type'],selects['mark'],selects['model']])
+
+            Search.setSearchCarOptions()
+        })
+    }
+
+    function onChangeLocation() {
+
+        $(el).on('change', selects['locAdd'], function (e) {
+            e.preventDefault()
+
+            getDocs()
+        })
+
+        $(el).on('change', selects['locRem'], function (e) {
+            e.preventDefault()
+
+            getDocs()
+        })
+    }
+
+    function onSearchGlobal() {
+
+        $(searchGlobal).submit(function (e) {
+            e.preventDefault()
+
+            searchGlobalQuery = {}
+
+            let query = $(searchGlobal + ' input').val()
+
+            $(searchGlobal + ' input').val('')
+
+            if(new RegExp('^[a-zA-Z]{2}$', "i").test(query)) {
+
+
+                let founded = options['location'].filter(function (str) {
+
+                    return new RegExp('^'+query,"i").test(str);
+
+                });
+
+                searchGlobalQuery['locAdd'] = founded
+
+            }
+
+            if(new RegExp('^[a-zA-Z0-9]{17}$', "i").test(query))  {
+
+                searchGlobalQuery['vin'] = query;
+            }
+
+            if(new RegExp('^[0-9]{8}$', "i").test(query))  {
+
+                searchGlobalQuery['lot'] = query;
+            }
+
+            if(new RegExp('^[0-9]{4}$', "i").test(query)) if(query>=options['years'].min() && query<=options['years'].max()) {
+
+                searchGlobalQuery['yearTo'] = query;
+                searchGlobalQuery['yearFrom'] = query;
+            }
+
+            console.log('global obj')
+            console.log(searchGlobalQuery)
+
+            searchType = 'global'
+
+            Table.getPage(1, Search.getSearchData())
+
+        })
+    }
+
+    function onSearchCars() {
+
+        $(searchBtn).click(function () {
+
+            searchType = 'main'
+            Table.getPage(1, Search.getSearchData())
+        })
+    }
+
+    function onClearFavorite() {
+
+        $(favoriteWrapper).on('click', '#favorite-clear-btn', function (e) {
+
+            App.deleteCookie('favoriteCars')
+
+
+            $(favoriteWrapper).html(
+                '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
+
+            $(window).trigger('disableFavoriteBtn');
+
+            Search.showFavorite = false
+
+            Search.clearSearchValue()
+
+            Table.getPage(1, Search.getSearchData())
+        })
+
+    }
+
+    function onClickClearSearch() {
+
+        $(searchClearBtn).click(function (e) {
+            e.preventDefault()
+
+            Search.setSearchDefaultOptions()
+        })
+    }
+
+    function RemoveNotExistFavorite() {
+
+
+        let data = {}
+
+         data['favoriteCars'] = App.getCookie('favoriteCars')
+
+        $.post({
+
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            url: '/cars/favorite/remove',
+
+            data: data
+
+        }).done(function (data) {
+            //DOPISAT
+        })
+    }
+
+    function onToggleFavorite() {
+
+        $(favoriteWrapper).on('click', '#favorite-search-btn', function (e) {
+
+            var disFavoriteBtn = $('#favorite-search-btn').attr('disabled')
+
+            if ('disabled' === disFavoriteBtn) {
+
+                return false;
+            }
+
+            if (!Search.showFavorite) {
+
+                Search.showFavorite = true
+
+                $(favoriteWrapper).html(
+                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite search-btn_half">Все</a>' +
+                    '<a id="favorite-clear-btn" class="btn search-btn search-btn_favorite search-btn_half">Очистить</a>')
+            } else {
+
+                $(favoriteWrapper).html(
+                    '<a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>')
+                Search.showFavorite = false
+            }
+
+
+            Search.setSearchDefaultOptions()
+
+            console.log('Toggle favorite')
+
+            Table.getPage(1, Search.getSearchData())
+        })
+    }
+
+    function onDisableFavorite() {
+
+        $(window).on('disableFavoriteBtn', function (e, data) {
+
+            var favoriteCars = App.getCookie('favoriteCars')
+
+            if (favoriteCars) {
+
+                $(favoriteBtn).attr('disabled', false)
+            } else {
+
+                $(favoriteBtn).attr('disabled', true)
+            }
+        });
+
+
+    }
+
     return {
 
         showFavorite: false,
@@ -421,6 +487,8 @@ let Search = (function () {
             initSelectSetting()
 
             initEvents()
+
+            RemoveNotExistFavorite()
 
             $(window).trigger('disableFavoriteBtn');
 
@@ -438,48 +506,58 @@ let Search = (function () {
 
         getSearchData: function () {
 
-            let searchData = {}
 
-            searchData['type'] = $(selects['type']).val()
+            if(searchType === 'main') {
 
-            searchData['mark'] = $(selects['mark']).val()
+                let searchData = {}
 
-            searchData['model'] = $(selects['model']).val()
+                searchData['type'] = $(selects['type']).val()
 
-            searchData['yearTo'] = $(selects['yearTo']).val()
+                searchData['mark'] = $(selects['mark']).val()
 
-            searchData['yearFrom'] = $(selects['yearFrom']).val()
+                searchData['model'] = $(selects['model']).val()
 
-            searchData['damage'] = $(selects['damage']).val()
+                searchData['yearTo'] = $(selects['yearTo']).val()
 
-            searchData['drive'] = $(selects['drive']).val()
+                searchData['yearFrom'] = $(selects['yearFrom']).val()
 
-            searchData['fuel'] = $(selects['fuel']).val()
+                searchData['damage'] = $(selects['damage']).val()
 
-            searchData['highlight'] = $(selects['highlight']).val()
+                searchData['drive'] = $(selects['drive']).val()
 
-            searchData['locAdd'] = $(selects['locAdd']).val()
-            searchData['locRem'] = $(selects['locRem']).val()
+                searchData['fuel'] = $(selects['fuel']).val()
 
-            searchData['docAdd'] = $(selects['docAdd']).val()
+                searchData['highlight'] = $(selects['highlight']).val()
 
-            searchData['docRem'] = $(selects['docRem']).val()
+                searchData['locAdd'] = $(selects['locAdd']).val()
+                searchData['locRem'] = $(selects['locRem']).val()
+
+                searchData['docAdd'] = $(selects['docAdd']).val()
+
+                searchData['docRem'] = $(selects['docRem']).val()
 
 
-            if ($(buyNowInput).is(":checked")){
-                searchData['buyNow'] = 1
+                if ($(buyNowInput).is(":checked")){
+                    searchData['buyNow'] = 1
+                }
+
+                if (Search.showFavorite) {
+
+                    let favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
+
+                    if (favoriteCars === undefined) favoriteCars = []
+
+                    searchData['favoriteCars'] = favoriteCars
+                }
+
+                return searchData
             }
 
-            if (Search.showFavorite) {
+            if(searchType === 'global') {
 
-                let favoriteCars = JSON.parse(App.getCookie('favoriteCars'))
-
-                if (favoriteCars === undefined) favoriteCars = []
-
-                searchData['favoriteCars'] = favoriteCars
+                return searchGlobalQuery
             }
 
-            return searchData
         },
 
         getSelectOptions: function (select) {
@@ -540,46 +618,54 @@ let Search = (function () {
 
         setSearchCarOptions: function () {
 
+            let type = $(selects['type']).val()
             let mark = $(selects['mark']).val()
             let model = $(selects['model']).val()
 
+            if (mark) mark = '/' + mark
             if (model) model = '/' + model
 
             $.get({
 
-                url: '/cars/property/' + mark + model
+                url: '/cars/property/' + type + mark + model
 
             }).done(function (data) {
 
-                Search.setSelectOptions(selects['docAdd'],data['doc_type'])
-                Search.setSelectOptions(selects['docRem'],data['doc_type'])
+
+                if(data.marks){
+                    Search.setSelectOptions(selects['mark'],data['marks'])
+                }
+
+                Search.setSelectOptions(selects['yearTo'],data['years'])
+                Search.setSelectOptions(selects['yearFrom'],data['years'])
 
                 Search.setSelectOptions(selects['damage'],data['damage'])
 
-                Search.setSelectOptions(selects['drive'],data['drive'])
-
-                Search.setSelectOptions(selects['fuel'],data['fuel'])
-
                 Search.setSelectOptions(selects['highlight'],data['highlights'])
+
+                Search.setSelectOptions(selects['drive'],data['drive'])
+                Search.setSelectOptions(selects['fuel'],data['fuel'])
 
                 Search.setSelectOptions(selects['locAdd'],data['location'])
                 Search.setSelectOptions(selects['locRem'],data['location'])
 
-                Search.setSelectOptions(selects['yearTo'],data['years'])
-                Search.setSelectOptions(selects['yearFrom'],data['years'])
+                Search.setSelectOptions(selects['docAdd'],data['doc_type'])
+                Search.setSelectOptions(selects['docRem'],data['doc_type'])
+
+                console.log('setSelectsOptions')
+                console.log(data);
 
                 $('.selectpicker').selectpicker('refresh');
             })
         },
 
-        //Set common selects options
-        setSearchDefaultOptions: function (exceptClear = []) {
+        //Set type:car selects options
+        setSearchDefaultOptions: function () {
 
             let options = Search.getOptions()
 
-            console.log('SetSearchDefaultOptions')
-
-            console.log(options['mark'])
+            console.log($(selects['type']).selectpicker('val'))
+            $(selects['type']).selectpicker('val', 'car')
 
             Search.setSelectOptions(selects['mark'],options['mark'])
 
@@ -602,11 +688,12 @@ let Search = (function () {
             Search.setSelectOptions(selects['docAdd'],options['doc_type'])
             Search.setSelectOptions(selects['docRem'],options['doc_type'])
 
-            Search.clearSearch(exceptClear)
-
+            Search.clearSearchValue([selects['type']])
         },
 
-        clearSearch: function (exceptClear = []) {
+        clearSearchValue: function (exceptClear = []) {
+
+
 
             let selectsArray = Object.values(selects);
 

@@ -77,19 +77,15 @@ class IndexController extends SiteController
 
     public function contactUs(Request $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:50',
-            'tel' => 'required|max:50'
+        $this->validate($request, [
+            'name' => 'required|min:2',
+            'tel' => 'required|min:5',
         ]);
 
-        if ($validator->passes()) {
 
-            Mail::to(env('MAIL_ADDRESS'))->send(new ContactUsMail($request->tel, $request->name));
-            return response()->json(['success' => 'true']);
-        }
+        Mail::to(env('MAIL_ADDRESS'))->send(new ContactUsMail($request->tel, $request->name, $request->message, $request->favoriteCars));
 
-        return response()->json(['error' => $validator->errors()->all()]);
+        return response()->json(['success' => 'true']);
     }
 
     protected function getCars()
@@ -109,24 +105,11 @@ class IndexController extends SiteController
     protected function getSearch()
     {
 
-        $search = array();
+        $search = $this->carRepository->getSearchProperty('car'); //add marks,
 
         $search['marks'] = $this->carRepository->getMarks('car');
 
-        $search['years'] = $this->carRepository->getYears();
-
-        $search['location'] = $this->carRepository->unique('location');
-
-        $search['fuel'] = config('car_search.fuel');
-
-        $search['drive'] = array_keys(config('car_search.drive_type'));
-
-        $search['docType'] = $this->carRepository->unique('doc_type');
-
-        $search['damage'] = $this->carRepository->unique('primary_damage');
-
-        $search['highlights'] = config('car_search.highlights');
-
+        //dd($search);
 
         return $search;
     }

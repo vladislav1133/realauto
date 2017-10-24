@@ -19,12 +19,16 @@ class ContactUsMail extends Mailable
 
     protected $tel;
     protected $name;
+    protected $mess;
+    protected $favoriteCars;
 
 
-    public function __construct($tel, $name)
+    public function __construct($tel, $name, $mess = false, $favoriteCars = false)
     {
         $this->tel = $tel;
         $this->name = $name;
+        $this->mess = $mess;
+        $this->favoriteCars = $favoriteCars;
     }
 
     /**
@@ -37,7 +41,9 @@ class ContactUsMail extends Mailable
         return $this->view(env('THEME').'.mails.contactUs')
             ->with([
                 'tel' => $this->tel,
-                'name' => $this->name
+                'name' => $this->name,
+                'mess' => $this->mess,
+                'favoriteCars' => $this->favoriteCars
             ])
             ->subject('Realauto новый заказ');
     }

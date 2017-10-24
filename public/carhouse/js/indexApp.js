@@ -2,13 +2,76 @@ let App = (function () {
 
     function initEvents() {
 
-        eventContactPopup()
+        onClickContactBtn()
         onChangePage()
+        onSubmitContactForm()
     }
 
-    function eventContactPopup() {
-        $('#contact-up-btn').magnificPopup({})
+    function onClickContactBtn() {
+        $('#contact-us-btn').magnificPopup({})
     }
+
+    function setMainImageHeight() {
+
+        let h = window.innerHeight;
+        $('.main-header').css('height', h );
+
+    }
+
+    function onSubmitContactForm() {
+
+
+        $('#contact-us-popup').submit(function (e) {
+            e.preventDefault()
+
+            let form = $(this).serializeArray()
+            let data = {}
+
+            for (let i = 0; i < form.length; i++){
+                data[form[i]['name']] = form[i]['value'];
+            }
+
+            if(data.favoriteCars === 'on') {
+
+                 let favoriteCars =  App.getCookie('favoriteCars')
+                console.log('favs ' + favoriteCars)
+
+                if(favoriteCars === undefined) {
+
+                    data.favoriteCars = null
+                } else {
+
+                    data.favoriteCars =  JSON.parse(favoriteCars)
+                }
+            }
+
+
+            $.ajax({
+                type: 'POST',
+
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+
+                url: '/contact-us',
+
+                data: data
+
+            }).done(function (data) {
+
+                $('.btn-popup').magnificPopup('close');
+
+                $('#contact-us-popup input').val('');
+                $('#contact-us-popup input').val('');
+                $('#contact-us-popup textarea').val('');
+                $('#contact-us-popup textarea').val('');
+                $('#contact-us-popup input:checkbox').prop( "checked", false );
+
+                return false;
+            });
+        })
+    }
+
 
     function onChangePage () {
 
@@ -40,6 +103,8 @@ let App = (function () {
             Table.init()
             CustomsCalculator.init()
 
+            setMainImageHeight()
+
             //Custom gallery
             $('#custom-slider').bxSlider({
                 pagerCustom: '#slider-pager',
@@ -51,6 +116,7 @@ let App = (function () {
 
 
             if($('#main-aside').hasClass('main-aside')){
+
                 let sidebar = new StickySidebar('.main-aside', {
                     topSpacing: 105,
                     containerSelector: '#main-content .container',
@@ -61,6 +127,14 @@ let App = (function () {
             initEvents()
 
             $(window).trigger('changePage')
+
+            Array.prototype.max = function() {
+                return Math.max.apply(null, this);
+            };
+
+            Array.prototype.min = function() {
+                return Math.min.apply(null, this);
+            };
         },
 
         getCookie: function (name) {

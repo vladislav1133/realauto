@@ -48,13 +48,13 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
+
 .custom-calc{
     padding: 20px 10px;
     background-color: #ccc;
     color : #000;
 
 }
-
 
 .sale_date {
 
@@ -65,7 +65,6 @@ Version:    1.1
 }
 
 .custom-calc__input {
-
 
 }
 
@@ -92,11 +91,32 @@ Version:    1.1
 }
 
 .btn {
-    border-radius: 2px;
+    border-radius: 4px;
     outline: none;
 }
 .btn:hover, .btn:focus{
     outline: none;
+}
+
+.footable .rem-btn{
+    display: inline;
+    width: 91px;
+    font-size: 12px;
+    padding: 1px 0;
+    margin-left: 5px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #ffffff;
+    background-color: #6a0000;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+}
+
+.footable .rem-btn:hover, .footable .rem-btn:focus {
+    background-color: #890000;
+    color: #fff!important;
 }
 
 
@@ -105,6 +125,9 @@ Version:    1.1
     top: 0;
     right: 0;
 }
+
+/* CONTACT US FORM */
+
 .cu-form {
     margin:0 auto;
     width: 320px;
@@ -114,6 +137,14 @@ Version:    1.1
     border-radius: 5px;
     padding: 15px 10px;
 
+}
+
+.cu-form input, .cu-form textarea{
+    border-color: #6a0000;
+}
+
+.cu-form input::placeholder, .cu-form textarea::placeholder{
+    color: #6a0000;
 }
 
 .cu-form__label {
@@ -129,6 +160,13 @@ Version:    1.1
     font-size: 13px;
     border: 1px solid #000;
 }
+
+.cu-form__textarea{
+    height:80px;
+    font-size: 13px;
+    border: 1px solid #000;
+}
+
 .cu-form__btn {
     font-size: 11px;
     font-weight: 700;
@@ -143,6 +181,9 @@ Version:    1.1
     text-decoration: none;
     margin-top: 15px;
 }
+
+
+
 
 .search-clear-btn{
     font-weight: 400;
@@ -297,7 +338,7 @@ body {
     width: 100%;
     max-width: 1900px;
     margin: 0 auto;
-    background-image: url('http://realauto.pro/carhouse/img/banner-bg.jpg');
+    background-image: url('/carhouse/img/banner-bg.jpg');
     background-size: 100% 100%;
     height: 720px;
 }
@@ -822,13 +863,15 @@ body {
     outline: none;
 }
 
+
+
 .favorite__btn {
+    background: transparent;
     font-size: 25px;
     margin: 0;
     padding: 3px 0;
     width: 20px;
     float: left;
-    background-color: #fff;
     color: #6a0000;
     transition: 0.3s color ease;
 }
@@ -1277,6 +1320,11 @@ footer .footer-item .gallery-item {
     border: 0;
 }
 
+#table-body>.second-row {
+    background: #dbdbea;
+}
+
+
 
 /** SEARCH **/
 
@@ -1361,7 +1409,7 @@ footer .footer-item .gallery-item {
     background-color: #6a0000;
     text-decoration: none;
     transition: background-color 0.3s;
-    border-radius: 0;
+    border-radius: 4px;
 }
 
 .sidebar .search-btn:hover {
@@ -1511,10 +1559,6 @@ footer .footer-item .gallery-item {
     height: 20px;
 }
 
-element.style {
-    width:none;
-}
-
 .price-box label:before {
     width: 0px;
     height: 0px;
@@ -1554,13 +1598,10 @@ label:before {
     bottom: 1px;
     background-color: transparent;
     box-shadow: none;
-    border-radius: 0px;
+    border-radius: 0;
     border: solid 1px #b7b5b5;
 }
 
-input[type=checkbox] {
-    display: none;
-}
 
 input[type=checkbox]:checked + label:before {
     content: "\2713";

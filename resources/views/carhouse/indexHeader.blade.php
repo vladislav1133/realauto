@@ -35,7 +35,7 @@
 
             </div>
         </div>
-        <div class="banner__car"></div>
+
     </div>
     <div id="double-nav-container" class="double-nav-container">
         <div class="container">

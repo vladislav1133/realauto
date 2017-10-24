@@ -19,6 +19,7 @@
                 </form>
             </div>
 
+
             <div class="col-xs-12">
                 <div class="search__head">
                     <div class="row">
@@ -38,9 +39,9 @@
             </div>
 
             <div class="search__col col-xs-12">
-                <select id="search-type" class="selectpicker search__select">
-                    <option value="car">Car</option>
-                    <option value="moto">Moto</option>
+                <select id="search-type" class="selectpicker search__select" data-title="Все" >
+                    <option value="car" selected>CAR</option>
+                    <option value="moto">MOTO</option>
                 </select>
             </div>
 
@@ -189,8 +190,8 @@
             <div class="search__col search__col_left col-xs-6 ">
                 <select multiple id="search-doc-add" data-live-search="true" class="selectpicker search__select"
                         data-actions-box="true" title="Добавить">
-                    @if($search['docType'])
-                        @foreach($search['docType'] as $docAdd)
+                    @if($search['doc_type'])
+                        @foreach($search['doc_type'] as $docAdd)
                             <option>{{$docAdd}}</option>
                         @endforeach
                     @endif
@@ -201,8 +202,8 @@
 
                 <select multiple id="search-doc-rem" data-live-search="true" class="selectpicker search__select"
                         data-actions-box="true" title="Исключить">
-                    @if($search['docType'])
-                        @foreach($search['docType'] as $docRem)
+                    @if($search['doc_type'])
+                        @foreach($search['doc_type'] as $docRem)
                             <option>{{$docRem}}</option>
                         @endforeach
                     @endif
@@ -211,6 +212,8 @@
             <div class="col-xs-12">
                 <input id="search-buy-now" style="display: inline-block" type="checkbox"><label
                         for="search-buy-now">Купить сейчас</label>
+
+
             </div>
 
             <div class="col-xs-12">
@@ -221,7 +224,7 @@
                                 class="fa fa-search search-btn-icon"></span>Искать</span></a>
             </div>
             <div class="col-xs-12">
-                <a id="contact-up-btn" href="#contact-us-popup" class="btn search-btn ">Связаться с нами</a>
+                <a id="contact-us-btn" href="#contact-us-popup" class="btn search-btn ">Связаться с нами</a>
             </div>
             <div class="col-xs-12">
                 <div class="favorite-wrapper">
