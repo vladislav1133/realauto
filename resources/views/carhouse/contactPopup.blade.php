@@ -22,9 +22,16 @@
         </div>
 
         <div class="form-group">
-            <input type="checkbox" class="form-control append-favorite" >
-            <label for="add-favorite">Прикрепить избранное</label>
+            <div class="checkbox">
+                <label>
+                    <input id="append-favorite" type="checkbox" value="">
+                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                    Прикрепить избранное
+                </label>
+            </div>
         </div>
+
+
 
         <div class="form-group">
             <button class="btn cu-form__btn ">отправить</button>

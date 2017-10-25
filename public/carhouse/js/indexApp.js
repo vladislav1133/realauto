@@ -13,7 +13,9 @@ let App = (function () {
 
     function setMainImageHeight() {
 
-        let h = window.innerHeight;
+        let h = App.get_viewport_size().height
+        
+
         $('.main-header').css('height', h );
 
     }
@@ -32,7 +34,7 @@ let App = (function () {
             }
 
 
-            if($('#contact-us-popup .append-favorite').prop('checked')) {
+            if($('#contact-us-popup #append-favorite').prop('checked')) {
 
                  let favoriteCars =  App.getCookie('favoriteCars')
 
@@ -130,16 +132,12 @@ let App = (function () {
 
     return {
 
-        itemExist: function (arr, item) {
 
-            return arr.some(function (el) {
-
-                return el === item;
-            });
-        },
 
         init: function () {
+
             setMainImageHeight()
+
             initEvents()
             RemoveNotExistFavorite()
 
@@ -160,7 +158,9 @@ let App = (function () {
             });
 
 
-            if($('#main-aside').hasClass('main-aside')){
+
+
+            if($('#main-aside').hasClass('main-aside') && ($( window ).width() > 767) ){
 
                 let sidebar = new StickySidebar('.main-aside', {
                     topSpacing: 105,
@@ -180,6 +180,31 @@ let App = (function () {
             Array.prototype.min = function() {
                 return Math.min.apply(null, this);
             };
+
+
+
+        },
+
+         get_viewport_size: function(){
+            if(typeof(window.innerWidth) == 'number'){
+                my_width = window.innerWidth;
+                my_height = window.innerHeight;
+            }else if(document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)){
+                my_width = document.documentElement.clientWidth;
+                my_height = document.documentElement.clientHeight;
+            }else if(document.body && (document.body.clientWidth || document.body.clientHeight)){
+                my_width = document.body.clientWidth;
+                my_height = document.body.clientHeight;
+            }
+            return {width: my_width, height: my_height};
+        },
+
+        itemExist: function (arr, item) {
+
+            return arr.some(function (el) {
+
+                return el === item;
+            });
         },
 
         getCookie: function (name) {

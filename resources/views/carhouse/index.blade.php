@@ -8,10 +8,10 @@
 
     <div id="main-content" class="car-list content-area">
         <div class="container">
-                <div id="main-aside" class="main-aside col-xs-3">
+                <div id="main-aside" class="main-aside col-xs-12 col-sm-3">
                     @include(env('THEME').'.indexSideBar')
                 </div>
-                <div class="col-xs-9">
+                <div class="col-xs-12 col-sm-9 content-area__table">
                     <div id="table">
                             <div id="main-table">
                                 @include(env('THEME').'.indexContent')

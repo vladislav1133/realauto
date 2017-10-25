@@ -20,7 +20,7 @@
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
                 <th data-breakpoints="xs sm md">Дата аукциона </th>
-                <th>Купить сейчас</th>
+                <th data-breakpoints="xs">Купить сейчас</th>
                 <th data-breakpoints="all">Текушая ставка</th>
                 <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>

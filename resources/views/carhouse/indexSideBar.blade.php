@@ -218,10 +218,13 @@
                 </select>
             </div>
             <div class="col-xs-12">
-                <input id="search-buy-now" style="display: inline-block" type="checkbox"><label
-                        for="search-buy-now">Купить сейчас</label>
-
-
+                <div class="checkbox">
+                    <label>
+                        <input id="search-buy-now" type="checkbox" value="">
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        Купить сейчас
+                    </label>
+                </div>
             </div>
 
             <div class="col-xs-12">
