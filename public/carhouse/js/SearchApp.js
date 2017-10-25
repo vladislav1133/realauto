@@ -83,61 +83,7 @@ let Search = (function () {
     }
 
 
-    function onSubmitContactForm() {
 
-
-        $('#contact-us-popup').submit(function (e) {
-            e.preventDefault()
-
-            let form = $(this).serializeArray()
-            let data = {}
-
-            for (let i = 0; i < form.length; i++){
-                data[form[i]['name']] = form[i]['value'];
-            }
-
-            if(data.favoriteCars === 'on') {
-
-                let favoriteCars =  App.getCookie('favoriteCars')
-                console.log('favs ' + favoriteCars)
-
-                if(favoriteCars === undefined) {
-
-                    data.favoriteCars = null
-                } else {
-
-                    data.favoriteCars =  JSON.parse(favoriteCars)
-                }
-            }
-
-
-            $.ajax({
-                type: 'POST',
-
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-
-                url: '/contact-us',
-
-                data: data
-
-            }).done(function (data) {
-
-                $('.btn-popup').magnificPopup('close');
-
-                $('#contact-us-popup input').val('');
-                $('#contact-us-popup input').val('');
-                $('#contact-us-popup textarea').val('');
-                $('#contact-us-popup textarea').val('');
-                $('#contact-us-popup input:checkbox').prop( "checked", false );
-
-                return false;
-            });
-
-
-        })
-    }
 
     function initEvents() {
 
@@ -402,27 +348,7 @@ let Search = (function () {
         })
     }
 
-    function RemoveNotExistFavorite() {
 
-
-        let data = {}
-
-         data['favoriteCars'] = App.getCookie('favoriteCars')
-
-        $.post({
-
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-
-            url: '/cars/favorite/remove',
-
-            data: data
-
-        }).done(function (data) {
-            //DOPISAT
-        })
-    }
 
     function onToggleFavorite() {
 
@@ -488,7 +414,6 @@ let Search = (function () {
 
             initEvents()
 
-            RemoveNotExistFavorite()
 
             $(window).trigger('disableFavoriteBtn');
 
@@ -538,6 +463,7 @@ let Search = (function () {
 
 
                 if ($(buyNowInput).is(":checked")){
+
                     searchData['buyNow'] = 1
                 }
 

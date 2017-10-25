@@ -10,11 +10,11 @@
         </div>
 
         <div class="form-group">
-            <input type="tel" class="form-control" name="tel" placeholder="Телефон" required>
+            <input type="tel" class="form-control" name="tel" placeholder="Телефон" required value="dsaasdasdasd">
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" name="name" placeholder="Имя" required>
+            <input type="text" class="form-control" name="name" placeholder="Имя" required value="vlad">
         </div>
 
         <div class="form-group">
@@ -22,7 +22,7 @@
         </div>
 
         <div class="form-group">
-            <input type="checkbox" class="form-control" id="add-favorite" name="favoriteCars">
+            <input type="checkbox" class="form-control append-favorite" >
             <label for="add-favorite">Прикрепить избранное</label>
         </div>
 

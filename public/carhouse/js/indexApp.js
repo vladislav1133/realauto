@@ -31,19 +31,15 @@ let App = (function () {
                 data[form[i]['name']] = form[i]['value'];
             }
 
-            if(data.favoriteCars === 'on') {
+
+            if($('#contact-us-popup .append-favorite').prop('checked')) {
 
                  let favoriteCars =  App.getCookie('favoriteCars')
-                console.log('favs ' + favoriteCars)
 
-                if(favoriteCars === undefined) {
+                if(favoriteCars !== undefined) data.favoriteCars =  JSON.parse(favoriteCars)
 
-                    data.favoriteCars = null
-                } else {
-
-                    data.favoriteCars =  JSON.parse(favoriteCars)
-                }
             }
+
 
 
             $.ajax({
@@ -59,6 +55,8 @@ let App = (function () {
 
             }).done(function (data) {
 
+                console.log('return favs')
+                console.log(data)
                 $('.btn-popup').magnificPopup('close');
 
                 $('#contact-us-popup input').val('');
@@ -72,6 +70,49 @@ let App = (function () {
         })
     }
 
+    function RemoveNotExistFavorite() {
+
+
+        let data = {}
+
+        data['favoriteCars'] = App.getCookie('favoriteCars')
+
+        $.post({
+
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            url: '/cars/favorite/remove',
+
+            data: data
+
+        }).done(function (data) {
+
+            if(data.success) {
+
+                console.log('wtf?')
+                console.log(data)
+
+                if(data.favoriteCars.length > 0) {
+                    let favoriteCars = JSON.stringify(data.favoriteCars)
+
+                    App.deleteCookie('favoriteCars')
+                    document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
+                } else {
+
+                    App.deleteCookie('favoriteCars')
+                }
+
+                console.log('rem not exist done')
+
+                console.log(data.favoriteCars)
+
+
+            }
+
+        })
+    }
 
     function onChangePage () {
 
@@ -79,6 +120,7 @@ let App = (function () {
 
             $('.sale_date').each(function () {
                 if($(this).text() === App.getFormatedDate()) {
+
                     $(this).addClass('sale_date_today')
                 }
             })
@@ -97,13 +139,16 @@ let App = (function () {
         },
 
         init: function () {
+            setMainImageHeight()
+            initEvents()
+            RemoveNotExistFavorite()
 
             SecondMenu.init()
             Search.init()
             Table.init()
             CustomsCalculator.init()
 
-            setMainImageHeight()
+
 
             //Custom gallery
             $('#custom-slider').bxSlider({
@@ -124,7 +169,7 @@ let App = (function () {
                 });
             }
 
-            initEvents()
+
 
             $(window).trigger('changePage')
 

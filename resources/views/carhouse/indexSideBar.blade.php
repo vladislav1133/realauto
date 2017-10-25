@@ -1,8 +1,7 @@
 <aside class="sidebar">
-    <div id="search" class=" search">
 
+    <div class="global-search" style="margin-bottom: 5px">
         <div class="row">
-
             <div class="col-xs-12">
                 <form id="search-query" action="">
 
@@ -18,6 +17,15 @@
                     <!-- -------------------------->
                 </form>
             </div>
+        </div>
+    </div>
+
+
+    <div id="search" class=" search">
+
+        <div class="row">
+
+
 
 
             <div class="col-xs-12">

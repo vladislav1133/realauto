@@ -149,17 +149,19 @@ let Table = (function () {
                 $(this).html('<i class="fa fa-bookmark-o"></i>')
             })
 
-            var favoriteCars = App.getCookie('favoriteCars')
+            let favoriteCars = App.getCookie('favoriteCars')
 
             if (favoriteCars === undefined) return false
 
             favoriteCars = JSON.parse(favoriteCars)
 
+            console.log('Куксы: ')
+            console.log(favoriteCars)
             $(el + ' .favorite__btn').each(function (i) {
 
-                var favoriteBtn = $(this)
+                let favoriteBtn = $(this)
 
-                var lotId = $(this).data('lot')
+                let lotId = $(this).data('lot')
 
                 favoriteCars.forEach(function (item, i) {
 
@@ -173,7 +175,7 @@ let Table = (function () {
 
         addFavoriteCar: function (lotId) {
 
-            var favoriteCars = App.getCookie('favoriteCars')
+            let favoriteCars = App.getCookie('favoriteCars')
 
             if (favoriteCars === undefined) {
 
@@ -182,7 +184,7 @@ let Table = (function () {
 
                 favoriteCars = JSON.parse(favoriteCars)
 
-                var id = favoriteCars.indexOf(lotId);
+                let id = favoriteCars.indexOf(lotId);
 
                 if (id === -1) {
 
@@ -197,11 +199,13 @@ let Table = (function () {
             if (favoriteCars.length > 0) {
 
                 favoriteCars = JSON.stringify(favoriteCars)
+
                 document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
             } else {
 
                 App.deleteCookie('favoriteCars')
             }
+
 
 
             this.updateFavoriteCars();

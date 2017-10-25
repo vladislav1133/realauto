@@ -290,13 +290,13 @@ class CarsController extends Controller {
 
         $favoriteCars = json_decode($favoriteCars);
 
-        if(!is_array($favoriteCars))  return response()->json('Invalid array');
+        if(!is_array($favoriteCars))  return response()->json(['success' => false, 'message' => 'invalid data']);
 
         $lots = $this->carRepository->pluck('lot_id')->toArray();
 
-        $response['favoriteCars'] = array_intersect($favoriteCars, $lots);
+        $favoriteCars = array_intersect($favoriteCars, $lots);
 
-        return response()->json($response);
+        return response()->json(['success' => true, 'favoriteCars' => $favoriteCars ]);
     }
 
 

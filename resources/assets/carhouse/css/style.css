@@ -99,6 +99,8 @@ Version:    1.1
 }
 
 .footable .rem-btn{
+
+    float: right;
     display: inline;
     width: 91px;
     font-size: 12px;
@@ -1577,97 +1579,6 @@ footer .footer-item .gallery-item {
     border: 1px solid #EEE;
 }
 
-label {
-    display: inline-block;
-    cursor: pointer;
-    position: relative;
-    padding-left: 25px;
-    margin-right: 15px;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
-
-label:before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 20px;
-    position: absolute;
-    left: 0;
-    bottom: 1px;
-    background-color: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    border: solid 1px #b7b5b5;
-}
-
-
-input[type=checkbox]:checked + label:before {
-    content: "\2713";
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-    font-size: 15px;
-    color: #f3f3f3;
-    text-align: center;
-    line-height: 15px;
-}
-
-.checkbox label, .radio label {
-    min-height: 20px;
-    padding-left: 30px;
-    margin-bottom: 0;
-    font-weight: 400;
-    cursor: pointer;
-}
-
-.checkbox {
-    padding-left: 20px;
-}
-
-.checkbox label {
-    display: inline-block;
-    position: relative;
-    padding-left: 15px;
-}
-
-.checkbox label::before {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    width: 17px;
-    height: 17px;
-    left: 0;
-    margin-left: -20px;
-    border: 1px solid #cccccc;
-    border-radius: 0px;
-    background-color: #fff;
-    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-}
-
-.checkbox label::after {
-    display: inline-block;
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    left: 0;
-    top: 0;
-    margin-left: -20px;
-    padding-left: 3px;
-    padding-top: 1px;
-    font-size: 11px;
-    color: #555555;
-}
-
-.checkbox-theme input[type="checkbox"]:checked + label::after {
-    color: #fff;
-}
-
-.checkbox-theme input[type="checkbox"]:checked + label::before {
-    background-color: #6a0000;
-    border-color: #6a0000;
-}
 
 .search-block .list-1 li {
     list-style: none;
