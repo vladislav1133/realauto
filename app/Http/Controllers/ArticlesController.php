@@ -26,14 +26,14 @@ class ArticlesController extends SiteController
      */
     public function index()
     {
-        $articles=$this->getArticles();
+       // $articles=$this->getArticles();
 
         $meta = $this->articleRepository->getMeta('blog');
 
-        $content = view(env('THEME').'.blogContent')
-            ->with('articles',$articles)
-            ->render();
-
+        //$content = view(env('THEME').'.blogContent')
+         //   ->with('articles',$articles)
+         //   ->render();
+        $content ='';
 
         return view(env('THEME').'.blog')
             ->with('info',$this->indexInfo)
