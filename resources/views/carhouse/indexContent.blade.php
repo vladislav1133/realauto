@@ -14,7 +14,7 @@
                 <th data-breakpoints="xs">Двигатель</th>
                 <th data-breakpoints="xs sm">Топливо</th>
                 <th data-breakpoints="xs sm">Трансмиссия</th>
-                <th data-breakpoints="xs">Одометр</th>
+                <th data-breakpoints="xs sm">Одометр</th>
                 <th data-breakpoints="all">Тип привода</th>
                 <th data-breakpoints="all">Основные моменты</th>
                 <th data-breakpoints="all">Основные повреждения</th>

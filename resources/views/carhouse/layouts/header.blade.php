@@ -1,31 +1,61 @@
+<div class="common-header">
 
-<div class="main-header main-header_default">
-    <div class="container main-nav-container">
-        <nav class="navbar navbar-default main-nav">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand-logo" href="{{route('home')}}">
-                    <img src="{{asset(env('THEME'))}}/img/logo.png" alt="CAR HOUSE">
-                </a>
+
+    <!-- Pushy Menu -->
+    <nav class="pushy pushy-left">
+        <div class="pushy-content">
+            <ul>
+                <li class="pushy-link"><a href="{{route('home')}}">Главная</a></li>
+                <li class="pushy-link"><a href="{{route('availablecars.index')}}">Машины в наличии</a></li>
+                <li class="pushy-link"><a href="{{route('blog.index')}}">Блог</a></li>
+                <li class="pushy-link"><a href="{{route('contacts')}}">Контакты</a></li>
+                <li class="pushy-link"><a href="{{route('rastamozhka')}}">Таможенный калькулятор</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Site Overlay -->
+    <div class="site-overlay"></div>
+
+
+    <div class="container">
+
+        <nav class="main-nav">
+
+
+            <div class="row">
+
+                <div class=" col-xs-2">
+                    <a class="main-nav__logo" href="{{route('home')}}">
+                        <img src="{{asset(env('THEME'))}}/img/logo.png" alt="CAR HOUSE">
+                    </a>
+                </div>
+
+                <div>
+                    <ul class="main-nav__list col-xs-10">
+                        <li class="main-nav__item"><a class="main-nav__link" href="{{route('home')}}">Главная</a></li>
+                        <li class="main-nav__item"><a class="main-nav__link" href="{{route('availablecars.index')}}">Машины в наличии</a></li>
+                        <li class="main-nav__item"><a class="main-nav__link" href="{{route('blog.index')}}">Блог</a></li>
+                        <li class="main-nav__item"><a class="main-nav__link" href="{{route('contacts')}}">Контакты</a></li>
+                        <li class="main-nav__item"><a class="main-nav__link" href="{{route('rastamozhka')}}">Таможенный калькулятор</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right navbar-right_margin">
-                    <li><a href="{{route('home')}}" >Главная</a></li>
-                    <li><a href="{{route('availablecars.index')}}" >Машины в наличии</a></li>
-                    <li><a href="{{route('blog.index')}}" >Блог</a></li>
-                    <li><a href="{{route('contacts')}}" >Контакты</a></li>
-                    <li><a href="{{route('rastamozhka')}}" >Таможенный калькулятор</a></li>
-                </ul>
+
+            <div class="toggle-button">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="menu-btn">&#9776;</button>
+                    </div>
+                </div>
             </div>
+
+
         </nav>
+
+
+
     </div>
+
+
 </div>
-
-
-

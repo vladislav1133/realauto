@@ -1,53 +1,61 @@
-/*------------------------------------------------------------------
-[Main Stylesheet]
+img {
+    height: auto;
+    width: 100%;
+}
 
-Project:    Car House
-Version:    1.1
--------------------------------------------------------------------*/
+/** MAIN-NAV**/
+.main-nav {
+    margin-top: 15px;
+}
 
-/*------------------------------------------------------------------
-[Table of contents]
+.main-nav__list {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0;
+}
 
-1. Body
-    2. Top Header / .top-header
-    3. Main Header / .main-header
-        3.1. Navigation / .navbar
-            3.1.1. Logo / navbar-brand-logo
-    4. Home Page Banner / .banner
-    5. Single Page Banner / .page-banner
-        5.1. Breadcrumb / breadcrumb-area
-    5. Content Area / .content-area
-        5.1 Option Bar / .option-bar
-        5.2 Car Box / .car-box
-            5.2.1. Car Content (Grid Page)/ .car-content
-            5.2.2  Car Box Body (List Page) / .car-box-body
-        5.3. Sidebar / .sidebar
-            5.3.1. Single Block / .search-block
-    6. Car Details / .car-details
-        6.1. Single Details Slider / .car-detail-slider
-            6.1.1. Carousel / #carousel-custom
-        6.2.Car Details Content / .car-details-content-body
-        6.3. User Comments / .comments-box
-        6.4. Right Sidebar / .car-sidebar-right
-            6.4.1. Car Info / .car-detail-block
-            6.4.2. Dealer Info / .dealer-contact
-            6.4.3. Social Share / .share
-            6.4.4. Private Message / .private-message
-            6.4.5 Recent News / .Recent-new
-    7. Contact Us / .contact-us-body
-        7.1. Contact Form / .contact-form
-        7.2 Contact Info / .contact-details
-        7.3 Social Media / .share
-    8. Testimonials / .testimonials
-    9. Main Footer  / .main-footer
-        8.1. Footer Item / .footer-item
-    10.  Sub Footer / .sub-footer
-    11. Login / .login-page-body
-        11.1. Form / .form-content-box
-    12. 404 Page / .page-content-404
-            12.1. Content / .error404
--------------------------------------------------------------------*/
+.main-nav__item {
 
+}
+
+.common-header {
+    z-index: 1000000;
+    width: 100%;
+    background-color: #6a0000;
+    font-family: "GothamProBlackItalic", sans-serif;
+    position: fixed;
+    padding-bottom: 8px;
+}
+
+.main-nav__link {
+    display: block;
+    padding: 15px 10px;
+    padding-top: 18px;
+    font-size: 16px;
+    color: #c8c8c8;
+    text-decoration: none;
+    transition: 0.3s color ease;
+}
+
+.main-nav__link:hover, .main-nav__link:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+.toggle-button {
+    display: none;
+    padding: 10px 0;
+}
+
+.toggle-button .menu-btn {
+    margin-left: 25px;
+    background: transparent;
+    color: #fff;
+    height: 45px;
+    width: 45px;
+    font-size: 24px;
+}
 
 .sale_date {
 
@@ -427,12 +435,7 @@ body {
 }
 
 .banner__offer {
-
-    position: absolute;
-    top: 20%;
-    left: 13%;
-
-
+    margin-top: 30px;
     color: #fff;
 }
 
@@ -441,93 +444,35 @@ body {
     height: 100%;
 }
 
+
+.banner__title {
+    font-size: 36px;
+
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    font-family: "GothamProBlack", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
 .banner__text {
     font-size: 18px;
     font-weight: 300;
     font-family: 'Open sans', sans-serif;
+    width: 61%;
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .banner__text a{
     color: #33A3EE
 }
 
-.banner__title {
-    font-size: 24px;
-    font-weight: bold;
-    font-family: 'Open sans', sans-serif;
-}
 
 
-.navbar-default {
-    background: none;
-    border: none;
-    margin-bottom: 0px;
-    border-radius: 0px;
-}
-
-.main-header .navbar-default .nav > li > a {
-    display: block;
-    padding: 5px 20px;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #CBCBCB;
-    transition: all 0.3s ease;
-}
-
-.main-header .navbar-default .nav > li > a:hover {
-    color: #fff;
-    border: none;
-}
-
-.main-header .navbar-default .nav > li > .active {
-    color: #000;
-    border: none;
-}
-
-.main-header .navbar-default .nav {
-    margin-top: 32px;
-}
-
-.navbar-brand-logo {
-    float: left;
-    padding: 8px 0px;
-
-}
-
-.navbar-brand-logo:focus {
-    outline: none;
-
-}
-
-
-.navbar-brand-logo img {
-    height: 80px;
-}
-
-.dropdown-menu > li > a {
-    display: block;
-    padding: 15px 20px;
-    text-transform: uppercase;
-    font-size: 12px;
-    border-left: solid 5px white;
-    border-bottom: solid 1px white;
-    background: none;
-}
-
-.dropdown-menu > li > a:hover {
-    border-left: solid 5px #6a0000;
-    background: none;
-    border-bottom: solid 1px #f1f1f1;
-}
-
-.nav .open > a,
-.nav .open > a:focus,
-.nav .open > a:hover {
-    background-color: #f5f5f5;
-    border-color: #ffffff;
-}
 
 .double-nav-container {
     background: #6a0000;
@@ -1864,31 +1809,6 @@ footer .footer-item .gallery-item {
     padding: 35px;
 }
 
-.nav-tabs > li > a {
-    margin-right: 3px;
-    line-height: 1.42857143;
-    border-top: solid 2px white;
-    border-radius: 0px;
-    background: none;
-    color: black;
-    font-weight: bold;
-}
-
-.nav > li > a:hover {
-    text-decoration: none;
-    background-color: white;
-    color: #6a0000;
-    border-top: solid 2px white;
-}
-
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:hover {
-    color: black;
-    cursor: default;
-    background-color: none;
-    border-top: solid 2px red;
-}
 
 .features ul {
     margin: 0px;
@@ -3108,6 +3028,7 @@ a.tags {
 
 }
 
+
 table tbody td{
     text-transform: lowercase;
     font-weight: 700;
@@ -3273,88 +3194,69 @@ table tbody th{
     margin-right: 0;
 }
 
+@media (max-width: 2000px){
 
+    .banner__title {
+        font-size: 45px;
+        margin-top: 75px;
 
-@media (max-width:450px) {
-
-
-    .nav-car-link{
-        padding-left: 0;
     }
 
-
-    .nav-car-item{
-        float: left;
+    .banner__text {
+        font-size: 22px;
+        width: 76%;
     }
-
-    .nav-car-right-menu {
-        margin-top: 0;
-        width:100%;
-    }
-
-    .nav-car-left{
-        width: 100%;
-    }
-
-
-
-    .product {
-        padding-bottom: 5px;
-    }
-
-
-
-    .product__img{
-        margin-bottom: 4px;
-    }
-
-    .product-price-link {
-        float: none;
-    }
-
-    .features .col-pad{
-        width:100%;
-    }
-
-    .error404 .e404 {
-        top: 3%;
-        padding: 0px;
-    }
-
-    .banner__offer{
-        width: 100%;
-        position: relative;
-        left: 0;
-    }
-
-    .main-header{
-        height: 485px;
-    }
-
-    .banner__car {
-        max-height: 100px;
-    }
-
 }
+@media (max-width: 1400px){
 
-@media (max-width:550px) {
+    .banner__title {
+        margin-top: 48px;
+    }
+}
+@media (max-width: 992px){
 
-    .banner__car{
+    .main-nav__logo, .main-nav__list{
         display: none;
     }
 
+    .toggle-button {
+        display: block;
+    }
 
-}
+    .navbar-toggle {
+        position: relative;
+        float: right;
+        padding: 9px 10px;
+        margin-top: 25px;
+        margin-right: 0;
+        margin-bottom: 8px;
+        background-color: transparent;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 0;
+    }
 
+    .search-from {
+        margin-bottom: 24px;
+    }
 
-@media (max-width: 640px) {
-
-    .banner__car {
-        max-height: 185px;
-        width: 70%;
+    .main-header .navbar-default .nav {
+        margin-top: -20px
     }
 }
+
 @media (max-width: 768px) {
+
+    .banner__text {
+        width: 86%;
+    }
+    .banner__title {
+        font-size: 32px;
+    }
+    .main-header {
+        background-image: none;
+        height: auto;
+    }
 
     .main-aside {
         padding-left: 15px;
@@ -3736,9 +3638,6 @@ table tbody th{
         font-size:24px;
     }
 
-    .main-header{
-        height: 580px;
-    }
 
     .main-header_default{
         height: 95px;
@@ -3751,8 +3650,6 @@ table tbody th{
 
     .main-nav {
         z-index: 10000;
-        background: #6a0000;
-        padding: 0 15px;
     }
 
     .main-nav-container{
@@ -3776,53 +3673,36 @@ table tbody th{
 
 }
 
-@media (max-width: 992px){
+@media (max-width: 640px) {
 
-
-
-    .search-from {
-        margin-bottom: 24px;
-    }
-
-    .main-header .navbar-default .nav {
-        margin-top: -20px
+    .banner__car {
+        max-height: 185px;
+        width: 70%;
     }
 }
 
-@media(max-width: 360px){
+@media (max-width: 590px){
 
-    .search-btn-col {
-        width: 100%;
-    }
+    .banner__offer {
+        width: 80%;
+        margin: 20px auto;
+        position: unset;
 
-    .search-col{
-        width: 100%;
     }
 }
 
+@media (max-width: 550px){
+    .main-header {
+        height: auto
+    }
+}
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (max-width: 550px) {
 
-    .navbar-brand-logo img {
-        height: 35px;
+    .banner__car{
+        display: none;
     }
 
-    .main-header .navbar-default .nav > li > a {
-        margin-left: 0;
-        padding: 5px 10px;
-        max-height: 650px;
-        bottom: -50px
-    }
-
-    .double-nav-container .main-header .navbar-default .nav > li > a {
-
-        bottom: 0;
-    }
-
-
-    .main-header .navbar-default .navbar-right_margin {
-        margin-top: -12px;
-    }
 
 }
 
@@ -3862,18 +3742,75 @@ table tbody th{
     }
 }
 
-@media (max-width: 550px){
-    .main-header {
-        height: auto
+@media (max-width: 450px) {
+
+
+    .nav-car-link{
+        padding-left: 0;
     }
+
+
+    .nav-car-item{
+        float: left;
+    }
+
+    .nav-car-right-menu {
+        margin-top: 0;
+        width:100%;
+    }
+
+    .nav-car-left{
+        width: 100%;
+    }
+
+
+
+    .product {
+        padding-bottom: 5px;
+    }
+
+
+
+    .product__img{
+        margin-bottom: 4px;
+    }
+
+    .product-price-link {
+        float: none;
+    }
+
+    .features .col-pad{
+        width:100%;
+    }
+
+    .error404 .e404 {
+        top: 3%;
+        padding: 0px;
+    }
+
+    .banner__offer{
+        width: 100%;
+        position: relative;
+        left: 0;
+    }
+
+    .main-header{
+        height: 485px;
+    }
+
+    .banner__car {
+        max-height: 100px;
+    }
+
 }
 
-@media (max-width: 590px){
+@media (max-width: 360px){
 
-    .banner__offer {
-        width: 80%;
-        margin: 20px auto;
-        position: unset;
+    .search-btn-col {
+        width: 100%;
+    }
 
+    .search-col{
+        width: 100%;
     }
 }

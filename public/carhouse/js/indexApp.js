@@ -146,15 +146,6 @@ let App = (function () {
             });
 
 
-            if ($('#main-aside').hasClass('main-aside') && ($(window).width() > 767)) {
-
-                let sidebar = new StickySidebar('.main-aside', {
-                    topSpacing: 105,
-                    containerSelector: '#main-content .container',
-
-                });
-            }
-
 
             $(window).trigger('changePage')
 
@@ -260,7 +251,11 @@ $(document).ready(function () {
 
     App.init()
 
-    $('.index-header').height($(window).innerHeight())
+
+
+    if ($('#main-aside').hasClass('main-aside') && ($(window).width() > 768)) {
+        $('.index-header').height($(window).innerHeight())
+    }
 })
 
 
