@@ -60,7 +60,7 @@
                     <td>@if($car->buy_it_now)${{$car->buy_it_now}}@else &mdash; @endif</td>
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
                     <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">убрать из избранного</button>@else &mdash; @endif</td>
-                    <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">Исключить</button>@else &mdash; @endif</td>
+                    <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">убрать из избранного</button>@else &mdash; @endif</td>
                 </tr>
             @endforeach
             </tbody>
