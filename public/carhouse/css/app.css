@@ -744,6 +744,10 @@ Version:    1.1
     color: #6a0000;
 }
 
+.cu-form input::-ms-input-placeholder, .cu-form textarea::-ms-input-placeholder{
+    color: #6a0000;
+}
+
 .cu-form input::placeholder, .cu-form textarea::placeholder{
     color: #6a0000;
 }
