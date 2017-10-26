@@ -19,7 +19,7 @@
 
 
                             <div class="col-xs-12">
-                                <h5>Цена авто</h5>
+                                <h5>Цена авто1</h5>
                             </div>
                             <div class="col-xs-11">
                                 <input  name='price' type="number" class="form-control custom-culc__input" value="20000" min="100" max="1000000">
