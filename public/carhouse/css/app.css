@@ -541,44 +541,6 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
-.calculator {
-
-}
-
-.calculator .nav-tabs li{
-    background-color: #b9b9c8;
-    padding: 0;
-    margin: 0;
-}
-
-.calculator .nav-tabs>li>a {
-    border: none;
-    outline: none;
-    background-color: #b9b9c8;
-    margin: 0;
-    padding: 10px 15px;
-}
-
-
-
-.calculator .nav-tabs>li.active>a {
-    background-color: #dbdbea;
-    border-top: none;
-}
-
-
-
-.custom-calc{
-    padding: 20px 10px;
-    background-color: #dbdbea;
-    color : #000;
-
-}
-
-
-.custom-calc__input {
-
-}
 
 .sale_date {
 
@@ -938,6 +900,7 @@ body {
 
 /** MAIN-HEADER AREA START **/
 .main-header {
+    font-family: "GothamProBlackItalic", sans-serif;
     position: relative;
     width: 100%;
     max-width: 1900px;
@@ -4445,5 +4408,8 @@ table tbody th{
 @-moz-viewport    { width: device-width; }
 @-ms-viewport     { width: device-width; }
 @-o-viewport      { width: device-width; }
-@viewport         { width: device-width; }/* Customs calculator */
+@viewport         { width: device-width; }/* Customs calculator */@font-face {
+  font-family: "GothamProBlackItalic";
+  src: url(/fonts/GothamProBlackItalic.woff?9404e507dad65b8af3160f030fd0d4b1) format("woff");
+}
 
