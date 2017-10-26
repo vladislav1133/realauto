@@ -1,6 +1,5 @@
 let CustomsCalculator = (function () {
 
-
     let lightCalculator = (function () {
 
         let TAX = 0.1
@@ -131,6 +130,7 @@ let CustomsCalculator = (function () {
         render = (priceList) => {
 
             let html = ''
+
 
             html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'])
             html += getPriceRow('НДС', priceList['VAT'].cost, priceList['VAT'].value)
@@ -492,9 +492,9 @@ let CustomsCalculator = (function () {
             html += getPriceRow('Пошлина', priceList['TAX'].cost, priceList['TAX'].value)
             html += getPriceRow('Акциз', String(priceList['EXCISE'].cost), priceList['EXCISE'].value)
 
-            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'])
             html += getPriceRow('Дополнительные расходы', '', '', false)
             html += getPriceRow('Пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
+            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'])
 
             $(checkEl).html(html)
         }
@@ -597,14 +597,26 @@ let CustomsCalculator = (function () {
         });
     }
 
+    $(".custom-calc button").click(function(event){
+
+        let target = event.currentTarget;
+
+        target.parentElement.nextElementSibling.style.display="block";
+
+    });
+
     function onChangeCalculator() {
 
-        let tab = '.nav-tabs li'
+        let tab = '.nav-tabs li';
 
-        $(tab).click(function () {
+        $(tab).click(function (event) {
 
-            $('.check').empty()
+            if(event.currentTarget.classList.contains("active") != true){
 
+            $('.check').empty();
+            $(".resultBlock").css("display", "none");
+
+            };
         })
     }
 

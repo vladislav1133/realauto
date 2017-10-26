@@ -541,44 +541,6 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
-.calculator {
-
-}
-
-.calculator .nav-tabs li{
-    background-color: #b9b9c8;
-    padding: 0;
-    margin: 0;
-}
-
-.calculator .nav-tabs>li>a {
-    border: none;
-    outline: none;
-    background-color: #b9b9c8;
-    margin: 0;
-    padding: 10px 15px;
-}
-
-
-
-.calculator .nav-tabs>li.active>a {
-    background-color: #dbdbea;
-    border-top: none;
-}
-
-
-
-.custom-calc{
-    padding: 20px 10px;
-    background-color: #dbdbea;
-    color : #000;
-
-}
-
-
-.custom-calc__input {
-
-}
 
 .sale_date {
 
@@ -942,6 +904,7 @@ body {
 
 /** MAIN-HEADER AREA START **/
 .main-header {
+    font-family: "GothamProBlackItalic", sans-serif;
     position: relative;
     width: 100%;
     max-width: 1900px;
@@ -2414,32 +2377,6 @@ footer .footer-item .gallery-item {
     border: solid 1px #E4E3E3;
     border-radius:3px;
     padding: 35px;
-}
-
-.nav-tabs > li > a {
-    margin-right: 3px;
-    line-height: 1.42857143;
-    border-top: solid 2px white;
-    border-radius: 0px;
-    background: none;
-    color: black;
-    font-weight: bold;
-}
-
-.nav > li > a:hover {
-    text-decoration: none;
-    background-color: white;
-    color: #6a0000;
-    border-top: solid 2px white;
-}
-
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:hover {
-    color: black;
-    cursor: default;
-    background-color: none;
-    border-top: solid 2px red;
 }
 
 .features ul {
@@ -4451,13 +4388,23 @@ table tbody th{
 @-o-viewport      { width: device-width; }
 @viewport         { width: device-width; }/* Customs calculator */
 .calculator {
+	width: 55%;
+	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 80px;
 
-}
+	display: -webkit-box;
 
-.calculator .nav-tabs li{
-    background-color: #b9b9c8;
-    padding: 0;
-    margin: 0;
+	display: -ms-flexbox;
+
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 }
 
 .calculator .nav-tabs>li>a {
@@ -4478,18 +4425,121 @@ table tbody th{
 
 
 .custom-calc{
-    padding: 20px 10px;
+    padding: 20px 50px 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+
     background-color: #dbdbea;
     color : #000;
-
 }
 
 
-.custom-calc__input {
-
+.custom-calc > div{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	margin-bottom: 30px;
 }
 
-.sale_date {
+.custom-calc .resultBlock{
+	display: none;
+}
 
+.custom-calc h5{
+	margin-right: 20px; 
+}
+
+.custom-calc .form-control{
+	border: 1px solid black;
+}
+
+.custom-calc input.form-control{
+	width: 40%;
+	margin-right: 20px;
+}
+
+.custom-calc select.form-control{
+	width: 11%;
+}
+
+.buttonBlock{
+	margin-bottom: 20px !important;
+}
+
+.buttonBlock button{
+	background-color: #7C0000;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	margin-left: 14%;
+	height: 40px;
+	width: 140px;
+	border-radius: 5px;
+}
+
+.nav-tabs{
+	border: none !important;
+	list-style: none;
+	margin: 0;
+	padding: 0; 
+}
+
+.nav-tabs li{
+	width: 147px;
+	height: 81px;
+	padding: 0;
+	margin: 0;
+	margin-right: 5px;
+
+	display: -webkit-box;
+
+	display: -ms-flexbox;
+
+	display: flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+
+	background-color: #b9b9c8;
+}
+
+.nav-tabs > li.active{
+	background-color: #dbdbea;
+}
+
+.nav-tabs > li > a {
+    margin-right: 3px;
+    line-height: 1.42857143;
+    border-top: solid 2px white;
+    border-radius: 0px;
+    background: none;
+    color: black;
+    font-weight: bold;
+}
+
+.nav > li > a:hover {
+    text-decoration: none;
+    background-color: white;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    color: black;
+    cursor: default;
+}@font-face {
+  font-family: "GothamProBlackItalic";
+  src: url(/fonts/GothamProBlackItalic.woff?9404e507dad65b8af3160f030fd0d4b1) format("woff");
 }
 
