@@ -5,7 +5,8 @@ namespace App\Repositories;
 use App\Car;
 use Carbon\Carbon;
 
-class CarRepository extends Repository {
+class CarRepository extends Repository
+{
 
     private $car_dmg = [
         'ALL OVER ' => 'повсеместные повреждения',
@@ -41,38 +42,22 @@ class CarRepository extends Repository {
         $this->model = $car;
     }
 
-    public function getNames($type = 'car') {
+    public function getNames($type = 'car')
+    {
 
-        if($type != 'car' || $type != 'moto') $type = 'car';
+        $names = $this->get('name', '', '', '', '', '', '', '', $type)->toArray();
 
-        $motoBodyStyle = config('car_search.body_style.moto');
-
-        if($type === 'car') {
-
-            $names = $this->model
-                ->whereNotIn('body_style',$motoBodyStyle)
-                ->where('engine_type','like','%L%')
-                ->orWhere('engine_type','=','')
-                ->orWhere('engine_type','=','U')
-                ->pluck('name')->toArray();
-
-
-        }
-
-        if($type === 'moto'){
-
-            $names = $this->model
-                ->whereIn('body_style',$motoBodyStyle)
-                ->where('engine_type','not like','%L%')
-                ->pluck('name')->toArray();
-        }
+        $names = array_pluck($names, 'name');
 
         return $names;
     }
 
-    public function getMarks($type = false) {
+    public function getMarks($type = 'car')
+    {
+
 
         $names = $this->getNames($type);
+
 
         $marks = array();
 
@@ -86,13 +71,12 @@ class CarRepository extends Repository {
 
         sort($marks);
 
-
-
         return $marks;
     }
 
 
-    public function getModels($mark, $firstName = false) {
+    public function getModels($mark, $firstName = false)
+    {
 
         $names = $this->getNames();
 
@@ -109,7 +93,6 @@ class CarRepository extends Repository {
 
                 array_push($modelsWithKeys, $model);
             }
-
         }
 
         $modelsWithKeys = array_unique($modelsWithKeys);
@@ -144,21 +127,24 @@ class CarRepository extends Repository {
         return $models;
     }
 
-    public function getYears() {
+    public function getYears()
+    {
 
-        $years = $this->unique('year','asc');
+        $years = $this->unique('year', 'asc');
 
         return $years;
     }
 
-    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn = false,$distinct = false,$whereNotNull = false, $type = 'car') {
-        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull, $type);
+    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'car')
+    {
+        $query = parent::get($select, $pagination, $orderBy, $where, $whereIn, $whereNotIn, $distinct, $whereNotNull, $type);
 
         return $query;
     }
 
-    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false,$whereNotNull = false, $type = 'car') {
-        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull, $type);
+    public function getCars($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'car')
+    {
+        $cars = parent::get($select, $pagination, $orderBy, $where, $whereIn, $whereNotIn, $distinct, $whereNotNull, $type);
 
         $cars = $this->prepareImg($cars);
 
@@ -172,12 +158,12 @@ class CarRepository extends Repository {
 
         $cars = $this->prepareHighlights($cars);
 
-
         return $cars;
     }
 
 
-    protected function prepareHighlights($cars) {
+    protected function prepareHighlights($cars)
+    {
 
         $cars->transform(function ($item, $key) {
 
@@ -290,19 +276,21 @@ class CarRepository extends Repository {
 
     }
 
-    protected function prepareDrive($cars){
+    protected function prepareDrive($cars)
+    {
 
         return $cars;
     }
 
-    protected function prepareSaleDate($cars) {
+    protected function prepareSaleDate($cars)
+    {
 
 
         $cars->transform(function ($item, $key) {
 
             if ($item->sale_date) {
 
-                $item->sale_date = Carbon::createFromTimestamp($item->sale_date/1000)->format('d/m/Y');
+                $item->sale_date = Carbon::createFromTimestamp($item->sale_date / 1000)->format('d/m/Y');
             }
             return $item;
         });
@@ -310,25 +298,28 @@ class CarRepository extends Repository {
         return $cars;
     }
 
-    public function search($query) {
+    public function search($query)
+    {
 
         return $this->searchValidate($query);
     }
 
-    public function searchValidate($query){
+    public function searchValidate($query)
+    {
 
-        if(preg_match('/^[a-zA-Z]{2}$/',$query)) return 'location';
+        if (preg_match('/^[a-zA-Z]{2}$/', $query)) return 'location';
 
-        if (preg_match('/^[a-zA-Z0-9]{17}$/',$query)) return 'vin';
+        if (preg_match('/^[a-zA-Z0-9]{17}$/', $query)) return 'vin';
 
-        if(preg_match('/^[0-9]{4}$/',$query)) if($query>=2012 and $query<=2018) return 'year';
+        if (preg_match('/^[0-9]{4}$/', $query)) if ($query >= 2012 and $query <= 2018) return 'year';
 
-        if(preg_match('/^[0-9]{8}$/',$query)) return 'lot';
+        if (preg_match('/^[0-9]{8}$/', $query)) return 'lot';
 
         return false;
     }
 
-    public function getSearchProperty ($type = 'car', $mark = false, $model = false){
+    public function getSearchProperty($type = 'car', $mark = false, $model = false)
+    {
 
         $whereIn = [];
         $whereNotIn = [];
@@ -343,10 +334,10 @@ class CarRepository extends Repository {
             $where[] = ['name', 'like', '%' . $model . '%'];
         }
 
-        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type','primary_damage'],'','',$where,$whereIn,$whereNotIn,'','',$type);
+        $cars = $this->get(['year', 'drive', 'fuel', 'location', 'highlights', 'doc_type', 'primary_damage'], '', '', $where, $whereIn, $whereNotIn, '', '', $type);
 
 
-        if(!$mark) {
+        if (!$mark) {
             $property['marks'] = $this->getMarks($type);
         }
 
@@ -355,8 +346,8 @@ class CarRepository extends Repository {
         $property['fuel'] = array_filter(array_unique($cars->sortBy('fuel')->pluck('fuel')->toArray()));
         $property['highlights'] = array_filter(array_unique($cars->sortBy('highlights')->pluck('highlights')->toArray()));
 
-        foreach ($property['highlights'] as &$highlight){
-            if($highlight === 'RUNS AND DRIVES') $highlight = 'RUN AND DRIVE';
+        foreach ($property['highlights'] as &$highlight) {
+            if ($highlight === 'RUNS AND DRIVES') $highlight = 'RUN AND DRIVE';
         }
 
 
@@ -368,17 +359,17 @@ class CarRepository extends Repository {
         $driveType = config('car_search.drive_type');
 
 
-           foreach ($driveType as $k=>$type){
+        foreach ($driveType as $k => $type) {
 
 
-              foreach ($type as $item){
+            foreach ($type as $item) {
 
-                  if(in_array($item,$drives)){
+                if (in_array($item, $drives)) {
 
-                      array_push($property['drive'],$k);
-                  }
-              }
-           }
+                    array_push($property['drive'], $k);
+                }
+            }
+        }
 
         $property['drive'] = array_unique($property['drive']);
 
@@ -389,7 +380,8 @@ class CarRepository extends Repository {
 
     }
 
-    public function getDefaultSearchProperty() {
+    public function getDefaultSearchProperty()
+    {
 
         $searchProperty = [];
 

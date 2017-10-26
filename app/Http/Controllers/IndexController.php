@@ -62,6 +62,7 @@ class IndexController extends SiteController
 
         $cars = $this->getCars('car');
 
+
         $carsTotal = $cars->total();
 
         $search = $this->getSearch();

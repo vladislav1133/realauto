@@ -194,13 +194,13 @@ Version:    1.1
 /*----------------------------------*/
 
 .footable .rem-btn{
-
     float: right;
     display: inline;
-    width: 91px;
+    width: auto;
+
     font-size: 12px;
-    padding: 1px 0;
-    margin-left: 5px;
+    padding: 1px 3px;
+
     text-align: center;
     letter-spacing: 1px;
     color: #ffffff;
@@ -237,11 +237,11 @@ Version:    1.1
 }
 
 .cu-form input, .cu-form textarea{
-    border-color: #6a0000;
+    border-color: #999;
 }
 
 .cu-form input::placeholder, .cu-form textarea::placeholder{
-    color: #6a0000;
+    color: #999;
 }
 
 .cu-form__label {
@@ -279,6 +279,9 @@ Version:    1.1
     margin-top: 15px;
 }
 
+.cu-form__btn:hover, .cu-form__btn:focus {
+    color: #fff;
+}
 
 
 
@@ -466,12 +469,8 @@ body {
     top: 20%;
     left: 13%;
 
-    width: 432px;
-    height: 380px;
-
 
     color: #fff;
-    border: 15px solid #6a0000;
 }
 
 .banner__bg {
@@ -691,6 +690,7 @@ body {
 /** RECENT CAR AREA START **/
 .content-area {
     padding: 50px 0px;
+    min-height: 1000px;
 }
 
 .option-bar {
