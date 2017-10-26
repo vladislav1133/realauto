@@ -11,14 +11,6 @@ let App = (function () {
         $('#contact-us-btn').magnificPopup({})
     }
 
-    function setMainImageHeight() {
-
-        let h = App.get_viewport_size().height
-        
-
-        $('.main-header').css('height', h );
-
-    }
 
     function onSubmitContactForm() {
 
@@ -29,19 +21,18 @@ let App = (function () {
             let form = $(this).serializeArray()
             let data = {}
 
-            for (let i = 0; i < form.length; i++){
+            for (let i = 0; i < form.length; i++) {
                 data[form[i]['name']] = form[i]['value'];
             }
 
 
-            if($('#contact-us-popup #append-favorite').prop('checked')) {
+            if ($('#contact-us-popup #append-favorite').prop('checked')) {
 
-                 let favoriteCars =  App.getCookie('favoriteCars')
+                let favoriteCars = App.getCookie('favoriteCars')
 
-                if(favoriteCars !== undefined) data.favoriteCars =  JSON.parse(favoriteCars)
+                if (favoriteCars !== undefined) data.favoriteCars = JSON.parse(favoriteCars)
 
             }
-
 
 
             $.ajax({
@@ -65,7 +56,7 @@ let App = (function () {
                 $('#contact-us-popup input').val('');
                 $('#contact-us-popup textarea').val('');
                 $('#contact-us-popup textarea').val('');
-                $('#contact-us-popup input:checkbox').prop( "checked", false );
+                $('#contact-us-popup input:checkbox').prop("checked", false);
 
                 return false;
             });
@@ -91,12 +82,12 @@ let App = (function () {
 
         }).done(function (data) {
 
-            if(data.success) {
+            if (data.success) {
 
                 console.log('wtf?')
                 console.log(data)
 
-                if(data.favoriteCars.length > 0) {
+                if (data.favoriteCars.length > 0) {
                     let favoriteCars = JSON.stringify(data.favoriteCars)
 
                     App.deleteCookie('favoriteCars')
@@ -116,12 +107,12 @@ let App = (function () {
         })
     }
 
-    function onChangePage () {
+    function onChangePage() {
 
         $(window).on('changePage', function () {
 
             $('.sale_date').each(function () {
-                if($(this).text() === App.getFormatedDate()) {
+                if ($(this).text() === App.getFormatedDate()) {
 
                     $(this).addClass('sale_date_today')
                 }
@@ -133,10 +124,8 @@ let App = (function () {
     return {
 
 
-
         init: function () {
 
-            setMainImageHeight()
 
             initEvents()
             RemoveNotExistFavorite()
@@ -145,7 +134,6 @@ let App = (function () {
             Search.init()
             Table.init()
             CustomsCalculator.init()
-
 
 
             //Custom gallery
@@ -158,9 +146,7 @@ let App = (function () {
             });
 
 
-
-
-            if($('#main-aside').hasClass('main-aside') && ($( window ).width() > 767) ){
+            if ($('#main-aside').hasClass('main-aside') && ($(window).width() > 767)) {
 
                 let sidebar = new StickySidebar('.main-aside', {
                     topSpacing: 105,
@@ -170,34 +156,20 @@ let App = (function () {
             }
 
 
-
             $(window).trigger('changePage')
 
-            Array.prototype.max = function() {
+            Array.prototype.max = function () {
                 return Math.max.apply(null, this);
             };
 
-            Array.prototype.min = function() {
+            Array.prototype.min = function () {
                 return Math.min.apply(null, this);
             };
 
 
-
         },
 
-         get_viewport_size: function(){
-            if(typeof(window.innerWidth) == 'number'){
-                my_width = window.innerWidth;
-                my_height = window.innerHeight;
-            }else if(document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)){
-                my_width = document.documentElement.clientWidth;
-                my_height = document.documentElement.clientHeight;
-            }else if(document.body && (document.body.clientWidth || document.body.clientHeight)){
-                my_width = document.body.clientWidth;
-                my_height = document.body.clientHeight;
-            }
-            return {width: my_width, height: my_height};
-        },
+
 
         itemExist: function (arr, item) {
 
@@ -265,20 +237,18 @@ let App = (function () {
             let today = new Date();
             let dd = today.getDate();
 
-            let mm = today.getMonth()+1;
+            let mm = today.getMonth() + 1;
             let yyyy = today.getFullYear();
 
-            if(dd<10)
-            {
-                dd='0'+dd;
+            if (dd < 10) {
+                dd = '0' + dd;
             }
 
-            if(mm<10)
-            {
-                mm='0'+mm;
+            if (mm < 10) {
+                mm = '0' + mm;
             }
 
-            let response = dd+ '/' + mm + '/' + yyyy
+            let response = dd + '/' + mm + '/' + yyyy
 
             return response
         }
@@ -290,6 +260,7 @@ $(document).ready(function () {
 
     App.init()
 
+    $('.index-header').height($(window).innerHeight())
 })
 
 

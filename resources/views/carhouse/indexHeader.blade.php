@@ -1,4 +1,4 @@
-<div class="main-header">
+<div class="main-header index-header">
     <div class="container main-nav-container">
 
         <nav class="navbar navbar-default main-nav">

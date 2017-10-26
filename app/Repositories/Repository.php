@@ -9,7 +9,7 @@ abstract class Repository
 
     protected $model = false;
 
-    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false)
+    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'car')
     {
 
         if ($distinct) {
@@ -21,44 +21,73 @@ abstract class Repository
         }
 
 
+
         if ($orderBy) {
 
             $builder->orderBy($orderBy[0], $orderBy[1]);
         }
 
-        if ($where) {
 
-            $builder->where($where);
+
+
+//
+//        if ($where) {
+//
+//            $builder->where($where);
+//        }
+
+//        if ($whereIn) {
+//
+//            foreach ($whereIn as $item) {
+//
+//                $builder->whereIn($item[0], $item[1]);
+//            }
+//        }
+//
+//        if($whereNotNull){
+//
+//            foreach($whereNotNull as $item){
+//
+//                $builder->whereNotNull($item);
+//            }
+//        }
+//
+//        if ($whereNotIn) {
+//
+//            foreach ($whereNotIn as $item) {
+//
+//                $builder->whereNotIn($item[0], $item[1]);
+//            }
+//        }
+
+
+        $motoBodyStyle = config('car_search.body_style.moto');
+
+        if($type === 'car') {
+
+            $builder
+                ->whereNotIn('body_style',$motoBodyStyle)
+                ->where('engine_type','like','%L%')
+                ->orWhere('engine_type','=','')
+                ->orWhere('engine_type','=','U')
+                ->pluck('name')->toArray();
+
+
         }
 
-        if ($whereIn) {
+        if($type === 'moto'){
 
-            foreach ($whereIn as $item) {
-
-                $builder->whereIn($item[0], $item[1]);
-            }
-        }
-
-        if($whereNotNull){
-
-            foreach($whereNotNull as $item){
-
-                $builder->whereNotNull($item);
-            }
-        }
-
-        if ($whereNotIn) {
-
-            foreach ($whereNotIn as $item) {
-
-                $builder->whereNotIn($item[0], $item[1]);
-            }
+            $builder
+                ->whereIn('body_style',$motoBodyStyle)
+                ->where('engine_type','not like','%L%')
+                ->pluck('name')->toArray();
         }
 
         if ($pagination) {
 
             return $builder->paginate($pagination);
         }
+
 
         return $builder->get();
     }

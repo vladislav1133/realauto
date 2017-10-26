@@ -124,7 +124,6 @@ class CarsController extends Controller {
         $type = $request->type;
 
 
-
         if($buyNow !== null) {
             $where[] = ['buy_it_now', '!=',''];
         }
@@ -134,22 +133,7 @@ class CarsController extends Controller {
         if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
         if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
 
-        if ($type) {
 
-            $type = strtolower($type);
-
-            $motoBodyStyle = config('car_search.body_style.moto');
-
-            if($type === 'car') {
-
-                $whereNotIn[] = ['body_style', $motoBodyStyle];
-            }
-
-            if($type === 'moto'){
-
-                $whereIn[] = ['body_style', $motoBodyStyle];
-            }
-        }
 
         if ($yearFrom) {
             $where[] = ['year', '>=', $yearFrom];
@@ -242,7 +226,7 @@ class CarsController extends Controller {
         }
 
 
-        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull);
+        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull,$type);
 
         $carsCount = $cars->total();
 
@@ -270,7 +254,7 @@ class CarsController extends Controller {
         return response()->json($res);
     }
 
-    public function getSearchProperty($type, $mark = false, $model = false){
+    public function getSearchProperty($type = 'car', $mark = false, $model = false){
 
         $property = $this->carRepository->getSearchProperty($type, $mark, $model);
 

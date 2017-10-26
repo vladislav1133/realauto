@@ -48,8 +48,8 @@
 
             <div class="search__col col-xs-12">
                 <select id="search-type" class="selectpicker search__select" data-title="Все" >
-                    <option value="car" selected>CAR</option>
-                    <option value="moto">MOTO</option>
+                    <option value="car" selected>АВТОМОБИЛИ</option>
+                    <option value="moto">МОТОЦИКЛЫ</option>
                 </select>
             </div>
 

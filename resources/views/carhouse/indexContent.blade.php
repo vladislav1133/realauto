@@ -41,7 +41,7 @@
                                 </a>
                             </div>
                             <div>
-                                <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}" title="Добавить в избранное"><i class="fa fa-bookmark-o"></i></button>
+                                <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}"><i class="fa fa-bookmark-o"></i></button>
                             </div>
                         </div>
                     </td>
@@ -59,7 +59,7 @@
                     <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
                     <td>@if($car->buy_it_now)${{$car->buy_it_now}}@else &mdash; @endif</td>
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
-                    <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">Исключить</button>@else &mdash; @endif</td>
+                    <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">убрать из избранного</button>@else &mdash; @endif</td>
                     <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">Исключить</button>@else &mdash; @endif</td>
                 </tr>
             @endforeach

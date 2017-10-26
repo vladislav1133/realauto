@@ -541,11 +541,42 @@ Version:    1.1
             12.1. Content / .error404
 -------------------------------------------------------------------*/
 
+.calculator {
+
+}
+
+.calculator .nav-tabs li{
+    background-color: #b9b9c8;
+    padding: 0;
+    margin: 0;
+}
+
+.calculator .nav-tabs>li>a {
+    border: none;
+    outline: none;
+    background-color: #b9b9c8;
+    margin: 0;
+    padding: 10px 15px;
+}
+
+
+
+.calculator .nav-tabs>li.active>a {
+    background-color: #dbdbea;
+    border-top: none;
+}
+
+
 
 .custom-calc{
     padding: 20px 10px;
-    background-color: #ccc;
+    background-color: #dbdbea;
     color : #000;
+
+}
+
+
+.custom-calc__input {
 
 }
 
@@ -557,9 +588,7 @@ Version:    1.1
     color: #00801f;
 }
 
-.custom-calc__input {
 
-}
 
 .today {
     color:green;
@@ -1898,7 +1927,7 @@ footer .footer-item .gallery-item {
 }
 
 #table-body>.second-row {
-    background: #dbdbea;
+    background: #f7f7f7;
 }
 
 
@@ -2069,6 +2098,7 @@ footer .footer-item .gallery-item {
 
 #table .table thead th {
     text-align: center;
+    vertical-align: middle;
 }
 .table thead .footable-last-visible {
     border-right: 1px solid #6a0000;

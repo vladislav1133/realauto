@@ -60,7 +60,7 @@ class IndexController extends SiteController
             'DC - CERTIFICATE OF TITLE'
         ];
 
-        $cars = $this->getCars();
+        $cars = $this->getCars('car');
 
         $carsTotal = $cars->total();
 
@@ -88,15 +88,12 @@ class IndexController extends SiteController
         return response()->json(['success' => 'true']);
     }
 
-    protected function getCars()
+    protected function getCars($type = 'car')
     {
 
-        $motoBodyStyle = config('car_search.body_style.moto');
-
-        $whereNotIn[] = ['body_style', $motoBodyStyle];
 
         $cars = $this->carRepository
-            ->getCars(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'], '', '', $whereNotIn);
+            ->getCars(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'], '', '', '','','',$type);
 
 
         return $cars;
@@ -107,9 +104,6 @@ class IndexController extends SiteController
 
         $search = $this->carRepository->getSearchProperty('car'); //add marks,
 
-        $search['marks'] = $this->carRepository->getMarks('car');
-
-        //dd($search);
 
         return $search;
     }

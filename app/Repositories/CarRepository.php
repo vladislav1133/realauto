@@ -41,29 +41,31 @@ class CarRepository extends Repository {
         $this->model = $car;
     }
 
-    public function getNames($type = false) {
+    public function getNames($type = 'car') {
 
-        $whereIn = [];
-        $whereNotIn = [];
+        if($type != 'car' || $type != 'moto') $type = 'car';
 
         $motoBodyStyle = config('car_search.body_style.moto');
 
         if($type === 'car') {
 
-            $whereNotIn[] = ['body_style', $motoBodyStyle];
+            $names = $this->model
+                ->whereNotIn('body_style',$motoBodyStyle)
+                ->where('engine_type','like','%L%')
+                ->orWhere('engine_type','=','')
+                ->orWhere('engine_type','=','U')
+                ->pluck('name')->toArray();
+
+
         }
 
         if($type === 'moto'){
 
-            $whereIn[] = ['body_style', $motoBodyStyle];
+            $names = $this->model
+                ->whereIn('body_style',$motoBodyStyle)
+                ->where('engine_type','not like','%L%')
+                ->pluck('name')->toArray();
         }
-
-
-        $names = $this->get('name','','','',$whereIn,$whereNotIn)->toArray();
-
-
-
-        $names = array_pluck($names, 'name');
 
         return $names;
     }
@@ -83,6 +85,8 @@ class CarRepository extends Repository {
         $marks = array_filter(array_unique($marks));
 
         sort($marks);
+
+
 
         return $marks;
     }
@@ -147,14 +151,14 @@ class CarRepository extends Repository {
         return $years;
     }
 
-    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn = false,$distinct = false,$whereNotNull = false) {
-        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull);
+    public function get($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn = false,$distinct = false,$whereNotNull = false, $type = 'car') {
+        $query = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull, $type);
 
         return $query;
     }
 
-    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false,$whereNotNull = false) {
-        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull);
+    public function getCars($select='*',$pagination=false,$orderBy=false,$where=false,$whereIn=false,$whereNotIn=false,$distinct = false,$whereNotNull = false, $type = 'car') {
+        $cars = parent::get($select, $pagination,$orderBy,$where,$whereIn,$whereNotIn,$distinct,$whereNotNull, $type);
 
         $cars = $this->prepareImg($cars);
 
@@ -324,7 +328,7 @@ class CarRepository extends Repository {
         return false;
     }
 
-    public function getSearchProperty ($type, $mark = false, $model = false){
+    public function getSearchProperty ($type = 'car', $mark = false, $model = false){
 
         $whereIn = [];
         $whereNotIn = [];
@@ -332,18 +336,6 @@ class CarRepository extends Repository {
 
         $type = strtolower($type);
 
-        $motoBodyStyle = config('car_search.body_style.moto');
-
-
-        if($type === 'car') {
-
-            $whereNotIn[] = ['body_style', $motoBodyStyle];
-        }
-
-        if($type === 'moto'){
-
-            $whereIn[] = ['body_style', $motoBodyStyle];
-        }
 
         $where[] = ['name', 'like', '%' . $mark . '%'];
 
@@ -351,7 +343,7 @@ class CarRepository extends Repository {
             $where[] = ['name', 'like', '%' . $model . '%'];
         }
 
-        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type','primary_damage'],'','',$where,$whereIn,$whereNotIn);
+        $cars = $this->get(['year','drive','fuel','location','highlights','doc_type','primary_damage'],'','',$where,$whereIn,$whereNotIn,'','',$type);
 
 
         if(!$mark) {
@@ -371,7 +363,6 @@ class CarRepository extends Repository {
         $property['drive'] = [];
 
         $drives = array_filter(array_unique($cars->sortBy('drive')->pluck('drive')->toArray()));
-
 
 
         $driveType = config('car_search.drive_type');

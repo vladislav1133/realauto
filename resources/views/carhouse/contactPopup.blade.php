@@ -10,11 +10,11 @@
         </div>
 
         <div class="form-group">
-            <input type="tel" class="form-control" name="tel" placeholder="Телефон" required value="dsaasdasdasd">
+            <input type="tel" class="form-control" name="tel" placeholder="Ваш телефон" required>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" name="name" placeholder="Имя" required value="vlad">
+            <input type="text" class="form-control" name="name" placeholder="Ваше имя" required>
         </div>
 
         <div class="form-group">

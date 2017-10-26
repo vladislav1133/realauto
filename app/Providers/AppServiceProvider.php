@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+
+use DB;
+
 class AppServiceProvider extends ServiceProvider
 {
 
@@ -30,9 +33,16 @@ class AppServiceProvider extends ServiceProvider
         /** @var WidgetsRegistryInterface $widgetsRegistry */
         $widgetsRegistry = $this->app[\SleepingOwl\Admin\Contracts\Widgets\WidgetsRegistryInterface::class];
 
-        foreach ($this->widgets as $widget) {
-            $widgetsRegistry->registerWidget($widget);
-        }
+//        foreach ($this->widgets as $widget) {
+//            $widgetsRegistry->registerWidget($widget);
+//        }
+//
+//                DB::listen(function ($query){
+//            //просмотрю sql запроса
+//            dump($query->sql);
+//            //отсылаемые параметры
+//            //dump($query->bindings);
+//        });
 
     }
 
