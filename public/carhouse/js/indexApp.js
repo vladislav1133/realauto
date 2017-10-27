@@ -121,12 +121,23 @@ let App = (function () {
 
     }
 
+    function initSelectSetting() {
+
+        $('.selectpicker').selectpicker({
+            selectedTextFormat: 'count > 0',
+            countSelectedText: 'Выбрано {0}',
+            size: 5
+        })
+
+        $('.selectpicker').selectpicker('refresh');
+    }
+
     return {
 
 
         init: function () {
 
-
+            initSelectSetting()
             initEvents()
             RemoveNotExistFavorite()
 

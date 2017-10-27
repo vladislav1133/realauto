@@ -146,6 +146,7 @@ let Table = (function () {
 
             $(el + ' .favorite__btn').each(function (i) {
 
+                $(this).attr('title','Добавить в избранное')
                 $(this).html('<i class="fa fa-bookmark-o"></i>')
             })
 
@@ -155,8 +156,6 @@ let Table = (function () {
 
             favoriteCars = JSON.parse(favoriteCars)
 
-            console.log('Куксы: ')
-            console.log(favoriteCars)
             $(el + ' .favorite__btn').each(function (i) {
 
                 let favoriteBtn = $(this)
@@ -168,6 +167,7 @@ let Table = (function () {
                     if (lotId === item) {
 
                         favoriteBtn.html('<i class="fa fa-bookmark"></i>')
+                        favoriteBtn.attr('title','Исключить из избранного')
                     }
                 })
             })

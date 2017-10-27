@@ -1,8 +1,10 @@
 
 
+
 @if($cars)
     <div class="table-container">
-        <table class="table car-table"  data-toggle-column="last" data-paging="true" data-empty="Автомобили не найдеы" style="background: #fff"
+        <table class="table car-table" data-toggle-column="last" data-paging="true" data-empty="Автомобили не найдеы"
+               style="background: #fff"
                data-page-size="15">
             <thead>
             <tr>
@@ -19,7 +21,7 @@
                 <th data-breakpoints="all">Основные моменты</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
-                <th data-breakpoints="xs sm md">Дата аукциона </th>
+                <th data-breakpoints="xs sm md">Дата аукциона</th>
                 <th data-breakpoints="xs">Купить сейчас</th>
                 <th data-breakpoints="all">Текушая ставка</th>
                 <th data-breakpoints="all">Расположение</th>
@@ -31,7 +33,9 @@
             @foreach($cars as $k=>$car)
                 <tr @if(($k +1)%2 === 0)class="second-row"@endif>
                     <td>
-                        <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank"><div><img class="product__img" src="{{$car->path_to_image}}" alt=""></div></a>
+                        <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank">
+                            <div><img class="product__img" src="{{$car->path_to_image}}" alt=""></div>
+                        </a>
                     </td>
                     <td>
                         <div>
@@ -41,7 +45,8 @@
                                 </a>
                             </div>
                             <div>
-                                <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}"><i class="fa fa-bookmark-o"></i></button>
+                                <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}"
+                                        title="Добавить в избранное"><i class="fa fa-bookmark-o"></i></button>
                             </div>
                         </div>
                     </td>
@@ -59,8 +64,12 @@
                     <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
                     <td>@if($car->buy_it_now)${{$car->buy_it_now}}@else &mdash; @endif</td>
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
-                    <td>@if($car->location){{$car->location}}<button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">убрать из избранного</button>@else &mdash; @endif</td>
-                    <td>@if($car->doc_type){{$car->doc_type}}<button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">убрать из избранного</button>@else &mdash; @endif</td>
+                    <td>@if($car->location){{$car->location}}
+                        <button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">Исключить из поиска
+                        </button>@else &mdash; @endif</td>
+                    <td>@if($car->doc_type){{$car->doc_type}}
+                        <button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">Исключить из поиска
+                        </button>@else &mdash; @endif</td>
                 </tr>
             @endforeach
             </tbody>
@@ -68,7 +77,7 @@
         <div class="table-pagination">
             {{$cars->links()}}
         </div>
-        </div>
+    </div>
 
 @endif
 

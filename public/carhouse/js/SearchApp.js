@@ -68,19 +68,7 @@ let Search = (function () {
         options['doc_type'] = Search.getSelectOptions(selects['docAdd'])
     }
 
-    function initSelectSetting() {
 
-        $('.selectpicker').selectpicker({
-            selectedTextFormat: 'count > 0',
-            countSelectedText: 'Выбрано {0}',
-            size: 5,
-            selectAllText: 'Выделить все',
-            deselectAllText: 'Убрать все'
-        })
-
-        $('.selectpicker').selectpicker('refresh');
-
-    }
 
 
 
@@ -409,8 +397,6 @@ let Search = (function () {
         init: function () {
 
             initSearchOptions()
-
-            initSelectSetting()
 
             initEvents()
 

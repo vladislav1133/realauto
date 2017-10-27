@@ -5,6 +5,7 @@
     <nav class="pushy pushy-left">
         <div class="pushy-content">
             <ul>
+
                 <li class="pushy-link"><a href="{{route('home')}}">Главная</a></li>
                 <li class="pushy-link"><a href="{{route('availablecars.index')}}">Машины в наличии</a></li>
                 <li class="pushy-link"><a href="{{route('blog.index')}}">Блог</a></li>

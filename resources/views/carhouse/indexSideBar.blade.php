@@ -1,31 +1,31 @@
 <aside class="sidebar">
 
-    <div class="global-search" style="margin-bottom: 5px">
-        <div class="row">
-            <div class="col-xs-12">
-                <form id="search-query" action="">
+    <div class="global-search">
 
-                    <!-- -------------------------->
-                    <div class="input-group">
-                        <input id="search-query" type="text" placeholder="Глобальный поиск" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
+        <form id="search-query" action="">
+
+            <!-- -------------------------->
+            <div class="input-group">
+                <input id="search-query" type="text" placeholder="Глобальный поиск" class="form-control">
+                <span class="input-group-btn">
+
+                        <button class="btn btn-default" type="submit">
                                 <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div><!-- /input-group -->
-                    <!-- -------------------------->
-                </form>
-            </div>
-        </div>
-    </div>
+                        </button>
 
+                        <button class="btn btn-default">
+                                <i class="fa fa-question"></i>
+                        </button>
+                        </span>
+            </div><!-- /input-group -->
+            <!-- -------------------------->
+        </form>
+
+    </div>
 
     <div id="search" class=" search">
 
         <div class="row">
-
-
 
 
             <div class="col-xs-12">
@@ -47,7 +47,11 @@
             </div>
 
             <div class="search__col col-xs-12">
-                <select id="search-type" class="selectpicker search__select" data-title="Все" >
+                <select
+                        id="search-type"
+                        class="selectpicker search__select"
+                        data-title="Все"
+                >
                     <option value="car" selected>АВТОМОБИЛИ</option>
                     <option value="moto">МОТОЦИКЛЫ</option>
                 </select>
@@ -58,7 +62,12 @@
             </div>
 
             <div class="search__col col-xs-12">
-                <select id="search-marks" data-live-search="true" class="selectpicker search__select" data-title="Все">
+                <select
+                        id="search-marks"
+                        class="selectpicker search__select"
+                        data-live-search="true"
+                        data-title="Все"
+                >
                     @if($search['marks'])
                         @foreach($search['marks'] as $mark)
                             <option>{{$mark}}</option>
@@ -73,7 +82,11 @@
 
             <div class="search__col col-xs-12">
 
-                <select id="search-models" class="selectpicker search__select" data-title="Все">
+                <select
+                        id="search-models"
+                        class="selectpicker search__select"
+                        data-title="Все"
+                >
                 </select>
             </div>
 
@@ -83,7 +96,11 @@
             </div>
 
             <div class="search__col search__col_left col-xs-6">
-                <select id="search-from" class="selectpicker search__select" data-title="От">
+                <select
+                        id="search-from"
+                        class="selectpicker search__select"
+                        data-title="От"
+                >
                     @if($search['years'])
                         @foreach($search['years'] as $year)
                             <option>{{$year}}</option>
@@ -93,7 +110,11 @@
             </div>
 
             <div class="search__col search__col_right col-xs-6">
-                <select id="search-to" class="selectpicker search__select" data-title="До">
+                <select
+                        id="search-to"
+                        class="selectpicker search__select"
+                        data-title="До"
+                >
                     @if($search['years'])
                         @foreach($search['years'] as $year)
                             <option>{{$year}}</option>
@@ -107,8 +128,16 @@
             </div>
 
             <div class="search__col col-xs-12">
-                <select id="search-damage" data-actions-box="true" multiple data-live-search="true"
-                        class="selectpicker search__select" data-title="Все">
+                <select
+                        id="search-damage"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Все"
+                        data-live-search="true"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['damage'])
                         @foreach($search['damage'] as $pDamage)
                             <option>{{$pDamage}}</option>
@@ -118,12 +147,19 @@
             </div>
 
             <div class="col-xs-12 search__col">
-                <div class="search__label">Основные. моменты:</div>
+                <div class="search__label">Основные моменты:</div>
             </div>
 
             <div class="search__col search__col col-xs-12">
-                <select multiple id="search-highlight" class="selectpicker search__select" data-actions-box="true"
-                        title="Все">
+                <select
+                        id="search-highlight"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Все"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['highlights'])
                         @foreach($search['highlights'] as $highlight)
                             <option>{{$highlight}}</option>
@@ -142,8 +178,15 @@
             </div>
 
             <div class="search__col search__col_left col-xs-6">
-                <select multiple id="search-drive" class="selectpicker search__select" data-actions-box="true"
-                        title="Все">
+                <select
+                        id="search-drive"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Все"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['drive'])
                         @foreach($search['drive'] as $drive)
                             <option>{{$drive}}</option>
@@ -153,8 +196,15 @@
             </div>
 
             <div class="search__col search__col_right col-xs-6">
-                <select multiple id="search-fuel" class="selectpicker search__select" data-actions-box="true"
-                        title="Все">
+                <select
+                        id="search-fuel"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Все"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['fuel'])
                         @foreach($search['fuel'] as $fuel)
                             <option>{{$fuel}}</option>
@@ -168,8 +218,16 @@
                 <div class="search__label">Расположение:</div>
             </div>
             <div class="search__col search__col_left col-xs-6 ">
-                <select multiple id="search-loc-add" data-live-search="true" class="selectpicker search__select"
-                        data-actions-box="true" title="Добавить">
+                <select
+                        id="search-loc-add"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Добавить"
+                        data-live-search="true"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['location'])
                         @foreach($search['location'] as $locAdd)
                             <option>{{$locAdd}}</option>
@@ -180,8 +238,16 @@
 
             <div class="search__col search__col_right col-xs-6 ">
 
-                <select multiple id="search-loc-rem" data-live-search="true" class="selectpicker search__select"
-                        data-actions-box="true" title="Исключить">
+                <select
+                        id="search-loc-rem"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Исключить"
+                        data-live-search="true"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['location'])
                         @foreach($search['location'] as $locRem)
                             <option>{{$locRem}}</option>
@@ -196,8 +262,16 @@
             </div>
 
             <div class="search__col search__col_left col-xs-6 ">
-                <select multiple id="search-doc-add" data-live-search="true" class="selectpicker search__select"
-                        data-actions-box="true" title="Добавить">
+                <select
+                        id="search-doc-add"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Добавить"
+                        data-live-search="true"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['doc_type'])
                         @foreach($search['doc_type'] as $docAdd)
                             <option>{{$docAdd}}</option>
@@ -208,8 +282,16 @@
 
             <div class="search__col search__col_right col-xs-6 ">
 
-                <select multiple id="search-doc-rem" data-live-search="true" class="selectpicker search__select"
-                        data-actions-box="true" title="Исключить">
+                <select
+                        id="search-doc-rem"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Исключить"
+                        data-live-search="true"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
                     @if($search['doc_type'])
                         @foreach($search['doc_type'] as $docRem)
                             <option>{{$docRem}}</option>

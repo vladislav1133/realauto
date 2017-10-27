@@ -26,14 +26,13 @@ class ArticlesController extends SiteController
      */
     public function index()
     {
-       // $articles=$this->getArticles();
+        $articles=$this->getArticles();
 
         $meta = $this->articleRepository->getMeta('blog');
 
-        //$content = view(env('THEME').'.blogContent')
-         //   ->with('articles',$articles)
-         //   ->render();
-        $content ='';
+        $content = view(env('THEME').'.blogContent')
+            ->with('articles',$articles)
+            ->render();
 
         return view(env('THEME').'.blog')
             ->with('info',$this->indexInfo)
@@ -122,6 +121,7 @@ class ArticlesController extends SiteController
     {
         $articles = $this->articleRepository
             ->get('*',config('settings.articles_on_page'),['created_at','desc']);
+
 
         return $articles;
     }

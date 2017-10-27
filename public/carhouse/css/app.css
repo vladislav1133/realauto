@@ -690,6 +690,7 @@ img {
     width: 100%;
 }
 
+
 /** MAIN-NAV**/
 .main-nav {
     margin-top: 15px;
@@ -708,6 +709,11 @@ img {
 
 .main-nav__item {
 
+}
+
+
+.main-nav__logo {
+    outline: none;
 }
 
 .common-header {
@@ -956,7 +962,12 @@ img {
     color: #fff;
 }
 
-
+/** GLOBAL SEARCH**/
+.global-search {
+    width: 100%;
+    margin-bottom: 5px;
+    float: right;
+}
 
 .search-clear-btn{
     font-weight: 400;
