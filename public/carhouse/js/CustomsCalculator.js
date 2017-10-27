@@ -38,7 +38,6 @@ let CustomsCalculator = (function () {
 
             price = price + tax
 
-            console.log('PRR ' + price)
 
             let pension = 0
 
@@ -51,7 +50,7 @@ let CustomsCalculator = (function () {
                 }
             }
 
-            console.log('PENSIA ' +pension)
+
             return pension
         }
 
@@ -127,7 +126,7 @@ let CustomsCalculator = (function () {
 
         function render(priceList) {
 
-            console.log('light render')
+
 
             let html = ''
 
@@ -175,7 +174,7 @@ let CustomsCalculator = (function () {
             calculate: function (price, newCurrency, drive) {
 
 
-                console.log('lightcar calc')
+
 
                 setDrive(drive)
 
@@ -192,7 +191,7 @@ let CustomsCalculator = (function () {
 
         let TAX = 0.08
         let VAT = 0.2
-        let currency = false
+        let currency = 'EUR'
         let drive = false
 
         let EUR_TO_USD = 1.174
@@ -218,43 +217,29 @@ let CustomsCalculator = (function () {
 
             price = price + tax
 
-            console.log('PRR ' + price)
+
+            console.log('PENSION_FUND')
+            console.log(PENSION_FUND)
 
             let pension = 0
 
             for (let prop in PENSION_FUND[currency]) {
 
-                 console.log('CURR ' +currency)
-                  console.log('PROP: ' + prop + ' ' + PENSION_FUND[currency][prop])
+
 
                 if(price<=PENSION_FUND[currency][prop]){
 
-                     console.log('THAT MOMENTTTTTTTTTTTTTT     ' + prop)
-                     console.log('THAT MOMENTTTTTTTTTTTTTT     ' + PENSION_FUND[currency][prop])
                     pension = prop
                     break
                 }
             }
 
-            console.log('PENSIAAA ' +pension)
+
 
             return pension
         }
 
-        function initPension() {
 
-            let low = parseInt(5247 * EUR_TO_USD)
-            let middle = parseInt(9298 * EUR_TO_USD)
-            let hight = 1000000
-
-            PENSION_FUND['USD'] = {}
-
-            PENSION_FUND['USD'][low] = 0.03
-            PENSION_FUND['USD'][middle] = 0.04
-            PENSION_FUND['USD'][hight] = 0.05
-
-            console.log(PENSION_FUND)
-        }
 
         function getExcise() {
 
@@ -272,10 +257,10 @@ let CustomsCalculator = (function () {
             let excise = getExcise()
             let tax = parseInt(price * TAX)
 
-            console.log('TAXXXXXXXXXXXXXX ' + tax)
+
             let pension = getPension(price,tax) * (price + tax)
 
-            console.log('PENSIONNNNNNNNNNNNNNNNN ' + pension)
+
             let vat = parseInt(VAT * (price + tax + excise.value))
             let rastamozhka = parseInt(vat + tax + excise.value)
             let fullPrice = price + rastamozhka
@@ -311,7 +296,7 @@ let CustomsCalculator = (function () {
             else return '€'
         }
 
-        render = (priceList) => {
+        function render(priceList) {
 
             let html = ''
 
@@ -348,7 +333,11 @@ let CustomsCalculator = (function () {
 
         function setCurrency(newCurrency) {
 
+
+
             currency = newCurrency
+
+            console.log(currency)
         }
 
 
@@ -358,8 +347,7 @@ let CustomsCalculator = (function () {
 
             calculate: function (price, newCurrency, drive) {
 
-                initPension()
-
+               
                 setDrive(drive)
 
                 setCurrency(newCurrency)
@@ -405,14 +393,12 @@ let CustomsCalculator = (function () {
 
             price = price + tax
 
-            console.log('PRR ' + price)
+
 
             let pension = 0
 
             for (let prop in PENSION_FUND[currency]) {
 
-                // console.log('CURR ' +currency)
-                //  console.log('PROP: ' + prop + ' ' + PENSION_FUND[currency][prop])
 
                 if(price<=PENSION_FUND[currency][prop]){
                     pension = prop
@@ -420,7 +406,7 @@ let CustomsCalculator = (function () {
                 }
             }
 
-            console.log('PENSIA ' +pension)
+
             return pension
         }
 
@@ -496,7 +482,7 @@ let CustomsCalculator = (function () {
 
         render = (priceList) => {
 
-            console.log('Moto render')
+
 
             let html = ''
 
@@ -547,7 +533,7 @@ let CustomsCalculator = (function () {
 
             calculate: function (price, newCurrency, drive) {
 
-                console.log('Moto culc')
+
                 setDrive(drive)
 
                 setCurrency(newCurrency)
@@ -573,7 +559,7 @@ let CustomsCalculator = (function () {
             let drive = data[2].value
 
 
-            console.log(onSubmitLightCar)
+
 
             lightCalculator.calculate(price, currency, drive)
         });
@@ -591,7 +577,7 @@ let CustomsCalculator = (function () {
             let drive = parseInt(data[2].value) / 1000
 
 
-            console.log('onSubMoto')
+
             motoCalculator.calculate(price, currency, drive)
         });
     }
@@ -607,6 +593,7 @@ let CustomsCalculator = (function () {
             let currency = data[1].value
             let power = data[2].value
 
+            console.log('CURRENCY ' + currency)
 
             electricCalculator.calculate(price, currency, power)
         });
