@@ -4719,6 +4719,11 @@ table tbody th{
 	border-radius: 5px;
 }
 
+.price-row_bold{
+	font-weight: bold;
+	font-size: 17px;
+}
+
 .nav-tabs{
 	display: -webkit-box;
 	display: -ms-flexbox;
