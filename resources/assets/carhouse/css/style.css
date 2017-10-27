@@ -432,7 +432,23 @@ body {
     background-image: url('/carhouse/img/banner-bg.jpg');
     background-size: cover;
     background-position-x: 70%;
-    height: 720px;
+    height: 1000px;
+}
+
+@media (max-width: 1600px){
+    
+    .main-header{
+        height: 850px;
+    }
+
+}
+
+@media (max-width: 1400px){
+    
+    .main-header{
+        height: 720px;
+    }
+
 }
 
 .main-header_default {
@@ -489,7 +505,7 @@ body {
 }
 
 .banner__text {
-    font-size: 1.4vw;
+    font-size: 1.2vw;
     font-family: 'GothamPro', sans-serif;
     width: 100%;
     margin: 0 auto;
@@ -1593,11 +1609,17 @@ footer .footer-item .gallery-item {
     margin-bottom: 0;
 }
 
-
 .table {
     font-size: 12px;
 }
 
+#table-body > tr > td{
+    text-align: center;
+}
+
+#table-body > tr table{
+    text-align: left;
+}
 
 .slider.slider-horizontal .slider-track {
     height: 10px;
