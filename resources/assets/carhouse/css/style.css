@@ -1,3 +1,4 @@
+
 img {
     height: auto;
     width: 100%;
@@ -5,22 +6,20 @@ img {
 
 #main-content{
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
     width: 95%;
     margin: auto;
 }
 
-#aside{
-    flex-basis: 100px;
-    flex-grow: 3;
+.side-bar{
+    flex-basis: 250px;
+    flex-grow: 1;
     margin-right: 20px;
-    max-width: 250px;   
 }
 
-#content{
-    flex-basis: 100px;
-    flex-grow: 10;
+.content{
+    flex-grow: 9;
 }
 
 /** MAIN-NAV**/
@@ -431,7 +430,8 @@ body {
     max-width: 1900px;
     margin: 0 auto;
     background-image: url('/carhouse/img/banner-bg.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position-x: 70%;
     height: 720px;
 }
 
@@ -456,18 +456,21 @@ body {
 }
 
 .banner__offer {
-    margin-top: 30px;
+    margin-top: 8vw;
     color: #fff;
 }
 
 .banner__bg {
     padding: 5px 16px 0 28px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
 .banner__title {
-    font-size: 36px;
+    font-size: 3vw;
 
     width: 80%;
     margin: 0 auto;
@@ -478,11 +481,17 @@ body {
 
 }
 
+.banner__line{
+    display: block;
+    width: 60%;
+    border: 1px solid #476669;
+    margin: 10px 0; 
+}
+
 .banner__text {
-    font-size: 18px;
-    font-weight: 300;
-    font-family: 'Open sans', sans-serif;
-    width: 61%;
+    font-size: 1.4vw;
+    font-family: 'GothamPro', sans-serif;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     text-transform: uppercase;
@@ -1397,6 +1406,7 @@ footer .footer-item .gallery-item {
   position: relative;
   z-index: 101;
 }
+
 /** GLOBAL-SEARCH **/
 
 .global-search {
@@ -1404,6 +1414,29 @@ footer .footer-item .gallery-item {
     margin-bottom: 5px;
 }
 
+.global-search .popup{
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -209px;
+    background-color: #fff;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px; 
+
+    text-align: left;
+    padding: 5px 10px;
+}
+
+.global-search .tri{
+    color: transparent;
+    position: absolute;
+    top: -1px;
+    left: -13px;
+
+    border: 15px solid; 
+    border-right-color: #fff;
+    border-left: 0;
+}
 
 /** SEARCH **/
 
@@ -3241,26 +3274,11 @@ table tbody th{
     margin-right: 0;
 }
 
-@media (max-width: 2000px){
-
-    .banner__title {
-        font-size: 45px;
-        margin-top: 75px;
-
-    }
-
-    .banner__text {
-        font-size: 22px;
-        width: 76%;
-    }
-}
-@media (max-width: 1400px){
-
-    .banner__title {
-        margin-top: 48px;
-    }
-}
 @media (max-width: 992px){
+
+    .side-bar{
+        margin-right: 0;
+    }
 
     .main-nav__logo, .main-nav__list{
         display: none;
@@ -3294,15 +3312,13 @@ table tbody th{
 
 @media (max-width: 768px) {
 
-    .banner__text {
-        width: 86%;
-    }
-    .banner__title {
-        font-size: 32px;
-    }
     .main-header {
         background-image: none;
         height: auto;
+    }
+
+    .banner__text {
+        width: 86%;
     }
 
     .main-aside {
@@ -3778,14 +3794,6 @@ table tbody th{
 
     .banner__car {
         display: none
-    }
-
-    .banner__text {
-        font-size: 16px;
-    }
-
-    .banner__title {
-        font-size: 20px;
     }
 }
 

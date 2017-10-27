@@ -8,12 +8,12 @@
 
     <div id="main-content" class="car-list content-area">
 
-            <div id="aside">
+            <div class="side-bar">
                 @include(env('THEME').'.indexSideBar')
             </div>
 
 
-            <div class="content-area__table" id="content">
+            <div class="content content-area__table">
                 <div id="table">
                     <div id="main-table">
                         @include(env('THEME').'.indexContent')
@@ -21,7 +21,6 @@
                     <div id="hide-table"></div>
                 </div>
             </div>
-            
     </div>
 
 @endsection

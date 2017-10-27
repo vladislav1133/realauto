@@ -2,21 +2,26 @@
 
     <form id="global-search" class="global-search">
 
-            <!-- -------------------------->
+
             <div class="input-group">
                 <input id="search-query" type="text" placeholder="Глобальный поиск" class="form-control">
                 <span class="input-group-btn">
 
-                        <button class="btn btn-default" type="submit">
-                                <i class="fa fa-search"></i>
-                        </button>
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
 
-                        <button type="button" class="btn btn-default">
-                                <i class="fa fa-question"></i>
-                        </button>
-                        </span>
+                    <button type="button" class="btn btn-default global-search__info" id="global-advice">
+                        <i class="fa fa-question"></i>
+                        <div class="popup">Поисковый коды</br>
+                        Год: 4 цифры</br>
+                        Номер лота: 8 цифр</br>
+                        Vin: 17 символов</br>
+                        Расположение: 2 символа</br><div class="tri"></div></div>
+                    </button>
+                </span>
             </div><!-- /input-group -->
-            <!-------------  --------------->
+
         </form>
 
     <div id="search" class="search">

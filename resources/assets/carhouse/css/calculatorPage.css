@@ -1,6 +1,7 @@
 /* Customs calculator */
 .calculator {
 	width: 55%;
+	min-width: 320px;
 	margin: auto;
 	margin-top: 100px;
 	margin-bottom: 80px;
@@ -56,12 +57,12 @@
 }
 
 .custom-calc input.form-control{
-	width: 40%;
-	margin-right: 20px;
+	width: 45%;
+	margin-right: 15px;
 }
 
 .custom-calc select.form-control{
-	width: 11%;
+	width: 80px;
 }
 
 .buttonBlock{
@@ -80,6 +81,8 @@
 }
 
 .nav-tabs{
+	display: flex;
+
 	border: none !important;
 	list-style: none;
 	margin: 0;
@@ -98,6 +101,10 @@
 	align-items: center;
 
 	background-color: #b9b9c8;
+}
+
+.nav-tabs li:last-child{
+	margin-right: 0;
 }
 
 .nav-tabs > li.active{
@@ -124,4 +131,12 @@
 .nav-tabs > li.active > a:hover {
     color: black;
     cursor: default;
+}
+
+@media (max-width: 650px){
+
+	.custom-calc{
+		padding: 15px 15px 0;
+	}
+
 }

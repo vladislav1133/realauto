@@ -96,9 +96,26 @@ let Search = (function () {
         onChangeModel()
 
         onChangeLocation()
+
+        onClickGlobalAdvice()
     }
 
+    function onClickGlobalAdvice(){
+        let ga = "#global-advice"
+        let gaPopup = ".global-search .popup"
 
+        $(ga).click(function(){
+
+
+            if($(gaPopup).css('display') === 'none') {
+              //  $(gaPopup).slideDown();
+              $(gaPopup).css('display','block') 
+            } else {
+               // $(gaPopup).slideUp();
+               $(gaPopup).css('display','none') 
+            }
+        })
+    }
 
     function getMarks() {
 
