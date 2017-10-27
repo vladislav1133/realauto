@@ -413,7 +413,8 @@ body {
     max-width: 1900px;
     margin: 0 auto;
     background-image: url('/carhouse/img/banner-bg.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position-x: 70%;
     height: 720px;
 }
 
@@ -438,18 +439,21 @@ body {
 }
 
 .banner__offer {
-    margin-top: 30px;
+    margin-top: 8vw;
     color: #fff;
 }
 
 .banner__bg {
     padding: 5px 16px 0 28px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
 .banner__title {
-    font-size: 36px;
+    font-size: 3vw;
 
     width: 80%;
     margin: 0 auto;
@@ -460,11 +464,17 @@ body {
 
 }
 
+.banner__line{
+    display: block;
+    width: 60%;
+    border: 1px solid #476669;
+    margin: 10px 0; 
+}
+
 .banner__text {
-    font-size: 18px;
-    font-weight: 300;
-    font-family: 'Open sans', sans-serif;
-    width: 61%;
+    font-size: 1.4vw;
+    font-family: 'GothamPro', sans-serif;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     text-transform: uppercase;
@@ -3216,25 +3226,6 @@ table tbody th{
     margin-right: 0;
 }
 
-@media (max-width: 2000px){
-
-    .banner__title {
-        font-size: 45px;
-        margin-top: 75px;
-
-    }
-
-    .banner__text {
-        font-size: 22px;
-        width: 76%;
-    }
-}
-@media (max-width: 1400px){
-
-    .banner__title {
-        margin-top: 48px;
-    }
-}
 @media (max-width: 992px){
 
     .main-nav__logo, .main-nav__list{
@@ -3269,15 +3260,13 @@ table tbody th{
 
 @media (max-width: 768px) {
 
-    .banner__text {
-        width: 86%;
-    }
-    .banner__title {
-        font-size: 32px;
-    }
     .main-header {
         background-image: none;
         height: auto;
+    }
+
+    .banner__text {
+        width: 86%;
     }
 
     .main-aside {
@@ -3753,14 +3742,6 @@ table tbody th{
 
     .banner__car {
         display: none
-    }
-
-    .banner__text {
-        font-size: 16px;
-    }
-
-    .banner__title {
-        font-size: 20px;
     }
 }
 
