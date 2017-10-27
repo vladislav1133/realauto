@@ -1,3 +1,4 @@
+
 let CustomsCalculator = (function () {
 
     let lightCalculator = (function () {
@@ -37,14 +38,11 @@ let CustomsCalculator = (function () {
 
             price = price + tax
 
-            console.log('PRR ' + price)
 
             let pension = 0
 
             for (let prop in PENSION_FUND[currency]) {
 
-                // console.log('CURR ' +currency)
-                //  console.log('PROP: ' + prop + ' ' + PENSION_FUND[currency][prop])
 
                 if(price<=PENSION_FUND[currency][prop]){
                     pension = prop
@@ -52,7 +50,7 @@ let CustomsCalculator = (function () {
                 }
             }
 
-            console.log('PENSIA ' +pension)
+
             return pension
         }
 
@@ -81,8 +79,6 @@ let CustomsCalculator = (function () {
             return excise
         }
 
-
-
         function getPriceList(price) {
 
             price = parseInt(price)
@@ -94,6 +90,7 @@ let CustomsCalculator = (function () {
 
 
             let rastamozhka = parseInt(vat + tax + excise.value)
+
             let fullPrice = price + rastamozhka
 
 
@@ -127,32 +124,34 @@ let CustomsCalculator = (function () {
             else return '€'
         }
 
-        render = (priceList) => {
+        function render(priceList) {
+
+
 
             let html = ''
 
 
-            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'])
+            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'], true, 'price-row_bold')
             html += getPriceRow('НДС', priceList['VAT'].cost, priceList['VAT'].value)
             html += getPriceRow('Пошлина', priceList['TAX'].cost, priceList['TAX'].value)
             html += getPriceRow('Акциз', String(priceList['EXCISE'].cost), priceList['EXCISE'].value)
 
-            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'])
             html += getPriceRow('Дополнительные расходы', '', '', false)
             html += getPriceRow('Пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
+            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'], true, 'price-row_bold')
 
             $(checkEl).html(html)
         }
 
-        function getPriceRow(name, cost, val, setIcon = true) {
+        function getPriceRow(name, cost, val, setIcon = true, classes = '') {
 
             let str = ''
             let curIcon = ''
             if (setIcon) curIcon = getCurrencyIcon()
 
-            str += '<div class="col-xs-6">' + name + '</div>'
+            str += '<div class="col-xs-6 '+ classes +'">' + name + '</div>'
             str += '<div class="col-xs-4">' + cost + '</div>'
-            str += '<div class="col-xs-2">' + val + curIcon + '</div>'
+            str += '<div class="col-xs-2 '+ classes +'">' + val + curIcon + '</div>'
             str += '<div class="col-xs-12"><hr></div>'
 
             return str
@@ -174,6 +173,9 @@ let CustomsCalculator = (function () {
 
             calculate: function (price, newCurrency, drive) {
 
+
+
+
                 setDrive(drive)
 
                 setCurrency(newCurrency)
@@ -189,7 +191,7 @@ let CustomsCalculator = (function () {
 
         let TAX = 0.08
         let VAT = 0.2
-        let currency = false
+        let currency = 'EUR'
         let drive = false
 
         let EUR_TO_USD = 1.174
@@ -215,39 +217,29 @@ let CustomsCalculator = (function () {
 
             price = price + tax
 
-            console.log('PRR ' + price)
+
+            console.log('PENSION_FUND')
+            console.log(PENSION_FUND)
 
             let pension = 0
 
             for (let prop in PENSION_FUND[currency]) {
 
-                // console.log('CURR ' +currency)
-                //  console.log('PROP: ' + prop + ' ' + PENSION_FUND[currency][prop])
+
 
                 if(price<=PENSION_FUND[currency][prop]){
+
                     pension = prop
                     break
                 }
             }
 
-            console.log('PENSIA ' +pension)
+
+
             return pension
         }
 
-        function initPension() {
 
-            let low = parseInt(5247 * EUR_TO_USD)
-            let middle = parseInt(9298 * EUR_TO_USD)
-            let hight = 1000000
-
-            PENSION_FUND['USD'] = {}
-
-            PENSION_FUND['USD'][low] = 0.03
-            PENSION_FUND['USD'][middle] = 0.04
-            PENSION_FUND['USD'][hight] = 0.05
-
-            console.log(PENSION_FUND)
-        }
 
         function getExcise() {
 
@@ -264,7 +256,11 @@ let CustomsCalculator = (function () {
             price = parseInt(price)
             let excise = getExcise()
             let tax = parseInt(price * TAX)
+
+
             let pension = getPension(price,tax) * (price + tax)
+
+
             let vat = parseInt(VAT * (price + tax + excise.value))
             let rastamozhka = parseInt(vat + tax + excise.value)
             let fullPrice = price + rastamozhka
@@ -300,31 +296,31 @@ let CustomsCalculator = (function () {
             else return '€'
         }
 
-        render = (priceList) => {
+        function render(priceList) {
 
             let html = ''
 
-            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'])
+            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'],true,'price-row_bold')
             html += getPriceRow('НДС', priceList['VAT'].cost, priceList['VAT'].value)
             html += getPriceRow('Пошлина', priceList['TAX'].cost, priceList['TAX'].value)
             html += getPriceRow('Акциз', String(priceList['EXCISE'].cost), priceList['EXCISE'].value)
 
-            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'])
             html += getPriceRow('Дополнительные расходы', '', '', false)
             html += getPriceRow('Пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
+            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'],true,'price-row_bold')
 
             $(checkEl).html(html)
         }
 
-        function getPriceRow(name, cost, val, setIcon = true) {
+        function getPriceRow(name, cost, val, setIcon = true, classes = '') {
 
             let str = ''
             let curIcon = ''
             if (setIcon) curIcon = getCurrencyIcon()
 
-            str += '<div class="col-xs-6">' + name + '</div>'
+            str += '<div class="col-xs-6 '+ classes +'">' + name + '</div>'
             str += '<div class="col-xs-4">' + cost + '</div>'
-            str += '<div class="col-xs-2">' + val + curIcon + '</div>'
+            str += '<div class="col-xs-2 '+ classes +'">' + val + curIcon + '</div>'
             str += '<div class="col-xs-12"><hr></div>'
 
             return str
@@ -337,7 +333,11 @@ let CustomsCalculator = (function () {
 
         function setCurrency(newCurrency) {
 
+
+
             currency = newCurrency
+
+            console.log(currency)
         }
 
 
@@ -347,8 +347,7 @@ let CustomsCalculator = (function () {
 
             calculate: function (price, newCurrency, drive) {
 
-                initPension()
-
+               
                 setDrive(drive)
 
                 setCurrency(newCurrency)
@@ -394,14 +393,12 @@ let CustomsCalculator = (function () {
 
             price = price + tax
 
-            console.log('PRR ' + price)
+
 
             let pension = 0
 
             for (let prop in PENSION_FUND[currency]) {
 
-                // console.log('CURR ' +currency)
-                //  console.log('PROP: ' + prop + ' ' + PENSION_FUND[currency][prop])
 
                 if(price<=PENSION_FUND[currency][prop]){
                     pension = prop
@@ -409,7 +406,7 @@ let CustomsCalculator = (function () {
                 }
             }
 
-            console.log('PENSIA ' +pension)
+
             return pension
         }
 
@@ -444,7 +441,7 @@ let CustomsCalculator = (function () {
             price = parseInt(price)
             let excise = getExcise()
 
-            console.log('excise ' + excise)
+
             let tax = parseInt(price * TAX)
             let pension = getPension(price,tax) * (price + tax)
 
@@ -485,29 +482,32 @@ let CustomsCalculator = (function () {
 
         render = (priceList) => {
 
+
+
             let html = ''
 
-            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'])
+
+            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'],true,'price-row_bold')
             html += getPriceRow('НДС', priceList['VAT'].cost, priceList['VAT'].value)
             html += getPriceRow('Пошлина', priceList['TAX'].cost, priceList['TAX'].value)
             html += getPriceRow('Акциз', String(priceList['EXCISE'].cost), priceList['EXCISE'].value)
 
             html += getPriceRow('Дополнительные расходы', '', '', false)
             html += getPriceRow('Пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
-            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'])
+            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'],true,'price-row_bold')
 
             $(checkEl).html(html)
         }
 
-        function getPriceRow(name, cost, val, setIcon = true) {
+        function getPriceRow(name, cost, val, setIcon = true, classes = '') {
 
             let str = ''
             let curIcon = ''
             if (setIcon) curIcon = getCurrencyIcon()
 
-            str += '<div class="col-xs-6">' + name + '</div>'
+            str += '<div class="col-xs-6 '+ classes +'">' + name + '</div>'
             str += '<div class="col-xs-4">' + cost + '</div>'
-            str += '<div class="col-xs-2">' + val + curIcon + '</div>'
+            str += '<div class="col-xs-2 '+ classes +'">' + val + curIcon + '</div>'
             str += '<div class="col-xs-12"><hr></div>'
 
             return str
@@ -532,6 +532,7 @@ let CustomsCalculator = (function () {
             el: '#moto-calculator',
 
             calculate: function (price, newCurrency, drive) {
+
 
                 setDrive(drive)
 
@@ -559,6 +560,7 @@ let CustomsCalculator = (function () {
 
 
 
+
             lightCalculator.calculate(price, currency, drive)
         });
     }
@@ -575,6 +577,7 @@ let CustomsCalculator = (function () {
             let drive = parseInt(data[2].value) / 1000
 
 
+
             motoCalculator.calculate(price, currency, drive)
         });
     }
@@ -586,24 +589,17 @@ let CustomsCalculator = (function () {
 
             let data = $(this).serializeArray()
 
-            console.log(data)
-
             let price = data[0].value
             let currency = data[1].value
             let power = data[2].value
 
+            console.log('CURRENCY ' + currency)
 
             electricCalculator.calculate(price, currency, power)
         });
     }
 
-    $(".custom-calc button").click(function(event){
 
-        let target = event.currentTarget;
-
-        target.parentElement.nextElementSibling.style.display="block";
-
-    });
 
     function onChangeCalculator() {
 
@@ -620,14 +616,25 @@ let CustomsCalculator = (function () {
         })
     }
 
+    function onClickCalculatorButton() {
+
+        $(".custom-calc button").click(function(event){
+
+            let target = event.currentTarget;
+
+            target.parentElement.nextElementSibling.style.display="block";
+
+        });
+    }
+
     function initEvents() {
 
 
         onSubmitElectricCar()
         onSubmitLightCar()
         onSubmitMoto()
-
         onChangeCalculator()
+        onClickCalculatorButton()
     }
 
     return {
