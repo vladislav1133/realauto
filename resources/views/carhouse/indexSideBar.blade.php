@@ -1,8 +1,6 @@
 <aside class="sidebar">
 
-    <div class="global-search">
-
-        <form id="search-query" action="">
+    <form id="global-search" class="global-search">
 
             <!-- -------------------------->
             <div class="input-group">
@@ -13,35 +11,26 @@
                                 <i class="fa fa-search"></i>
                         </button>
 
-                        <button class="btn btn-default">
+                        <button type="button" class="btn btn-default">
                                 <i class="fa fa-question"></i>
                         </button>
                         </span>
             </div><!-- /input-group -->
-            <!-- -------------------------->
+            <!-------------  --------------->
         </form>
 
-    </div>
-
-    <div id="search" class=" search">
+    <div id="search" class="search">
 
         <div class="row">
 
-
             <div class="col-xs-12">
                 <div class="search__head">
-                    <div class="row">
-                        <div class="col-xs-11">
-                            <b>Искать</b> автомобиль
-                            <div class="">
-                                <a id="search-clear-btn" href="#">Сбросить всё</a>
-                            </div>
-                        </div>
-
-                    </div>
+                    <b>Искать транспорт</b>
                 </div>
             </div>
-
+            <div class="col-xs-12">
+                <a id="search-clear-btn" href="#">Сбросить всё</a>
+            </div>
             <div class="col-xs-12">
                 <div class="search__label">Тип транспорта:</div>
             </div>

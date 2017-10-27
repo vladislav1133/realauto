@@ -11,7 +11,7 @@
             <div class="col-xs-12">
 
             </div>
-            <div id="main-aside" class="main-aside col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-3">
                 @include(env('THEME').'.indexSideBar')
             </div>
 

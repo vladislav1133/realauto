@@ -685,6 +685,7 @@ img.mfp-img {
   -webkit-transform: translateY(-50%) rotate(90deg);
   transform: translateY(-50%) rotate(90deg);
 }
+
 img {
     height: auto;
     width: 100%;
@@ -710,7 +711,6 @@ img {
 .main-nav__item {
 
 }
-
 
 .main-nav__logo {
     outline: none;
@@ -962,12 +962,7 @@ img {
     color: #fff;
 }
 
-/** GLOBAL SEARCH**/
-.global-search {
-    width: 100%;
-    margin-bottom: 5px;
-    float: right;
-}
+
 
 .search-clear-btn{
     font-weight: 400;
@@ -985,9 +980,6 @@ img {
 
 
 
-html body .main-aside .sidebar .section-heading .row .search-select {
-    width: 100%;
-}
 
 
 .main-aside {
@@ -2049,13 +2041,71 @@ footer .footer-item .gallery-item {
 
 
 
+
+
+
+/** SIDEBAR **/
+
+.sidebar {
+
+
+}
+
+
+.sidebar .search-btn{
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #ffffff;
+    padding: 7px 13px;
+    background-color: #6a0000;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+}
+
+.sidebar .search-btn:hover {
+    background-color: #890000;
+}
+
+.sidebar .search-btn_half{
+    width: 50%;
+    float:left
+}
+
+
+/** GLOBAL-SEARCH **/
+
+.global-search {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+
 /** SEARCH **/
 
 .search {
+
+    font-size: 12px;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: solid 1px #E4E3E3;
+    border-radius: 4px;
 }
+
+
 
 .search__head {
 
+    font-size: 16px;
+    text-align: left;
 }
 
 .search__icon{
@@ -2090,10 +2140,6 @@ footer .footer-item .gallery-item {
 
 
 
-/**SIDEBAR AREA START **/
-
-
-
 .search-btn-title{
     position: relative;
 
@@ -2118,41 +2164,7 @@ footer .footer-item .gallery-item {
     right: 10px;
     top: 4px;
 }
-.sidebar .search-btn{
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    display: block;
-    text-align: center;
-    letter-spacing: 1px;
-    color: #ffffff;
-    padding: 7px 13px;
-    background-color: #6a0000;
-    text-decoration: none;
-    -webkit-transition: background-color 0.3s;
-    transition: background-color 0.3s;
-    border-radius: 4px;
-}
 
-.sidebar .search-btn:hover {
-    background-color: #890000;
-}
-
-.sidebar .search-btn_half{
-    width: 50%;
-    float:left
-}
-
-.sidebar {
-    font-size: 12px;
-    background: #fff;
-    padding: 10px;
-    margin-bottom: 30px;
-    border: solid 1px #E4E3E3;
-
-}
 
 .search-block .title {
     font-weight: 700;

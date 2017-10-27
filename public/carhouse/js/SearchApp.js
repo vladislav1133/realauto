@@ -462,10 +462,6 @@ let Search = (function () {
                     searchData['favoriteCars'] = favoriteCars
                 }
 
-                console.log('search data')
-
-                console.log(searchData)
-
                 return searchData
             }
 
