@@ -1438,7 +1438,7 @@ footer .footer-item .gallery-item {
 
 .sidebar .search-btn{
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -1527,6 +1527,24 @@ footer .footer-item .gallery-item {
 
     font-size: 16px;
     text-align: left;
+
+    display: flex;
+    align-items: center;
+}
+
+.search__head-btn{
+    border-radius: 5px;
+    padding: 5px 7px;
+    margin-left: 10px;
+    background-color: #6A0000;
+    color: white;
+
+    transition: 1s ease-out;
+}
+
+.search__head-btn:hover{
+    background-color: #AC0000;
+    cursor: pointer;
 }
 
 .search__icon{
