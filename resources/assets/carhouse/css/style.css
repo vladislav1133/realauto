@@ -32,6 +32,7 @@ img {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 0;
+    padding: 0;
 }
 
 .main-nav__item {
@@ -276,7 +277,24 @@ img {
     color: #fff;
 }
 
+#search-clear-btn{
+    display: block;
+    width: 101px;
+    height: 28px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
+    border-radius: 4px;
+
+    color: white;
+    text-align: center;
+    line-height: 28px;
+    background-color: #6A0000;
+}
+
+#search-clear-btn:hover{
+    text-decoration: none;
+}
 
 .search-clear-btn{
     font-weight: 400;
@@ -458,6 +476,35 @@ body {
     z-index: 1000;
 }
 
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-nav_wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    background-color: #6A0000;
+}
+
+.main-nav{
+    width: 87%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-nav__logo_wrap{
+    max-width: 165px;
+    margin-bottom: 10px;
+    flex-basis: 165px;
+    flex-grow: 2;
+}
+
+
+
 .banner__car {
     position: absolute;
     background: url('http://realauto.pro/carhouse/img/banner-car.png') no-repeat;
@@ -482,15 +529,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    font-style: italic;
 }
 
 
 .banner__title {
-    font-size: 3vw;
+    font-size: 2vw;
 
     width: 80%;
     margin: 0 auto;
-    margin-bottom: 15px;
     font-family: "GothamProBlack", sans-serif;
     text-align: center;
     text-transform: uppercase;
@@ -505,7 +553,7 @@ body {
 }
 
 .banner__text {
-    font-size: 1.2vw;
+    font-size: 1vw;
     font-family: 'GothamPro', sans-serif;
     width: 100%;
     margin: 0 auto;
@@ -1410,8 +1458,15 @@ footer .footer-item .gallery-item {
 }
 
 .sidebar .search-btn_half{
-    width: 50%;
-    float:left
+    width: 48%;
+}
+
+#favorite-search-btn{
+    float: left;
+}
+
+#favorite-clear-btn{
+    float: right;
 }
 
 .sticky {
@@ -1610,7 +1665,7 @@ footer .footer-item .gallery-item {
 }
 
 .table {
-    font-size: 12px;
+    font-size: 11px;
 }
 
 #table-body > tr > td{

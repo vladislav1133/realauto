@@ -13,7 +13,7 @@
 
                     <button type="button" class="btn btn-default global-search__info" id="global-advice">
                         <i class="fa fa-question"></i>
-                        <div class="popup">Поисковый коды</br>
+                        <div class="popup">Поисковые коды</br>
                         Год: 4 цифры</br>
                         Номер лота: 8 цифр</br>
                         Vin: 17 символов</br>

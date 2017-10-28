@@ -8,7 +8,7 @@ let Search = (function () {
 
     let searchBtn = '#search-btn'
 
-    let searchGlobal = '#search-query'
+    let searchGlobal = '#global-search'
 
     let searchGlobalQuery = {}
 

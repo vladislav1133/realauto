@@ -85,6 +85,11 @@
 	font-size: 17px;
 }
 
+.price-row_bold + .col-xs-12 hr{
+	border-top: 2px solid green;
+	margin-top: auto;
+}
+
 .nav-tabs{
 	display: flex;
 

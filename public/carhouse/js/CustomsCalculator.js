@@ -131,14 +131,14 @@ let CustomsCalculator = (function () {
             let html = ''
 
 
-            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'], true, 'price-row_bold')
+            html += getPriceRow('Цена с учетом таможенных платежей', '', priceList['fullPrice'], true, 'price-row_bold')
             html += getPriceRow('НДС', priceList['VAT'].cost, priceList['VAT'].value)
             html += getPriceRow('Пошлина', priceList['TAX'].cost, priceList['TAX'].value)
             html += getPriceRow('Акциз', String(priceList['EXCISE'].cost), priceList['EXCISE'].value)
 
             html += getPriceRow('Дополнительные расходы', '', '', false)
-            html += getPriceRow('Пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
-            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'], true, 'price-row_bold')
+            html += getPriceRow('Налог в пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
+            html += getPriceRow('Итого таможенных платежей', '', priceList['RASTAMOZHKA'], true, 'price-row_bold')
 
             $(checkEl).html(html)
         }
@@ -300,14 +300,14 @@ let CustomsCalculator = (function () {
 
             let html = ''
 
-            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'],true,'price-row_bold')
+            html += getPriceRow('Цена с учетом таможенных платежей', '', priceList['fullPrice'],true,'price-row_bold')
             html += getPriceRow('НДС', priceList['VAT'].cost, priceList['VAT'].value)
             html += getPriceRow('Пошлина', priceList['TAX'].cost, priceList['TAX'].value)
             html += getPriceRow('Акциз', String(priceList['EXCISE'].cost), priceList['EXCISE'].value)
 
             html += getPriceRow('Дополнительные расходы', '', '', false)
-            html += getPriceRow('Пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
-            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'],true,'price-row_bold')
+            html += getPriceRow('Налог в пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
+            html += getPriceRow('Итого таможенных платежей', '', priceList['RASTAMOZHKA'],true,'price-row_bold')
 
             $(checkEl).html(html)
         }
@@ -487,14 +487,14 @@ let CustomsCalculator = (function () {
             let html = ''
 
 
-            html += getPriceRow('Цена с растаможкой', '', priceList['fullPrice'],true,'price-row_bold')
+            html += getPriceRow('Цена с учетом таможенных платежей', '', priceList['fullPrice'],true,'price-row_bold')
             html += getPriceRow('НДС', priceList['VAT'].cost, priceList['VAT'].value)
             html += getPriceRow('Пошлина', priceList['TAX'].cost, priceList['TAX'].value)
             html += getPriceRow('Акциз', String(priceList['EXCISE'].cost), priceList['EXCISE'].value)
 
             html += getPriceRow('Дополнительные расходы', '', '', false)
-            html += getPriceRow('Пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
-            html += getPriceRow('Итого растарможка', '', priceList['RASTAMOZHKA'],true,'price-row_bold')
+            html += getPriceRow('Налог в пенсионный фонд', priceList['PENSION'].cost, priceList['PENSION'].value)
+            html += getPriceRow('Итого таможенных платежей', '', priceList['RASTAMOZHKA'],true,'price-row_bold')
 
             $(checkEl).html(html)
         }
