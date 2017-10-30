@@ -42,6 +42,8 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
+    
+
     public function getDocs(Request $request)
     {
         $mark = $request->input('mark');
