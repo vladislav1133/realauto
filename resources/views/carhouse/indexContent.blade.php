@@ -63,7 +63,7 @@
                     <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
                     <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
-                    <td>@if($car->buy_it_now)${{$car->buy_it_now}}@else &mdash; @endif</td>
+                    <td>@if($car->buy_it_now)<div class="buy-now_green">${{$car->buy_it_now}}</div>@else &mdash; @endif</td>
                     <td>@if($car->location){{$car->location}}
                         <button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">Исключить из поиска
                         </button>@else &mdash; @endif</td>

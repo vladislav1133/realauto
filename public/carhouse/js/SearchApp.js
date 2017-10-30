@@ -324,6 +324,12 @@ let Search = (function () {
             searchType = 'main'
             Table.getPage(1, Search.getSearchData())
         })
+
+        $("#search-btn-top").click(function () {
+
+            searchType = 'main'
+            Table.getPage(1, Search.getSearchData())
+        })
     }
 
     function onClearFavorite() {

@@ -536,7 +536,7 @@ body {
 
 
 .banner__title {
-    font-size: 2vw;
+    font-size: 27px;
 
     width: 80%;
     margin: 0 auto;
@@ -554,9 +554,9 @@ body {
 }
 
 .banner__text {
-    font-size: 1vw;
+    font-size: 14px;
     font-family: 'GothamPro', sans-serif;
-    width: 100%;
+    width: 50%;
     margin: 0 auto;
     text-align: center;
     text-transform: uppercase;
@@ -1534,6 +1534,7 @@ footer .footer-item .gallery-item {
 }
 
 .search__head-btn{
+    border: none;
     border-radius: 5px;
     padding: 5px 7px;
     margin-left: 10px;
@@ -1699,6 +1700,10 @@ footer .footer-item .gallery-item {
 
 #table-body > tr table{
     text-align: left;
+}
+
+.buy-now_green{
+    color: #00801F;
 }
 
 .slider.slider-horizontal .slider-track {
@@ -3378,6 +3383,14 @@ table tbody th{
 
 @media (max-width: 992px){
 
+    .banner__title{
+        font-size: 23px;
+    }
+
+    .banner__text{
+        font-size: 12px;
+    }
+
     .side-bar{
         margin-right: 0;
     }
@@ -3410,6 +3423,11 @@ table tbody th{
     .main-header .navbar-default .nav {
         margin-top: -20px
     }
+
+    .banner__text{
+
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -3840,6 +3858,15 @@ table tbody th{
 
 @media (max-width: 640px) {
 
+    .banner__title{
+        font-size: 18px;
+    }
+
+    .banner__text{
+        width: 70%;
+        font-size: 9px;
+    }
+
     .banner__car {
         max-height: 185px;
         width: 70%;
@@ -3864,6 +3891,16 @@ table tbody th{
 
 @media (max-width: 550px) {
 
+    .banner__title{
+        width: 80%;
+        font-size: 15px;
+    }
+
+    .banner__text{
+        width: 90%;
+        font-size: 9px;
+    }
+
     .banner__car{
         display: none;
     }
@@ -3886,10 +3923,6 @@ table tbody th{
         height: auto;
     }
 
-    .main-header{
-        height: 485px;
-    }
-
     .main-header_default{
         height: 95px;
     }
@@ -3900,7 +3933,6 @@ table tbody th{
 }
 
 @media (max-width: 450px) {
-
 
     .nav-car-link{
         padding-left: 0;
@@ -3949,10 +3981,6 @@ table tbody th{
         width: 100%;
         position: relative;
         left: 0;
-    }
-
-    .main-header{
-        height: 485px;
     }
 
     .banner__car {

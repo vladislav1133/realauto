@@ -31,7 +31,7 @@
             <div class="col-xs-12">
                 <div class="search__head">
                     <b>Искать транспорт</b>
-                    <div class="search__head-btn"><i class="fa fa-search"></i></div>
+                    <button id="search-btn-top" class="search__head-btn"><i class="fa fa-search"></i></button>
                 </div>
             </div>
             <div class="col-xs-12">
