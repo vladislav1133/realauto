@@ -13,13 +13,14 @@ img {
 }
 
 .side-bar{
-    flex-basis: 250px;
+    flex-basis: 200px;
     flex-grow: 1;
     margin-right: 20px;
 }
 
 .content{
-    flex-grow: 9;
+    flex-grow: 992px;
+    flex-grow: 11;
 }
 
 /** MAIN-NAV**/

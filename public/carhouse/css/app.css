@@ -705,8 +705,8 @@ img {
 }
 
 .side-bar{
-    -ms-flex-preferred-size: 250px;
-        flex-basis: 250px;
+    -ms-flex-preferred-size: 200px;
+        flex-basis: 200px;
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
@@ -714,9 +714,10 @@ img {
 }
 
 .content{
-    -webkit-box-flex: 9;
-        -ms-flex-positive: 9;
-            flex-grow: 9;
+    -webkit-box-flex: 992px;
+        -ms-flex-positive: 992px;
+            flex-grow: 992px;
+    flex-grow: 11;
 }
 
 /** MAIN-NAV**/
@@ -4914,11 +4915,11 @@ table tbody th{
 }
 
 @media (max-width: 650px){
-
-	.custom-calc{
-		padding: 15px 15px 0;
+	
+	.calculator {
+    	width: 90%;
 	}
-
+	
 }@font-face {
   font-family: "GothamProBlackItalic";
   src: url(/fonts/GothamProBlackItalic.woff?9404e507dad65b8af3160f030fd0d4b1) format("woff");

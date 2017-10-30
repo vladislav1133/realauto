@@ -144,9 +144,9 @@
 }
 
 @media (max-width: 650px){
-
-	.custom-calc{
-		padding: 15px 15px 0;
+	
+	.calculator {
+    	width: 90%;
 	}
-
+	
 }

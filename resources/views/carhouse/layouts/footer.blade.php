@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="footer-item col-lg-4 col-md-4 col-sm-6 col-xs-6" >
-                <a class="footer-item-link" href="tel:+ +380677568007"><i class="fa fa-phone"></i> +38 (067) 756 80 07</a>
+                <a class="footer-item-link" href="tel:+ +380677568007"><i class="fa fa-phone"></i> +38 (067) 756 -- --</a>
             </div>
             <div class="footer-item col-lg-4 col-md-4 col-sm-6 col-xs-6" >
                 <a class="footer-item-link" href="mailto:  realauto@realauto.pro">
