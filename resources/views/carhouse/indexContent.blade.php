@@ -15,14 +15,14 @@
                 <th data-breakpoints="xs">Модель</th>
                 <th data-breakpoints="xs">Двигатель</th>
                 <th data-breakpoints="xs sm">Топливо</th>
-                <th data-breakpoints="xs sm">Трансмиссия</th>
+                <th data-breakpoints="xs sm">КПП</th>
                 <th data-breakpoints="xs sm">Одометр</th>
                 <th data-breakpoints="all">Тип привода</th>
                 <th data-breakpoints="all">Основные моменты</th>
                 <th data-breakpoints="all">Основные повреждения</th>
                 <th data-breakpoints="all">Вторичные повреждения</th>
-                <th data-breakpoints="xs sm md">Дата аукциона</th>
-                <th data-breakpoints="xs sm md">Текушая ставка</th>
+                <th data-breakpoints="xs sm md">Дата</br> аукциона</th>
+                <th data-breakpoints="xs sm md">Текушая</br> ставка</th>
                 <th data-breakpoints="xs">Купить сейчас</th>
                 <th data-breakpoints="all">Расположение</th>
                 <th data-breakpoints="all">Тип документа</th>

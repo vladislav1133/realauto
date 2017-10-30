@@ -13,13 +13,13 @@ img {
 }
 
 .side-bar{
-    flex-basis: 200px;
+    flex-basis: 230px;
     flex-grow: 1;
     margin-right: 20px;
 }
 
 .content{
-    flex-grow: 992px;
+    flex-basis: 682px;
     flex-grow: 11;
 }
 
@@ -1684,7 +1684,13 @@ footer .footer-item .gallery-item {
 }
 
 .table {
-    font-size: 11px;
+    font-size: 13px;
+}
+
+.table th{
+    word-wrap: break-word;
+    padding: 8px 0 !important;
+    text-align: center;
 }
 
 #table-body > tr > td{
