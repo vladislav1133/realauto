@@ -26,9 +26,9 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
-    public function getModels($mark) {
+    public function getModels($type, $mark) {
 
-        $models = $this->carRepository->getModels($mark,true);
+        $models = $this->carRepository->getModels($type, $mark,true);
 
         $response['models'] = $models;
 
@@ -42,7 +42,7 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
-    
+
 
     public function getDocs(Request $request)
     {
