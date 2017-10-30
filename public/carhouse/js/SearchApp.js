@@ -137,10 +137,11 @@ let Search = (function () {
     function getModels() {
 
         let mark = $(selects['mark']).val()
+        let type = $(selects['type']).val()
 
         $.get({
 
-            url: '/cars/models/' + mark
+            url: '/cars/models/' + type + '/' + mark
 
         }).done(function (response) {
 
@@ -213,6 +214,8 @@ let Search = (function () {
            // let mark = $(selects['mark']).val();
 
             Search.clearSearchValue([selects['type']])
+
+            Search.setSelectOptions(selects['model'],'')
 
             Search.setSearchCarOptions()
 
@@ -566,6 +569,7 @@ let Search = (function () {
                 if(data.marks){
                     Search.setSelectOptions(selects['mark'],data['marks'])
                 }
+
 
                 Search.setSelectOptions(selects['yearTo'],data['years'])
                 Search.setSelectOptions(selects['yearFrom'],data['years'])

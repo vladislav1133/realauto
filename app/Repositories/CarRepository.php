@@ -75,10 +75,10 @@ class CarRepository extends Repository
     }
 
 
-    public function getModels($mark, $firstName = false)
+    public function getModels($type, $mark, $firstName = false)
     {
 
-        $names = $this->getNames();
+        $names = $this->getNames($type);
 
         $models = array();
 
