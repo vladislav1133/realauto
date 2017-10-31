@@ -6,11 +6,9 @@
                     <div class="caption detail">
 
                         <div class="post-materials">
-
-                            <p>Телефон: +380 97 77 777</p>
-                            <p>Улица: +380 97 77 777</p>
-                            <p>: +380 97 77 777</p>
-
+                            <p>Улица: Харьков улица Шевченко, 238</p>
+                            <p>Телефон: +38 (067) 756 80 07</p>
+                            <p>Почта: realauto@realauto.pro</p>
                         </div>
                     </div>
                 </div>

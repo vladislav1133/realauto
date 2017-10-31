@@ -87,14 +87,25 @@ img {
 }
 
 .sale_date_today {
-    color: #00801f;
+    color: #00a21f;
 }
 
-
-
-.today {
-    color:green;
+.buy-now_green{
+    color: #00a21f;
 }
+
+.footable-last-visible {
+    position: relative;
+}
+
+table>tbody>tr>td>span.footable-toggle.last-column {
+    float: none;
+    margin: 0;
+    position: absolute;
+    bottom: 16px;
+    right: 10px;
+}
+
 
 .bx-controls-direction{
     position: absolute;
@@ -1706,9 +1717,6 @@ footer .footer-item .gallery-item {
     text-align: left;
 }
 
-.buy-now_green{
-    color: #00801F;
-}
 
 .slider.slider-horizontal .slider-track {
     height: 10px;
