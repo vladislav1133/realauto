@@ -84,7 +84,12 @@ class IndexController extends SiteController
         ]);
 
 
-        Mail::to(env('MAIL_ADDRESS'))->send(new ContactUsMail($request->tel, $request->name, $request->message, $request->favoriteCars));
+        $mailable = new ContactUsMail($request->tel, $request->name, $request->message, $request->favoriteCars);
+        $mailable->replyTo(env('MAIL_ADDRESS'), env('APP_NAME'));
+
+        Mail::to(env('MAIL_ADDRESS'))->send($mailable);
+
+
 
         return response()->json(['success' => 'true']);
     }
