@@ -963,7 +963,11 @@ body {
     outline: none;
 }
 
-
+.favorite__btn_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .favorite__btn {
     background: transparent;

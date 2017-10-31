@@ -119,29 +119,6 @@
             </div>
 
             <div class="col-xs-12 search__col">
-                <div class="search__label">Основные повреждения:</div>
-            </div>
-
-            <div class="search__col col-xs-12">
-                <select
-                        id="search-damage"
-                        class="selectpicker search__select"
-                        multiple
-                        data-title="Все"
-                        data-live-search="true"
-                        data-actions-box="true"
-                        data-select-all-text="Выделить все"
-                        data-deselect-all-text="Убрать все"
-                >
-                    @if($search['damage'])
-                        @foreach($search['damage'] as $pDamage)
-                            <option>{{$pDamage}}</option>
-                        @endforeach
-                    @endif
-                </select>
-            </div>
-
-            <div class="col-xs-12 search__col">
                 <div class="search__label">Основные моменты:</div>
             </div>
 
@@ -163,6 +140,28 @@
                 </select>
             </div>
 
+            <div class="col-xs-12 search__col">
+                <div class="search__label">Основные повреждения:</div>
+            </div>
+
+            <div class="search__col col-xs-12">
+                <select
+                        id="search-damage"
+                        class="selectpicker search__select"
+                        multiple
+                        data-title="Все"
+                        data-live-search="true"
+                        data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
+                >
+                    @if($search['damage'])
+                        @foreach($search['damage'] as $pDamage)
+                            <option>{{$pDamage}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
 
             <div class="col-xs-6">
                 <div class="search__label">Привод:</div>

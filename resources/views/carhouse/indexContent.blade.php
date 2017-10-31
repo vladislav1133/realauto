@@ -44,7 +44,7 @@
                                     {{$car->lot_id}}
                                 </a>
                             </div>
-                            <div>
+                            <div class="favorite__btn_wrap">
                                 <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}"
                                         title="Добавить в избранное"><i class="fa fa-bookmark-o"></i></button>
                             </div>
