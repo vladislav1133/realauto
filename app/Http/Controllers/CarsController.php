@@ -228,12 +228,15 @@ class CarsController extends Controller {
         }
 
 
+
         $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull,$type);
 
         $carsCount = $cars->total();
 
+        $language['damage'] = trans('cars.damage');
+        $language['highlights'] = trans('cars.highlights');
 
-        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->render();
+        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
 
         return ['table' => $carsTable, 'carsCount' => $carsCount];
     }
