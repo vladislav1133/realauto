@@ -30,6 +30,9 @@ class IndexController extends SiteController
     public function index()
     {
 
+        $language['damage'] = trans('cars.damage');
+        $language['highlights'] = trans('cars.highlights');
+
         $meta = $this->carRepository->getMeta('index');
 
         $doc_type = [
@@ -67,7 +70,10 @@ class IndexController extends SiteController
 
         $search = $this->getSearch();
 
+
+
         return view(env('THEME') . '.index')
+            ->with('language',$language)
             ->with('carsTotal', $carsTotal)
             ->with('cars', $cars)
             ->with('search', $search)

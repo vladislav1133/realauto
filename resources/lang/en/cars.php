@@ -1,0 +1,41 @@
+<?php
+
+return [
+
+    'highlights' => [
+
+        'ENHANCED VEHICLES' => 'ENHANCED VEHICLES',
+        'RUN AND DRIVE' => 'RUN AND DRIVE',
+        'ENGINE START PROGRAM' => 'ENGINE START PROGRAM'
+    ],
+
+    'damage' => [
+        'ALL OVER' => 'ALL OVER',
+        'BIOHAZARDOUS/CHEMICAL' => 'BIOHAZARDOUS/CHEMICAL',
+        'BURN - ENGINE' => 'BURN - ENGINE',
+        'BURN - INTERIOR' => 'BURN - INTERIOR',
+        'BURN' => 'BURN',
+        'CASH FOR CLUNKERS' => 'CASH FOR CLUNKERS',
+        'DAMAGE HISTORY' => 'DAMAGE HISTORY',
+        'FRAME DAMAGE REPORTED' => 'FRAME DAMAGE REPORTED',
+        'FRONT END' => 'FRONT END',
+        'MECHANICAL' => 'MECHANICAL',
+        'MINOR DENTS/SCRATCHES' => 'MINOR DENTS/SCRATCHES',
+        'NORMAL WEAR' => 'NORMAL WEAR',
+        'PARTIAL/INCOMPLETE REPAIR' => 'PARTIAL/INCOMPLETE REPAIR',
+        'REJECTED REPAIR' => 'REJECTED REPAIR',
+        'ROLLOVER' => 'ROLLOVER',
+        'REAR END' => 'REAR END',
+        'SIDE' => 'SIDE',
+        'STRIPPED' => 'STRIPPED',
+        'TOP/ROOF' => 'TOP/ROOF',
+        'UNKNOWN' => 'UNKNOWN',
+        'UNDERCARRIAGE' => 'UNDERCARRIAGE',
+        'MISSING/ALTERED VIN' => 'MISSING/ALTERED VIN',
+        'VANDALISM' => 'VANDALISM',
+        'REPLACED VIN' => 'REPLACED VIN',
+        'WATER/FLOOD' => 'WATER/FLOOD',
+        'HAIL' => 'HAIL',
+    ],
+
+];

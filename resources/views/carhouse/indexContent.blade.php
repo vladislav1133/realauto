@@ -50,26 +50,63 @@
                             </div>
                         </div>
                     </td>
+
                     <td>@if($car->year){{$car->year}}@else &mdash; @endif</td>
+
                     <td>@if($car->mark){{$car->mark}}@else &mdash; @endif</td>
+
                     <td>@if($car->model){{$car->model}}@else &mdash; @endif</td>
+
                     <td>@if($car->engine_type){{$car->engine_type}}@else &mdash; @endif</td>
+
                     <td>@if($car->fuel){{$car->fuel}}@else &mdash; @endif</td>
+
                     <td>@if($car->transmission){{$car->transmission}}@else &mdash; @endif</td>
+
                     <td>@if($car->odometer){{$car->odometer}}@else &mdash; @endif</td>
+
                     <td>@if($car->drive){{$car->drive}}@else &mdash; @endif</td>
-                    <td>@if($car->highlights){{$car->highlights}}@else &mdash; @endif</td>
-                    <td>@if($car->primary_damage){{$car->primary_damage}}@else &mdash; @endif</td>
-                    <td>@if($car->secondary_damage){{$car->secondary_damage}} @else &mdash; @endif</td>
+
+                    <td>
+                        @if($car->highlights)
+                            <div title="{{$language['highlights'][$car->highlights] or ''}}">{{$car->highlights}}</div>
+                        @else
+                        &mdash;
+                        @endif
+                    </td>
+
+                    <td>
+                        @if($car->primary_damage)
+                            <div title="{{$language['damage'][$car->primary_damage] or ''}}">{{$car->primary_damage}}</div>
+                        @else
+                            &mdash;
+                        @endif
+                    </td>
+
+                    <td>
+                        @if($car->secondary_damage)
+                           <div title="{{$language['damage'][$car->secondary_damage] or ''}}">{{$car->secondary_damage}}</div>
+                        @else
+                            &mdash;
+                        @endif
+                    </td>
+
                     <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
+
                     <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
+
                     <td>@if($car->buy_it_now)<div class="buy-now_green">${{$car->buy_it_now}}</div>@else &mdash; @endif</td>
+
+
                     <td>@if($car->location){{$car->location}}
                         <button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">Исключить из поиска
-                        </button>@else &mdash; @endif</td>
+                        </button>@else &mdash; @endif
+                    </td>
+
                     <td>@if($car->doc_type){{$car->doc_type}}
                         <button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">Исключить из поиска
-                        </button>@else &mdash; @endif</td>
+                        </button>@else &mdash; @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>
