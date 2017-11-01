@@ -8,6 +8,8 @@
 
     <div id="main-content" class="car-list content-area">
 
+        <div class="main-content_inner">
+
             <div class="side-bar">
                 @include(env('THEME').'.indexSideBar')
             </div>
@@ -20,6 +22,8 @@
                     <div id="hide-table"></div>
                 </div>
             </div>
+
+        </div>
     </div>
 
 @endsection
