@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Car;
+use App\GeneralData;
+use App\Mail\ContactUsMail;
+use App\Repositories\CarRepository;
+use App\Repositories\GeneralDataRepository;
+
+use Illuminate\Http\Request;
+
+use Mail;
+use Validator;
+use Carbon\Carbon;
+
+class IndexController extends SiteController
+{
+
+    protected $carRepository;
+
+    public function __construct(CarRepository $carRepository, GeneralDataRepository $generalDataRepository)
+    {
+        parent::__construct(new GeneralDataRepository(new GeneralData()));
+        $this->carRepository = $carRepository;
+
+        $this->indexInfo = $this->generalDataRepository->getInfo('*');
+    }
+
+    public function index()
+    {
+
+        $language['damage'] = trans('cars.damage');
+        $language['highlights'] = trans('cars.highlights');
+
+        $meta = $this->carRepository->getMeta('index');
+
+        $doc_type = [
+            'AL - BILL OF SALE',
+            'AL - CERT OF TITLE-FLOOD SALVAGE',
+            'AL - CERT OF TITLE-PARTS ONLY SALVG',
+            'AL - CERT OF TITLE-REBUILT',
+            'AL - CERT OF TITLE-SALVAGE TITLE',
+            'AL - CERT OF TITLE-SALVAGE TITLE (P)',
+            'AL - CERTIFICATE OF TITLE',
+            'AL - CLEAN TITLE - AL BID CARD REQ',
+            'AR - CERT OF TITLE-SALVAGE',
+            'AR - CERTIFICATE OF TITLE',
+            'AZ - CERT OF TITLE - SALVAGE',
+            'AZ - CERTIFICATE OF TITLE',
+            'CA - CERT OF TITLE-SALVAGED',
+            'CA - JUNK RECEIPT',
+            'CA - NON-REPAIRABLE VEHICLE CERT',
+            'CA - SALVAGE CERTIFICATE',
+            'CA - SALVAGE CERTIFICATE (P)',
+            'CO - CERT OF TITLE-SALVAGE HISTORY (P)',
+            'CO - CERTIFICATE OF TITLE',
+            'CO - CERTIFICATE OF TITLE (P)',
+            'CO - SALVAGE TITLE',
+            'CT - ABANDONED VEH SALE NOTIFICATIO',
+            'CT - CERT OF TITLE-SALVAGE',
+            'CT - CERTIFICATE OF TITLE',
+            'DC - CERTIFICATE OF TITLE'
+        ];
+
+        $cars = $this->getCars('car');
+
+
+        $carsTotal = $cars->total();
+
+        $search = $this->getSearch();
+
+
+
+        return view(env('THEME') . '.index')
+            ->with('language',$language)
+            ->with('carsTotal', $carsTotal)
+            ->with('cars', $cars)
+            ->with('search', $search)
+            ->with('info', $this->indexInfo)
+            ->with('doc_type', $doc_type)
+            ->with('meta', $meta)->render();
+    }
+
+    public function contactUs(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:2',
+            'tel' => 'required|min:5',
+        ]);
+
+
+        $mailable = new ContactUsMail($request->tel, $request->name, $request->message, $request->favoriteCars);
+        $mailable->replyTo(env('MAIL_ADDRESS'), env('APP_NAME'));
+
+        Mail::to(env('MAIL_ADDRESS'))->send($mailable);
+
+
+
+        return response()->json(['success' => 'true']);
+    }
+
+    protected function getCars($type = 'car')
+    {
+
+
+        $cars = $this->carRepository
+            ->getCars(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'], '', '', '','','',$type);
+
+
+        return $cars;
+    }
+
+    protected function getSearch()
+    {
+
+        $search = $this->carRepository->getSearchProperty('car'); //add marks,
+
+
+        return $search;
+    }
+
+    public function rastamozhka()
+    {
+        $meta = $this->carRepository->getMeta('index');
+
+
+        return view(env('THEME') . '.rastamozhka')
+            ->with('meta', $meta)->render();
+    }
+
+
+}
+
