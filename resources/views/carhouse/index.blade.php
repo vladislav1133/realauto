@@ -14,6 +14,8 @@
                 @include(env('THEME').'.indexSideBar')
             </div>
 
+            <div class="for-side-bar-fixed"></div>
+
             <div class="content content-area__table">
                 <div id="table">
                     <div id="main-table">

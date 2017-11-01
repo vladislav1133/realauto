@@ -14,8 +14,8 @@ let App = (function () {
             let sidebar = new StickySidebar('.side-bar', {
                 containerSelector: '.main-content_inner',
                 innerWrapperSelector: '.sidebar',
-                topSpacing: 0,
-                bottomSpacing: 0
+                topSpacing: 100,
+                bottomSpacing: 150
             });
 
         }

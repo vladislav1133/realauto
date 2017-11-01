@@ -704,13 +704,27 @@ img {
     margin: auto;
 }
 
+.main-content_inner{
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+
 .side-bar{
+    max-width: 255px;
     -ms-flex-preferred-size: 230px;
         flex-basis: 230px;
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
     margin-right: 20px;
+    will-change: min-height;
 }
 
 .content{
@@ -959,6 +973,10 @@ table>tbody>tr>td>span.footable-toggle.last-column {
 }
 
 .cu-form input:-ms-input-placeholder, .cu-form textarea:-ms-input-placeholder{
+    color: #999;
+}
+
+.cu-form input::-ms-input-placeholder, .cu-form textarea::-ms-input-placeholder{
     color: #999;
 }
 
@@ -2198,7 +2216,11 @@ footer .footer-item .gallery-item {
 /** SIDEBAR **/
 
 .sidebar {
-
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); /* For browsers don't support translate3d. */
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    will-change: position, transform;
 
 }
 
@@ -2237,21 +2259,8 @@ footer .footer-item .gallery-item {
     float: right;
 }
 
-.side-bar_fixed{
-    width: 19.5%;
-    position: fixed;
-    top: 0;
-    left: 2.5%;
-}
-
 .for-side-bar-fixed{
-    display: none;
-    -ms-flex-preferred-size: 230px;
-        flex-basis: 230px;
-    -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
-    margin-right: 20px;
+    content:"";
 }
 
 /** GLOBAL-SEARCH **/
@@ -4181,6 +4190,7 @@ table tbody th{
 
     .side-bar{
         margin-right: 0;
+        max-width: auto;
     }
 
     .main-nav__logo, .main-nav__list{
