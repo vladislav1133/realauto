@@ -8,6 +8,8 @@ let Search = (function () {
 
     let searchBtn = '#search-btn'
 
+    let searchBtnTop = '#search-btn-top'
+
     let searchGlobal = '#global-search'
 
     let searchGlobalQuery = {}
@@ -51,31 +53,46 @@ let Search = (function () {
     //Just car options
     function initSearchOptions() {
 
-        options['mark'] = Search.getSelectOptions(selects['mark'])
+        options['mark'] = filter_array(Search.getSelectOptions(selects['mark']))
 
-        options['years'] = Search.getSelectOptions(selects['yearTo'])
+        options['years'] = filter_array(Search.getSelectOptions(selects['yearTo']))
 
-        options['damage'] = Search.getSelectOptions(selects['damage'])
+        options['damage'] = filter_array(Search.getSelectOptions(selects['damage']))
 
-        options['drive'] = Search.getSelectOptions(selects['drive'])
+        options['drive'] = filter_array(Search.getSelectOptions(selects['drive']))
 
-        options['fuel'] = Search.getSelectOptions(selects['fuel'])
+        options['fuel'] = filter_array(Search.getSelectOptions(selects['fuel']))
 
-        options['location'] = Search.getSelectOptions(selects['locAdd'])
+        options['location'] = filter_array(Search.getSelectOptions(selects['locAdd']))
 
-        options['highlight'] = Search.getSelectOptions(selects['highlight'])
+        options['highlight'] = filter_array(Search.getSelectOptions(selects['highlight']))
 
-        options['doc_type'] = Search.getSelectOptions(selects['docAdd'])
+        options['doc_type'] = filter_array(Search.getSelectOptions(selects['docAdd']))
     }
 
+    function filter_array(test_array) {
+        var index = -1,
+            arr_length = test_array ? test_array.length : 0,
+            resIndex = -1,
+            result = [];
 
+        while (++index < arr_length) {
+            var value = test_array[index];
+
+            if (value) {
+                result[++resIndex] = value;
+            }
+        }
+
+        return result;
+    }
 
 
 
 
     function initEvents() {
 
-        onChangeType()
+
 
         onSearchCars()
 
@@ -90,6 +107,8 @@ let Search = (function () {
         //Change selectors
 
         onSearchGlobal()
+
+        onChangeType()
 
         onChangeMark()
 
@@ -145,9 +164,12 @@ let Search = (function () {
 
         }).done(function (response) {
 
+
             let models = response.models;
 
             if (models.length !== 0) Search.setSelectOptions(selects['model'],models)
+
+            Search.stopPreloader()
 
         });
     }
@@ -202,16 +224,7 @@ let Search = (function () {
         $(el).on('change', selects['type'], function (e) {
             e.preventDefault()
 
-           // let mark = $(selects['mark']).val();
-
-            //
-            // getMarks()
-            //
-            // Search.setSearchDefaultOptions([selects['type']])
-            //
-            ////////////////////////////////////////////
-
-           // let mark = $(selects['mark']).val();
+           Search.runPreloader()
 
             Search.clearSearchValue([selects['type']])
 
@@ -219,7 +232,7 @@ let Search = (function () {
 
             Search.setSearchCarOptions()
 
-           // getModels(mark);
+
 
         })
     }
@@ -228,6 +241,8 @@ let Search = (function () {
 
         $(el).on('change', selects['mark'], function (e) {
             e.preventDefault()
+
+            Search.runPreloader()
 
             let mark = $(selects['mark']).val();
 
@@ -243,6 +258,8 @@ let Search = (function () {
 
         $(el).on('change', selects['model'], function (e) {
             e.preventDefault()
+
+            Search.runPreloader()
 
             let mark = $(selects['mark']).val();
 
@@ -325,9 +342,10 @@ let Search = (function () {
             Table.getPage(1, Search.getSearchData())
         })
 
-        $("#search-btn-top").click(function () {
+        $(searchBtnTop).click(function () {
 
             searchType = 'main'
+
             Table.getPage(1, Search.getSearchData())
         })
     }
@@ -358,7 +376,11 @@ let Search = (function () {
         $(searchClearBtn).click(function (e) {
             e.preventDefault()
 
+            Search.runPreloader()
+
             Search.setSearchDefaultOptions()
+
+            Search.stopPreloader()
         })
     }
 
@@ -419,6 +441,14 @@ let Search = (function () {
     return {
 
         showFavorite: false,
+
+        runPreloader: function() {
+            $(searchBtnTop).html('<img src="/public/carhouse/img/search_preloader.svg">')
+        },
+
+        stopPreloader: function() {
+            $(searchBtnTop).html('<i class="fa fa-search"></i>')
+        },
 
         init: function () {
 
@@ -597,6 +627,8 @@ let Search = (function () {
                 console.log(data);
 
                 $('.selectpicker').selectpicker('refresh');
+
+                Search.stopPreloader()
             })
         },
 
@@ -605,11 +637,12 @@ let Search = (function () {
 
             let options = Search.getOptions()
 
-            console.log($(selects['type']).selectpicker('val'))
+
             $(selects['type']).selectpicker('val', 'car')
 
             Search.setSelectOptions(selects['mark'],options['mark'])
 
+            console.log(options['mark'])
             Search.setSelectOptions(selects['model'],'')
 
             Search.setSelectOptions(selects['yearTo'],options['years'])
