@@ -20,6 +20,8 @@ let App = (function () {
 
         }
 
+        console.log("test");
+
     }
 
     function onClickContactBtn() {
