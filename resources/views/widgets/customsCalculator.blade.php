@@ -1,5 +1,7 @@
 <div class="calculator">
 
+
+        <div class="calcWrap">
             <!-- Nav tabs -->
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#light-car" aria-controls="light-car" role="tab" data-toggle="tab"><img src="{{asset('public\carhouse\img\calc-lightCar.png')}}" alt=""></a></li>
@@ -107,4 +109,10 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="calc-img">
+            <img src="carhouse/img/calcMap.png" alt="">
+        </div>
+    </div>
+
 </div>

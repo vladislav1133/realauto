@@ -2075,6 +2075,10 @@ footer .footer-item .gallery-item {
     list-style: none;
 }
 
+.image{
+    margin: 23px;
+}
+
 ul.blog-post-comments {
     padding: 0px;
     margin: 0px;
@@ -2802,7 +2806,7 @@ label:before {
 .blog-box {
 
     margin-bottom: 50px;
-    padding: 0;
+    padding: 0 15px;
     padding-top: 40px;
     border: none;
     color: #000;
@@ -3413,7 +3417,7 @@ table tbody th{
 
     .side-bar{
         margin-right: 0;
-        max-width: auto;
+        max-width: 100%;
     }
 
     .main-nav__logo, .main-nav__list{

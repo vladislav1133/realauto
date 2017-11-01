@@ -2845,6 +2845,10 @@ footer .footer-item .gallery-item {
     list-style: none;
 }
 
+.image{
+    margin: 23px;
+}
+
 ul.blog-post-comments {
     padding: 0px;
     margin: 0px;
@@ -3573,7 +3577,7 @@ label:before {
 .blog-box {
 
     margin-bottom: 50px;
-    padding: 0;
+    padding: 0 15px;
     padding-top: 40px;
     border: none;
     color: #000;
@@ -4190,7 +4194,7 @@ table tbody th{
 
     .side-bar{
         margin-right: 0;
-        max-width: auto;
+        max-width: 100%;
     }
 
     .main-nav__logo, .main-nav__list{
@@ -4812,7 +4816,7 @@ table tbody th{
 @-o-viewport      { width: device-width; }
 @viewport         { width: device-width; }/* Customs calculator */
 .calculator {
-	width: 55%;
+	width: 75%;
 	min-width: 320px;
 	margin: auto;
 	margin-top: 100px;
@@ -4823,10 +4827,6 @@ table tbody th{
 	display: -ms-flexbox;
 
 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	    -ms-flex-direction: column;
-	        flex-direction: column;
 	-webkit-box-pack: center;
 	    -ms-flex-pack: center;
 	        justify-content: center;
@@ -4981,6 +4981,14 @@ table tbody th{
 .nav-tabs > li.active > a:hover {
     color: black;
     cursor: default;
+}
+
+.calcWrap{
+	margin-right: 50px;
+}
+
+.calc-img{
+
 }
 
 @media (max-width: 650px){
