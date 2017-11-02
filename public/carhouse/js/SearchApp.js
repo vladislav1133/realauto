@@ -443,7 +443,7 @@ let Search = (function () {
         showFavorite: false,
 
         runPreloader: function() {
-            $(searchBtnTop).html('<img src="/public/carhouse/img/search_preloader.svg">')
+            $(searchBtnTop).html('<img class="search-block_preloader" src="/public/carhouse/img/search_preloader.svg">')
         },
 
         stopPreloader: function() {

@@ -163,15 +163,11 @@
                 </select>
             </div>
 
-            <div class="col-xs-6">
+            <div class="col-xs-12 search__col">
                 <div class="search__label">Привод:</div>
             </div>
 
-            <div class="col-xs-6 search__col_right">
-                <div class="search__label">Топливо:</div>
-            </div>
-
-            <div class="search__col search__col_left col-xs-6">
+            <div class="search__col col-xs-12">
                 <select
                         id="search-drive"
                         class="selectpicker search__select"
@@ -189,7 +185,11 @@
                 </select>
             </div>
 
-            <div class="search__col search__col_right col-xs-6">
+            <div class="col-xs-12 search__col">
+                <div class="search__label">Топливо:</div>
+            </div>
+
+            <div class="search__col col-xs-12">
                 <select
                         id="search-fuel"
                         class="selectpicker search__select"

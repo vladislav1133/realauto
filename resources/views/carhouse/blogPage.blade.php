@@ -8,7 +8,6 @@
             <div class="col-lg-12 col-md-12 col-xs-12">
                 <!-- blog-box start-->
                 <div class="thumbnail blog-box clearfix">
-                    <img src="{{asset($article->img)}}" alt="full-blog-01">
                     <!-- detail -->
                     <div class="caption detail">
                         <!-- Title -->
@@ -17,8 +16,10 @@
                         </h1>
                         <!-- Post Materials-->
                         <div class="post-materials">
-                            <div class="header">
+                            <div class="blog-header">
+                                <div class="blog-clock_wrap">
                                <i class="fa fa-clock-o"></i> {{$article->created_at->format('d M Y')}}
+                               </div>
                             </div>
                             {!! $article->text !!}
                         </div>
