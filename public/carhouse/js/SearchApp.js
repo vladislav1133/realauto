@@ -88,11 +88,7 @@ let Search = (function () {
     }
 
 
-
-
     function initEvents() {
-
-
 
         onSearchCars()
 
@@ -453,7 +449,6 @@ let Search = (function () {
 
             initEvents()
 
-
             $(window).trigger('disableFavoriteBtn');
 
         },
@@ -635,7 +630,7 @@ let Search = (function () {
             let options = Search.getOptions()
 
 
-            $(selects['type']).selectpicker('val', 'car')
+            $(selects['type']).selectpicker('val', 'all')
 
             Search.setSelectOptions(selects['mark'],options['mark'])
 
