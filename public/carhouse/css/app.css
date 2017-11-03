@@ -2229,6 +2229,11 @@ footer .footer-item .gallery-item {
     z-index: 10;
 }
 
+.inner-wrapper-sticky{
+    position: relative;
+    z-index: 10;
+}
+
 .sidebar .search-btn{
     width: 100%;
     margin-bottom: 20px;
