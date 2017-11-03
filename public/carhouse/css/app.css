@@ -2225,7 +2225,10 @@ footer .footer-item .gallery-item {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
     will-change: position, transform;
+}
 
+.inner-wrapper-sticky{
+    z-index: 10;
 }
 
 
@@ -2299,8 +2302,8 @@ footer .footer-item .gallery-item {
 }
 
 .search-block_preloader{
-    width: 17px;
-    height: 20px;
+    width: 15px;
+    height: 16px;
 }
 
 /** SEARCH **/
