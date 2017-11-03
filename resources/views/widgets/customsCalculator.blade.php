@@ -110,9 +110,9 @@
                 </div>
             </div>
         </div>
-        <div class="calc-img">
-            <img src="carhouse/img/calcMap.png" alt="">
-        </div>
+        {{--<div class="calc-img">--}}
+            {{--<img src="carhouse/img/calcMap.png" alt="">--}}
+        {{--</div>--}}
     </div>
 
 </div>
