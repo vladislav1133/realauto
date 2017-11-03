@@ -30,8 +30,6 @@ img {
 .content{
     flex-basis: 682px;
     flex-grow: 11;
-    position: relative;
-    z-index: -1;
 }
 
 /** MAIN-NAV**/
