@@ -63,7 +63,7 @@ class IndexController extends SiteController
             'DC - CERTIFICATE OF TITLE'
         ];
 
-        $cars = $this->getCars('car');
+        $cars = $this->getCars('all');
 
 
         $carsTotal = $cars->total();
@@ -100,7 +100,7 @@ class IndexController extends SiteController
         return response()->json(['success' => 'true']);
     }
 
-    protected function getCars($type = 'car')
+    protected function getCars($type = 'all')
     {
 
 

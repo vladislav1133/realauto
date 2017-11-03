@@ -47,8 +47,10 @@
                         class="selectpicker search__select"
                         data-title="Все"
                 >
-                    <option value="car" selected>АВТОМОБИЛИ</option>
+                    <option value="all" selected>ВСЕ</option>
+                    <option value="car">АВТОМОБИЛИ</option>
                     <option value="moto">МОТОЦИКЛЫ</option>
+
                 </select>
             </div>
 
@@ -97,6 +99,7 @@
                         data-title="От"
                 >
                     @if($search['years'])
+                        <option value="from" selected>От</option>
                         @foreach($search['years'] as $year)
                             <option>{{$year}}</option>
                         @endforeach
@@ -111,6 +114,7 @@
                         data-title="До"
                 >
                     @if($search['years'])
+                        <option value="to" selected>До</option>
                         @foreach($search['years'] as $year)
                             <option>{{$year}}</option>
                         @endforeach

@@ -733,8 +733,6 @@ img {
     -webkit-box-flex: 11;
         -ms-flex-positive: 11;
             flex-grow: 11;
-    position: relative;
-    z-index: -1;
 }
 
 /** MAIN-NAV**/
@@ -983,10 +981,6 @@ table>tbody>tr>td>span.footable-toggle.last-column {
 }
 
 .cu-form input:-ms-input-placeholder, .cu-form textarea:-ms-input-placeholder{
-    color: #999;
-}
-
-.cu-form input::-ms-input-placeholder, .cu-form textarea::-ms-input-placeholder{
     color: #999;
 }
 

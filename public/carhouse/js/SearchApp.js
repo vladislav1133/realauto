@@ -376,11 +376,8 @@ let Search = (function () {
         $(searchClearBtn).click(function (e) {
             e.preventDefault()
 
-            Search.runPreloader()
-
             Search.setSearchDefaultOptions()
 
-            Search.stopPreloader()
         })
     }
 

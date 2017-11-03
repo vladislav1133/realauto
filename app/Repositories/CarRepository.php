@@ -135,7 +135,7 @@ class CarRepository extends Repository
         return $years;
     }
 
-    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'car')
+    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'all')
     {
 
         if ($distinct) {
@@ -272,9 +272,10 @@ class CarRepository extends Repository
 
             $builder
                 ->whereIn('body_style', $motoBodyStyle)
-                ->where('engine_type', 'not like', '%L%')
-                ->pluck('name')->toArray();
+                ->where('engine_type', 'not like', '%L%');
         }
+
+
 
         if ($pagination) {
 
@@ -285,7 +286,7 @@ class CarRepository extends Repository
         return $builder->get();
     }
 
-    public function getCars($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'car')
+    public function getCars($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'all')
     {
         $cars = $this->get($select, $pagination, $orderBy, $where, $whereIn, $whereNotIn, $distinct, $whereNotNull, $type);
 

@@ -153,9 +153,9 @@ class CarsController extends Controller {
 
             $driveSearch[1] = array();
 
-            foreach ($drive as $type) {
+            foreach ($drive as $driveType) {
 
-                foreach ($drive_type[$type] as $item) {
+                foreach ($drive_type[$driveType] as $item) {
 
                     array_push($driveSearch[1], $item);
                 }
@@ -219,15 +219,6 @@ class CarsController extends Controller {
         }
 
         $orderBy = ['sale_date', 'asc'];
-
-        if ($yearTo || $yearFrom) {
-
-            $orderBy = [];
-            $orderBy[0] = 'year';
-            $orderBy[1] = 'asc';
-        }
-
-
 
         $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull,$type);
 
