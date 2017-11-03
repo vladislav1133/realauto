@@ -76,14 +76,27 @@ let Table = (function () {
 
         checkCarImage: function () {
 
-            $('#table-body td a div img').each(function (i) {
+            let el = '#table-body td a div img'
 
-                let src = $(this).prop('src')
+            $(el).each(function (i) {
 
-                if(src === 'https://cs.copart.com/v1/'){
-                    $(this).prop('src', '/public/carhouse/img/car-blank.png')
-                }
+
+                let link = $(this).prop('src')
+
+                var $this;
+                $this = $(this);
+
+                $.ajax({
+                    url:link, //be sure to check the right attribute
+                    success: function () { //pass an anonymous callback function
+                    },
+                    error: function (jqXHR, status, er) {
+                        $this.prop('src', '/public/carhouse/img/car-blank.png')
+                    }
+                });
             })
+
+
 
         },
 
