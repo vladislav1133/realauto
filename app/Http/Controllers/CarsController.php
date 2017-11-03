@@ -222,6 +222,7 @@ class CarsController extends Controller {
 
         $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull,$type);
 
+
         $carsCount = $cars->total();
 
         $language['damage'] = trans('cars.damage');
@@ -250,7 +251,7 @@ class CarsController extends Controller {
         return response()->json($res);
     }
 
-    public function getSearchProperty($type = 'car', $mark = false, $model = false){
+    public function getSearchProperty($type = 'all', $mark = false, $model = false){
 
         $property = $this->carRepository->getSearchProperty($type, $mark, $model);
 

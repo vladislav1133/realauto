@@ -42,7 +42,7 @@ class CarRepository extends Repository
         $this->model = $car;
     }
 
-    public function getNames($type = 'car')
+    public function getNames($type = 'all')
     {
 
         $names = $this->get('name', '', '', '', '', '', '', '', $type)->toArray();
@@ -52,7 +52,7 @@ class CarRepository extends Repository
         return $names;
     }
 
-    public function getMarks($type = 'car')
+    public function getMarks($type = 'all')
     {
 
 
@@ -462,7 +462,7 @@ class CarRepository extends Repository
         return false;
     }
 
-    public function getSearchProperty($type = 'car', $mark = false, $model = false)
+    public function getSearchProperty($type = 'all', $mark = false, $model = false)
     {
 
         $whereIn = [];
