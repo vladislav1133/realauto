@@ -11,9 +11,14 @@ let App = (function () {
 
         if ($(window).width() > 993) {
 
-            let sidebar = new StickySidebar('.side-bar', {
-                containerSelector: '.main-content_inner',
-                innerWrapperSelector: '.sidebar',
+            //let sidebar = new StickySidebar('.side-bar', {
+            //    containerSelector: '.main-content_inner',
+            //    innerWrapperSelector: '.sidebar',
+            //    topSpacing: 0,
+            //    bottomSpacing: 140
+            //});
+
+            $('.side-bar').stickySidebar({
                 topSpacing: 0,
                 bottomSpacing: 140
             });
