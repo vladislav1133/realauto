@@ -64,6 +64,8 @@
                         class="selectpicker search__select"
                         data-live-search="true"
                         data-title="Все"
+                        data-max-options="1"
+                        multiple
                 >
                     @if($search['marks'])
                         @foreach($search['marks'] as $mark)

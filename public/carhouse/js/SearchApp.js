@@ -630,7 +630,7 @@ let Search = (function () {
             let options = Search.getOptions()
 
 
-            $(selects['type']).selectpicker('val', 'all')
+            $(selects['type']).selectpicker('val', 'car')
 
             Search.setSelectOptions(selects['mark'],options['mark'])
 
