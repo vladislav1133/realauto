@@ -65,11 +65,12 @@
                         data-live-search="true"
                         data-title="Все"
                         data-max-options="1"
-                        multiple
+
                 >
                     @if($search['marks'])
+
                         @foreach($search['marks'] as $mark)
-                            <option>{{$mark}}</option>
+                            <option value="{{$mark}}">{{$mark}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -103,7 +104,7 @@
                     @if($search['years'])
 
                         @foreach($search['years'] as $year)
-                            <option>{{$year}}</option>
+                            <option value="{{$year}}" @if($year == reset($search['years'])) selected @endif>{{$year}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -118,7 +119,7 @@
                     @if($search['years'])
 
                         @foreach($search['years'] as $year)
-                            <option>{{$year}}</option>
+                            <option value="{{$year}}" @if($year == end($search['years'])) selected @endif>{{$year}}</option>
                         @endforeach
                     @endif
                 </select>

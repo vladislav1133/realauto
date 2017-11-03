@@ -70,6 +70,21 @@ let Table = (function () {
 
             this.initEvents()
 
+            Table.checkCarImage()
+
+        },
+
+        checkCarImage: function () {
+
+            $('#table-body td a div img').each(function (i) {
+
+                let src = $(this).prop('src')
+
+                if(src === 'https://cs.copart.com/v1/'){
+                    $(this).prop('src', '/public/carhouse/img/car-blank.png')
+                }
+            })
+
         },
 
         render: function (data) {
@@ -138,6 +153,8 @@ let Table = (function () {
 
                     Table.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
                 }
+
+                Table.checkCarImage()
 
             });
         },
