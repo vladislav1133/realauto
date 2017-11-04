@@ -1,6 +1,3 @@
-
-
-
 @if($cars)
     <div class="table-container">
         <table class="table car-table" data-toggle-column="last" data-paging="true" data-empty="Автомобили не найдеы"
