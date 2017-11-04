@@ -13,9 +13,13 @@ let App = (function () {
         //    containerSelector: ".main-content_inner"
         //})
 
-        $(".side-bar").sticky({
-            bottomSpacing: 70
-        });
+        if ($(window).width() > 993) {
+
+            $(".side-bar").sticky({
+                bottomSpacing: 70
+            });
+
+        }
 
     }
 
