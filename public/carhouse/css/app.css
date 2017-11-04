@@ -4853,7 +4853,7 @@ table tbody th{
 @-o-viewport      { width: device-width; }
 @viewport         { width: device-width; }/* Customs calculator */
 .calculator {
-	width: 75%;
+	width: 34%;
 	min-width: 320px;
 	margin: auto;
 	margin-top: 100px;
@@ -4864,6 +4864,10 @@ table tbody th{
 	display: -ms-flexbox;
 
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 	-webkit-box-pack: center;
 	    -ms-flex-pack: center;
 	        justify-content: center;
