@@ -23,8 +23,14 @@ img {
     max-width: 255px;
     flex-basis: 230px;
     flex-grow: 1;
+}
+
+.sticky-wrapper{
+    max-width: 255px;
+    flex-basis: 230px;
+    flex-grow: 1;
     margin-right: 20px;
-    will-change: min-height;
+    z-index: 10 !important;
 }
 
 .content{

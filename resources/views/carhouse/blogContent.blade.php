@@ -13,7 +13,9 @@
                                     </h1>
                                     <div class="post-materials">
                                         <div class="header">
+                                            <div class="blog-clock_wrap">
                                             <i class="fa fa-clock-o"></i> 8 MAY 2016
+                                            </div>
                                         </div>
                                         <p>{{$article->review}}</p>
                                         <a href="{{route('blog.show',['alias'=>$article->alias])}}"

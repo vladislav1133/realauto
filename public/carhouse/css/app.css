@@ -723,8 +723,17 @@ img {
     -webkit-box-flex: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
+}
+
+.sticky-wrapper{
+    max-width: 255px;
+    -ms-flex-preferred-size: 230px;
+        flex-basis: 230px;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     margin-right: 20px;
-    will-change: min-height;
+    z-index: 10 !important;
 }
 
 .content{
