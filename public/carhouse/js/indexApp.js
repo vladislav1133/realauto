@@ -9,23 +9,13 @@ let App = (function () {
 
     function initSidebarScroll() {
 
-        if ($(window).width() > 993) {
+        //$(".side-bar").pin({
+        //    containerSelector: ".main-content_inner"
+        //})
 
-            //let sidebar = new StickySidebar('.side-bar', {
-            //    containerSelector: '.main-content_inner',
-            //    innerWrapperSelector: '.sidebar',
-            //    topSpacing: 0,
-            //    bottomSpacing: 140
-            //});
-
-            $('.side-bar').stickySidebar({
-                topSpacing: 0,
-                bottomSpacing: 140
-            });
-
-        }
-
-        console.log("test");
+        $(".side-bar").sticky({
+            bottomSpacing: 70
+        });
 
     }
 
