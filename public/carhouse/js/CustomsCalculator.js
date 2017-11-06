@@ -7,18 +7,41 @@ let CustomsCalculator = (function () {
         let VAT = 0.2
         let currency = false
         let drive = false
-        let EUR_TO_USD = 1.174
+        let fuel = false
+        let EUR_TO_USD = 1.15
         let EXCISE = {
-            'EUR': {
-                1100: 0.063,
-                1600: 0.102,
-                20001: 0.276
+
+            'gas': {
+                'EUR': {
+                    1000: 0.063,
+                    1500: 0.102,
+                    2200: 0.267,
+                    3000: 0.276,
+                    20000: 2.209
+                },
+
+                'USD': {
+                    1000: (0.063 * EUR_TO_USD).toFixed(3),
+                    1500: (0.102 * EUR_TO_USD).toFixed(3),
+                    2200: (0.267 * EUR_TO_USD).toFixed(3),
+                    3000: (0.276 * EUR_TO_USD).toFixed(3),
+                    20000: (2.209 * EUR_TO_USD).toFixed(3)
+                },
             },
-            'USD': {
-                1100: (0.063 * EUR_TO_USD).toFixed(3),
-                1600: (0.102 * EUR_TO_USD).toFixed(3),
-                20001: (0.276 * EUR_TO_USD).toFixed(3)
-            },
+            'diesel': {
+                'EUR': {
+                    1500: 0.103,
+                    2500: 0.327,
+                    20000: 2.209
+                },
+
+                'USD': {
+                    1500: (0.103 * EUR_TO_USD).toFixed(3),
+                    2500: (0.327 * EUR_TO_USD).toFixed(3),
+                    20000: (2.209 * EUR_TO_USD).toFixed(3)
+                },
+            }
+
         }
 
         let PENSION_FUND = {
@@ -62,11 +85,11 @@ let CustomsCalculator = (function () {
             }
 
 
-            for (let prop in EXCISE[currency]) {
+            for (let prop in EXCISE[fuel][currency]) {
 
 
-                if (drive < prop) {
-                    excise.value = EXCISE[currency][prop]
+                if (drive <= prop) {
+                    excise.value = EXCISE[fuel][currency][prop]
 
                     break
                 }
@@ -80,6 +103,9 @@ let CustomsCalculator = (function () {
         }
 
         function getPriceList(price) {
+
+            console.log('FUEL ' + fuel)
+
 
             price = parseInt(price)
             let excise = getExcise()
@@ -126,8 +152,6 @@ let CustomsCalculator = (function () {
 
         function render(priceList) {
 
-
-
             let html = ''
 
 
@@ -162,6 +186,11 @@ let CustomsCalculator = (function () {
             drive = driveAmount * 1000
         }
 
+        function setFuel(newFuel) {
+
+            fuel = newFuel
+        }
+
         function setCurrency(newCurrency) {
 
             currency = newCurrency
@@ -171,14 +200,13 @@ let CustomsCalculator = (function () {
 
             el: '#light-car-calculator',
 
-            calculate: function (price, newCurrency, drive) {
-
-
-
+            calculate: function (price, newCurrency, drive, newFuel) {
 
                 setDrive(drive)
 
                 setCurrency(newCurrency)
+
+                setFuel(newFuel)
 
                 let priceList = getPriceList(price)
 
@@ -557,11 +585,11 @@ let CustomsCalculator = (function () {
             let price = data[0].value
             let currency = data[1].value
             let drive = data[2].value
+            let fuel = data[3].value
 
 
 
-
-            lightCalculator.calculate(price, currency, drive)
+            lightCalculator.calculate(price, currency, drive,fuel)
         });
     }
 

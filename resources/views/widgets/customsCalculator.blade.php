@@ -34,6 +34,13 @@
                                         <option @if($i>1.4 && $i<1.6) selected="selected" @endif value="{{$i}}">{{$i}}</option>
                                     @endfor
                                 </select>
+
+
+                                <select  name="fuel" class="form-control">
+                                        <option value="gas">Бензин</option>
+                                        <option value="diesel">Дизель</option>
+                                </select>
+
                             </div>
 
                             <div class="buttonBlock">
