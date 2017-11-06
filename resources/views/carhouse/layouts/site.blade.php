@@ -46,6 +46,7 @@
 <script src="{{asset(env('THEME'))}}/js/Table.js"></script>
 <script src="{{asset(env('THEME'))}}/js/SearchApp.js"></script>
 <script src="{{asset(env('THEME'))}}/js/indexApp.js"></script>
+<script src="{{asset(env('THEME'))}}/js/tableRender.js"></script>
 
 
 @if(Route::currentRouteName()=='home')

@@ -984,6 +984,10 @@ table>tbody>tr>td>span.footable-toggle.last-column {
     color: #999;
 }
 
+.cu-form input::-ms-input-placeholder, .cu-form textarea::-ms-input-placeholder{
+    color: #999;
+}
+
 .cu-form input::placeholder, .cu-form textarea::placeholder{
     color: #999;
 }
@@ -2472,42 +2476,68 @@ footer .footer-item .gallery-item {
 
 /** TABLE **/
 
-#table .table thead th {
+.table {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+
+    margin-bottom: 0;
+
+    font-size: 13px;
+    background-color: #fff;
+}
+
+.thead{
+    height: 60px;
+
+    border: 1px solid black;
+
+    background-color: #6A0000;
+}
+
+.table .thead div{
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+
+    padding: 8px 0 !important;
+
+    word-wrap: break-word;
     text-align: center;
-    vertical-align: middle;
-}
-.table thead .footable-last-visible {
-    border-right: 1px solid #6a0000;
+    border-right: 1px solid black;
+    color: white;
 }
 
+.tbody{
 
-#table #main-table table tbody tr table tbody tr th {
-    min-width: 190px;
+    border: 1px solid black;
+
 }
+
+.table__row{
+
+    border: 1px solid black;
+}
+
+.table__row-cell{
+    display: inline-block;
+    width: 100px;
+    height: 60px;
+
+    padding: 8px 0 !important;
+
+    border-right: 1px solid black;
+}
+
 .table-pagination{
     text-align: center;
 }
-#main-table .table-container .car-table {
-    margin-bottom: 0;
-}
 
-.table {
-    font-size: 13px;
-}
-
-.table th{
-    word-wrap: break-word;
-    padding: 8px 0 !important;
-    text-align: center;
-}
-
-#table-body > tr > td{
-    text-align: center;
-}
-
-#table-body > tr table{
-    text-align: left;
-}
+/*----------------------------------------*/
 
 
 .slider.slider-horizontal .slider-track {
