@@ -15,17 +15,48 @@ $(document).ready(function(){
 		let bottomCell = cellArray.slice(cellCount, cellArray.length + 1);
 		let topCell = cellArray.splice(cellCount, bottomCell.length + 1);
 
-		//console.log(topCell.length);
-		console.log(bottomCell.length + topCell.length);
 		bottomCell.css("display", "none")
 
 	})
 
-	//console.log(cellCount);
+	$(".table__row").click(function(){
 
-	//console.log($(".table__row .table__row-cell")[1])
+		$(this).addClass("active-row");
 
+		let cellArray = $(this).children();
 
+		var bottomCell = cellArray.filter(function(style) {
+  			return $(style).is(":visible");
+		});
 
+		var bottomCell = [];
+
+		cellArray.each(function(){
+
+			if($(this).is(":visible") != true){
+				bottomCell.push($(this));
+			};
+
+		});
+
+		$(this).after("<div class='bottom-cell_wrap'></div>");
+
+		let map = new Map();
+
+		let i = 0;
+
+		$(bottomCell).each(function(){
+
+			$(this).css("display", "block");
+
+			map.set(i, $(this));
+
+			i++;
+
+		});
+
+		$(".active-row").next().html(map);
+
+	})
 
 });
