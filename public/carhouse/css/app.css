@@ -993,10 +993,6 @@ table>tbody>tr>td>span.footable-toggle.last-column {
     color: #999;
 }
 
-.cu-form input::-ms-input-placeholder, .cu-form textarea::-ms-input-placeholder{
-    color: #999;
-}
-
 .cu-form input::placeholder, .cu-form textarea::placeholder{
     color: #999;
 }

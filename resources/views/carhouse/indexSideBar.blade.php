@@ -35,8 +35,12 @@
                 </div>
             </div>
             <div class="col-xs-12">
+                <b>Найдено: </b><span class="total-cars">{{$carsTotal}}</span>
+            </div>
+            <div class="col-xs-12">
                 <a id="search-clear-btn" href="#">Сбросить всё</a>
             </div>
+
             <div class="col-xs-12">
                 <div class="search__label">Тип транспорта:</div>
             </div>
@@ -47,8 +51,7 @@
                         class="selectpicker search__select"
                         data-title="Все"
                 >
-                    <option value="all" selected>ВСЕ</option>
-                    <option value="car">АВТОМОБИЛИ</option>
+                    <option value="car" selected>АВТОМОБИЛИ</option>
                     <option value="moto">МОТОЦИКЛЫ</option>
 
                 </select>
@@ -65,10 +68,9 @@
                         data-live-search="true"
                         data-title="Все"
                         data-max-options="1"
-
                 >
                     @if($search['marks'])
-
+                        <option value="all" selected>ВСЕ</option>
                         @foreach($search['marks'] as $mark)
                             <option value="{{$mark}}">{{$mark}}</option>
                         @endforeach
@@ -86,6 +88,8 @@
                         id="search-models"
                         class="selectpicker search__select"
                         data-title="Все"
+                        data-live-search="true"
+                        data-actions-box="true"
                 >
                 </select>
             </div>
@@ -141,7 +145,7 @@
                 >
                     @if($search['highlights'])
                         @foreach($search['highlights'] as $highlight)
-                            <option>{{$highlight}}</option>
+                            <option value="{{$highlight}}">{{$highlight}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -164,7 +168,7 @@
                 >
                     @if($search['damage'])
                         @foreach($search['damage'] as $pDamage)
-                            <option>{{$pDamage}}</option>
+                            <option value="{{$pDamage}}">{{$pDamage}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -186,7 +190,7 @@
                 >
                     @if($search['drive'])
                         @foreach($search['drive'] as $drive)
-                            <option>{{$drive}}</option>
+                            <option value="{{$drive}}">{{$drive}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -208,7 +212,7 @@
                 >
                     @if($search['fuel'])
                         @foreach($search['fuel'] as $fuel)
-                            <option>{{$fuel}}</option>
+                            <option value="{{$fuel}}">{{$fuel}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -231,7 +235,7 @@
                 >
                     @if($search['location'])
                         @foreach($search['location'] as $locAdd)
-                            <option>{{$locAdd}}</option>
+                            <option value="{{$locAdd}}">{{$locAdd}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -251,7 +255,7 @@
                 >
                     @if($search['location'])
                         @foreach($search['location'] as $locRem)
-                            <option>{{$locRem}}</option>
+                            <option value="{{$locRem}}">{{$locRem}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -275,7 +279,7 @@
                 >
                     @if($search['doc_type'])
                         @foreach($search['doc_type'] as $docAdd)
-                            <option>{{$docAdd}}</option>
+                            <option value="{{$docAdd}}">{{$docAdd}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -295,7 +299,7 @@
                 >
                     @if($search['doc_type'])
                         @foreach($search['doc_type'] as $docRem)
-                            <option>{{$docRem}}</option>
+                            <option value="{{$docRem}}">{{$docRem}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -305,13 +309,13 @@
                     <label>
                         <input id="search-buy-now" type="checkbox" value="">
                         <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                        Купить сейчас
+                        <b>Купить сейчас</b>
                     </label>
                 </div>
             </div>
 
             <div class="col-xs-12">
-                <b>Всего: </b><span id="total-cars">{{$carsTotal}}</span>
+                <b>Найдено: </b><span class="total-cars">{{$carsTotal}}</span>
             </div>
             <div class="col-xs-12">
                 <a id="search-btn" class="btn search-btn"><span class="search-btn-title"><span

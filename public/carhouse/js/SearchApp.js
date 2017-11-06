@@ -174,6 +174,7 @@ let Search = (function () {
 
         let data = {
 
+            type: $(selects['type']).val(),
             mark: $(selects['mark']).val(),
             model: $(selects['model']).val(),
             locAdd: $(selects['locAdd']).val(),
@@ -196,7 +197,7 @@ let Search = (function () {
 
             let docType = response.docType;
 
-            if (docType.length !== 0) {
+
 
 
                 $(selects['docAdd']).selectpicker('val', '');
@@ -208,7 +209,7 @@ let Search = (function () {
                 $('.selectpicker').selectpicker('refresh');
 
                 if (updatePage === true) Table.getPage(1, Search.getSearchData())
-            }
+
         });
     }
 
@@ -514,8 +515,6 @@ let Search = (function () {
 
                 return searchGlobalQuery
             }
-
-
         },
 
         getSelectOptions: function (select) {
@@ -538,7 +537,7 @@ let Search = (function () {
 
             $.each(array, function (key, value) {
 
-                el.append($("<option></option>").text(value));
+                el.append("<option value='"+ value +"'>"+ value +"</option>")
             });
 
             $('.selectpicker').selectpicker('refresh');
@@ -592,11 +591,19 @@ let Search = (function () {
 
                 if (data.marks) {
                     Search.setSelectOptions(selects['mark'], data['marks'])
+                    $(selects['mark']).prepend("<option value='all' selected='selected'>ВСЕ</option>");
                 }
 
 
                 Search.setSelectOptions(selects['yearTo'], data['years'])
                 Search.setSelectOptions(selects['yearFrom'], data['years'])
+
+                console.log('YEARS YEARS')
+                console.log(data['years'])
+                
+                $(selects['yearFrom']).selectpicker('val', data['years'][0])
+                $(selects['yearTo']).selectpicker('val', data['years'][data['years'].length - 1])
+
 
                 Search.setSelectOptions(selects['damage'], data['damage'])
 
@@ -626,7 +633,7 @@ let Search = (function () {
             let options = Search.getOptions()
 
 
-            $(selects['type']).selectpicker('val', 'all')
+            $(selects['type']).selectpicker('val', 'car')
 
             Search.setSelectOptions(selects['mark'], options['mark'])
 
@@ -634,6 +641,10 @@ let Search = (function () {
 
             Search.setSelectOptions(selects['model'], '')
 
+
+
+            Search.setSelectOptions(selects['yearFrom'], options['years'])
+            Search.setSelectOptions(selects['yearTo'], options['years'])
 
             $(selects['yearFrom']).selectpicker('val', options['years'][0])
             $(selects['yearTo']).selectpicker('val', options['years'][options['years'].length - 1])

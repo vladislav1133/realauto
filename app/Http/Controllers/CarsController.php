@@ -46,12 +46,12 @@ class CarsController extends Controller {
 
     public function getDocs(Request $request)
     {
-        $mark = $request->input('mark');
+        $type = $request->type;
+        $mark = $request->mark;
+        $model = $request->model;
 
-        $model = $request->input('model');
-
-        $locAdd = $request->input('locAdd');
-        $locRem = $request->input('locRem');
+        $locAdd = $request->locAdd;
+        $locRem = $request->locRem;
 
         $docs = [];
         $whereNotIn = [];
@@ -59,8 +59,10 @@ class CarsController extends Controller {
         $where = [];
 
 
+        if ($mark === 'all') $mark = false;
         if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
         if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
+
 
         if ($locRem) array_push($whereNotIn, ['location', $locRem]);
 
@@ -79,7 +81,7 @@ class CarsController extends Controller {
             if ($locAdd) array_push($whereIn, ['location', $locAdd]);
         }
 
-        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], $where, $whereIn,$whereNotIn,true);
+        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], $where, $whereIn,$whereNotIn,true,'',$type);
 
         foreach ($queryArr as $arr) {
 
@@ -131,7 +133,7 @@ class CarsController extends Controller {
         }
 
 
-
+        if($mark === 'all') $mark = false;
         if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
         if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
 
@@ -222,7 +224,6 @@ class CarsController extends Controller {
 
         $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull,$type);
 
-
         $carsCount = $cars->total();
 
         $language['damage'] = trans('cars.damage');
@@ -251,7 +252,7 @@ class CarsController extends Controller {
         return response()->json($res);
     }
 
-    public function getSearchProperty($type = 'all', $mark = false, $model = false){
+    public function getSearchProperty($type = 'car', $mark = false, $model = false){
 
         $property = $this->carRepository->getSearchProperty($type, $mark, $model);
 

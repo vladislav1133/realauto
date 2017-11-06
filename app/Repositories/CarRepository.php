@@ -42,7 +42,7 @@ class CarRepository extends Repository
         $this->model = $car;
     }
 
-    public function getNames($type = 'all')
+    public function getNames($type = 'car')
     {
 
         $names = $this->get('name', '', '', '', '', '', '', '', $type)->toArray();
@@ -52,7 +52,7 @@ class CarRepository extends Repository
         return $names;
     }
 
-    public function getMarks($type = 'all')
+    public function getMarks($type = 'car')
     {
 
 
@@ -135,7 +135,7 @@ class CarRepository extends Repository
         return $years;
     }
 
-    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'all')
+    public function get($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'car')
     {
 
         if ($distinct) {
@@ -286,7 +286,7 @@ class CarRepository extends Repository
         return $builder->get();
     }
 
-    public function getCars($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'all')
+    public function getCars($select = '*', $pagination = false, $orderBy = false, $where = false, $whereIn = false, $whereNotIn = false, $distinct = false, $whereNotNull = false, $type = 'car')
     {
         $cars = $this->get($select, $pagination, $orderBy, $where, $whereIn, $whereNotIn, $distinct, $whereNotNull, $type);
 
@@ -462,7 +462,7 @@ class CarRepository extends Repository
         return false;
     }
 
-    public function getSearchProperty($type = 'all', $mark = false, $model = false)
+    public function getSearchProperty($type = 'car', $mark = false, $model = false)
     {
 
         $whereIn = [];
@@ -475,6 +475,7 @@ class CarRepository extends Repository
         $where[] = ['name', 'like', '%' . $mark . '%'];
 
         if ($model) {
+
             $where[] = ['name', 'like', '%' . $model . '%'];
         }
 
@@ -485,7 +486,7 @@ class CarRepository extends Repository
             $property['marks'] = $this->getMarks($type);
         }
 
-        $property['years'] = array_filter(array_unique($cars->sortBy('year')->pluck('year')->toArray()));
+        $property['years'] = array_values(array_filter(array_unique($cars->sortBy('year')->pluck('year')->toArray())));
         $property['damage'] = array_filter(array_unique($cars->sortBy('primary_damage')->pluck('primary_damage')->toArray()));
         $property['fuel'] = array_filter(array_unique($cars->sortBy('fuel')->pluck('fuel')->toArray()));
         $property['highlights'] = array_filter(array_unique($cars->sortBy('highlights')->pluck('highlights')->toArray()));

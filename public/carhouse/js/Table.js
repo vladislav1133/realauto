@@ -43,6 +43,8 @@ let Table = (function () {
 
         $(el).on('click', remDocBtn, function (e) {
 
+            console.log('Table rem doc')
+            console.log($(this).data('doc'))
             Search.removeDoc($(this).data('doc'),true)
 
 
@@ -53,7 +55,8 @@ let Table = (function () {
 
         $(el).on('click', remLocBtn, function (e) {
 
-
+            console.log('Table rem loc')
+            console.log($(this).data('loc'))
             Search.removeLoc($(this).data('loc'))
 
 
@@ -116,7 +119,7 @@ let Table = (function () {
                     $('#main-table').html(hideTable)
                 }
 
-                $('#total-cars').html(data['carsCount'])
+                $('.total-cars').html(data['carsCount'])
 
             }, 1000);
 
