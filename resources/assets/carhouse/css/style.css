@@ -1717,7 +1717,7 @@ footer .footer-item .gallery-item {
 }
 
 .thead{
-    height: 60px;
+    height: 40px;
 
     border: 1px solid black;
 
@@ -1727,7 +1727,7 @@ footer .footer-item .gallery-item {
 .table .thead div{
     display: inline-block;
     width: 100px;
-    height: 50px;
+    height: 40px;
 
     padding: 8px 0 !important;
 
@@ -1756,6 +1756,32 @@ footer .footer-item .gallery-item {
     padding: 8px 0 !important;
 
     border-right: 1px solid black;
+}
+
+.bottom-cell_wrap{
+    display: flex;
+}
+
+.bottom-cell_wrap > div:nth-child(1){
+    width: 200px;
+}
+
+.bottom-cell_wrap > div:nth-child(2){
+    width: 100%;
+}
+
+.bottom-cell_wrap .thead__cell, .bottom-cell_wrap .table__row-cell{
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 40px;
+    padding: 0 10px !important;
+    border: 1px solid black;
+}
+
+.bottom-cell_wrap .table__row-cell{
+    width: 100%;
 }
 
 .table-pagination{

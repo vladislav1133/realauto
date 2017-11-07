@@ -6,57 +6,80 @@ $(document).ready(function(){
 
 	let cellCount = Math.floor(tableWidth / cellWidth);
 
-	let rowArray = $(".table__row");
+	let theadArray = $(".thead__cell");
+
+	let theadBottom = theadArray.slice(cellCount, theadArray.length + 1);
+
+    theadBottom.css("display", "none");
+
+    let rowArray = $(".table__row");
 
 	rowArray.each(function(){
 
 		let cellArray = $(this).children();
 
 		let bottomCell = cellArray.slice(cellCount, cellArray.length + 1);
-		let topCell = cellArray.splice(cellCount, bottomCell.length + 1);
+		//let topCell = cellArray.splice(cellCount, bottomCell.length + 1);
 
 		bottomCell.css("display", "none")
 
-	})
+	});
 
+	//----------------------------------------------------------
 	$(".table__row").click(function(){
 
-		$(this).addClass("active-row");
+		if($(this).hasClass("active-row") == !true){
 
-		let cellArray = $(this).children();
+            $(this).addClass("active-row");
 
-		var bottomCell = cellArray.filter(function(style) {
-  			return $(style).is(":visible");
-		});
+            let cellArray = $(this).children();
 
-		var bottomCell = [];
+            var bottomCell = [];
 
-		cellArray.each(function(){
+            cellArray.each(function () {
 
-			if($(this).is(":visible") != true){
-				bottomCell.push($(this));
-			};
+                if($(this).is(":visible") != true){
+                    bottomCell.push($(this));
+                }
 
-		});
+            });
 
-		$(this).after("<div class='bottom-cell_wrap'></div>");
+            $(this).after("<div class='bottom-cell_wrap'></div>");
 
-		let map = new Map();
+            $(".active-row").next().html("<div class='thead-bottom'></div><div class='tbody-bottom'></div>");
 
-		let i = 0;
+            $(theadBottom).each(function () {
 
-		$(bottomCell).each(function(){
+                $(this).css("display", "block");
 
-			$(this).css("display", "block");
+                $('.thead-bottom').append($(this));
 
-			map.set(i, $(this));
+            });
 
-			i++;
+            $(bottomCell).each(function () {
 
-		});
+				let clone = $(this).clone();
 
-		$(".active-row").next().html(map);
+                clone.css("display", "block");
 
-	})
+                $('.tbody-bottom').append(clone);
+
+            });
+
+		}else {
+
+            $(this).removeClass("active-row");
+
+            let bottomCell = [];
+
+            if($(this).next().hasClass("bottom-cell_wrap")){
+
+                $(this).next().remove();
+
+            }
+
+        }
+
+    });
 
 });

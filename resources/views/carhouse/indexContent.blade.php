@@ -2,24 +2,24 @@
     <div class="table-container">
         <div class="table car-table" data-empty="Автомобили не найдеы">
             <div class="thead">
-                <div>Фото</div>
-                <div>Лот</div>
-                <div>Год</div>
-                <div>Марка</div>
-                <div>Модель</div>
-                <div>Двигатель</div>
-                <div>Топливо</div>
-                <div>КПП</div>
-                <div>Одометр</div>
-                <div>Тип привода</div>
-                <div>Основные моменты</div>
-                <div>Основные повреждения</div>
-                <div>Вторичные повреждения</div>
-                <div>Дата</br> аукциона</div>
-                <div>Текушая</br> ставка</div>
-                <div>Купить сейчас</div>
-                <div>Расположение</div>
-                <div>Тип документа</div>
+                <div class="thead__cell">Фото</div>
+                <div class="thead__cell">Лот</div>
+                <div class="thead__cell">Год</div>
+                <div class="thead__cell">Марка</div>
+                <div class="thead__cell">Модель</div>
+                <div class="thead__cell">Двигатель</div>
+                <div class="thead__cell">Топливо</div>
+                <div class="thead__cell">КПП</div>
+                <div class="thead__cell">Одометр</div>
+                <div class="thead__cell">Тип привода</div>
+                <div class="thead__cell">Основные моменты</div>
+                <div class="thead__cell">Основные повреждения</div>
+                <div class="thead__cell">Вторичные повреждения</div>
+                <div class="thead__cell">Дата</br> аукциона</div>
+                <div class="thead__cell">Текушая</br> ставка</div>
+                <div class="thead__cell">Купить сейчас</div>
+                <div class="thead__cell">Расположение</div>
+                <div class="thead__cell">Тип документа</div>
             </div>
             <div class="tbody" id="table-body">
             @foreach($cars as $k=>$car)
