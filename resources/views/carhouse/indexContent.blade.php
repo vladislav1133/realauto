@@ -31,7 +31,7 @@
                 <tr @if(($k +1)%2 === 0)class="second-row"@endif>
                     <td>
                         <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank">
-                            <div><img class="product__img" src="{{$car->path_to_image}}" alt=""></div>
+                            <div><img class="product__img" src="{{$car->path_to_image}}" alt="" onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';"></div>
                         </a>
                     </td>
                     <td>

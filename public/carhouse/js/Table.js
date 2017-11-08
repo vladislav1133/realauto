@@ -73,33 +73,6 @@ let Table = (function () {
 
             this.initEvents()
 
-            Table.checkCarImage()
-
-        },
-
-        checkCarImage: function () {
-
-            let el = '#table-body td a div img'
-
-            $(el).each(function (i) {
-
-
-                let link = $(this).prop('src')
-
-                var $this;
-                $this = $(this);
-
-                $.ajax({
-                    url:link, //be sure to check the right attribute
-                    success: function () { //pass an anonymous callback function
-                    },
-                    error: function (jqXHR, status, er) {
-                        $this.prop('src', '/public/carhouse/img/car-blank.png')
-                    }
-                });
-            })
-
-
 
         },
 
@@ -170,7 +143,7 @@ let Table = (function () {
                     Table.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
                 }
 
-                Table.checkCarImage()
+
 
             });
         },
@@ -245,6 +218,8 @@ let Table = (function () {
         },
 
         initEvents: function () {
+
+
 
             onPaginate()
 
