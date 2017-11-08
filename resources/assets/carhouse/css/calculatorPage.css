@@ -147,6 +147,14 @@
 
 }
 
+.custom-calc h5{
+	min-width: 67px;
+}
+
+.custom-calc select.custom-calc__fuel {
+	width: 100px;
+}
+
 @media (max-width: 650px){
 	
 	.calculator {
