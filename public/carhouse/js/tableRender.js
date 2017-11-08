@@ -2,18 +2,18 @@ $(document).ready(function(){
 	
 	let tableWidth = $(".table").width();
 	let cellWidth = $(".table__row .table__row-cell").width();
-	let cell = $(".table__row-cell")
-
+	let cell = $(".table__row-cell");
 	let cellCount = Math.floor(tableWidth / cellWidth);
 
+
+
 	let theadArray = $(".thead__cell");
-
 	let theadBottom = theadArray.slice(cellCount, theadArray.length + 1);
-
     theadBottom.css("display", "none");
 
-    let rowArray = $(".table__row");
 
+
+    let rowArray = $(".table__row");
 	rowArray.each(function(){
 
 		let cellArray = $(this).children();
@@ -25,6 +25,43 @@ $(document).ready(function(){
 
 	});
 
+
+
+    $(window).resize(function(){
+
+		let tableWidth = $(".table").width();
+		let cellWidth = $(".table__row .table__row-cell").width();
+		let cell = $(".table__row-cell");
+		let cellCount = Math.floor(tableWidth / cellWidth);
+
+		//------------------------------
+
+		let theadArray = $(".thead__cell");
+		let theadBottom = theadArray.slice(cellCount, theadArray.length + 1);
+		let theadTop = theadArray.splice(cellCount, theadBottom.length + 1);
+		$(theadArray).css("display", "inline-block");
+    	$(theadBottom).css("display", "none");
+
+    	//------------------------------
+
+    	let rowArray = $(".table__row");
+		rowArray.each(function(){
+
+			let cellArray = $(this).children();
+
+			let bottomCell = cellArray.slice(cellCount, cellArray.length + 1);
+			let topCell = cellArray.splice(cellCount, bottomCell.length + 1);
+
+			//console.log(topCell);
+
+			$(cellArray).css("display", "inline-block");
+			$(bottomCell).css("display", "none")
+
+		});
+
+	});
+
+
 	//----------------------------------------------------------
 	$(".table__row").click(function(){
 
@@ -32,37 +69,29 @@ $(document).ready(function(){
 
             $(this).addClass("active-row");
 
-            let cellArray = $(this).children();
+            $(this).after("<div class='bottom-cell_wrap'><div class='thead-bottom'></div><div class='tbody-bottom'></div></div>");
 
-            var bottomCell = [];
-
-            cellArray.each(function () {
-
-                if($(this).is(":visible") != true){
-                    bottomCell.push($(this));
-                }
-
-            });
-
-            $(this).after("<div class='bottom-cell_wrap'></div>");
-
-            $(".active-row").next().html("<div class='thead-bottom'></div><div class='tbody-bottom'></div>");
-
-            $(theadBottom).each(function () {
+            let theadBottomClone = theadBottom.clone();
+            let theadContent = $(this).next().children(".thead-bottom");
+            $(theadBottomClone).each(function () {
 
                 $(this).css("display", "block");
-
-                $('.thead-bottom').append($(this));
+                $(theadContent).append($(this));
 
             });
 
-            $(bottomCell).each(function () {
+            let cellArray = $(this).children();
+            let bottomContent = $(this).next().children(".tbody-bottom");
+            $(cellArray).each(function () {
 
-				let clone = $(this).clone();
+                if($(this).is(":visible") != true){
+                
+                	let clone = $(this).clone();
 
-                clone.css("display", "block");
+                	clone.css("display", "block");
 
-                $('.tbody-bottom').append(clone);
+                	$(bottomContent).append(clone);
+                }
 
             });
 
@@ -70,7 +99,7 @@ $(document).ready(function(){
 
             $(this).removeClass("active-row");
 
-            let bottomCell = [];
+            delete cellArray;
 
             if($(this).next().hasClass("bottom-cell_wrap")){
 

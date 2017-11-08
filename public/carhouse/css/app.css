@@ -2486,15 +2486,15 @@ footer .footer-item .gallery-item {
             flex-direction: column;
 
     margin-bottom: 0;
+    border-radius: 6px;
 
     font-size: 13px;
     background-color: #fff;
 }
 
 .thead{
+    border-radius: 5px 5px 0 0;
     height: 40px;
-
-    border: 1px solid black;
 
     background-color: #6A0000;
 }
@@ -2508,29 +2508,29 @@ footer .footer-item .gallery-item {
 
     word-wrap: break-word;
     text-align: center;
-    border-right: 1px solid black;
     color: white;
 }
 
 .tbody{
 
-    border: 1px solid black;
-
 }
 
 .table__row{
 
-    border: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .table__row-cell{
     display: inline-block;
     width: 100px;
-    height: 60px;
-
+    
+    text-align: center;
     padding: 8px 0 !important;
+}
 
-    border-right: 1px solid black;
+.table__row .table__row-cell:first-child img{
+    margin-left: 5px;
 }
 
 .bottom-cell_wrap{
@@ -2560,7 +2560,7 @@ footer .footer-item .gallery-item {
 
     height: 40px;
     padding: 0 10px !important;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .bottom-cell_wrap .table__row-cell{
