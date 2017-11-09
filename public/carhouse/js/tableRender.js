@@ -27,40 +27,6 @@ $(document).ready(function(){
 
 
 
-    $(window).resize(function(){
-
-		let tableWidth = $(".table").width();
-		let cellWidth = $(".table__row .table__row-cell").width();
-		let cell = $(".table__row-cell");
-		let cellCount = Math.floor(tableWidth / cellWidth);
-
-		//------------------------------
-
-		let theadArray = $(".thead__cell");
-		let theadBottom = theadArray.slice(cellCount, theadArray.length + 1);
-		let theadTop = theadArray.splice(cellCount, theadBottom.length + 1);
-		$(theadArray).css("display", "inline-block");
-    	$(theadBottom).css("display", "none");
-
-    	//------------------------------
-
-    	let rowArray = $(".table__row");
-		rowArray.each(function(){
-
-			let cellArray = $(this).children();
-
-			let bottomCell = cellArray.slice(cellCount, cellArray.length + 1);
-			let topCell = cellArray.splice(cellCount, bottomCell.length + 1);
-
-			//console.log(topCell);
-
-			$(cellArray).css("display", "inline-block");
-			$(bottomCell).css("display", "none")
-
-		});
-
-	});
-
 
 	//----------------------------------------------------------
 	$(".table__row").click(function(){
