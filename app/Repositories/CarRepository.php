@@ -8,34 +8,6 @@ use Carbon\Carbon;
 class CarRepository extends Repository
 {
 
-    private $car_dmg = [
-        'ALL OVER ' => 'повсеместные повреждения',
-        'BURN - ENGINE' => 'пожар — двигатель',
-        'BURN' => 'пожар',
-        'DAMAGE HISTORY' => 'история повреждений',
-        'FRONT END' => 'передняя часть',
-        'MECHANICAL' => 'механические повреждения',
-        'NORMAL WEAR' => 'естественный износ',
-        'REJECTED REPAIR' => 'в ремонте было отказано',
-        'REAR END' => 'задняя часть',
-        'STRIPPED' => 'снята обшивка',
-        'UNKNOWN' => 'неизвестно',
-        'MISSING/ALTERED VIN' => 'отсутствующий / измененный VIN',
-        'REPLACED VIN' => 'замененный VIN',
-        'BIOHAZARDOUS/CHEMICAL' => 'биологическая / химическая опасность',
-        'BURN - INTERIOR' => 'пожар — салон',
-        'CASH FOR CLUNKERS' => 'наличные за старые автомобили',
-        'FRAME DAMAGE REPORTED' => 'заявленное повреждение корпуса',
-        'HAIL' => 'град',
-        'MINOR DENT/SCRATCHES' => 'незначительные выбоины/царапины',
-        'PARTIAL/INCOMPLETE REPAIR' => 'частичный / неполный ремонт',
-        'ROLLOVER' => 'незначительные выбоины / царапины',
-        'SIDE' => 'боковая часть',
-        'TOP/ROOF' => 'верхняя часть / крыша',
-        'UNDERCARRIAGE' => 'ходовая часть',
-        'VANDALISM ' => 'вандализм',
-        'WATER/FLOOD ' => 'затопление / наводнение',
-    ];
 
     public function __construct(Car $car)
     {
@@ -294,30 +266,12 @@ class CarRepository extends Repository
 
         $cars = $this->prepareMarkAndModel($cars);
 
-        $cars = $this->prepareOdometer($cars);
+        //$cars = $this->prepareOdometer($cars);
 
         $cars = $this->prepareDrive($cars);
 
         $cars = $this->prepareSaleDate($cars);
 
-        $cars = $this->prepareHighlights($cars);
-
-        return $cars;
-    }
-
-
-    protected function prepareHighlights($cars)
-    {
-
-        $cars->transform(function ($item, $key) {
-
-            if ($item->highlights === 'RUNS AND DRIVES') {
-
-                $item->highlights = 'RUN AND DRIVE';
-            }
-
-            return $item;
-        });
 
         return $cars;
     }
