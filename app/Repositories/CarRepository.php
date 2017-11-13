@@ -45,9 +45,9 @@ class CarRepository extends Repository
     public function getNames($type = 'car')
     {
 
-        $names = $this->get('name', '', '', '', '', '', '', '', $type)->toArray();
+        $names = $this->get('brand', '', '', '', '', '', '', '', $type)->toArray();
 
-        $names = array_pluck($names, 'name');
+        $names = array_pluck($names, 'brand');
 
         return $names;
     }
@@ -472,11 +472,11 @@ class CarRepository extends Repository
         $type = strtolower($type);
 
 
-        $where[] = ['name', 'like', '%' . $mark . '%'];
+        $where[] = ['brand', 'like', '%' . $mark . '%'];
 
         if ($model) {
 
-            $where[] = ['name', 'like', '%' . $model . '%'];
+            $where[] = ['brand', 'like', '%' . $model . '%'];
         }
 
         $cars = $this->get(['year', 'drive', 'fuel', 'location', 'highlights', 'doc_type', 'primary_damage'], '', '', $where, $whereIn, $whereNotIn, '', '', $type);
