@@ -8,34 +8,7 @@ use Carbon\Carbon;
 class CarRepository extends Repository
 {
 
-    private $car_dmg = [
-        'ALL OVER ' => 'повсеместные повреждения',
-        'BURN - ENGINE' => 'пожар — двигатель',
-        'BURN' => 'пожар',
-        'DAMAGE HISTORY' => 'история повреждений',
-        'FRONT END' => 'передняя часть',
-        'MECHANICAL' => 'механические повреждения',
-        'NORMAL WEAR' => 'естественный износ',
-        'REJECTED REPAIR' => 'в ремонте было отказано',
-        'REAR END' => 'задняя часть',
-        'STRIPPED' => 'снята обшивка',
-        'UNKNOWN' => 'неизвестно',
-        'MISSING/ALTERED VIN' => 'отсутствующий / измененный VIN',
-        'REPLACED VIN' => 'замененный VIN',
-        'BIOHAZARDOUS/CHEMICAL' => 'биологическая / химическая опасность',
-        'BURN - INTERIOR' => 'пожар — салон',
-        'CASH FOR CLUNKERS' => 'наличные за старые автомобили',
-        'FRAME DAMAGE REPORTED' => 'заявленное повреждение корпуса',
-        'HAIL' => 'град',
-        'MINOR DENT/SCRATCHES' => 'незначительные выбоины/царапины',
-        'PARTIAL/INCOMPLETE REPAIR' => 'частичный / неполный ремонт',
-        'ROLLOVER' => 'незначительные выбоины / царапины',
-        'SIDE' => 'боковая часть',
-        'TOP/ROOF' => 'верхняя часть / крыша',
-        'UNDERCARRIAGE' => 'ходовая часть',
-        'VANDALISM ' => 'вандализм',
-        'WATER/FLOOD ' => 'затопление / наводнение',
-    ];
+
 
     public function __construct(Car $car)
     {
@@ -45,9 +18,9 @@ class CarRepository extends Repository
     public function getNames($type = 'car')
     {
 
-        $names = $this->get('brand', '', '', '', '', '', '', '', $type)->toArray();
+        $names = $this->get('name', '', '', '', '', '', '', '', $type)->toArray();
 
-        $names = array_pluck($names, 'brand');
+        $names = array_pluck($names, 'name');
 
         return $names;
     }
@@ -472,11 +445,11 @@ class CarRepository extends Repository
         $type = strtolower($type);
 
 
-        $where[] = ['brand', 'like', '%' . $mark . '%'];
+        $where[] = ['name', 'like', '%' . $mark . '%'];
 
         if ($model) {
 
-            $where[] = ['brand', 'like', '%' . $model . '%'];
+            $where[] = ['name', 'like', '%' . $model . '%'];
         }
 
         $cars = $this->get(['year', 'drive', 'fuel', 'location', 'highlights', 'doc_type', 'primary_damage'], '', '', $where, $whereIn, $whereNotIn, '', '', $type);
