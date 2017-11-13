@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use App\Repositories\CarRepository;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CarsController extends Controller {
+
     protected $carRepository;
 
     public function __construct(CarRepository $carRepository)
@@ -38,8 +38,6 @@ class CarsController extends Controller {
 
         return response()->json($response);
     }
-
-
 
     public function getDocs(Request $request)
     {
@@ -223,12 +221,7 @@ class CarsController extends Controller {
 
         $carsCount = $cars->total();
 
-        $language['damage'] = trans('cars.damage');
-        $language['highlights'] = trans('cars.highlights');
-
-        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
-
-        return ['table' => $carsTable, 'carsCount' => $carsCount];
+        return response()->json(['cars' => $cars, 'total' => $carsCount]);
     }
 
     public function search($query) {
@@ -277,6 +270,7 @@ class CarsController extends Controller {
 
         return response()->json(['success' => true, 'favoriteCars' => $favoriteCars ]);
     }
+
 
 
 }
