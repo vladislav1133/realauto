@@ -2,6 +2,11 @@
 
 return [
 
+    'vehicle_type' => [
+        'AUTOMOBILE',
+        'MOTORCYCLE'
+    ],
+
     'fuel' => [
         'Compressed Natural Gas',
         'Convertible To Gaseous Powered',

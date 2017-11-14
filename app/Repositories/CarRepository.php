@@ -8,8 +8,6 @@ use Carbon\Carbon;
 class CarRepository extends Repository
 {
 
-
-
     public function __construct(Car $car)
     {
         $this->model = $car;
@@ -267,30 +265,12 @@ class CarRepository extends Repository
 
         $cars = $this->prepareMarkAndModel($cars);
 
-        $cars = $this->prepareOdometer($cars);
+        //$cars = $this->prepareOdometer($cars);
 
         $cars = $this->prepareDrive($cars);
 
         $cars = $this->prepareSaleDate($cars);
 
-        $cars = $this->prepareHighlights($cars);
-
-        return $cars;
-    }
-
-
-    protected function prepareHighlights($cars)
-    {
-
-        $cars->transform(function ($item, $key) {
-
-            if ($item->highlights === 'RUNS AND DRIVES') {
-
-                $item->highlights = 'RUN AND DRIVE';
-            }
-
-            return $item;
-        });
 
         return $cars;
     }
