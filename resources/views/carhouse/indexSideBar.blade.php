@@ -41,9 +41,26 @@
                 <a id="search-clear-btn" href="#">Сбросить всё</a>
             </div>
 
+
+            <div class="col-xs-12">
+                <div class="search__label">Источник:</div>
+            </div>
+
+            <div class="search__col col-xs-12">
+                <select
+                        id="search-source"
+                        class="selectpicker search__select"
+                        data-title="Все"
+                >
+                    <option value="iaai.com" selected>IAAI</option>
+                    <option value="copart.com">COPART</option>
+                </select>
+            </div>
+
             <div class="col-xs-12">
                 <div class="search__label">Тип транспорта:</div>
             </div>
+
 
             <div class="search__col col-xs-12">
                 <select
@@ -51,11 +68,13 @@
                         class="selectpicker search__select"
                         data-title="Все"
                 >
-                    <option value="car" selected>АВТОМОБИЛИ</option>
-                    <option value="moto">МОТОЦИКЛЫ</option>
+                    <option value="AUTOMOBILE" selected>АВТОМОБИЛИ</option>
+                    <option value="MOTORCYCLE">МОТОЦИКЛЫ</option>
+
 
                 </select>
             </div>
+
 
             <div class="col-xs-12">
                 <div class="search__label">Марка:</div>
@@ -67,7 +86,6 @@
                         class="selectpicker search__select"
                         data-live-search="true"
                         data-title="Все"
-                        data-max-options="1"
                 >
                     @if($search['marks'])
                         <option value="all" selected>ВСЕ</option>
@@ -88,8 +106,11 @@
                         id="search-models"
                         class="selectpicker search__select"
                         data-title="Все"
+                        multiple
                         data-live-search="true"
                         data-actions-box="true"
+                        data-select-all-text="Выделить все"
+                        data-deselect-all-text="Убрать все"
                 >
                 </select>
             </div>

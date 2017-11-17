@@ -2,21 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\GeneralDataRepository;
+use App\Repositories\PageRepository;
 
 class SiteController extends Controller{
 
-    protected $generalDataRepository;
+    protected $pageRepository;
 
-    public function __construct(GeneralDataRepository $generalDataRepository){
-        $this->generalDataRepository=$generalDataRepository;
+    public function __construct(PageRepository $pageRepository){
+
+        $this->pageRepository = $pageRepository;
     }
-
-    protected function getInfo($select='*'){
-
-        return $this->generalDataRepository->get($select);
-    }
-
 
 }
 

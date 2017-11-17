@@ -10,11 +10,10 @@ class ArticleRepository extends Repository{
         $this->model=$article;
     }
 
+    public function all($paginate=0) {
 
-    public function one($alias,$relation=false){
-
-        $article=parent::one($alias,$relation);
-
-        return $article;
+        return $this->model->select('*')->orderBy('created_at','desc')->paginate($paginate);
     }
+
+
 }

@@ -74,7 +74,17 @@ let Table = (function () {
             this.initEvents()
 
 
+                $('.pgwSlider').pgwSlider();
         },
+
+        showGallery: function (el) { // get the class name in arguments here
+        $.magnificPopup.open({
+            items: {
+                src: '#car-gallery',
+            },
+
+        });
+    },
 
         render: function (data) {
 

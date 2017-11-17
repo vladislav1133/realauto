@@ -13,6 +13,7 @@
     <link rel="shortcut icon" href="{{asset('carhouse/img/fav-real.png')}}">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/footable.standalone.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
+    <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/pgwslider.min.css">
 
 
 
@@ -36,6 +37,7 @@
 
 <script src="{{asset('js/app.js')}}"></script>
 
+<script src="{{asset(env('THEME'))}}/js/pgwslider.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/jquery.bxslider.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/pushy.min.js"></script>

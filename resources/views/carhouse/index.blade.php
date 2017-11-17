@@ -24,8 +24,19 @@
                     <div id="hide-table"></div>
                 </div>
             </div>
-
         </div>
+
+        <a class="simple-ajax-popup" href="realauto/cars/property/copart.com/AUTOMOBILE">Load another content via ajax</a>
+        <div id="car-gallery">
+            <ul class="pgwSlider">
+                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
+                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
+                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
+                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
+                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
+            </ul>
+        </div>
+
     </div>
 
 @endsection

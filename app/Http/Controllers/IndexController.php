@@ -3,39 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Car;
-use App\GeneralData;
+use App\Page;
 use App\Mail\ContactUsMail;
 use App\Repositories\CarRepository;
-use App\Repositories\GeneralDataRepository;
-
+use App\Repositories\PageRepository;
 use Illuminate\Http\Request;
 
 use Mail;
 use Validator;
-use Carbon\Carbon;
 
 class IndexController extends SiteController
 {
 
     protected $carRepository;
 
-    public function __construct(CarRepository $carRepository, GeneralDataRepository $generalDataRepository)
+    public function __construct(CarRepository $carRepository, PageRepository $pageRepository)
     {
-        parent::__construct(new GeneralDataRepository(new GeneralData()));
+        parent::__construct(new PageRepository(new Page()));
+
         $this->carRepository = $carRepository;
 
-        $this->indexInfo = $this->generalDataRepository->getInfo('*');
+
     }
 
     public function index()
     {
 
+        $meta = $this->pageRepository->findByField('name','index')->toArray();
+
         $language['damage'] = trans('cars.damage');
         $language['highlights'] = trans('cars.highlights');
 
-        $meta = $this->carRepository->getMeta('index');
 
-        $cars = $this->getCars('car');
+        $cars = $this->getCars();
 
 
         $carsTotal = $cars->total();
@@ -43,14 +43,13 @@ class IndexController extends SiteController
         $search = $this->getSearch();
 
 
-
         return view(env('THEME') . '.index')
             ->with('language',$language)
             ->with('carsTotal', $carsTotal)
             ->with('cars', $cars)
             ->with('search', $search)
-            ->with('info', $this->indexInfo)
-            ->with('meta', $meta)->render();
+            ->with('meta', $meta)
+            ->render();
     }
 
     public function contactUs(Request $request)
@@ -71,13 +70,12 @@ class IndexController extends SiteController
         return response()->json(['success' => 'true']);
     }
 
-    protected function getCars($type = 'car')
+    protected function getCars($source ='iaai.com', $type = 'AUTOMOBILE')
     {
+        $where['where'][] = ['source',$source];
+        $where['where'][] = ['vehicle_type',$type];
 
-
-        $cars = $this->carRepository
-            ->getCars(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'], '', '', '','','',$type);
-
+        $cars = $this->carRepository->get(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'],$where);
 
         return $cars;
     }
@@ -85,15 +83,14 @@ class IndexController extends SiteController
     protected function getSearch()
     {
 
-        $search = $this->carRepository->getSearchProperty('car'); //add marks,
-
+        $search = $this->carRepository->getSearchProperty('iaai.com','AUTOMOBILE'); //add marks,
 
         return $search;
     }
 
     public function rastamozhka()
     {
-        $meta = $this->carRepository->getMeta('index');
+        $meta = $this->pageRepository->findByField('name','rastamozhka');
 
 
         return view(env('THEME') . '.rastamozhka')

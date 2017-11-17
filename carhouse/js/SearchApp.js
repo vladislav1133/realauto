@@ -1,6 +1,6 @@
 let Search = (function () {
 
-    let options = {}
+    let options = {};
 
     let searchType = 'main'
 
@@ -21,6 +21,8 @@ let Search = (function () {
     let favoriteWrapper = '.favorite-wrapper'
 
     let selects = {
+
+        'source': '#search-source',
 
         'type': '#search-type',
 
@@ -53,7 +55,13 @@ let Search = (function () {
     //Just car options
     function initSearchOptions() {
 
+        options['source'] = filter_array(Search.getSelectOptions(selects['source']))
+
+
+        options['type'] = filter_array(Search.getSelectOptions(selects['type']))
+
         options['mark'] = filter_array(Search.getSelectOptions(selects['mark']))
+        options['mark'].shift()
 
         options['years'] = filter_array(Search.getSelectOptions(selects['yearTo']))
 
@@ -103,6 +111,8 @@ let Search = (function () {
         //Change selectors
 
         onSearchGlobal()
+
+        onChangeSource()
 
         onChangeType()
 
@@ -174,6 +184,7 @@ let Search = (function () {
 
         let data = {
 
+            source: $(selects['source']).val(),
             type: $(selects['type']).val(),
             mark: $(selects['mark']).val(),
             model: $(selects['model']).val(),
@@ -198,8 +209,6 @@ let Search = (function () {
             let docType = response.docType;
 
 
-
-
                 $(selects['docAdd']).selectpicker('val', '');
                 $(selects['docRem']).selectpicker('val', '');
 
@@ -215,6 +224,24 @@ let Search = (function () {
 
     //EVENTS
 
+    function onChangeSource() {
+
+        $(el).on('change', selects['source'], function (e) {
+            e.preventDefault()
+
+            Search.runPreloader()
+
+            $(selects['type']).selectpicker('val', options['type'][0])
+            Search.setSelectOptions(selects['model'], '')
+
+            Search.clearSearchValue([selects['source'], selects['type']])
+
+            Search.setSearchCarOptions()
+
+        })
+    }
+
+
     function onChangeType() {
 
         $(el).on('change', selects['type'], function (e) {
@@ -222,7 +249,7 @@ let Search = (function () {
 
             Search.runPreloader()
 
-            Search.clearSearchValue([selects['type']])
+            Search.clearSearchValue([selects['source'], selects['type']])
 
             Search.setSelectOptions(selects['model'], '')
 
@@ -241,11 +268,11 @@ let Search = (function () {
 
             let mark = $(selects['mark']).val();
 
-            Search.clearSearchValue([selects['type'], selects['mark']])
+            Search.clearSearchValue([selects['source'], selects['type'], selects['mark']])
 
             Search.setSearchCarOptions()
 
-            getModels(mark);
+           // getModels(mark);
         })
     }
 
@@ -258,7 +285,7 @@ let Search = (function () {
 
             let mark = $(selects['mark']).val();
 
-            Search.clearSearchValue([selects['type'], selects['mark'], selects['model']])
+            Search.clearSearchValue([selects['source'], selects['type'], selects['mark'], selects['model']])
 
             Search.setSearchCarOptions()
         })
@@ -434,7 +461,7 @@ let Search = (function () {
         showFavorite: false,
 
         runPreloader: function () {
-            $(searchBtnTop).html('<img class="search-block_preloader" src="/public/carhouse/img/search_preloader.svg">')
+            $(searchBtnTop).html('<img class="search-block_preloader" src="/carhouse/img/search_preloader.svg">')
         },
 
         stopPreloader: function () {
@@ -467,6 +494,8 @@ let Search = (function () {
             if (searchType === 'main') {
 
                 let searchData = {}
+
+                searchData['source'] = $(selects['source']).val()
 
                 searchData['type'] = $(selects['type']).val()
 
@@ -535,7 +564,9 @@ let Search = (function () {
 
             el.empty();
 
+            console.log(array)
             $.each(array, function (key, value) {
+
 
                 el.append("<option value='"+ value +"'>"+ value +"</option>")
             });
@@ -575,31 +606,39 @@ let Search = (function () {
 
         setSearchCarOptions: function () {
 
-            let type = $(selects['type']).val()
+            let source = $(selects['source']).val()
+            let type = '/' + $(selects['type']).val()
             let mark = $(selects['mark']).val()
             let model = $(selects['model']).val()
 
-            if (mark) mark = '/' + mark
-            if (model) model = '/' + model
+            if (model) model = model.join(',');
 
+            console.log('перед get')
             $.get({
 
-                url: '/cars/property/' + type + mark + model
+                url: '/cars/property/' + source + type,
+
+                data: {
+                    mark: mark,
+                    model: model
+                }
 
             }).done(function (data) {
 
+                console.log('in done')
 
-                if (data.marks) {
-                    Search.setSelectOptions(selects['mark'], data['marks'])
+                if (data.hasOwnProperty('marks')) {
+                    Search.setSelectOptions(selects['mark'], data.marks)
                     $(selects['mark']).prepend("<option value='all' selected='selected'>ВСЕ</option>");
                 }
 
+                if(data.hasOwnProperty('models')) {
+                    Search.setSelectOptions(selects['model'], data.models)
+                }
 
                 Search.setSelectOptions(selects['yearTo'], data['years'])
                 Search.setSelectOptions(selects['yearFrom'], data['years'])
 
-                console.log('YEARS YEARS')
-                console.log(data['years'])
                 
                 $(selects['yearFrom']).selectpicker('val', data['years'][0])
                 $(selects['yearTo']).selectpicker('val', data['years'][data['years'].length - 1])
@@ -618,8 +657,6 @@ let Search = (function () {
                 Search.setSelectOptions(selects['docAdd'], data['doc_type'])
                 Search.setSelectOptions(selects['docRem'], data['doc_type'])
 
-                console.log('setSelectsOptions')
-                console.log(data);
 
                 $('.selectpicker').selectpicker('refresh');
 
@@ -632,16 +669,16 @@ let Search = (function () {
 
             let options = Search.getOptions()
 
+            $(selects['source']).selectpicker('val', options['source'][0])
 
-            $(selects['type']).selectpicker('val', 'car')
+            $(selects['type']).selectpicker('val', options['type'][0])
 
             Search.setSelectOptions(selects['mark'], options['mark'])
+            $(selects['mark']).prepend("<option value='all' selected='selected'>ВСЕ</option>");
+            $(selects['mark']).selectpicker('val', 'all')
 
-            console.log(options['mark'])
 
             Search.setSelectOptions(selects['model'], '')
-
-
 
             Search.setSelectOptions(selects['yearFrom'], options['years'])
             Search.setSelectOptions(selects['yearTo'], options['years'])
@@ -663,7 +700,7 @@ let Search = (function () {
             Search.setSelectOptions(selects['docAdd'], options['doc_type'])
             Search.setSelectOptions(selects['docRem'], options['doc_type'])
 
-            Search.clearSearchValue([selects['type'], selects['yearTo'], selects['yearFrom']])
+            Search.clearSearchValue([selects['source'], selects['type'],selects['mark'], selects['yearTo'], selects['yearFrom']])
         },
 
         clearSearchValue: function (exceptClear = []) {

@@ -1,3 +1,4 @@
+
 @if($cars)
     <div class="table-container">
         <table class="table car-table" data-toggle-column="last" data-paging="true" data-empty="Автомобили не найдеы"
@@ -30,27 +31,33 @@
             @foreach($cars as $k=>$car)
                 <tr @if(($k +1)%2 === 0)class="second-row"@endif>
                     <td>
-                        <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank">
-                            <div><img class="product__img" src="{{$car->path_to_image}}" alt="" onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';"></div>
-                        </a>
+                            <div><img class="product__img" src="{{asset(''). trim($car->path_to_image,'/')}}" alt="" onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';"></div>
+
                     </td>
                     <td>
                         <div>
                             <div>
-                                <a href="https://www.copart.com/lot/{{$car->lot_id}}" target="_blank">
+                                <a href="{{'https://www.copart.com/lot/'.$car->lot_id}}" target="_blank">
                                     {{$car->lot_id}}
                                 </a>
                             </div>
-                            <div class="favorite__btn_wrap">
+                            <div style="display: inline" class="favorite__btn_wrap">
                                 <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}"
                                         title="Добавить в избранное"><i class="fa fa-bookmark-o"></i></button>
                             </div>
+
+                            @if($car->source === 'copart.com')
+                                <a style="font-size: 25px" href="{{'https://www.copart.com/lot/'.$car->lot_id}}" target="_blank">C</a>
+                            @else
+                                <a style="font-size: 25px; color: #A20106;" href="{{'https://www.iaai.com/Vehicle?itemID='.$car->lot_id}}" target="_blank">A</a>
+                            @endif
+
                         </div>
                     </td>
 
                     <td>@if($car->year){{$car->year}}@else &mdash; @endif</td>
 
-                    <td>@if($car->mark){{$car->mark}}@else &mdash; @endif</td>
+                    <td>@if($car->brand){{$car->brand}}@else &mdash; @endif</td>
 
                     <td>@if($car->model){{$car->model}}@else &mdash; @endif</td>
 

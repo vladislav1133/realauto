@@ -2,9 +2,42 @@
 
 return [
 
+    'damage' => [
+        'ALL OVER' => 'ALL OVER',
+        'BIOHAZARDOUS/CHEMICAL',
+        'BURN - ENGINE',
+        'BURN - INTERIOR',
+        'BURN' ,
+        'CASH FOR CLUNKERS',
+        'DAMAGE HISTORY' ,
+        'FRAME DAMAGE REPORTED',
+        'FRONT END' ,
+        'MECHANICAL',
+        'MINOR DENTS/SCRATCHES' ,
+        'NORMAL WEAR' ,
+        'PARTIAL/INCOMPLETE REPAIR' ,
+        'REJECTED',
+        'ROLLOVER',
+        'REAR END' ,
+        'SIDE' ,
+        'STRIPPED' ,
+        'TOP/ROOF',
+        'UNKNOWN' ,
+        'UNDERCARRIAGE' ,
+        'MISSING/ALTERED VIN' ,
+        'VANDALISM'   ,
+        'REPLACED VIN' ,
+        'WATER/FLOOD' ,
+        'HAIL',
+    ],
+
     'vehicle_type' => [
         'AUTOMOBILE',
         'MOTORCYCLE'
+    ],
+
+    'source' => [
+        'iaai.com'
     ],
 
     'fuel' => [
@@ -35,16 +68,6 @@ return [
         'RUN AND DRIVE'
     ],
 
-    'body_style' => [
-        'moto' => [
-            'ALL TERR',
-            'DIRT',
-            'ENDURO',
-            'MOTO CRO',
-            'RACER',
-            'ROAD/STR'
-        ]
-    ]
 
     //Добавить engine_type любой без л
 ];

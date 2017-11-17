@@ -25,7 +25,7 @@
                                 <div><strong>Цвет: </strong>черный</div>
                                 <div><strong>Пробег: </strong>11000</div>
                             </div>
-                            <a href="/"
+                            <a href="{{route('availablecars.show',1)}}"
                                class="btn btn-read-more acar-box__btn">Подробнее
                             </a>
                             <a href="#"

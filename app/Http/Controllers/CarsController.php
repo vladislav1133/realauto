@@ -6,12 +6,153 @@ use App\Repositories\CarRepository;
 
 use Illuminate\Http\Request;
 
+
 class CarsController extends Controller {
     protected $carRepository;
 
     public function __construct(CarRepository $carRepository)
     {
         $this->carRepository = $carRepository;
+    }
+
+    public function getCars(Request $request)
+    {
+
+        $where = [];
+
+        $driveSearch = [];
+
+        $drive_type = config('car_search.drive_type');
+
+        $drive = $request->drive;
+        $mark = $request->mark;
+        $model = $request->model;
+        $yearFrom = $request->yearFrom;
+        $yearTo = $request->yearTo;
+        $docAdd = $request->docAdd;
+        $docRem = $request->docRem;
+        $highlight = $request->highlight;
+        $fuel = $request->fuel;
+        $locAdd = $request->locAdd;
+        $locRem = $request->locRem;
+        $favoriteCars = $request->favoriteCars;
+        $lot = $request->lot;
+        $vin = $request->vin;
+        $buyNow = $request->buyNow;
+        $damage = $request->damage;
+        $type = $request->type;
+        $source = $request->source;
+
+
+        //check it
+        if($buyNow !== null) {
+            $where['where'][] = ['buy_it_now','!=',''];
+        }
+
+        if ($type) $where['where'][] = ['source',$source];
+
+        if ($type) $where['where'][] = ['vehicle_type',$type];
+
+
+        if($mark === 'all') $mark = false;
+        if ($mark) $where['where'][] = ['brand',$mark];
+
+        if ($model) $where['whereIn'][] = ['model',$model];
+
+
+        if ($yearFrom) {
+            $where['where'][] = ['year', '>=', $yearFrom];
+        }
+
+        if ($yearTo) {
+            $where['where'][] = ['year', '<=', $yearTo];
+        }
+
+        if ($damage) array_push($where['whereIn'][], ['primary_damage', $damage]);
+
+        if ($drive) {
+
+            $driveSearch[0] = 'drive';
+
+            $driveSearch[1] = array();
+
+            foreach ($drive as $driveType) {
+
+                foreach ($drive_type[$driveType] as $item) {
+
+                    array_push($driveSearch[1], $item);
+                }
+            }
+
+            $where['whereIn'][] = $driveSearch;
+        }
+
+        if ($fuel) $where['whereIn'][] = ['fuel', $fuel];
+
+        if ($docRem)  $where['whereNotIn'][] = ['doc_type', $docRem];
+
+        if ($docAdd){
+
+            if($docRem){
+                foreach ($docRem as $key=>$doc){
+
+                    if(($key = array_search($doc, $docAdd)) !== false) {
+
+                        unset($docAdd[$key]);
+                    }
+                }
+            }
+
+            if ($docAdd) $where['whereIn'][] = ['doc_type', $docAdd];
+        }
+
+        if ($locRem)  $where['whereNotIn'][] = ['location', $locRem];
+
+        if ($locAdd){
+
+            if($locRem){
+                foreach ($locRem as $loc){
+
+                    if(($key = array_search($loc, $locAdd)) !== false) {
+
+                        unset($locAdd[$key]);
+                    }
+                }
+            }
+
+            if ($locAdd)$where['whereIn'][] = ['location', $locAdd];
+        }
+
+        if ($highlight) {
+
+            $key = array_search('RUN AND DRIVE',$highlight);
+            if($key !== false) $highlight[$key] = 'RUNS AND DRIVES';
+
+            $where['whereIn'][] =['highlights', $highlight];
+        }
+
+        if ($favoriteCars) $where['whereIn'][] = ['lot_id', $favoriteCars];
+
+        if($lot) {
+            $where['where'][] = ['lot_id', '=', $lot];
+        }
+
+        if($vin) {
+            $where['where'][] = ['vin', '=', $vin];
+        }
+
+        $orderBy = ['sale_date', 'asc'];
+
+        $cars = $this->carRepository->get(['*'], config('settings.cars_on_page'), $orderBy, $where);
+
+        $carsCount = $cars->total();
+
+        $language['damage'] = trans('cars.damage');
+        $language['highlights'] = trans('cars.highlights');
+
+        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
+
+        return ['table' => $carsTable, 'carsCount' => $carsCount];
     }
 
     public function getMarks($type)
@@ -39,10 +180,9 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
-
-
     public function getDocs(Request $request)
     {
+        $source = $request->source;
         $type = $request->type;
         $mark = $request->mark;
         $model = $request->model;
@@ -50,18 +190,19 @@ class CarsController extends Controller {
         $locAdd = $request->locAdd;
         $locRem = $request->locRem;
 
-        $docs = [];
-        $whereNotIn = [];
-        $whereIn = [];
         $where = [];
 
+        if ($source) $where['where'][] = ['source', $source];
+
+        if ($type) $where['where'][] = ['vehicle_type', $type];
 
         if ($mark === 'all') $mark = false;
-        if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
-        if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
+        if ($mark) $where['where'][] = ['brand', $mark];
+
+        if ($model) $where['where'][] = ['model', $model];
 
 
-        if ($locRem) array_push($whereNotIn, ['location', $locRem]);
+        if ($locRem) $where['whereNotIn'][] =  ['location', $locRem];
 
         if ($locAdd){
 
@@ -75,15 +216,12 @@ class CarsController extends Controller {
                 }
             }
 
-            if ($locAdd) array_push($whereIn, ['location', $locAdd]);
+            if ($locAdd) $where['whereIn'][] = ['location', $locAdd];
         }
 
-        $queryArr = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], $where, $whereIn,$whereNotIn,true,'',$type);
+        $docs = $this->carRepository->get(['doc_type'], '', ['doc_type', 'asc'], $where);
 
-        foreach ($queryArr as $arr) {
-
-            array_push($docs, $arr['doc_type']);
-        }
+        $docs = $this->carRepository->getProperty($docs,'doc_type');
 
         $response['docType'] = $docs;
 
@@ -91,167 +229,14 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
-    public function getCars(Request $request)
-    {
-
-        $where = false;
-
-        $whereIn = [];
-
-        $whereNotIn = [];
-
-        $whereNotNull = [];
-
-        $driveSearch = [];
-
-        $drive_type = config('car_search.drive_type');
-
-        $drive = $request->drive;
-        $mark = $request->mark;
-        $model = $request->model;
-        $yearFrom = $request->yearFrom;
-        $yearTo = $request->yearTo;
-        $docAdd = $request->docAdd;
-        $docRem = $request->docRem;
-        $highlight = $request->highlight;
-        $fuel = $request->fuel;
-        $locAdd = $request->locAdd;
-        $locRem = $request->locRem;
-        $favoriteCars = $request->favoriteCars;
-        $lot = $request->lot;
-        $vin = $request->vin;
-        $buyNow = $request->buyNow;
-        $damage = $request->damage;
-        $type = $request->type;
 
 
-        if($buyNow !== null) {
-            $where[] = ['buy_it_now', '!=',''];
-        }
+    public function getSearchProperty($source, $type, Request $request){
 
+        $mark = $request['mark'];
+        $model = array_filter(explode(',',$request['model']));
 
-        if($mark === 'all') $mark = false;
-        if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
-        if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
-
-
-
-        if ($yearFrom) {
-            $where[] = ['year', '>=', $yearFrom];
-        }
-
-        if ($yearTo) {
-            $where[] = ['year', '<=', $yearTo];
-        }
-
-        if ($damage) array_push($whereIn, ['primary_damage', $damage]);
-
-        if ($drive) {
-
-            $driveSearch[0] = 'drive';
-
-            $driveSearch[1] = array();
-
-            foreach ($drive as $driveType) {
-
-                foreach ($drive_type[$driveType] as $item) {
-
-                    array_push($driveSearch[1], $item);
-                }
-            }
-
-            $whereIn[] = $driveSearch;
-        }
-
-        if ($fuel) array_push($whereIn, ['fuel', $fuel]);
-
-        if ($docRem) array_push($whereNotIn, ['doc_type', $docRem]);
-
-        if ($docAdd){
-
-            if($docRem){
-                foreach ($docRem as $key=>$doc){
-
-                    if(($key = array_search($doc, $docAdd)) !== false) {
-
-                        unset($docAdd[$key]);
-                    }
-                }
-            }
-
-            if ($docAdd) array_push($whereIn, ['doc_type', $docAdd]);
-        }
-
-        if ($locRem) array_push($whereNotIn, ['location', $locRem]);
-
-        if ($locAdd){
-
-            if($locRem){
-                foreach ($locRem as $loc){
-
-                    if(($key = array_search($loc, $locAdd)) !== false) {
-
-                        unset($locAdd[$key]);
-                    }
-                }
-            }
-
-            if ($locAdd) array_push($whereIn, ['location', $locAdd]);
-        }
-
-        if ($highlight) {
-
-            $key = array_search('RUN AND DRIVE',$highlight);
-            if($key !== false) $highlight[$key] = 'RUNS AND DRIVES';
-
-            array_push($whereIn, ['highlights', $highlight]);
-        }
-
-        if ($favoriteCars) array_push($whereIn, ['lot_id', $favoriteCars]);
-
-        if($lot) {
-            $where[] = ['lot_id', '=', $lot];
-        }
-
-        if($vin) {
-            $where[] = ['vin', '=', $vin];
-        }
-
-        $orderBy = ['sale_date', 'asc'];
-
-        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull,$type);
-
-        $carsCount = $cars->total();
-
-        $language['damage'] = trans('cars.damage');
-        $language['highlights'] = trans('cars.highlights');
-
-        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
-
-        return ['table' => $carsTable, 'carsCount' => $carsCount];
-    }
-
-    public function search($query) {
-
-        $query = $this->carRepository->search($query);
-
-        $res = [];
-
-        if($query){
-
-            $res['found'] = true;
-            $res['col'] = $query;
-        } else {
-
-            $res['found'] = false;
-        }
-
-        return response()->json($res);
-    }
-
-    public function getSearchProperty($type = 'car', $mark = false, $model = false){
-
-        $property = $this->carRepository->getSearchProperty($type, $mark, $model);
+        $property = $this->carRepository->getSearchProperty($source, $type, $mark, $model);
 
         return response()->json($property);
     }

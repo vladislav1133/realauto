@@ -2,33 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Repositories\GeneralDataRepository;
-use App\GeneralData;
+use App\Page;
+use App\Repositories\PageRepository;
 
 
 class ContactController extends SiteController {
 
     protected $repository;
 
-    public function __construct(GeneralDataRepository $generalDataRepository){
-        parent::__construct(new GeneralDataRepository(new GeneralData()));
+    public function __construct(PageRepository $pageRepository){
+        parent::__construct(new PageRepository(new Page()));
 
-
-
-        $this->indexInfo = $this->generalDataRepository->getInfo('*');
     }
 
     public function index(){
 
-        $meta = $this->generalDataRepository->getMeta('contacts');
+        $meta = $this->pageRepository->findByField('name','contacts')->toArray();
 
         $content = view(env('THEME').'.contactsContent')->render();
 
         return view(env('THEME').'.contacts')
             ->with('content',$content)
-            ->with('info',$this->indexInfo)
             ->with('meta',$meta)->render();
     }
 }

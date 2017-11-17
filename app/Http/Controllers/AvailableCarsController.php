@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
+use App\Repositories\PageRepository;
 use Illuminate\Http\Request;
-
-use App\Repositories\GeneralDataRepository;
-use App\GeneralData;
 
 use App\Repositories\AvailableCarRepository;
 
@@ -13,12 +12,11 @@ class AvailableCarsController extends SiteController
 {
     protected $availableCarRepository;
 
-    public function __construct(AvailableCarRepository $availableCarRepository, GeneralDataRepository $generalDataRepository){
-        parent::__construct(new GeneralDataRepository(new GeneralData()));
+    public function __construct(AvailableCarRepository $availableCarRepository, PageRepository $pageRepository){
+        parent::__construct(new PageRepository(new Page()));
 
         $this->availableCarRepository=$availableCarRepository;
 
-        $this->indexInfo = $this->generalDataRepository->getInfo('*');
     }
 
     /**
@@ -29,14 +27,12 @@ class AvailableCarsController extends SiteController
     public function index(){
 
         //$articles=$this->getAvailableCars();
-        $meta = $this->availableCarRepository->getMeta('availablecars');
+        $meta = $this->pageRepository->findByField('name','availablecars')->toArray();
 
         $content = view(env('THEME').'.availableCarContent')
             ->render();
 
-
         return view(env('THEME').'.availableCar')
-            ->with('info',$this->indexInfo)
             ->with('meta', $meta)
             ->with('content', $content)
             ->render();
@@ -50,19 +46,17 @@ class AvailableCarsController extends SiteController
      * @return \Illuminate\Http\Response
      */
     public function show($alias){
-        $article=$this->getAvailableCar($alias);
+        //$article=$this->getAvailableCar($alias);
 
-        $meta['meta_title'] = $article['meta_title'];
-        $meta['meta_description'] = $article['meta_description'];
-        $meta['meta_keywords'] = $article['meta_keywords'];
+        $meta['meta_title'] = 'Доступная машина';
+        $meta['meta_description'] = 'Купить машину в наличии';
+        $meta['meta_keywords'] = 'Купить машину';
 
-        $content = view(env('THEME').'.availableCarPage2')->with('article',$article);
+        $content = view(env('THEME').'.availableCarPage2') ;
 
 
-        redirect()->route('home');
-        return view(env('THEME').'.blog')
+        return view(env('THEME').'.availableCar')
             ->with('meta',$meta)
-            ->with('info',$this->indexInfo)
             ->with('content', $content)->render();
 
     }

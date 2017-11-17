@@ -11,5 +11,5 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/carhouse/js')
-   .sass('resources/assets/sass/app.scss', 'public/carhouse/css');
+mix.js('resources/assets/js/app.js', 'carhouse/js')
+   .sass('resources/assets/sass/app.scss', 'carhouse/css');
