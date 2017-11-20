@@ -8,6 +8,21 @@
 
     <div id="main-content" class="car-list content-area">
 
+        <div class="hidden">
+
+                <div id="car-gallery"  style="margin:0 auto; width:100%; max-width: 1200px; position: relative">
+                    <ul class="rslides">
+                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
+                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
+                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
+                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
+                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
+                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+
+
         <div class="main-content_inner">
 
             <div class="side-bar">
@@ -26,18 +41,10 @@
             </div>
         </div>
 
-        <a class="simple-ajax-popup" href="realauto/cars/property/copart.com/AUTOMOBILE">Load another content via ajax</a>
-        <div id="car-gallery">
-            <ul class="pgwSlider">
-                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
-                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
-                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
-                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
-                <li><img src="http://www.news1130.com/wp-content/blogs.dir/sites/9/2015/06/24/rcoon.jpg"></li>
-            </ul>
-        </div>
 
     </div>
+
+
 
 @endsection
 

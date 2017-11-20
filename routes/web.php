@@ -29,6 +29,7 @@ Route::post('cars/docs','CarsController@getDocs');
 Route::get('cars/search/{query}','CarsController@search');
 Route::get('cars/property/{source}/{type}','CarsController@getSearchProperty');
 Route::post('cars/favorite/remove','CarsController@removeFavorite');
+Route::get('cars/images/{carId}','CarsController@getGalleryImg');
 
 
 

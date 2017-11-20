@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Car;
+use App\CarImg;
 use Carbon\Carbon;
 
 class CarRepository extends Repository
@@ -13,6 +14,18 @@ class CarRepository extends Repository
         $this->model = $car;
     }
 
+    public function getGalleryImg($carId){
+
+        $images = CarImg::select('*')->where('car_id',$carId)->first();
+
+
+
+        if($images){
+            $images = array_filter(explode(',',$images->imgs));
+        }
+
+        return $images;
+    }
 
     protected function prepareOdometer($cars)
     {
@@ -104,6 +117,8 @@ class CarRepository extends Repository
 
 
 
+        $where['where'][] = ['active',1];
+
         if ($where) {
 
 
@@ -165,6 +180,7 @@ class CarRepository extends Repository
         $where = [];
         $property = [];
 
+        if($source === 'all') $source = false;
         $where['where'][] = ['source',$source];
         $where['where'][] = ['vehicle_type',$type];
 
@@ -230,7 +246,16 @@ class CarRepository extends Repository
 
     public function getProperty($collection, $col) {
 
-        return  $collection->pluck($col)->unique()->sort()->values()->toArray();
+        $arr = $collection->pluck($col)->unique()->toArray();
+        if (($key = array_search('NULL', $arr)) !== false) {
+            unset($arr[$key]);
+        }
+
+        $arr = array_filter($arr);
+        sort($arr);
+        $arr = array_values($arr);
+
+        return $arr;
     }
 
 }

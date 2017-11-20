@@ -50,7 +50,8 @@ let Search = (function () {
         'docRem': '#search-doc-rem'
     }
 
-    let buyNowInput = '#search-buy-now'
+    let buyNowInputTop = '#search-buy-now-top'
+    let buyNowInputBottom = '#search-buy-now-bottom'
 
     //Just car options
     function initSearchOptions() {
@@ -232,6 +233,7 @@ let Search = (function () {
             Search.runPreloader()
 
             $(selects['type']).selectpicker('val', options['type'][0])
+
             Search.setSelectOptions(selects['model'], '')
 
             Search.clearSearchValue([selects['source'], selects['type']])
@@ -415,6 +417,7 @@ let Search = (function () {
                 return false;
             }
 
+
             if (!Search.showFavorite) {
 
                 Search.showFavorite = true
@@ -495,7 +498,7 @@ let Search = (function () {
 
                 let searchData = {}
 
-                searchData['source'] = $(selects['source']).val()
+                searchData['source'] =  $(selects['source']).val()
 
                 searchData['type'] = $(selects['type']).val()
 
@@ -523,7 +526,7 @@ let Search = (function () {
                 searchData['docRem'] = $(selects['docRem']).val()
 
 
-                if ($(buyNowInput).is(":checked")) {
+                if ($(buyNowInputTop).is(":checked") || $(buyNowInputBottom).is(":checked")) {
 
                     searchData['buyNow'] = 1
                 }
@@ -700,10 +703,10 @@ let Search = (function () {
             Search.setSelectOptions(selects['docAdd'], options['doc_type'])
             Search.setSelectOptions(selects['docRem'], options['doc_type'])
 
-            Search.clearSearchValue([selects['source'], selects['type'],selects['mark'], selects['yearTo'], selects['yearFrom']])
+            Search.clearSearchValue([selects['source'], selects['type'],selects['mark'], selects['yearTo'], selects['yearFrom']],true)
         },
 
-        clearSearchValue: function (exceptClear = []) {
+        clearSearchValue: function (exceptClear = [],buyItNow = false) {
 
 
             let selectsArray = Object.values(selects);
@@ -714,7 +717,10 @@ let Search = (function () {
             })
 
 
-            $(buyNowInput).prop("checked", false);
+            if(buyItNow){
+                $(buyNowInputTop).prop("checked", false);
+                $(buyNowInputBottom).prop("checked", false);
+            }
 
             $('.selectpicker').selectpicker('refresh');
         },

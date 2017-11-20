@@ -2,12 +2,25 @@
 
 return [
 
+    'drive' => [
+        'FRONT WHEEL DRIVE' => 'Передний привод',
+        'ALL WHEEL DRIVE' => 'Полный привод',
+        'REAR WHEEL DRIVE' => 'Задрий привод',
+        '4X4 DRIVE' => '4x4 привод',
+    ],
+
     'highlights' => [
 
         'ENHANCED VEHICLES' => 'Уточняйте дополнительно',
         'RUN AND DRIVE' => 'На ходу',
-        'ENGINE START PROGRAM' => 'Двигатель запускается'
+        'ENGINE START PROGRAM' => 'Двигатель запускается',
+        'VEHICLE WON\'T START' => 'Двигатель не запускается',
+        'ENGINE START PROGRAM WITH JUMP' => '',
+        'CANNOT TEST START, ENGINE DAMAGE' => 'Тест пуска двигателя невозможно провести, двигатель поврежден',
+        'CANNOT TEST START' => 'Тест пуска двигателя невозможно провести',
+        'DID NOT TEST START' => 'Пуск двигателя не тестировался ',
     ],
+
 
     'damage' => [
         'ALL OVER' => 'Ровсеместные повреждения',
@@ -36,6 +49,15 @@ return [
         'REPLACED VIN' => 'Замененный VIN',
         'WATER/FLOOD' => 'Затопление/Наводнение',
         'HAIL' => 'Град',
+        'TRANSMISSION' => 'Поврежденная трансмиссия',
+        'THEFT' => 'В угоне',
+        'REPOSSESSION' => 'Изъятая банком',
+        'FRONT & REAR' => 'Передняя и задняя часть',
+        'ENGINE DAMAGE' => 'Поврежденный двигатель',
+        'ELECTRICAL' => 'Поврежденное эл. Оборудование',
+        'COLLISION' => 'участник ДТП',
+
+
     ],
 
 ];

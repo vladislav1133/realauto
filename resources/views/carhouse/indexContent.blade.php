@@ -30,16 +30,19 @@
             <tbody id="table-body">
             @foreach($cars as $k=>$car)
                 <tr @if(($k +1)%2 === 0)class="second-row"@endif>
-                    <td>
-                            <div><img class="product__img" src="{{asset(''). trim($car->path_to_image,'/')}}" alt="" onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';"></div>
-
+                    <td><div>
+                            <img class="product__img"
+                                 src="http://test.realauto.pro/{{ trim($car->path_to_image,'/')}}"
+                                 alt=""
+                                 title="Смотреть фото"
+                                 data-car-id="{{$car->car_id}}"
+                                 onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';">
+                        </div>
                     </td>
                     <td>
                         <div>
                             <div>
-                                <a href="{{'https://www.copart.com/lot/'.$car->lot_id}}" target="_blank">
-                                    {{$car->lot_id}}
-                                </a>
+                                    <a href="{{$car->url}}" target="_blank">{{$car->lot_id}}</a>
                             </div>
                             <div style="display: inline" class="favorite__btn_wrap">
                                 <button class="product__btn favorite__btn" data-lot="{{$car->lot_id}}"
@@ -47,32 +50,38 @@
                             </div>
 
                             @if($car->source === 'copart.com')
-                                <a style="font-size: 25px" href="{{'https://www.copart.com/lot/'.$car->lot_id}}" target="_blank">C</a>
+                                <a style="font-size: 25px" href="{{$car->url}}" target="_blank">C</a>
                             @else
-                                <a style="font-size: 25px; color: #A20106;" href="{{'https://www.iaai.com/Vehicle?itemID='.$car->lot_id}}" target="_blank">A</a>
+                                <a style="font-size: 25px; color: #A20106;" href="{{$car->url}}" target="_blank">A</a>
                             @endif
 
                         </div>
                     </td>
 
-                    <td>@if($car->year){{$car->year}}@else &mdash; @endif</td>
+                    <td>@if($car->year && $car->year != 'NULL'){{$car->year}}@else &mdash; @endif</td>
 
-                    <td>@if($car->brand){{$car->brand}}@else &mdash; @endif</td>
+                    <td>@if($car->brand && $car->brand != 'NULL'){{$car->brand}}@else &mdash; @endif</td>
 
-                    <td>@if($car->model){{$car->model}}@else &mdash; @endif</td>
+                    <td>@if($car->model && $car->model != 'NULL'){{$car->model}}@else &mdash; @endif</td>
 
-                    <td>@if($car->engine_type){{$car->engine_type}}@else &mdash; @endif</td>
+                    <td>@if($car->engine_type && $car->engine_type != 'NULL'){{$car->engine_type}}@else &mdash; @endif</td>
 
-                    <td>@if($car->fuel){{$car->fuel}}@else &mdash; @endif</td>
+                    <td>@if($car->fuel && $car->fuel != 'NULL'){{$car->fuel}}@else &mdash; @endif</td>
 
-                    <td>@if($car->transmission){{$car->transmission}}@else &mdash; @endif</td>
+                    <td>@if($car->transmission && $car->transmission != 'NULL'){{$car->transmission}}@else &mdash; @endif</td>
 
-                    <td>@if($car->odometer){{$car->odometer}}@else &mdash; @endif</td>
-
-                    <td>@if($car->drive){{$car->drive}}@else &mdash; @endif</td>
+                    <td>@if($car->odometer && $car->odometer != 'NULL'){{$car->odometer}}@else &mdash; @endif</td>
 
                     <td>
-                        @if($car->highlights)
+                        @if($car->drive && $car->drive != 'NULL')
+                            <div title="{{$language['drive'][$car->drive] or ''}}">{{$car->drive}}</div>
+                        @else
+                            &mdash;
+                        @endif
+                    </td>
+
+                    <td>
+                        @if($car->highlights && $car->highlights != 'NULL')
                             <div title="{{$language['highlights'][$car->highlights] or ''}}">{{$car->highlights}}</div>
                         @else
                         &mdash;
@@ -80,7 +89,7 @@
                     </td>
 
                     <td>
-                        @if($car->primary_damage)
+                        @if($car->primary_damage && $car->primary_damage != 'NULL')
                             <div title="{{$language['damage'][$car->primary_damage] or ''}}">{{$car->primary_damage}}</div>
                         @else
                             &mdash;
@@ -88,26 +97,26 @@
                     </td>
 
                     <td>
-                        @if($car->secondary_damage)
+                        @if($car->secondary_damage && $car->secondary_damage != 'NULL')
                            <div title="{{$language['damage'][$car->secondary_damage] or ''}}">{{$car->secondary_damage}}</div>
                         @else
                             &mdash;
                         @endif
                     </td>
 
-                    <td class="sale_date">@if($car->sale_date){{$car->sale_date}}@else &mdash; @endif</td>
+                    <td class="sale_date">@if($car->sale_date && $car->sale_date != 'NULL'){{$car->sale_date}}@else &mdash; @endif</td>
 
-                    <td>@if($car->current_bid)${{$car->current_bid}}@else &mdash; @endif</td>
+                    <td>@if($car->current_bid && $car->current_bid != 'NULL')${{$car->current_bid}}@else &mdash; @endif</td>
 
-                    <td>@if($car->buy_it_now)<div class="buy-now_green">${{$car->buy_it_now}}</div>@else &mdash; @endif</td>
+                    <td>@if($car->buy_it_now && $car->buy_it_now != 'NULL')<div class="buy-now_green">${{$car->buy_it_now}}</div>@else &mdash; @endif</td>
 
 
-                    <td>@if($car->location){{$car->location}}
+                    <td>@if($car->location && $car->location != 'NULL'){{$car->location}}
                         <button class="btn btn-rem-loc rem-btn" data-loc="{{$car->location}}">Исключить из поиска
                         </button>@else &mdash; @endif
                     </td>
 
-                    <td>@if($car->doc_type){{$car->doc_type}}
+                    <td>@if($car->doc_type && $car->doc_type != 'NULL'){{$car->doc_type}}
                         <button class="btn btn-rem-doc rem-btn" data-doc="{{$car->doc_type}}">Исключить из поиска
                         </button>@else &mdash; @endif
                     </td>

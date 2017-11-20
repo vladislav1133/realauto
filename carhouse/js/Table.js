@@ -39,6 +39,61 @@ let Table = (function () {
         })
     }
 
+    function onClickImage() {
+
+        $(el).on('click', '.product__img', function (e) {
+
+            console.log('click img')
+
+            let carId = $(this).data('car-id')
+
+            $.ajax({
+                method: 'GET',
+                url: '/cars/images/'+ carId
+
+            }).done(function(data) {
+                console.log('DONE 200')
+                console.log(data)
+
+                let carGallery = $('#car-gallery')
+
+                carGallery.empty()
+
+                if(data.images.length !== 0) {
+
+                    let html = '<ul class="rslides">'
+
+                    $.each(data.images, function(index, value) {
+
+                        html += `<li><img src="http://test.realauto.pro/${value}" alt=""></li>`
+                    });
+
+                    html += '</ul>'
+
+                    carGallery.html(html)
+
+                    $(".rslides").responsiveSlides({
+                        auto:false,
+                        nav:true,
+                        prevText: "<i class='fa fa-arrow-left'></i>",   // String: Text for the "previous" button
+                        nextText: "<i class='fa fa-arrow-right'></i>",
+                    });
+
+                    $.magnificPopup.open({
+                        items: {
+                            src: '#car-gallery'
+                        },
+
+                    });
+
+
+                }
+
+            });
+
+        })
+    }
+
     function onClickRemoveDoc() {
 
         $(el).on('click', remDocBtn, function (e) {
@@ -46,8 +101,6 @@ let Table = (function () {
             console.log('Table rem doc')
             console.log($(this).data('doc'))
             Search.removeDoc($(this).data('doc'),true)
-
-
         })
     }
 
@@ -58,8 +111,6 @@ let Table = (function () {
             console.log('Table rem loc')
             console.log($(this).data('loc'))
             Search.removeLoc($(this).data('loc'))
-
-
         })
     }
 
@@ -67,14 +118,21 @@ let Table = (function () {
 
         init: function () {
 
+            console.log('Table init')
+
             $('#main-table .car-table').footable({});
 
             this.updateFavoriteCars()
 
             this.initEvents()
 
+            $(".rslides").responsiveSlides({
+                auto:false,
+                nav:true,
+                prevText: "<i class='fa fa-arrow-left'></i>",   // String: Text for the "previous" button
+                nextText: "<i class='fa fa-arrow-right'></i>",
+            });
 
-                $('.pgwSlider').pgwSlider();
         },
 
         showGallery: function (el) { // get the class name in arguments here
@@ -229,7 +287,7 @@ let Table = (function () {
 
         initEvents: function () {
 
-
+            onClickImage()
 
             onPaginate()
 

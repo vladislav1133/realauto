@@ -17,7 +17,7 @@ class ContactController extends SiteController {
 
     public function index(){
 
-        $meta = $this->pageRepository->findByField('name','contacts')->toArray();
+        $meta = $this->pageRepository->findByField('name','contacts');
 
         $content = view(env('THEME').'.contactsContent')->render();
 

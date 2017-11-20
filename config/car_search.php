@@ -2,34 +2,34 @@
 
 return [
 
-    'damage' => [
-        'ALL OVER' => 'ALL OVER',
-        'BIOHAZARDOUS/CHEMICAL',
-        'BURN - ENGINE',
-        'BURN - INTERIOR',
-        'BURN' ,
-        'CASH FOR CLUNKERS',
-        'DAMAGE HISTORY' ,
-        'FRAME DAMAGE REPORTED',
-        'FRONT END' ,
-        'MECHANICAL',
-        'MINOR DENTS/SCRATCHES' ,
-        'NORMAL WEAR' ,
-        'PARTIAL/INCOMPLETE REPAIR' ,
-        'REJECTED',
-        'ROLLOVER',
-        'REAR END' ,
-        'SIDE' ,
-        'STRIPPED' ,
-        'TOP/ROOF',
-        'UNKNOWN' ,
-        'UNDERCARRIAGE' ,
-        'MISSING/ALTERED VIN' ,
-        'VANDALISM'   ,
-        'REPLACED VIN' ,
-        'WATER/FLOOD' ,
-        'HAIL',
-    ],
+//    'damage' => [
+//        'ALL OVER' => 'ALL OVER',
+//        'BIOHAZARDOUS/CHEMICAL',
+//        'BURN - ENGINE',
+//        'BURN - INTERIOR',
+//        'BURN' ,
+//        'CASH FOR CLUNKERS',
+//        'DAMAGE HISTORY' ,
+//        'FRAME DAMAGE REPORTED',
+//        'FRONT END' ,
+//        'MECHANICAL',
+//        'MINOR DENTS/SCRATCHES' ,
+//        'NORMAL WEAR' ,
+//        'PARTIAL/INCOMPLETE REPAIR' ,
+//        'REJECTED',
+//        'ROLLOVER',
+//        'REAR END' ,
+//        'SIDE' ,
+//        'STRIPPED' ,
+//        'TOP/ROOF',
+//        'UNKNOWN' ,
+//        'UNDERCARRIAGE' ,
+//        'MISSING/ALTERED VIN' ,
+//        'VANDALISM'   ,
+//        'REPLACED VIN' ,
+//        'WATER/FLOOD' ,
+//        'HAIL',
+//    ],
 
     'vehicle_type' => [
         'AUTOMOBILE',
@@ -37,7 +37,8 @@ return [
     ],
 
     'source' => [
-        'iaai.com'
+        'iaai.com',
+        'copart.com',
     ],
 
     'fuel' => [

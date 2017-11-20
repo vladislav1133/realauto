@@ -8,6 +8,11 @@ use SleepingOwl\Admin\Widgets\Widget;
 class NavigationUserBlock extends Widget
 {
 
+    public function __construct()
+    {
+
+    }
+
     /**
      * Get content as a string of HTML.
      *
@@ -15,6 +20,7 @@ class NavigationUserBlock extends Widget
      */
     public function toHtml()
     {
+
 
         return view('admin.widgets.navbar');
     }

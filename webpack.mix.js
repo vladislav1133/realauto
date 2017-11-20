@@ -11,5 +11,7 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'carhouse/js')
-   .sass('resources/assets/sass/app.scss', 'carhouse/css');
+mix
+    .setPublicPath('./')
+    .js('./resources/assets/js/app.js', './carhouse/js')
+    .sass('./resources/assets/sass/app.scss', './carhouse/css');

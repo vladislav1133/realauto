@@ -40,7 +40,15 @@
             <div class="col-xs-12">
                 <a id="search-clear-btn" href="#">Сбросить всё</a>
             </div>
-
+            <div class="col-xs-12">
+                <div class="checkbox">
+                    <label>
+                        <input id="search-buy-now-top" type="checkbox" value="">
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        <b>Купить сейчас</b>
+                    </label>
+                </div>
+            </div>
 
             <div class="col-xs-12">
                 <div class="search__label">Источник:</div>
@@ -52,7 +60,8 @@
                         class="selectpicker search__select"
                         data-title="Все"
                 >
-                    <option value="iaai.com" selected>IAAI</option>
+                    <option value="all" selected>ВСЕ</option>
+                    <option value="iaai.com">IAAI</option>
                     <option value="copart.com">COPART</option>
                 </select>
             </div>
@@ -328,7 +337,7 @@
             <div class="col-xs-12">
                 <div class="checkbox">
                     <label>
-                        <input id="search-buy-now" type="checkbox" value="">
+                        <input id="search-buy-now-bottom" type="checkbox" value="">
                         <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                         <b>Купить сейчас</b>
                     </label>

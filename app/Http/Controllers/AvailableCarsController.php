@@ -27,7 +27,7 @@ class AvailableCarsController extends SiteController
     public function index(){
 
         //$articles=$this->getAvailableCars();
-        $meta = $this->pageRepository->findByField('name','availablecars')->toArray();
+        $meta = $this->pageRepository->findByField('name','availablecars');
 
         $content = view(env('THEME').'.availableCarContent')
             ->render();

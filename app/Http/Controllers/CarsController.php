@@ -47,9 +47,12 @@ class CarsController extends Controller {
         //check it
         if($buyNow !== null) {
             $where['where'][] = ['buy_it_now','!=',''];
+            $where['where'][] = ['buy_it_now','!=','NULL'];
+            $where['whereNotNull'][] = 'buy_it_now';
         }
 
-        if ($type) $where['where'][] = ['source',$source];
+        if($source === 'all') $source = false;
+        if ($source) $where['where'][] = ['source',$source];
 
         if ($type) $where['where'][] = ['vehicle_type',$type];
 
@@ -68,7 +71,7 @@ class CarsController extends Controller {
             $where['where'][] = ['year', '<=', $yearTo];
         }
 
-        if ($damage) array_push($where['whereIn'][], ['primary_damage', $damage]);
+        if ($damage) $where['whereIn'][] = ['primary_damage', $damage];
 
         if ($drive) {
 
@@ -125,10 +128,7 @@ class CarsController extends Controller {
 
         if ($highlight) {
 
-            $key = array_search('RUN AND DRIVE',$highlight);
-            if($key !== false) $highlight[$key] = 'RUNS AND DRIVES';
-
-            $where['whereIn'][] =['highlights', $highlight];
+            $where['whereIn'][] = ['highlights', $highlight];
         }
 
         if ($favoriteCars) $where['whereIn'][] = ['lot_id', $favoriteCars];
@@ -149,6 +149,7 @@ class CarsController extends Controller {
 
         $language['damage'] = trans('cars.damage');
         $language['highlights'] = trans('cars.highlights');
+        $language['drive'] = trans('cars.drive');
 
         $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
 
@@ -192,6 +193,7 @@ class CarsController extends Controller {
 
         $where = [];
 
+        if ($source === 'all') $source = false;
         if ($source) $where['where'][] = ['source', $source];
 
         if ($type) $where['where'][] = ['vehicle_type', $type];
@@ -263,5 +265,12 @@ class CarsController extends Controller {
         return response()->json(['success' => true, 'favoriteCars' => $favoriteCars ]);
     }
 
+    public function getGalleryImg($carId) {
+
+        $images = $this->carRepository->getGalleryImg($carId);
+
+        if($images === null) $images = [];
+        return response()->json(['images' => $images]);
+    }
 
 }

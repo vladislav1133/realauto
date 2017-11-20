@@ -33,6 +33,7 @@ class IndexController extends SiteController
 
         $language['damage'] = trans('cars.damage');
         $language['highlights'] = trans('cars.highlights');
+        $language['drive'] = trans('cars.drive');
 
 
         $cars = $this->getCars();
@@ -70,9 +71,8 @@ class IndexController extends SiteController
         return response()->json(['success' => 'true']);
     }
 
-    protected function getCars($source ='iaai.com', $type = 'AUTOMOBILE')
+    protected function getCars($type = 'AUTOMOBILE')
     {
-        $where['where'][] = ['source',$source];
         $where['where'][] = ['vehicle_type',$type];
 
         $cars = $this->carRepository->get(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'],$where);
@@ -82,8 +82,7 @@ class IndexController extends SiteController
 
     protected function getSearch()
     {
-
-        $search = $this->carRepository->getSearchProperty('iaai.com','AUTOMOBILE'); //add marks,
+        $search = $this->carRepository->getSearchProperty('all','AUTOMOBILE'); //add marks,
 
         return $search;
     }

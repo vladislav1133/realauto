@@ -4,11 +4,11 @@
     <ul class="nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#light-car" aria-controls="light-car" role="tab"
                                                   data-toggle="tab"><img
-                        src="{{asset('public\carhouse\img\calc-lightCar.png')}}" alt=""></a></li>
+                        src="{{asset('/carhouse/img/calc-lightCar.png')}}" alt=""></a></li>
         <li role="presentation"><a href="#electric-car" aria-controls="electric-car" role="tab" data-toggle="tab"><img
-                        src="{{asset('public\carhouse\img\calc-electricCar.png')}}" alt=""></a></li>
+                        src="{{asset('/carhouse/img/calc-electricCar.png')}}" alt=""></a></li>
         <li role="presentation"><a href="#moto" aria-controls="moto" role="tab" data-toggle="tab"><img
-                        src="{{asset('public\carhouse\img\calc-bike.png')}}" alt=""></a></li>
+                        src="{{asset('/carhouse/img/calc-bike.png')}}" alt=""></a></li>
     </ul>
 
 

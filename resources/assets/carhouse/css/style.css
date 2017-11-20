@@ -2670,6 +2670,33 @@ iframe {
     color: #5d6e7b;
 }
 
+/** CAR GALLERY **/
+
+
+#car-gallery .next{
+
+    font-size: 70px;
+    top: 40%;
+    right: 0;
+    color: #000;
+    opacity: 0.3;
+    position: absolute;
+    z-index: 100000;
+}
+
+#car-gallery .prev{
+
+    font-size: 70px;
+    top: 40%;
+    left: 0;
+    color: #000;
+    opacity: 0.3;
+    position: absolute;
+    z-index: 100000;
+}
+
+
+
 /** FORM CONTENT AREA START **/
 .form-content-box {
     padding: 54px;
