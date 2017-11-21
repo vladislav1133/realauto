@@ -126,8 +126,6 @@ class CarsController extends Controller {
 
         $cars = $this->carRepository->get(['*'], config('settings.cars_on_page'), $orderBy, $where);
 
-
-
         $carsCount = $cars->total();
 
         $language['damage'] = trans('cars.damage');
@@ -153,6 +151,13 @@ class CarsController extends Controller {
         $models = $this->carRepository->getModels($type, $mark,true);
 
         $response['models'] = $models;
+
+        return response()->json($response);
+    }
+
+    public function getYears(){
+
+        $response['years'] = $this->carRepository->getYears();
 
         return response()->json($response);
     }
@@ -207,6 +212,8 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
+
+
     public function getSearchProperty($source, $type, Request $request){
 
         $mark = $request['mark'];
@@ -215,6 +222,13 @@ class CarsController extends Controller {
         $property = $this->carRepository->getSearchProperty($source, $type, $mark, $model);
 
         return response()->json($property);
+    }
+
+    public function getDefaultSearchProperty() {
+
+        $property = $this->carRepository->getDefaultSearchProperty();
+
+        return $property;
     }
 
     public function removeFavorite(Request $request) {
