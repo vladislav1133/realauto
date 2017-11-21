@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Car;
 use App\CarImg;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 
 class CarRepository extends Repository
 {
@@ -173,11 +174,13 @@ class CarRepository extends Repository
         });
 
 
-        if ($pagination) {
-            $filtered = $filtered->forPage(1,10);
-        }
+        $pagination = new Paginator($filtered,'10','1');
+
+        dump($pagination);
+        dump($pagination->links());
 
 
+        dd();
         return $filtered;
     }
 

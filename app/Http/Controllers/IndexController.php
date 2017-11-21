@@ -10,6 +10,7 @@ use App\Repositories\PageRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use Illuminate\Pagination\Paginator;
 use Mail;
 use Validator;
 
@@ -38,9 +39,11 @@ class IndexController extends SiteController
 
 
         $cars = $this->getCars();
-    
-        $carsTotal = $cars->total();
 
+        $carsTotal = $cars->count();
+
+        $paginator = new Paginator($cars,'');
+        dd();
         $search = $this->getSearch();
 
 
