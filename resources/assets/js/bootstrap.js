@@ -15,6 +15,7 @@ try {
     require('../carhouse/js/jquery.magnific-popup.min')
     require('../carhouse/js/ie10-viewport-bug-workaround')
     require('../carhouse/js/jquery.bxslider.min')
+    require('../carhouse/js/vueTest.js')
 
 
 } catch (e) {

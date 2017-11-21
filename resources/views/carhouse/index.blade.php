@@ -32,7 +32,7 @@
             <div class="for-side-bar-fixed"></div>
 
             <div class="content content-area__table">
-                <div id="table">
+                <div id="table">{{mes}}
                     <div id="main-table">
                         @include(env('THEME').'.indexContent')
                     </div>
