@@ -60,7 +60,11 @@ let App = (function () {
 
                 url: '/contact-us',
 
-                data: data
+                data: data,
+
+                success: function(){
+                    alert('Ваше сообщение доставлено, нас менеджер свяжется с Вами в ближайшее время в течении рабочего дня.');
+                }
 
             }).done(function (data) {
 

@@ -10,7 +10,7 @@
 
         <div class="hidden">
 
-                <div id="car-gallery"  style="margin:0 auto; width:100%; max-width: 1200px; position: relative">
+                <div id="car-gallery">
                     <ul class="rslides">
                         <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
                         <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>

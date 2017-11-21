@@ -43,8 +43,6 @@ let Table = (function () {
 
         $(el).on('click', '.product__img', function (e) {
 
-            console.log('click img')
-
             let carId = $(this).data('car-id')
 
             $.ajax({
@@ -75,8 +73,8 @@ let Table = (function () {
                     $(".rslides").responsiveSlides({
                         auto:false,
                         nav:true,
-                        prevText: "<i class='fa fa-arrow-left'></i>",   // String: Text for the "previous" button
-                        nextText: "<i class='fa fa-arrow-right'></i>",
+                        prevText: "<img src='carhouse/img/arrow_left.png'></img>",   // String: Text for the "previous" button
+                        nextText: "<img src='carhouse/img/arrow_right.png'></img>",
                     });
 
                     $.magnificPopup.open({
