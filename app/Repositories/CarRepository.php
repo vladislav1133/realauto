@@ -217,27 +217,7 @@ class CarRepository extends Repository
         $property['location'] = $this->getProperty($cars,'location');
         $property['doc_type'] = $this->getProperty($cars,'doc_type');
 
-
-        $property['drive'] = [];
-
-        $drives = $this->getProperty($cars,'drive');
-
-        $driveType = config('car_search.drive_type');
-
-
-        foreach ($driveType as $k => $type) {
-
-
-            foreach ($type as $item) {
-
-                if (in_array($item, $drives)) {
-
-                    array_push($property['drive'], $k);
-                }
-            }
-        }
-
-        $property['drive'] = array_unique($property['drive']);
+        $property['drive'] = $this->getProperty($cars,'drive');
 
 
         return $property;

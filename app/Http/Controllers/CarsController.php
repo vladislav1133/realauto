@@ -73,22 +73,7 @@ class CarsController extends Controller {
 
         if ($damage) $where['whereIn'][] = ['primary_damage', $damage];
 
-        if ($drive) {
-
-            $driveSearch[0] = 'drive';
-
-            $driveSearch[1] = array();
-
-            foreach ($drive as $driveType) {
-
-                foreach ($drive_type[$driveType] as $item) {
-
-                    array_push($driveSearch[1], $item);
-                }
-            }
-
-            $where['whereIn'][] = $driveSearch;
-        }
+        if($drive) $where['whereIn'][] = ['drive',$drive];
 
         if ($fuel) $where['whereIn'][] = ['fuel', $fuel];
 
