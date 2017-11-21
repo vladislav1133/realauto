@@ -20,10 +20,6 @@ class CarsController extends Controller {
 
         $where = [];
 
-        $driveSearch = [];
-
-        $drive_type = config('car_search.drive_type');
-
         $drive = $request->drive;
         $mark = $request->mark;
         $model = $request->model;
