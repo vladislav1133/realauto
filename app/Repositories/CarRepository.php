@@ -89,7 +89,7 @@ class CarRepository extends Repository
 
     }
 
-    protected function prepareSaleDate($cars)
+    public function prepareSaleDate($cars)
     {
 
 
@@ -97,15 +97,19 @@ class CarRepository extends Repository
 
             if ($item->sale_date) {
 
+
                 $item->sale_date = Carbon::createFromTimestamp($item->sale_date / 1000)->format('d/m/Y');
+
             }
+
+
             return $item;
         });
 
         return $cars;
     }
 
-    public  function get($select = '*', $pagination = false, $orderBy = false,  array $where = [])
+    public function get($select = '*', $pagination = false, $orderBy = false,  array $where = [])
     {
 
         $builder=$this->model->select($select);
@@ -115,13 +119,9 @@ class CarRepository extends Repository
             $builder->orderBy($orderBy[0], $orderBy[1]);
         }
 
-
-
         $where['where'][] = ['active',1];
 
         if ($where) {
-
-
 
             if(array_key_exists('where', $where)){
 
@@ -164,16 +164,34 @@ class CarRepository extends Repository
 
         }
 
-        if ($pagination) {
+        $collection = $builder->get();
 
-            return $builder->paginate($pagination);
+        $filtered = $collection->filter(function ($item) {
+
+            return $this->haveActualDate($item->sale_date);
+
+        });
+
+
+        if ($pagination) {
+            $filtered = $filtered->forPage(1,10);
         }
 
 
-        return $builder->get();
+        return $filtered;
     }
 
 
+    public function haveActualDate($date){
+
+
+        $date = $date/1000;
+
+        $timeNow = Carbon::now()->getTimestamp();
+
+        if($date > $timeNow) return true;
+        return false;
+    }
 
     public function getSearchProperty($source, $type, $mark = false, $model = false)
     {
@@ -196,7 +214,7 @@ class CarRepository extends Repository
         }
 
 
-        $cars = $this->get(['brand','model','year', 'drive', 'fuel', 'location', 'highlights', 'doc_type', 'primary_damage'], '', '', $where);
+        $cars = $this->get(['brand','model','year', 'drive', 'fuel', 'location', 'highlights', 'doc_type', 'primary_damage','sale_date'], '', '', $where);
 
 
         if (!$mark) {

@@ -7,6 +7,7 @@ use App\Page;
 use App\Mail\ContactUsMail;
 use App\Repositories\CarRepository;
 use App\Repositories\PageRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Mail;
@@ -37,8 +38,7 @@ class IndexController extends SiteController
 
 
         $cars = $this->getCars();
-
-
+    
         $carsTotal = $cars->total();
 
         $search = $this->getSearch();
@@ -53,29 +53,18 @@ class IndexController extends SiteController
             ->render();
     }
 
-    public function contactUs(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|min:2',
-            'tel' => 'required|min:5',
-        ]);
 
-
-        $mailable = new ContactUsMail($request->tel, $request->name, $request->message, $request->favoriteCars);
-        $mailable->replyTo(env('MAIL_ADDRESS'), env('APP_NAME'));
-
-        Mail::to(env('MAIL_ADDRESS'))->send($mailable);
-
-
-
-        return response()->json(['success' => 'true']);
-    }
 
     protected function getCars($type = 'AUTOMOBILE')
     {
         $where['where'][] = ['vehicle_type',$type];
 
         $cars = $this->carRepository->get(['*'], config('settings.cars_on_page'), ['sale_date', 'asc'],$where);
+
+
+        $cars = $this->carRepository->prepareSaleDate($cars);
+
+
 
         return $cars;
     }
@@ -96,6 +85,22 @@ class IndexController extends SiteController
             ->with('meta', $meta)->render();
     }
 
+    public function contactUs(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:2',
+            'tel' => 'required|min:5',
+        ]);
 
+
+        $mailable = new ContactUsMail($request->tel, $request->name, $request->message, $request->favoriteCars);
+        $mailable->replyTo(env('MAIL_ADDRESS'), env('APP_NAME'));
+
+        Mail::to(env('MAIL_ADDRESS'))->send($mailable);
+
+
+
+        return response()->json(['success' => 'true']);
+    }
 }
 

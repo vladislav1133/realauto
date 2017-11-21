@@ -125,7 +125,7 @@
             </tbody>
         </table>
         <div class="table-pagination">
-            {{$cars->links()}}
+            {{$paginator->links()}}
         </div>
     </div>
 
