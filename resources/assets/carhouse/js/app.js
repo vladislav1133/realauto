@@ -1,3 +1,17 @@
+import Vue from "vue";
+
+import App from "./app.vue"
+
+const app = new Vue({
+
+    el: ".thead",
+
+    template: "<app></app>",
+
+    components: {App}
+
+})
+
 val =  $('.price-slider').slider('getValue');
 
 $('.price-slider').on('slide', function (ev) {
