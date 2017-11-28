@@ -63,7 +63,7 @@ let Table = (function () {
 
                     $.each(data.images, function(index, value) {
 
-                        html += `<li><img src="http://test.realauto.pro/${value}" alt=""></li>`
+                        html += `<li><img src="${value}" alt=""></li>`
                     });
 
                     html += '</ul>'

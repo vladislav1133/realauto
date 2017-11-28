@@ -28,22 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-
-        // Регистрация виджетов в реестре
-        /** @var WidgetsRegistryInterface $widgetsRegistry */
-        $widgetsRegistry = $this->app[\SleepingOwl\Admin\Contracts\Widgets\WidgetsRegistryInterface::class];
-
-//        foreach ($this->widgets as $widget) {
-//            $widgetsRegistry->registerWidget($widget);
-//        }
-//
-//                DB::listen(function ($query){
-//            //просмотрю sql запроса
-//            dump($query->sql);
-//            //отсылаемые параметры
-//            //dump($query->bindings);
-//        });
-
     }
 
     /**
