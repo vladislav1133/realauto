@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Repositories\CarRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -92,17 +93,7 @@ class CarsController extends Controller {
     public function getCars(Request $request)
     {
 
-        $where = false;
-
-        $whereIn = [];
-
-        $whereNotIn = [];
-
-        $whereNotNull = [];
-
-        $driveSearch = [];
-
-        $drive_type = config('car_search.drive_type');
+        $where = [];
 
         $drive = $request->drive;
         $mark = $request->mark;
@@ -121,49 +112,43 @@ class CarsController extends Controller {
         $buyNow = $request->buyNow;
         $damage = $request->damage;
         $type = $request->type;
+        $source = $request->source;
 
 
+        //check it
         if($buyNow !== null) {
-            $where[] = ['buy_it_now', '!=',''];
+            $where['where'][] = ['buy_it_now','!=',''];
+            $where['where'][] = ['buy_it_now','!=','NULL'];
+            $where['whereNotNull'][] = 'buy_it_now';
         }
+
+        if($source === 'all') $source = false;
+        if ($source) $where['where'][] = ['source',$source];
+
+        if ($type) $where['where'][] = ['vehicle_type',$type];
 
 
         if($mark === 'all') $mark = false;
-        if ($mark) $where[] = ['name', 'like', '%' . $mark . '%'];
-        if ($model) $where[] = ['name', 'like', '%' . $model . '%'];
+        if ($mark) $where['where'][] = ['brand',$mark];
 
+        if ($model) $where['whereIn'][] = ['model',$model];
 
 
         if ($yearFrom) {
-            $where[] = ['year', '>=', $yearFrom];
+            $where['where'][] = ['year', '>=', $yearFrom];
         }
 
         if ($yearTo) {
-            $where[] = ['year', '<=', $yearTo];
+            $where['where'][] = ['year', '<=', $yearTo];
         }
 
-        if ($damage) array_push($whereIn, ['primary_damage', $damage]);
+        if ($damage) $where['whereIn'][] = ['primary_damage', $damage];
 
-        if ($drive) {
+        if($drive) $where['whereIn'][] = ['drive',$drive];
 
-            $driveSearch[0] = 'drive';
+        if ($fuel) $where['whereIn'][] = ['fuel', $fuel];
 
-            $driveSearch[1] = array();
-
-            foreach ($drive as $driveType) {
-
-                foreach ($drive_type[$driveType] as $item) {
-
-                    array_push($driveSearch[1], $item);
-                }
-            }
-
-            $whereIn[] = $driveSearch;
-        }
-
-        if ($fuel) array_push($whereIn, ['fuel', $fuel]);
-
-        if ($docRem) array_push($whereNotIn, ['doc_type', $docRem]);
+        if ($docRem)  $where['whereNotIn'][] = ['doc_type', $docRem];
 
         if ($docAdd){
 
@@ -177,10 +162,10 @@ class CarsController extends Controller {
                 }
             }
 
-            if ($docAdd) array_push($whereIn, ['doc_type', $docAdd]);
+            if ($docAdd) $where['whereIn'][] = ['doc_type', $docAdd];
         }
 
-        if ($locRem) array_push($whereNotIn, ['location', $locRem]);
+        if ($locRem)  $where['whereNotIn'][] = ['location', $locRem];
 
         if ($locAdd){
 
@@ -194,34 +179,38 @@ class CarsController extends Controller {
                 }
             }
 
-            if ($locAdd) array_push($whereIn, ['location', $locAdd]);
+            if ($locAdd)$where['whereIn'][] = ['location', $locAdd];
         }
 
         if ($highlight) {
 
-            $key = array_search('RUN AND DRIVE',$highlight);
-            if($key !== false) $highlight[$key] = 'RUNS AND DRIVES';
-
-            array_push($whereIn, ['highlights', $highlight]);
+            $where['whereIn'][] = ['highlights', $highlight];
         }
 
-        if ($favoriteCars) array_push($whereIn, ['lot_id', $favoriteCars]);
+        if ($favoriteCars) $where['whereIn'][] = ['lot_id', $favoriteCars];
 
         if($lot) {
-            $where[] = ['lot_id', '=', $lot];
+            $where['where'][] = ['lot_id', '=', $lot];
         }
 
         if($vin) {
-            $where[] = ['vin', '=', $vin];
+            $where['where'][] = ['vin', '=', $vin];
         }
 
         $orderBy = ['sale_date', 'asc'];
 
-        $cars = $this->carRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where, $whereIn, $whereNotIn, '',$whereNotNull,$type);
+        $cars = $this->carRepository->get(['*'], config('settings.cars_on_page'), $orderBy, $where);
 
         $carsCount = $cars->total();
 
-        return response()->json(['cars' => $cars, 'total' => $carsCount]);
+        $language['damage'] = trans('cars.damage');
+        $language['highlights'] = trans('cars.highlights');
+        $language['drive'] = trans('cars.drive');
+
+        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
+
+        
+        return ['cars' => $cars, 'carsCount' => $carsCount];
     }
 
     public function search($query) {
@@ -249,21 +238,6 @@ class CarsController extends Controller {
         return response()->json($property);
     }
 
-
-    public function removeFavorite(Request $request) {
-
-        $favoriteCars = $request->favoriteCars;
-
-        $favoriteCars = json_decode($favoriteCars);
-
-        if(!is_array($favoriteCars))  return response()->json(['success' => false, 'message' => 'invalid data']);
-
-        $lots = $this->carRepository->pluck('lot_id')->toArray();
-
-        $favoriteCars = array_intersect($favoriteCars, $lots);
-
-        return response()->json(['success' => true, 'favoriteCars' => $favoriteCars ]);
-    }
 
 
 
