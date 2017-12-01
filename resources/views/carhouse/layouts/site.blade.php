@@ -36,7 +36,7 @@
 
 @yield('footer')
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="/carhouse/js/app.js"></script>
 
 <script src="{{asset(env('THEME'))}}/js/responsiveslides.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>

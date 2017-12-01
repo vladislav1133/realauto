@@ -41,7 +41,16 @@
                                  onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';">
 
                             @if($car->highlights==='RUN AND DRIVE')
-                                <div title="На ходу" style="cursor: pointer; position: absolute; top:0; right:3px; color:white; text-transform: uppercase; text-shadow: 1px 1px 2px black, 0 0 1em black;">
+                                <div title="На ходу" style="    cursor: pointer;
+                                                                position: absolute;
+                                                                top: 0;
+                                                                right: 1px;
+                                                                color: white;
+                                                                text-transform: uppercase;
+                                                                background: green;
+                                                                width: 18px;
+                                                                height: 18px;
+                                                                border-radius: 50%;">
                                     R
                                 </div>
                             @endif

@@ -212,8 +212,6 @@ class CarsController extends Controller {
         return response()->json($response);
     }
 
-
-
     public function getSearchProperty($source, $type, Request $request){
 
         $mark = $request['mark'];
@@ -224,12 +222,7 @@ class CarsController extends Controller {
         return response()->json($property);
     }
 
-    public function getDefaultSearchProperty() {
 
-        $property = $this->carRepository->getDefaultSearchProperty();
-
-        return $property;
-    }
 
     public function removeFavorite(Request $request) {
 
