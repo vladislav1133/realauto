@@ -30,14 +30,33 @@
             <tbody id="table-body">
             @foreach($cars as $k=>$car)
                 <tr @if(($k +1)%2 === 0)class="second-row"@endif>
-                    <td><div>
+                    <td>
+                        <div style="position: relative; width: 100px; margin: 0 auto;">
+
                             <img class="product__img"
-                                 src="http://test.realauto.pro/{{ trim($car->path_to_image,'/')}}"
+                                 src="{{$car->path_to_image}}"
                                  alt=""
                                  title="Смотреть фото"
                                  data-car-id="{{$car->car_id}}"
                                  onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';">
+
+                            @if($car->highlights==='RUN AND DRIVE')
+                                <div title="На ходу" style="    cursor: pointer;
+                                                                position: absolute;
+                                                                top: 0;
+                                                                right: 1px;
+                                                                color: white;
+                                                                text-transform: uppercase;
+                                                                background: green;
+                                                                width: 18px;
+                                                                height: 18px;
+                                                                border-radius: 50%;">
+                                    R
+                                </div>
+                            @endif
+
                         </div>
+
                     </td>
                     <td>
                         <div>
