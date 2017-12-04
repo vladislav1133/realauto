@@ -209,7 +209,7 @@ class CarsController extends Controller {
 
         $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
 
-        
+
         return ['cars' => $cars, 'carsCount' => $carsCount];
     }
 
