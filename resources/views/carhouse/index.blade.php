@@ -1,6 +1,7 @@
 @extends(env('THEME').'.layouts.site')
 
 @section('header')
+
     @include(env('THEME').'.indexHeader')
 @endsection
 

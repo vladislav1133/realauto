@@ -15,6 +15,7 @@
 //Pages
 Route::get('/', ['as'=>'home','uses'=>'IndexController@index']);
 Route::get('/rastamozhka', ['as'=>'rastamozhka','uses'=>'IndexController@rastamozhka']);
+Route::get('/faq', ['as'=>'faq','uses'=>'FaqController@index']);
 Route::get('contacts', ['as'=>'contacts','uses'=>'ContactController@index']);
 Route::resource('blog','ArticlesController', ['only' =>['index','show']]);
 Route::resource('availablecars', 'AvailableCarsController', ['only' => ['index', 'show']]);

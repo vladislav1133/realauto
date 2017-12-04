@@ -8,7 +8,7 @@
                         <div class="post-materials">
                             <p>Улица: Харьков улица Шевченко, 238</p>
                             <p>Телефон: +38 (097) 010 99 99</p>
-                            <p>Почта: realauto@realauto.pro</p>
+                            <p>Почта: info@realauto.pro</p>
                         </div>
                     </div>
                 </div>

@@ -5,12 +5,12 @@
     <nav class="pushy pushy-left">
         <div class="pushy-content">
             <ul>
-
                 <li class="pushy-link"><a href="{{route('home')}}">Главная</a></li>
                 <li class="pushy-link"><a href="{{route('availablecars.index')}}">Машины в наличии</a></li>
                 <li class="pushy-link"><a href="{{route('blog.index')}}">Блог</a></li>
                 <li class="pushy-link"><a href="{{route('contacts')}}">Контакты</a></li>
                 <li class="pushy-link"><a href="{{route('rastamozhka')}}">Таможенный калькулятор</a></li>
+                <li class="pushy-link"><a href="{{route('faq')}}">Справка</a></li>
             </ul>
         </div>
     </nav>
@@ -37,6 +37,7 @@
                         <li class="main-nav__item"><a class="main-nav__link" href="{{route('blog.index')}}">Блог</a></li>
                         <li class="main-nav__item"><a class="main-nav__link" href="{{route('contacts')}}">Контакты</a></li>
                         <li class="main-nav__item"><a class="main-nav__link" href="{{route('rastamozhka')}}">Таможенный калькулятор</a></li>
+                        <li class="main-nav__item"><a class="main-nav__link" href="{{route('faq')}}">Справка</a></li>
                     </ul>
                 </div>
 
