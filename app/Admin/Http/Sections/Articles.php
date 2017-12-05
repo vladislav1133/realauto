@@ -18,11 +18,10 @@ class Articles extends Section implements Initializable
 {
 
     /**
-     * Class Posts
+     * Class Articles
      *
-     * @property \App\Model $model
+     * @property \App\Article $model
      *
-     * @see http://sleepingowladmin.ru/docs/model_configuration_section
      */
     protected $checkAccess = false;
 

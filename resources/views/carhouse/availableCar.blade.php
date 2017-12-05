@@ -8,6 +8,10 @@
     {!! $content !!}
 @endsection
 
+
+
+
+
 @section('footer')
     @include(env('THEME').'.layouts.footer')
 @endsection

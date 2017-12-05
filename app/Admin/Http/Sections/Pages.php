@@ -18,11 +18,10 @@ class Pages extends Section implements Initializable
 {
 
     /**
-     * Class Posts
+     * Class Pages
      *
-     * @property \App\Model $model
+     * @property \App\Page $model
      *
-     * @see http://sleepingowladmin.ru/docs/model_configuration_section
      */
     protected $checkAccess = false;
 

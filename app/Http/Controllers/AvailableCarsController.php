@@ -12,10 +12,11 @@ class AvailableCarsController extends SiteController
 {
     protected $availableCarRepository;
 
-    public function __construct(AvailableCarRepository $availableCarRepository, PageRepository $pageRepository){
+    public function __construct(AvailableCarRepository $availableCarRepository, PageRepository $pageRepository)
+    {
         parent::__construct(new PageRepository(new Page()));
 
-        $this->availableCarRepository=$availableCarRepository;
+        $this->availableCarRepository = $availableCarRepository;
 
     }
 
@@ -24,17 +25,31 @@ class AvailableCarsController extends SiteController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
+        $meta = $this->pageRepository->findByField('name', 'availableCars')->toArray();
 
-        //$articles=$this->getAvailableCars();
-        $meta = $this->pageRepository->findByField('name','availablecars');
+        $language['drive'] = trans('cars.drive');
 
-        $content = view(env('THEME').'.availableCarContent')
+        $where['where'][] = ['active',1];
+
+        $cars = $this->availableCarRepository->getCars('*', 10,'',$where);
+
+        $carsTotal = $cars->total();
+
+        $search = $this->availableCarRepository->getSearchProperty();
+
+        $content = view(env('THEME') . '.availableCarContent')
+            ->with('language', $language)
+            ->with('carsTotal', $carsTotal)
+            ->with('cars', $cars)
+            ->with('search', $search)
             ->render();
 
-        return view(env('THEME').'.availableCar')
+        //dd($search);
+        return view(env('THEME') . '.availableCar')
+            ->with('content',$content)
             ->with('meta', $meta)
-            ->with('content', $content)
             ->render();
     }
 
@@ -42,93 +57,31 @@ class AvailableCarsController extends SiteController
     /**
      * Display the specified resource.
      *
-     * @param  int  $alias
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($alias){
-        //$article=$this->getAvailableCar($alias);
+    public function show($id)
+    {
 
-        $meta['meta_title'] = 'Доступная машина';
-        $meta['meta_description'] = 'Купить машину в наличии';
-        $meta['meta_keywords'] = 'Купить машину';
-
-        $content = view(env('THEME').'.availableCarPage2') ;
+        $car = $this->availableCarRepository->find($id);
 
 
-        return view(env('THEME').'.availableCar')
-            ->with('meta',$meta)
+        if($car->active === 0) abort(404);
+
+        $car->gallery = explode(',',$car->gallery);
+        $car->equipment = array_filter(explode(',',$car->equipment));
+
+
+        $meta['meta_title'] = $car->meta_title;
+        $meta['meta_description'] = $car->meta_description;
+        $meta['meta_keywords'] = $car->meta_keywords;
+
+        $content = view(env('THEME') . '.availableCarPage')->with('car', $car);
+
+
+        return view(env('THEME') . '.availableCar')
+            ->with('meta', $meta)
             ->with('content', $content)->render();
 
-    }
-
-
-
-    protected function getAvailableCars()
-    {
-        $articles = $this->articleRepository
-            ->get('*', false, config('settings.articles_on_page'));
-
-        return $articles;
-    }
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    protected function getAvailableCar($alias){
-        return null;
     }
 }

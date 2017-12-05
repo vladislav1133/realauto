@@ -1,7 +1,6 @@
 @extends(env('THEME').'.layouts.site')
 
 @section('header')
-
     @include(env('THEME').'.indexHeader')
 @endsection
 
@@ -13,12 +12,6 @@
 
                 <div id="car-gallery">
                     <ul class="rslides">
-                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
-                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
-                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
-                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
-                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
-                        <li><img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.ngsversion.1396530745057.jpg" alt=""></li>
                     </ul>
                 </div>
             </div>
