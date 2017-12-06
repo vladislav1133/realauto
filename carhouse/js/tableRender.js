@@ -15,20 +15,34 @@
 //         }
 //     });
 // });
-let VueResourse = require("vue-resourse");
-Vue.use(VueResourse);
 
-console.log(VueResourse);
+//Vue.use(VueResourse);
+
 
 new Vue({
     el: '#table-body',
     data: {
-        cars
+        endpoint: '/api/cars',
+        cars: []
+    },
+    methods: {
+
+        getCars: function () {
+            this.$http.get(this.endpoint).then(function (response) {
+                this.cars = response.data.cars.data
+            }, function (error) {
+                console.log("ошибка запроса")
+            })
+        }
+
+    },
+    created: function (){
+        this.getCars();
+        tableMain()
     }
 });
 
-setTimeout(function () {
-
+function tableMain() {
     let tableWidth = $(".table").width();
     let cellWidth = $(".table__row .table__row-cell").width();
     let cellCount = Math.floor(tableWidth / cellWidth);
@@ -40,8 +54,8 @@ setTimeout(function () {
 
 
 
-        let rowArray = $(".table__row");
-        rowArray.each(function(){
+    let rowArray = $(".table__row");
+    rowArray.each(function(){
 
         let cellArray = $(this).children();
         console.log(cellArray);
@@ -104,9 +118,7 @@ setTimeout(function () {
         }
 
     });
+}
 
-    alert("задержка");
-
-}, 1000);
 
 
