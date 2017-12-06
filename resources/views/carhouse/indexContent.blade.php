@@ -24,7 +24,7 @@
             </div>
             <div class="tbody" id="table-body">
 
-                <div class="table__row" v-for="car in cars">
+                <div class="table__row" v-on:click="foot()" v-for="car in cars">
                     <!--@{{item.path_to_image}}-->
                     <div class="table__row-cell" style="position: relative; width: 100px; margin: 0 auto;">
                         <img class="product__img"

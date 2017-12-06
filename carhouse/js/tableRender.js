@@ -1,24 +1,3 @@
-
-// fetch('/api/cars')
-//     .then(function (response) {
-//
-//         return response.json()
-//
-//     }).then(function (carsD) {
-//
-//     let cars = carsD.cars.data;
-//
-//     new Vue({
-//         el: '#table-body',
-//         data: {
-//             cars
-//         }
-//     });
-// });
-
-//Vue.use(VueResourse);
-
-
 new Vue({
     el: '#table-body',
     data: {
@@ -32,17 +11,47 @@ new Vue({
                 this.cars = response.data.cars.data
             }, function (error) {
                 console.log("ошибка запроса")
-            })
-        }
+            });
+        },
+
+        //foot: foot()
+
 
     },
     created: function (){
         this.getCars();
-        tableMain()
+        tableMain();
     }
 });
 
+
 function tableMain() {
+        let tableWidth = $(".table").width();
+        let cellWidth = $(".table__row .table__row-cell").width();
+        let cellCount = Math.floor(tableWidth / cellWidth);
+
+
+        let theadArray = $(".thead__cell");
+        let theadBottom = theadArray.slice(cellCount, theadArray.length + 1);
+        theadBottom.css("display", "none");
+
+
+        let rowArray = $(".table__row");
+        rowArray.each(function () {
+
+            let cellArray = $(this).children();
+
+            let bottomCell = cellArray.slice(cellCount, cellArray.length + 1);
+            //let topCell = cellArray.splice(cellCount, bottomCell.length + 1);
+
+            bottomCell.css("display", "none")
+        });
+
+
+}
+
+function foot(){
+
     let tableWidth = $(".table").width();
     let cellWidth = $(".table__row .table__row-cell").width();
     let cellCount = Math.floor(tableWidth / cellWidth);
@@ -50,75 +59,61 @@ function tableMain() {
 
     let theadArray = $(".thead__cell");
     let theadBottom = theadArray.slice(cellCount, theadArray.length + 1);
-    theadBottom.css("display", "none");
-
-
 
     let rowArray = $(".table__row");
-    rowArray.each(function(){
+    rowArray.each(function () {
 
         let cellArray = $(this).children();
-        console.log(cellArray);
 
         let bottomCell = cellArray.slice(cellCount, cellArray.length + 1);
         //let topCell = cellArray.splice(cellCount, bottomCell.length + 1);
 
-        bottomCell.css("display", "none")
-
     });
 
 
+    if($(this).hasClass("active-row") === false){
 
+        $(this).addClass("active-row");
 
-    //----------------------------------------------------------
-    $(".table__row").click(function(){
+        $(this).after("<div class='bottom-cell_wrap'><div class='thead-bottom'></div><div class='tbody-bottom'></div></div>");
 
-        if($(this).hasClass("active-row") == !true){
+        let theadBottomClone = theadBottom.clone();
+        let theadContent = $(this).next().children(".thead-bottom");
+        $(theadBottomClone).each(function () {
 
-            $(this).addClass("active-row");
+            $(this).css("display", "block");
+            $(theadContent).append($(this));
 
-            $(this).after("<div class='bottom-cell_wrap'><div class='thead-bottom'></div><div class='tbody-bottom'></div></div>");
+        });
 
-            let theadBottomClone = theadBottom.clone();
-            let theadContent = $(this).next().children(".thead-bottom");
-            $(theadBottomClone).each(function () {
+        let cellArray = $(this).children();
+        let bottomContent = $(this).next().children(".tbody-bottom");
+        $(cellArray).each(function () {
 
-                $(this).css("display", "block");
-                $(theadContent).append($(this));
+            if($(this).is(":visible") != true){
 
-            });
+                let clone = $(this).clone();
 
-            let cellArray = $(this).children();
-            let bottomContent = $(this).next().children(".tbody-bottom");
-            $(cellArray).each(function () {
+                clone.css("display", "block");
 
-                if($(this).is(":visible") != true){
-
-                    let clone = $(this).clone();
-
-                    clone.css("display", "block");
-
-                    $(bottomContent).append(clone);
-                }
-
-            });
-
-        }else {
-
-            $(this).removeClass("active-row");
-
-            delete cellArray;
-
-            if($(this).next().hasClass("bottom-cell_wrap")){
-
-                $(this).next().remove();
-
+                $(bottomContent).append(clone);
             }
+
+        });
+
+    }else {
+
+        $(this).removeClass("active-row");
+
+        delete cellArray;
+
+        if($(this).next().hasClass("bottom-cell_wrap")){
+
+            $(this).next().remove();
 
         }
 
-    });
-}
+    }
 
-
+};
 
