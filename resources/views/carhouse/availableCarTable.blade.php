@@ -40,7 +40,7 @@
 
                     <td>{{$car->price}} $</td>
 
-                    <td>{{$car->year}}td>
+                    <td>{{$car->year}}</td>
 
                     <td>{{$car->mark}}</td>
 

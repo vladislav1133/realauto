@@ -39,6 +39,8 @@ class AvailableCarsController extends SiteController
 
         $search = $this->availableCarRepository->getSearchProperty();
 
+      //  dd($search);
+
         $content = view(env('THEME') . '.availableCarContent')
             ->with('language', $language)
             ->with('carsTotal', $carsTotal)

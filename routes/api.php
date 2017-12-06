@@ -26,3 +26,6 @@ Route::post('cars/docs','CarsController@getDocs');
 Route::get('cars/search/{query}','CarsController@search');
 Route::get('cars/property/{type}/{mark?}/{model?}','CarsController@getSearchProperty');
 Route::post('cars/favorite/remove','CarsController@removeFavorite');
+
+
+Route::get('available-cars/models/{mark}', 'Api\AvailableCarsController@getModels');

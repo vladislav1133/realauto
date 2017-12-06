@@ -83,14 +83,18 @@ class AvailableCarRepository extends Repository{
 
         $cars = $this->getCars('*');
 
-
         $property['marks'] = $this->getProperty($cars,'mark');
-        $property['models'] = $this->getProperty($cars,'model');
         $property['years'] = $this->getProperty($cars,'year');
 
-        return $cars;
+        return $property;
     }
 
+    public function getModels(){
+
+        $models = $this->pluck('model')->unique()->sort()->toArray();
+
+        return $models;
+    }
     public function getProperty($collection, $col) {
 
         $arr = $collection->pluck($col)->unique()->toArray();

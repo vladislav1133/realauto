@@ -27,24 +27,6 @@
                 </div>
             </div>
 
-            <div class="col-xs-12">
-                <div class="search__label">Тип транспорта:</div>
-            </div>
-
-
-            <div class="search__col col-xs-12">
-                <select
-                        id="search-type"
-                        class="selectpicker search__select"
-                        data-title="Все"
-                >
-                    <option value="AUTOMOBILE" selected>АВТОМОБИЛИ</option>
-                    <option value="MOTORCYCLE">МОТОЦИКЛЫ</option>
-
-
-                </select>
-            </div>
-
 
             <div class="col-xs-12">
                 <div class="search__label">Марка:</div>
