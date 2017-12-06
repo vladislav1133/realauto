@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110466309-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110794605-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-110466309-1');
+        gtag('config', 'UA-110794605-1');
     </script>
-
     <title>@if($meta['meta_title']){{$meta['meta_title']}} @else {{'Real auto'}} @endif</title>
     <meta name="description" content="@if($meta['meta_description']){{$meta['meta_description']}} @else {{'Real auto. '}} @endif">
     <meta name="keywords" content="@if($meta['meta_keywords']){{$meta['meta_keywords']}} @else {{'RealAuto'}} @endif">
@@ -25,7 +23,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/footable.standalone.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/app.css">
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/responsiveslides.css">
-
 
 
 
