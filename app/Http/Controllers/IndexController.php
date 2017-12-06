@@ -62,7 +62,7 @@ class IndexController extends SiteController
 
 
         $mailable = new ContactUsMail($request->tel, $request->name, $request->message, $request->favoriteCars);
-        $mailable->replyTo(env('MAIL_ADDRESS'), env('APP_NAME'));
+
 
         Mail::to(env('MAIL_ADDRESS'))->send($mailable);
 

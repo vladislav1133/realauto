@@ -13,7 +13,7 @@ class Car extends Model
 
     public function getSaleDateAttribute($date){
 
-        return  Carbon::createFromTimestamp($date / 1000)->format('d/m/Y');
+        return  Carbon::parse($date)->format('d/m/Y');
     }
 
 

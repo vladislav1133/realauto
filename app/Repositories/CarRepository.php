@@ -89,21 +89,21 @@ class CarRepository extends Repository
 
     }
 
-    protected function prepareSaleDate($cars)
-    {
-
-
-        $cars->transform(function ($item, $key) {
-
-            if ($item->sale_date) {
-
-                $item->sale_date = Carbon::createFromTimestamp($item->sale_date / 1000)->format('d/m/Y');
-            }
-            return $item;
-        });
-
-        return $cars;
-    }
+//    protected function prepareSaleDate($cars)
+//    {
+//
+//
+//        $cars->transform(function ($item, $key) {
+//
+//            if ($item->sale_date) {
+//
+//                $item->sale_date = Carbon::createFromTimestamp($item->sale_date / 1000)->format('d/m/Y');
+//            }
+//            return $item;
+//        });
+//
+//        return $cars;
+//    }
 
     public  function get($select = '*', $pagination = false, $orderBy = false,  array $where = [])
     {

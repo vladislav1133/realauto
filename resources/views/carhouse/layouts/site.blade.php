@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110466309-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110466309-1');
+    </script>
+
     <title>@if($meta['meta_title']){{$meta['meta_title']}} @else {{'Real auto'}} @endif</title>
     <meta name="description" content="@if($meta['meta_description']){{$meta['meta_description']}} @else {{'Real auto. '}} @endif">
     <meta name="keywords" content="@if($meta['meta_keywords']){{$meta['meta_keywords']}} @else {{'RealAuto'}} @endif">
@@ -36,13 +47,15 @@
 
 @yield('footer')
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="/carhouse/js/app.js"></script>
 
 <script src="{{asset(env('THEME'))}}/js/responsiveslides.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/jquery.bxslider.min.js"></script>
 <script src="{{asset(env('THEME'))}}/js/pushy.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
 <script src="{{asset(env('THEME'))}}/js/jquery.sticky.js"></script>
 <script src="{{asset(env('THEME'))}}/js/SecondMenu.js"></script>
 <script src="{{asset(env('THEME'))}}/js/CustomsCalculator.js"></script>
@@ -50,6 +63,7 @@
 <script src="{{asset(env('THEME'))}}/js/SearchApp.js"></script>
 <!--<script src="{{asset(env('THEME'))}}/js/jquery.pin.js"></script>-->
 <script src="{{asset(env('THEME'))}}/js/indexApp.js"></script>
+<script src="{{asset(env('THEME'))}}/js/tableRender.js"></script>
 
 
 @if(Route::currentRouteName()=='home')
@@ -57,6 +71,8 @@
 @endif
 
 <!--<script src="{{asset(env('THEME'))}}/js/common.js"></script>-->
+
+
 
 
 

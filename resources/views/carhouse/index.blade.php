@@ -1,6 +1,7 @@
 @extends(env('THEME').'.layouts.site')
 
 @section('header')
+
     @include(env('THEME').'.indexHeader')
 @endsection
 
@@ -32,7 +33,7 @@
             <div class="for-side-bar-fixed"></div>
 
             <div class="content content-area__table">
-                <div id="table">{{mes}}
+                <div id="table">
                     <div id="main-table">
                         @include(env('THEME').'.indexContent')
                     </div>

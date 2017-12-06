@@ -10,7 +10,6 @@ var SecondMenu = (function () {
 
         init: function () {
 
-            console.log('we')
             this.initEvents()
         },
 
