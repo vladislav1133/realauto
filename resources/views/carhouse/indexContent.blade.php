@@ -24,7 +24,7 @@
             </div>
             <div class="tbody" id="table-body">
 
-                <div class="table__row" v-on:click="foot()" v-for="car in cars">
+                <div class="table__row" v-for="car in cars" v-on:click="foot(event)">
                     <!--@{{item.path_to_image}}-->
                     <div class="table__row-cell" style="position: relative; width: 100px; margin: 0 auto;">
                         <img class="product__img"
@@ -71,14 +71,26 @@
                     <div class="table__row-cell">@{{car.odometer}}</div>
                     <div class="table__row-cell">@{{car.drive}}</div>
                     <div class="table__row-cell">@{{car.highlights}}</div>
-                    <div class="table__row-cell"></div>
-                    <div class="table__row-cell"></div>
-                    <div class="table__row-cell"></div>
-                    <div class="table__row-cell"></div>
-                    <div class="table__row-cell"></div>
-                    <div class="table__row-cell"></div>
-                    <div class="table__row-cell"></div>
+                    <div class="table__row-cell">@{{car.primary_damage}}</div>
+                    <div class="table__row-cell">@{{car.secondary_damage}}</div>
+                    <div class="table__row-cell">@{{car.sale_date}}</div>
+                    <div class="table__row-cell">@{{car.current_bid}}</div>
+                    <div class="table__row-cell">@{{car.buy_it_now}}</div>
+                    <div class="table__row-cell">
+                        @{{car.location}}
+                        <button class="btn btn-rem-loc rem-btn" data-loc="@{{car.location}}">Исключить из поиска
+                        </button>
+                    </div>
+                    <div class="table__row-cell">
+                        @{{car.doc_type}}
+                        <button class="btn btn-rem-doc rem-btn" data-doc="@{{car.doc_type}}">Исключить из поиска
+                        </button>
+                    </div>
 
+                    <div class='bottom-cell_wrap'>
+                        <div class='thead-bottom'></div>
+                        <div class='tbody-bottom'></div>
+                    </div>
                 </div>
             </div>
         </div>
