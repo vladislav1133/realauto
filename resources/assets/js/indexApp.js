@@ -1,5 +1,9 @@
+
+
 import {Table} from './Table'
-import {Search} from './SearchApp'
+import {Search} from './Search'
+
+
 //import {CustomsCalculator} from './CustomsCalculator'
 
 
@@ -24,7 +28,6 @@ export let App = (function () {
             $(".side-bar").sticky({
                 bottomSpacing: 70
             });
-
         }
 
     }
@@ -161,7 +164,7 @@ export let App = (function () {
             RemoveNotExistFavorite()
 
             //SecondMenu.init()
-           // Search.init()
+            Search.init()
             Table.init()
             //CustomsCalculator.init()
 

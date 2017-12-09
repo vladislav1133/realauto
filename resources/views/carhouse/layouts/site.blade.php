@@ -27,17 +27,16 @@
     <link rel="stylesheet" type="text/css" href="{{asset(env('THEME'))}}/css/responsiveslides.css">
 
 
-
-
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="{{asset(env('THEME'))}}/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="{{asset(env('THEME'))}}/js/ie-emulation-modes-warning.js"></script>
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="{{asset(env('THEME'))}}/js/html5shiv.min.js"></script>
     <script src="{{asset(env('THEME'))}}/js/respond.min.js"></script>
     <![endif]-->
+
+
 </head>
 <body>
 
@@ -58,7 +57,7 @@
 {{--<script src="{{asset(env('THEME'))}}/js/SecondMenu.js"></script>--}}
 {{--<script src="{{asset(env('THEME'))}}/js/CustomsCalculator.js"></script>--}}
 {{--<script src="{{asset(env('THEME'))}}/js/Table.js"></script>--}}
-{{--<script src="{{asset(env('THEME'))}}/js/SearchApp.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/Search.js"></script>--}}
 <!--<script src="{{asset(env('THEME'))}}/js/jquery.pin.js"></script>-->
 {{--<script src="{{asset(env('THEME'))}}/js/indexApp.js"></script>--}}
 

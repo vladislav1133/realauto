@@ -1,6 +1,7 @@
 import {getCookie, deleteCookie} from './helpers/cookie'
-import {FavoriteCars} from 'FavoriteCars'
+import {FavoriteCars} from './FavoriteCars'
 export let Table = (function () {
+
 
     let el = '#table'
 

@@ -10328,7 +10328,7 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-module.exports = __webpack_require__(10);
+module.exports = __webpack_require__(17);
 
 
 /***/ }),
@@ -10337,141 +10337,49 @@ module.exports = __webpack_require__(10);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__indexApp__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__indexApp__ = __webpack_require__(13);
 __webpack_require__(3);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0__indexApp__["a" /* App */].init();
 
+//
 // $(document).ready(function () {
 //
-//
+// console.log('WWWWEEEWWWWW')
 //
 //
 //     // if ($('#main-aside').hasClass('main-aside') && ($(window).width() > 768)) {
 //     //   $('.index-header').height($(window).innerHeight())
 //     // }
 // })
+//
+//
+//
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
+/* WEBPACK VAR INJECTION */(function(global) {
 
 try {
-    window.$ = window.jQuery = __webpack_require__(0);
+    window.$ = global.jQuery = __webpack_require__(0);
 
-    __webpack_require__(48);
-    __webpack_require__(49);
-    __webpack_require__(50);
-    __webpack_require__(51);
-    __webpack_require__(52);
-    __webpack_require__(53);
-    __webpack_require__(54);
-    __webpack_require__(55);
-    __webpack_require__(56);
+    __webpack_require__(4);
+    __webpack_require__(5);
+    __webpack_require__(6);
+    __webpack_require__(7);
+    __webpack_require__(8);
+    __webpack_require__(10);
+    __webpack_require__(11);
+    __webpack_require__(12);
 } catch (e) {}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)))
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = getCookie;
-/* harmony export (immutable) */ __webpack_exports__["a"] = deleteCookie;
-/* unused harmony export setCookie */
-function getCookie(name) {
-    var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
-function deleteCookie(name) {
-    this.setCookie(name, "", {
-        expires: -1
-    });
-}
-
-function setCookie(name, value, options) {
-    options = options || {};
-
-    var expires = options.expires;
-
-    if (typeof expires === "number" && expires) {
-        var d = new Date();
-        d.setTime(d.getTime() + expires * 1000);
-        expires = options.expires = d;
-    }
-    if (expires && expires.toUTCString) {
-        options.expires = expires.toUTCString();
-    }
-
-    value = encodeURIComponent(value);
-
-    var updatedCookie = name + "=" + value;
-
-    for (var propName in options) {
-        updatedCookie += "; " + propName;
-        var propValue = options[propName];
-        if (propValue !== true) {
-            updatedCookie += "=" + propValue;
-        }
-    }
-
-    document.cookie = updatedCookie;
-}
-
-/***/ }),
-/* 47 */,
-/* 48 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -12648,10 +12556,10 @@ if (typeof jQuery === 'undefined') {
 }(jQuery);
 
 /***/ }),
-/* 49 */
-/***/ (function(module, exports) {
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*
 * FooTable v3 - FooTable is a jQuery plugin that aims to make HTML tables on smaller devices look awesome.
@@ -12749,7 +12657,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }, a.is.promise = function (b) {
     return a.is.object(b) && a.is.fn(b.then) && a.is.fn(b.promise);
   }, a.is.jq = function (b) {
-    return a.is.defined(window.jQuery) && b instanceof jQuery && b.length > 0;
+    return a.is.defined(__webpack_provided_window_dot_jQuery) && b instanceof jQuery && b.length > 0;
   }, a.is.moment = function (b) {
     return a.is.defined(window.moment) && a.is.object(b) && a.is["boolean"](b._isAMomentObject);
   }, a.is.emptyObject = function (b) {
@@ -14037,12 +13945,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return this.use(a.Export).csv(b);
   };
 }(FooTable);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 50 */
-/***/ (function(module, exports) {
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* =========================================================
  * bootstrap-slider.js v2.0.0
@@ -14395,10 +14304,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	};
 
 	$.fn.slider.Constructor = Slider;
-}(window.jQuery);
+}(__webpack_provided_window_dot_jQuery);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 51 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -14872,10 +14782,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = ty
 //# sourceMappingURL=bootstrap-select.js.map
 
 /***/ }),
-/* 52 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*! Magnific Popup - v1.1.0 - 2016-02-20
 * http://dimsemenov.com/plugins/magnific-popup/
@@ -14905,7 +14815,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       r = "mfp-removing",
       s = "mfp-prevent-close",
       t = function t() {},
-      u = !!window.jQuery,
+      u = !!__webpack_provided_window_dot_jQuery,
       v = a(window),
       w = function w(a, c) {
     b.ev.on(o + a + p, c);
@@ -15253,32 +15163,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }
       } } }), A();
 });
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 53 */
-/***/ (function(module, exports) {
-
-/*!
- * IE10 viewport hack for Surface/desktop Windows 8 bug
- * Copyright 2014-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
-
-// See the Getting Started docs for more information:
-// http://getbootstrap.com/getting-started/#support-ie10-width
-
-(function () {
-    'use strict';
-
-    if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-        var msViewportStyle = document.createElement('style');
-        msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
-        document.querySelector('head').appendChild(msViewportStyle);
-    }
-})();
-
-/***/ }),
-/* 54 */
+/* 9 */,
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -15557,7 +15446,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 55 */
+/* 11 */
 /***/ (function(module, exports) {
 
 /**
@@ -15865,7 +15754,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }(jQuery);
 
 /***/ }),
-/* 56 */
+/* 12 */
 /***/ (function(module, exports) {
 
 /*! http://responsiveslides.com v1.55 by @viljamis */
@@ -15963,13 +15852,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(jQuery, this, 0);
 
 /***/ }),
-/* 57 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return App; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Table__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SearchApp__ = __webpack_require__(59);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return App; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Table__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Search__ = __webpack_require__(47);
+
+
+
 
 
 //import {CustomsCalculator} from './CustomsCalculator'
@@ -16120,7 +16012,7 @@ var App = function () {
             RemoveNotExistFavorite();
 
             //SecondMenu.init()
-            // Search.init()
+            __WEBPACK_IMPORTED_MODULE_1__Search__["a" /* Search */].init();
             __WEBPACK_IMPORTED_MODULE_0__Table__["a" /* Table */].init();
             //CustomsCalculator.init()
 
@@ -16189,15 +16081,16 @@ var App = function () {
         }
     };
 }();
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 58 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Table; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_cookie__ = __webpack_require__(46);
-throw new Error("Cannot find module \"FavoriteCars\"");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Table; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__helpers_cookie__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__FavoriteCars__ = __webpack_require__(46);
 
 
 var Table = function () {
@@ -16314,7 +16207,7 @@ var Table = function () {
 
                         init: function init() {
 
-                                    __WEBPACK_IMPORTED_MODULE_1_FavoriteCars__["FavoriteCars"].hello();
+                                    __WEBPACK_IMPORTED_MODULE_1__FavoriteCars__["a" /* FavoriteCars */].hello();
 
                                     console.log('Table init');
 
@@ -16483,13 +16376,110 @@ var Table = function () {
 
             };
 }();
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 59 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export Search */
+/* harmony export (immutable) */ __webpack_exports__["b"] = getCookie;
+/* harmony export (immutable) */ __webpack_exports__["a"] = deleteCookie;
+/* unused harmony export setCookie */
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function deleteCookie(name) {
+    this.setCookie(name, "", {
+        expires: -1
+    });
+}
+
+function setCookie(name, value, options) {
+    options = options || {};
+
+    var expires = options.expires;
+
+    if (typeof expires === "number" && expires) {
+        var d = new Date();
+        d.setTime(d.getTime() + expires * 1000);
+        expires = options.expires = d;
+    }
+    if (expires && expires.toUTCString) {
+        options.expires = expires.toUTCString();
+    }
+
+    value = encodeURIComponent(value);
+
+    var updatedCookie = name + "=" + value;
+
+    for (var propName in options) {
+        updatedCookie += "; " + propName;
+        var propValue = options[propName];
+        if (propValue !== true) {
+            updatedCookie += "=" + propValue;
+        }
+    }
+
+    document.cookie = updatedCookie;
+}
+
+/***/ }),
+/* 16 */,
+/* 17 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FavoriteCars; });
+var FavoriteCars = {
+
+    hello: function hello() {
+        console.log('HELL FROM FAVORITE');
+    }
+};
+
+/***/ }),
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Search; });
 var Search = function () {
 
             var options = {};
@@ -17186,6 +17176,34 @@ var Search = function () {
                         }
             };
 }();
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ })
 /******/ ]);
