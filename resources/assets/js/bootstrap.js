@@ -3,12 +3,15 @@
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('../carhouse/js/bootstrap')
-    require('../carhouse/js/bootstrap-slider')
-    require('../carhouse/js/bootstrap-select.min')
-    require('../carhouse/js/jquery.magnific-popup.min')
-    require('../carhouse/js/ie10-viewport-bug-workaround')
-    require('../carhouse/js/jquery.bxslider.min')
+    require('./libs/bootstrap')
+    require('./libs/footable.min')
+    require('./libs/bootstrap-slider')
+    require('./libs/bootstrap-select.min')
+    require('./libs/jquery.magnific-popup.min')
+    require('./libs/ie10-viewport-bug-workaround')
+    require('./libs/jquery.sticky')
+    require('./libs/jquery.bxslider.min')
+    require('./libs/responsiveslides.min')
 
 
 } catch (e) {

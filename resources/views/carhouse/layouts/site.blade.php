@@ -49,18 +49,18 @@
 
 <script src="/carhouse/js/app.js"></script>
 
-<script src="{{asset(env('THEME'))}}/js/responsiveslides.min.js"></script>
-<script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>
-<script src="{{asset(env('THEME'))}}/js/jquery.bxslider.min.js"></script>
-<script src="{{asset(env('THEME'))}}/js/pushy.min.js"></script>
+{{--<script src="{{asset(env('THEME'))}}/js/responsiveslides.min.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/footable.min.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/jquery.bxslider.min.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/pushy.min.js"></script>--}}
 
-<script src="{{asset(env('THEME'))}}/js/jquery.sticky.js"></script>
-<script src="{{asset(env('THEME'))}}/js/SecondMenu.js"></script>
-<script src="{{asset(env('THEME'))}}/js/CustomsCalculator.js"></script>
-<script src="{{asset(env('THEME'))}}/js/Table.js"></script>
-<script src="{{asset(env('THEME'))}}/js/SearchApp.js"></script>
+{{--<script src="{{asset(env('THEME'))}}/js/jquery.sticky.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/SecondMenu.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/CustomsCalculator.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/Table.js"></script>--}}
+{{--<script src="{{asset(env('THEME'))}}/js/SearchApp.js"></script>--}}
 <!--<script src="{{asset(env('THEME'))}}/js/jquery.pin.js"></script>-->
-<script src="{{asset(env('THEME'))}}/js/indexApp.js"></script>
+{{--<script src="{{asset(env('THEME'))}}/js/indexApp.js"></script>--}}
 
 
 @if(Route::currentRouteName()=='home')

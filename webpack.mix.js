@@ -10,8 +10,12 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.autoload({
+    jquery: ['$', 'window.jQuery']
+});
 
 mix
     .setPublicPath('./')
     .js('./resources/assets/js/app.js', './carhouse/js')
-    .sass('./resources/assets/sass/app.scss', './carhouse/css');
+    .sass('./resources/assets/sass/app.scss', './carhouse/css')
+    ;
