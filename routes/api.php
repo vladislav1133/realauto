@@ -20,12 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //CarsController
 Route::get('cars','Api\CarsController@getCars');
-Route::get('cars/marks/{type}','CarsController@getMarks');
-Route::get('cars/models/{type}/{mark}','CarsController@getModels');
-Route::post('cars/docs','CarsController@getDocs');
-Route::get('cars/search/{query}','CarsController@search');
-Route::get('cars/property/{type}/{mark?}/{model?}','CarsController@getSearchProperty');
-Route::post('cars/favorite/remove','CarsController@removeFavorite');
-
 
 Route::get('available-cars/models/{mark}', 'Api\AvailableCarsController@getModels');
+Route::post('available-cars', 'Api\AvailableCarsController@getCars');

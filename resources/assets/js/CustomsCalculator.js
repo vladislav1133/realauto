@@ -507,7 +507,7 @@ export let CustomsCalculator = (function () {
             else return '€'
         }
 
-        render = (priceList) => {
+        function render(priceList) {
 
 
 

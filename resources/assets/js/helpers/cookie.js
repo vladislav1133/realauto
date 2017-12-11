@@ -1,17 +1,17 @@
-export function getCookie(name) {
+export function get(name) {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function deleteCookie(name) {
-    this.setCookie(name, "", {
+export function destroy(name) {
+    set(name, "", {
         expires: -1
     })
 }
 
-export function setCookie (name, value, options) {
+export function set (name, value, options) {
     options = options || {};
 
     var expires = options.expires;

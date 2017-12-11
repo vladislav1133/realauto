@@ -1,6 +1,7 @@
-import {getCookie, deleteCookie} from './helpers/cookie'
-import {FavoriteCars} from './FavoriteCars'
-export let Table = (function () {
+import * as cookie from './helpers/cookie'
+import {MainSearch} from './MainSearch'
+
+export let MainTable = (function () {
 
 
     let el = '#table'
@@ -20,7 +21,7 @@ export let Table = (function () {
 
             console.log('PAGE ' + page)
 
-            let html = Table.getPage(page, Search.getSearchData());
+            let html = MainTable.getPage(page, MainSearch.getSearchData());
 
             $('html, body').animate({
                 scrollTop: $(el).offset().top - 95
@@ -34,7 +35,7 @@ export let Table = (function () {
 
             var lotId = $(this).data('lot')
 
-            Table.addFavoriteCar(lotId)
+            MainTable.addFavoriteCar(lotId)
 
             $(this).blur()
 
@@ -101,7 +102,7 @@ export let Table = (function () {
 
             console.log('Table rem doc')
             console.log($(this).data('doc'))
-            Search.removeDoc($(this).data('doc'),true)
+            MainSearch.removeDoc($(this).data('doc'),true)
         })
     }
 
@@ -111,15 +112,13 @@ export let Table = (function () {
 
             console.log('Table rem loc')
             console.log($(this).data('loc'))
-            Search.removeLoc($(this).data('loc'))
+            MainSearch.removeLoc($(this).data('loc'))
         })
     }
 
     return {
 
         init: function () {
-
-            FavoriteCars.hello()
 
             console.log('Table init')
 
@@ -158,7 +157,7 @@ export let Table = (function () {
             setTimeout(function () {
                 var hideTable = $('#table #hide-table .table-container').get(0)
 
-                if(data['carsCount'] === 0) Table.renderError()
+                if(data['carsCount'] === 0) MainTable.renderError()
                 else {
                     $('#main-table').html(hideTable)
                 }
@@ -207,11 +206,11 @@ export let Table = (function () {
 
                 if (data) {
 
-                    Table.render(data)
+                    MainTable.render(data)
 
                 } else {
 
-                    Table.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
+                    MainTable.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
                 }
 
 
@@ -227,7 +226,7 @@ export let Table = (function () {
                 $(this).html('<i class="fa fa-bookmark-o"></i>')
             })
 
-            let favoriteCars = getCookie('favoriteCars')
+            let favoriteCars = cookie.get('favoriteCars')
 
             if (favoriteCars === undefined) return false
 
@@ -252,7 +251,7 @@ export let Table = (function () {
 
         addFavoriteCar: function (lotId) {
 
-            let favoriteCars = getCookie('favoriteCars')
+            let favoriteCars = cookie.get('favoriteCars')
 
             if (favoriteCars === undefined) {
 
@@ -280,7 +279,7 @@ export let Table = (function () {
                 document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
             } else {
 
-                deleteCookie('favoriteCars')
+                cookie.destroy('favoriteCars')
             }
 
 

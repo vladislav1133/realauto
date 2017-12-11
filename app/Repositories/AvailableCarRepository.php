@@ -89,9 +89,9 @@ class AvailableCarRepository extends Repository{
         return $property;
     }
 
-    public function getModels(){
+    public function getModels($mark){
 
-        $models = $this->pluck('model')->unique()->sort()->toArray();
+        $models = $this->model->where('mark',$mark)->pluck('model')->unique()->sort()->values()->toArray();
 
         return $models;
     }

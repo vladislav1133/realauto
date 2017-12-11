@@ -494,6 +494,11 @@ body {
     height: 1000px;
 }
 
+.available-car-content .favorite-checkbox{
+    display: none;
+}
+
+
 @media (max-width: 1600px){
     
     .main-header{

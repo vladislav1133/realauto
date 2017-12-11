@@ -13,5 +13,6 @@
 
 
 @section('footer')
+    @include(env('THEME').'.availableCarContactPopup')
     @include(env('THEME').'.layouts.footer')
 @endsection

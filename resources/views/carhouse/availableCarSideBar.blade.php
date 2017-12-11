@@ -81,7 +81,7 @@
                     @if(array_key_exists('years',$search))
 
                         @foreach($search['years'] as $year)
-                            <option value="{{$year}}" @if($year == reset($search['years'])) selected @endif>{{$year}}</option>
+                            <option value="{{$year}}">{{$year}}</option>
                         @endforeach
                     @endif
                 </select>
@@ -96,7 +96,7 @@
                     @if(array_key_exists('years',$search))
 
                         @foreach($search['years'] as $year)
-                            <option value="{{$year}}" @if($year == end($search['years'])) selected @endif>{{$year}}</option>
+                            <option value="{{$year}}">{{$year}}</option>
                         @endforeach
                     @endif
                 </select>

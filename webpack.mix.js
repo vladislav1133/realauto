@@ -17,5 +17,6 @@ mix.autoload({
 mix
     .setPublicPath('./')
     .js('./resources/assets/js/app.js', './carhouse/js')
-    .sass('./resources/assets/sass/app.scss', './carhouse/css')
-    ;
+    .sass('./resources/assets/sass/app.scss', './carhouse/css');
+
+mix.sourceMaps();
