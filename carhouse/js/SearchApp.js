@@ -362,13 +362,14 @@ let Search = (function () {
 
         $(searchBtn).click(function () {
 
-            searchType = 'main'
-            tableVue.getCars(1, Search.getSearchData())
-        })
+            searchType = 'main';
+            tableVue.getCars(1, Search.getSearchData());
+
+        });
 
         $(searchBtnTop).click(function () {
 
-            searchType = 'main'
+            searchType = 'main';
 
             tableVue.getCars(1, Search.getSearchData())
         })

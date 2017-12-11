@@ -296,4 +296,5 @@ let Table = (function () {
         }
 
     }
+
 })();
