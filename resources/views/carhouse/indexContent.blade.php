@@ -2,7 +2,7 @@
 @if($cars)
     <div class="table-container">
         <div class="table car-table" data-empty="Автомобили не найдеы">
-            <div class="thead" id="vueTest">
+            <div class="thead">
                 <div class="thead__cell">Фото</div>
                 <div class="thead__cell">Лот</div>
                 <div class="thead__cell">Год</div>
@@ -24,7 +24,7 @@
             </div>
             <div class="tbody" id="table-body">
 
-                <div class="table__row" v-for="car in cars" v-on:click="foot(event)">
+                <div class="table__row" v-for="car in cars">
                     <!--@{{item.path_to_image}}-->
                     <div class="table__row-cell" style="position: relative; width: 100px; margin: 0 auto;">
                         <img class="product__img"
@@ -48,7 +48,6 @@
                         </div>
                     </div>
                     <div class="table__row-cell">
-                        <div>
                             <div>
                                 <a href="@{{car.url}}" target="_blank">@{{car.lot_id}}</a>
                             </div>
@@ -57,10 +56,8 @@
                                         title="Добавить в избранное"><i class="fa fa-bookmark-o"></i>
                                 </button>
                             </div>
-
-                            <a v-if="car.source === 'copart.com'" style="font-size: 25px" href="@{{car.url}}" target="_blank">C</a>
-                            <a v-else style="font-size: 25px; color: #A20106;" href="@{{car.url}}" target="_blank">A</a>
-                        </div>
+                            <a v-if="car.source === 'copart.com'" style="font-size: 25px; margin-left: 7px;" href="@{{car.url}}" target="_blank">C</a>
+                            <a v-else style="font-size: 25px; color: #A20106; margin-left: 7px;" href="@{{car.url}}" target="_blank">A</a>
                     </div>
                     <div class="table__row-cell">@{{car.year}}</div>
                     <div class="table__row-cell">@{{car.brand}}</div>
@@ -73,9 +70,9 @@
                     <div class="table__row-cell">@{{car.highlights}}</div>
                     <div class="table__row-cell">@{{car.primary_damage}}</div>
                     <div class="table__row-cell">@{{car.secondary_damage}}</div>
-                    <div class="table__row-cell">@{{car.sale_date}}</div>
+                    <div class="table__row-cell sale_date">@{{car.sale_date}}</div>
                     <div class="table__row-cell">@{{car.current_bid}}</div>
-                    <div class="table__row-cell">@{{car.buy_it_now}}</div>
+                    <div class="table__row-cell buy-now_green">@{{car.buy_it_now}}</div>
                     <div class="table__row-cell">
                         @{{car.location}}
                         <button class="btn btn-rem-loc rem-btn" data-loc="@{{car.location}}">Исключить из поиска
@@ -95,6 +92,12 @@
             </div>
         </div>
         <div class="table-pagination">
+            <pagination
+                    :current="currentPage"
+                    :total="total"
+                    :per-page="perPage"
+                    @page-changed="getCars"
+            ></pagination>
         </div>
     </div>
 

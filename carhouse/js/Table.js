@@ -7,23 +7,23 @@ let Table = (function () {
 
     let errNotFound = '<tbody id="table-body"><tr class="footable-empty"><td colspan="11">Автомобили не найдеы</td></tr></tbody>'
 
-    function onPaginate() {
-
-        $(el).on('click', '.pagination a', function (e, data) {
-
-            e.preventDefault();
-
-            let page = $(this).attr('href').split('page=')[1];
-
-            console.log('PAGE ' + page)
-
-            let html = Table.getPage(page, Search.getSearchData());
-
-            $('html, body').animate({
-                scrollTop: $(el).offset().top - 95
-            }, 300)
-        });
-    }
+    // function onPaginate() {
+    //
+    //     $(el).on('click', '.pagination a', function (e, data) {
+    //
+    //         e.preventDefault();
+    //
+    //         let page = $(this).attr('href').split('page=')[1];
+    //
+    //         console.log('PAGE ' + page)
+    //
+    //         let html = Table.getPage(page, Search.getSearchData());
+    //
+    //         $('html, body').animate({
+    //             scrollTop: $(el).offset().top - 95
+    //         }, 300)
+    //     });
+    // }
 
     function onAddFavoriteCar() {
 
@@ -170,47 +170,47 @@ let Table = (function () {
             $('#main-table').html('<h2 style="text-align:center; color:#fff">По запросу автомобили не найдены</h2>')
         },
 
-        getPage: function (page, data) {
-
-            console.log(data)
-
-            data['page'] = page
-
-            this.getData(data)
-        },
-
-        getData: function (data) {
-
-
-
-            $.ajax({
-
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-
-                type: "POST",
-
-                url: '/cars',
-
-                data: data
-
-            }).done(function (data) {
-
-
-                if (data) {
-
-                    Table.render(data)
-
-                } else {
-
-                    Table.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
-                }
-
-
-
-            });
-        },
+        // getPage: function (page, data) {
+        //
+        //     console.log(data)
+        //
+        //     data['page'] = page
+        //
+        //     this.getData(data)
+        // },
+        //
+        // getData: function (data) {
+        //
+        //
+        //
+        //     $.ajax({
+        //
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //
+        //         type: "POST",
+        //
+        //         url: '/cars',
+        //
+        //         data: data
+        //
+        //     }).done(function (data) {
+        //
+        //
+        //         if (data) {
+        //
+        //             Table.render(data)
+        //
+        //         } else {
+        //
+        //             Table.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
+        //         }
+        //
+        //
+        //
+        //     });
+        // },
 
         updateFavoriteCars: function () {
 
@@ -285,7 +285,7 @@ let Table = (function () {
 
             onClickImage()
 
-            onPaginate()
+            // onPaginate()
 
             onAddFavoriteCar()
 
@@ -293,7 +293,7 @@ let Table = (function () {
 
             onClickRemoveLoc()
 
-        },
+        }
 
     }
-})()
+})();

@@ -224,17 +224,11 @@ table>tbody>tr>td>span.footable-toggle.last-column {
 
 /*----------------------------------*/
 
-.footable .rem-btn{
-    float: right;
-    display: inline;
-    width: auto;
-
+.rem-btn{
     font-size: 12px;
-    padding: 1px 3px;
-
-    text-align: center;
     letter-spacing: 1px;
     color: #ffffff;
+
     background-color: #6a0000;
     text-decoration: none;
     -webkit-transition: background-color 0.3s;
@@ -242,7 +236,7 @@ table>tbody>tr>td>span.footable-toggle.last-column {
     border-radius: 4px;
 }
 
-.footable .rem-btn:hover, .footable .rem-btn:focus {
+.rem-btn:hover, .rem-btn:focus {
     background-color: #890000;
     color: #fff!important;
 }
@@ -395,7 +389,7 @@ table>tbody>tr>td>span.footable-toggle.last-column {
 
 .product__img {
     height: 80px;
-    width: 100px;
+    width: 107px;
 }
 
 .product__img:hover{
@@ -1004,16 +998,13 @@ body {
 }
 
 .favorite__btn_wrap{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
 }
 
 .favorite__btn {
     background: transparent;
     font-size: 25px;
-    margin: 0;
-    padding: 3px 0;
+    margin-left: 15px;
     width: 20px;
     float: left;
     color: #6a0000;
@@ -1464,13 +1455,6 @@ footer .footer-item .gallery-item {
     border: 0;
 }
 
-#table-body>.second-row {
-    background: #f7f7f7;
-}
-
-
-
-
 
 
 /** SIDEBAR **/
@@ -1756,6 +1740,10 @@ footer .footer-item .gallery-item {
     border-bottom: 1px solid black;
 }
 
+.table__row:nth-child(even){
+    background: #F1F1F1;
+}
+
 .table__row-cell{
     display: inline-block;
     width: 100px;
@@ -1794,10 +1782,88 @@ footer .footer-item .gallery-item {
     width: 100%;
 }
 
+.more-btn{
+    float: right;
+    margin-left: -25px;
+    margin-top: 14px;
+}
+
+.more-btn:hover{
+    cursor: pointer;
+}
+
 .table-pagination{
     text-align: center;
 }
 
+.pagination {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto 30px;
+    padding: 0 15px;
+    max-width: 1280px;
+}
+
+.pagination__left, .pagination__right {
+    width: 20%;
+}
+
+.pagination__left {
+    float: left;
+}
+
+.pagination__right {
+    float: right;
+}
+
+.pagination__right a {
+    float: right;
+}
+
+.pagination a, .pagination span {
+    display: block;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    line-height: 42px;
+    height: 44px;
+    color: #999;
+    font-size: 18px;
+}
+
+.pagination a {
+    padding: 0 20px;
+    max-width: 160px;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    margin: 0 6px;
+    transition: all .2s ease-in-out;
+}
+
+.pagination a.current {
+    border-color: #FA0000;
+    color: #FA0000;
+}
+
+.pagination__mid {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+}
+
+.pagination__mid ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination__mid li {
+    display: inline-block;
+}
 
 .slider.slider-horizontal .slider-track {
     height: 10px;
