@@ -20,6 +20,8 @@ Route::get('contacts', ['as'=>'contacts','uses'=>'ContactController@index']);
 Route::resource('blog','ArticlesController', ['only' =>['index','show']]);
 Route::resource('availablecars', 'AvailableCarsController', ['only' => ['index', 'show']]);
 
+Route::post('available-cars', 'AvailableCarsController@getCars');
+
 Route::post('contact-us','IndexController@contactUs');
 
 //CarsController
@@ -31,6 +33,7 @@ Route::get('cars/search/{query}','CarsController@search');
 Route::get('cars/property/{source}/{type}','CarsController@getSearchProperty');
 Route::post('cars/favorite/remove','CarsController@removeFavorite');
 Route::get('cars/images/{carId}','CarsController@getGalleryImg');
+
 
 
 

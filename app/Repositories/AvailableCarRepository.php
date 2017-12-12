@@ -1,19 +1,21 @@
 <?php
 
-namespace  App\Repositories;
+namespace App\Repositories;
 
 use App\AvailableCar;
 
-class AvailableCarRepository extends Repository{
+class AvailableCarRepository extends Repository
+{
 
-    public function __construct(AvailableCar $aCar){
-        $this->model=$aCar;
+    public function __construct(AvailableCar $aCar)
+    {
+        $this->model = $aCar;
     }
 
-    public  function getCars($select = '*', $pagination = false, $orderBy = false,  array $where = [])
+    public function getCars($select = '*', $pagination = false, $orderBy = false, array $where = [])
     {
 
-        $builder=$this->model->select($select);
+        $builder = $this->model->select($select);
 
         if ($orderBy) {
 
@@ -21,20 +23,18 @@ class AvailableCarRepository extends Repository{
         }
 
 
-
         if ($where) {
 
 
+            if (array_key_exists('where', $where)) {
 
-            if(array_key_exists('where', $where)){
-
-                if(is_array($where['where']) && !empty($where['where'])){
+                if (is_array($where['where']) && !empty($where['where'])) {
 
                     $builder->where($where['where']);
                 }
             }
 
-            if(array_key_exists('whereIn', $where)){
+            if (array_key_exists('whereIn', $where)) {
                 if (is_array($where['whereIn']) && !empty($where['whereIn'])) {
 
                     foreach ($where['whereIn'] as $whereIn) {
@@ -45,7 +45,7 @@ class AvailableCarRepository extends Repository{
             }
 
 
-            if(array_key_exists('whereNotIn', $where)){
+            if (array_key_exists('whereNotIn', $where)) {
                 if (is_array($where['whereNotIn']) && !empty($where['whereNotIn'])) {
 
                     foreach ($where['whereNotIn'] as $whereInNot) {
@@ -55,7 +55,7 @@ class AvailableCarRepository extends Repository{
                 }
             }
 
-            if(array_key_exists('whereNotNull', $where)){
+            if (array_key_exists('whereNotNull', $where)) {
                 if (is_array($where['whereNotNull']) && !empty($where['whereNotNull'])) {
 
                     foreach ($where['whereNotNull'] as $column) {
@@ -69,33 +69,53 @@ class AvailableCarRepository extends Repository{
 
         if ($pagination) {
 
-            return $builder->paginate($pagination);
+            $collection = $builder->paginate($pagination);
+        } else {
+
+            $collection = $builder->get();
         }
 
+        $language['drive'] = trans('cars.drive', [], 'ru');
 
-        return $builder->get();
+          $collection->transform(function ($item, $key) use ($language) {
+
+            $lang = [];
+
+            if (array_key_exists(mb_strtoupper($item->drive), $language['drive'])) {
+
+                $lang = ['drive' => $language['drive'][mb_strtoupper($item->drive)]];
+            }
+
+            $item['lang'] = $lang;
+
+            return $item;
+        });
+
+        return $collection;
     }
 
-
-
-    public function getSearchProperty() {
+    public function getSearchProperty()
+    {
 
 
         $cars = $this->getCars('*');
 
-        $property['marks'] = $this->getProperty($cars,'mark');
-        $property['years'] = $this->getProperty($cars,'year');
+        $property['marks'] = $this->getProperty($cars, 'mark');
+        $property['years'] = $this->getProperty($cars, 'year');
 
         return $property;
     }
 
-    public function getModels($mark){
+    public function getModels($mark)
+    {
 
-        $models = $this->model->where('mark',$mark)->pluck('model')->unique()->sort()->values()->toArray();
+        $models = $this->model->where('mark', $mark)->pluck('model')->unique()->sort()->values()->toArray();
 
         return $models;
     }
-    public function getProperty($collection, $col) {
+
+    public function getProperty($collection, $col)
+    {
 
         $arr = $collection->pluck($col)->unique()->toArray();
         if (($key = array_search('NULL', $arr)) !== false) {

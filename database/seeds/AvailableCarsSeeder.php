@@ -29,7 +29,7 @@ class AvailableCarsSeeder extends Seeder
             'fuel' => 'Gas',
             'transmission' => 'Automatic',
             'odometer' => '250',
-            'drive' => 'All While Drive',
+            'drive' => 'All Wheel Drive',
             'icon' => 'images/available_cars/4b53f0b50084ece3d03097ce669d3c7a.jpg',
             'gallery' => 'images/available_cars/f9907adc2a3c049c3921b56dc75c8a97.jpg,images/available_cars/ec435c6b4595ca387b76cbd783c4780b.jpg,images/available_cars/d01dcf2beef737cb1464321af549b36b.jpg',
             'description' => '<p>Какое то описание автомобиля</p>',
@@ -51,7 +51,7 @@ class AvailableCarsSeeder extends Seeder
             'fuel' => 'Gas',
             'transmission' => 'Automatic',
             'odometer' => '250',
-            'drive' => 'All While Drive',
+            'drive' => 'All Wheel Drive',
             'icon' => 'images/available_cars/4b53f0b50084ece3d03097ce669d3c7a.jpg',
             'gallery' => 'images/available_cars/f9907adc2a3c049c3921b56dc75c8a97.jpg,images/available_cars/ec435c6b4595ca387b76cbd783c4780b.jpg,images/available_cars/d01dcf2beef737cb1464321af549b36b.jpg',
             'description' => '<p>Какое то описание автомобиля</p>'
@@ -71,7 +71,7 @@ class AvailableCarsSeeder extends Seeder
             'fuel' => 'Gas',
             'transmission' => 'Automatic',
             'odometer' => '250',
-            'drive' => 'All While Drive',
+            'drive' => 'All Wheel Drive',
             'icon' => 'images/available_cars/4b53f0b50084ece3d03097ce669d3c7a.jpg',
             'gallery' => 'images/available_cars/f9907adc2a3c049c3921b56dc75c8a97.jpg,images/available_cars/ec435c6b4595ca387b76cbd783c4780b.jpg,images/available_cars/d01dcf2beef737cb1464321af549b36b.jpg',
             'description' => '<p>Какое то описание автомобиля</p>'
@@ -90,7 +90,7 @@ class AvailableCarsSeeder extends Seeder
             'fuel' => 'Gas',
             'transmission' => 'Automatic',
             'odometer' => '250',
-            'drive' => 'All While Drive',
+            'drive' => 'All Wheel Drive',
             'icon' => 'images/available_cars/4b53f0b50084ece3d03097ce669d3c7a.jpg',
             'gallery' => 'images/available_cars/f9907adc2a3c049c3921b56dc75c8a97.jpg,images/available_cars/ec435c6b4595ca387b76cbd783c4780b.jpg,images/available_cars/d01dcf2beef737cb1464321af549b36b.jpg',
             'description' => '<p>Какое то описание автомобиля</p>'
@@ -110,7 +110,7 @@ class AvailableCarsSeeder extends Seeder
             'fuel' => 'Gas',
             'transmission' => 'Automatic',
             'odometer' => '250',
-            'drive' => 'All While Drive',
+            'drive' => 'All Wheel Drive',
             'icon' => 'images/available_cars/4b53f0b50084ece3d03097ce669d3c7a.jpg',
             'gallery' => 'images/available_cars/f9907adc2a3c049c3921b56dc75c8a97.jpg,images/available_cars/ec435c6b4595ca387b76cbd783c4780b.jpg,images/available_cars/d01dcf2beef737cb1464321af549b36b.jpg',
             'description' => '<p>Какое то описание автомобиля</p>'
@@ -131,7 +131,7 @@ class AvailableCarsSeeder extends Seeder
             'fuel' => 'Gas',
             'transmission' => 'Automatic',
             'odometer' => '250',
-            'drive' => 'All While Drive',
+            'drive' => 'All Wheel Drive',
             'icon' => 'images/available_cars/4b53f0b50084ece3d03097ce669d3c7a.jpg',
             'gallery' => 'images/available_cars/f9907adc2a3c049c3921b56dc75c8a97.jpg,images/available_cars/ec435c6b4595ca387b76cbd783c4780b.jpg,images/available_cars/d01dcf2beef737cb1464321af549b36b.jpg',
             'description' => '<p>Какое то описание автомобиля</p>'
@@ -156,7 +156,7 @@ class AvailableCarsSeeder extends Seeder
                 'fuel' => 'Gas',
                 'transmission' => 'Automatic',
                 'odometer' => '250',
-                'drive' => 'All While Drive',
+                'drive' => 'All Wheel Drive',
                 'icon' => 'images/available_cars/4b53f0b50084ece3d03097ce669d3c7a.jpg',
                 'gallery' => 'images/available_cars/f9907adc2a3c049c3921b56dc75c8a97.jpg,images/available_cars/ec435c6b4595ca387b76cbd783c4780b.jpg,images/available_cars/d01dcf2beef737cb1464321af549b36b.jpg',
                 'description' => '<p>Какое то описание автомобиля</p>'

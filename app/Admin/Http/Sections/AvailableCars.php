@@ -86,7 +86,7 @@ class AvailableCars extends Section implements Initializable
             AdminFormElement::text('fuel', 'Топливо')->required(),
             AdminFormElement::select('transmission', 'КПП',['Automatic'=>'Automatic','Manual'=>'Manual'])->required(),
             AdminFormElement::text('odometer', 'Пробег')->required(),
-            AdminFormElement::select('drive', 'Тип привода',['FRONT WHEEL DRIVE'=>'FRONT WHEEL DRIVE','ALL WHEEL DRIVE'=>'ALL WHEEL DRIVE','REAR WHEEL DRIVE'=>'REAR WHEEL DRIVE'])->required(),
+            AdminFormElement::select('drive', 'Тип привода',['Front Wheel Drive'=>'Front Wheel Drive','All Wheel Drive'=>'All Wheel Drive','Rear Wheel Drive'=>'Rear Wheel Drive'])->required(),
             AdminFormElement::image('icon', 'Иконка для таблицы')->required()->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
                 return 'images/available_cars';
             }),

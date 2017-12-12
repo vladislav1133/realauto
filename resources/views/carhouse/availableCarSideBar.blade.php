@@ -42,7 +42,7 @@
                     @if(array_key_exists('marks',$search))
                         <option value="all" selected>ВСЕ</option>
                         @foreach($search['marks'] as $mark)
-                            <option value="{{$mark}}">{{$mark}}</option>
+                            <option value="{{mb_strtoupper($mark)}}">{{mb_strtoupper($mark)}}</option>
                         @endforeach
                     @endif
                 </select>

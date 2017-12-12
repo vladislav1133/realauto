@@ -115,13 +115,9 @@ class CarRepository extends Repository
             $builder->orderBy($orderBy[0], $orderBy[1]);
         }
 
-
-
         $where['where'][] = ['active',1];
 
         if ($where) {
-
-
 
             if(array_key_exists('where', $where)){
 
@@ -166,11 +162,48 @@ class CarRepository extends Repository
 
         if ($pagination) {
 
-            return $builder->paginate($pagination);
+            $collection = $builder->paginate($pagination);
+        } else {
+
+            $collection = $builder->get();
         }
 
 
-        return $builder->get();
+        $language['damage'] = trans('cars.damage',[],'ru');
+        $language['highlights'] = trans('cars.highlights',[],'ru');
+        $language['drive'] = trans('cars.drive',[],'ru');
+
+
+        $collection->transform(function ($item, $key) use ($language) {
+
+            $lang = [];
+
+            if (array_key_exists(mb_strtoupper($item->drive), $language['drive'])) {
+
+                $lang['drive'] =  $language['drive'][mb_strtoupper($item->drive)];
+            }
+
+            if (array_key_exists(mb_strtoupper($item->highlights), $language['highlights'])) {
+
+                $lang['highlights'] = $language['highlights'][mb_strtoupper($item->highlights)];
+            }
+
+            if (array_key_exists(mb_strtoupper($item->secondary_damage), $language['damage'])) {
+
+                $lang['secondary_damage'] = $language['damage'][mb_strtoupper($item->secondary_damage)];
+            }
+
+            if (array_key_exists(mb_strtoupper($item->primary_damage), $language['damage'])) {
+
+                $lang['primary_damage'] = $language['damage'][mb_strtoupper($item->primary_damage)];
+            }
+
+            $item['lang'] = $lang;
+
+            return $item;
+        });
+
+        return $collection;
     }
 
 

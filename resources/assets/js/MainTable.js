@@ -1,16 +1,22 @@
 import * as cookie from './helpers/cookie'
+import * as date from './helpers/date'
 import {MainSearch} from './MainSearch'
 
 export let MainTable = (function () {
-
 
     let el = '#table'
 
     let remDocBtn = '.btn-rem-doc'
     let remLocBtn = '.btn-rem-loc'
 
-    let errNotFound = '<tbody id="table-body"><tr class="footable-empty"><td colspan="11">Автомобили не найдеы</td></tr></tbody>'
-
+    function initSlider() {
+        $(".rslides").responsiveSlides({
+            auto:false,
+            nav:true,
+            prevText: "<i class='fa fa-arrow-left'></i>",   // String: Text for the "previous" button
+            nextText: "<i class='fa fa-arrow-right'></i>",
+        });
+    }
     function onPaginate() {
 
         $(el).on('click', '.pagination a', function (e, data) {
@@ -19,9 +25,7 @@ export let MainTable = (function () {
 
             let page = $(this).attr('href').split('page=')[1];
 
-            console.log('PAGE ' + page)
-
-            let html = MainTable.getPage(page, MainSearch.getSearchData());
+            MainTable.getPage(page, MainSearch.getSearchData());
 
             $('html, body').animate({
                 scrollTop: $(el).offset().top - 95
@@ -116,25 +120,35 @@ export let MainTable = (function () {
         })
     }
 
+    function onChangePage() {
+
+        $(window).on('changePage', function () {
+
+            $('.sale_date').each(function () {
+                if ($(this).text() === date.getFormated()) {
+
+                    $(this).addClass('sale_date_today')
+                }
+            })
+        })
+    }
+
     return {
 
         init: function () {
 
-            console.log('Table init')
 
-            $('#main-table .car-table').footable({});
 
             this.updateFavoriteCars()
 
             this.initEvents()
 
-            $(".rslides").responsiveSlides({
-                auto:false,
-                nav:true,
-                prevText: "<i class='fa fa-arrow-left'></i>",   // String: Text for the "previous" button
-                nextText: "<i class='fa fa-arrow-right'></i>",
-            });
+            $('#main-table .car-table').footable({});
+            $(window).trigger('changePage')
 
+            initSlider()
+
+            console.log('Table init')
         },
 
         showGallery: function (el) { // get the class name in arguments here
@@ -212,8 +226,6 @@ export let MainTable = (function () {
 
                     MainTable.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
                 }
-
-
 
             });
         },
@@ -299,6 +311,7 @@ export let MainTable = (function () {
 
             onClickRemoveLoc()
 
+            onChangePage()
         },
 
     }

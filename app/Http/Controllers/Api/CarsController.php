@@ -201,16 +201,7 @@ class CarsController extends Controller {
 
         $cars = $this->carRepository->get(['*'], config('settings.cars_on_page'), $orderBy, $where);
 
-        $carsCount = $cars->total();
-
-        $language['damage'] = trans('cars.damage');
-        $language['highlights'] = trans('cars.highlights');
-        $language['drive'] = trans('cars.drive');
-
-        $carsTable = view(env('THEME') . '.indexContent')->with('cars', $cars)->with('language',$language)->render();
-
-
-        return ['cars' => $cars, 'carsCount' => $carsCount];
+        return response()->json(['success'=>true, 'data'=>$cars]);
     }
 
     public function search($query) {

@@ -1,20 +1,20 @@
+
 import {AvailableSearch} from "./AvailableSearch";
-
-require('./bootstrap');
-
 import {CustomsCalculator} from "./CustomsCalculator";
-
 import {MainTable} from './MainTable'
 import {MainSearch} from './MainSearch'
 import * as cookie from './helpers/cookie'
 import {AvailableTable} from "./AvailableTable";
 
-export let App = (function () {
+
+require('./bootstrap');
+
+
+ let App = (function () {
 
     function initEvents() {
 
         onClickContactBtn()
-        onChangePage()
         onSubmitContactForm()
     }
 
@@ -102,19 +102,7 @@ export let App = (function () {
         })
     }
 
-    function onChangePage() {
 
-        $(window).on('changePage', function () {
-
-            $('.sale_date').each(function () {
-                if ($(this).text() === Index.getFormatedDate()) {
-
-                    $(this).addClass('sale_date_today')
-                }
-            })
-        })
-
-    }
 
     function RemoveNotExistFavorite() {
 
@@ -188,29 +176,8 @@ export let App = (function () {
             });
 
 
-            $(window).trigger('changePage')
 
-        },
 
-        getFormatedDate: function () {
-
-            let today = new Date();
-            let dd = today.getDate();
-
-            let mm = today.getMonth() + 1;
-            let yyyy = today.getFullYear();
-
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-
-            let response = dd + '/' + mm + '/' + yyyy
-
-            return response
         }
     }
 })()

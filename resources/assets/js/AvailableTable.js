@@ -18,7 +18,7 @@ export let AvailableTable = (function () {
 
             console.log('PAGE ' + page)
 
-            let html = AvailableTable.getPage(page, AvailableSearch.getSearchData());
+            AvailableTable.getPage(page, AvailableSearch.getSearchData());
 
             $('html, body').animate({
                 scrollTop: $(el).offset().top - 95
@@ -98,7 +98,7 @@ export let AvailableTable = (function () {
 
                 type: "POST",
 
-                url: 'api/available-cars',
+                url: 'available-cars',
 
                 data: data
 

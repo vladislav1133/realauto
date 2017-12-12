@@ -26,15 +26,12 @@ class AvailableCarsController extends Controller
     public function getCars(Request $request)
     {
 
-
         $where = [];
 
         $mark = $request->mark;
         $model = $request->model;
         $yearFrom = $request->yearFrom;
         $yearTo = $request->yearTo;
-
-
 
         if($mark === 'all') $mark = false;
         if ($mark) $where['where'][] = ['mark',$mark];
@@ -55,15 +52,13 @@ class AvailableCarsController extends Controller
 
         $cars = $this->availableCarRepository->getCars(['*'], config('settings.cars_on_page'), $orderBy, $where);
 
-        $carsCount = $cars->total();
 
-        $language['damage'] = trans('cars.damage');
-        $language['highlights'] = trans('cars.highlights');
-        $language['drive'] = trans('cars.drive');
+        return response()->json([
+            'success'=>true,
+            'data' => $cars->toArray()
+            ]);
 
-        $carsTable = view(env('THEME') . '.availableCarTable')->with('cars', $cars)->with('language',$language)->render();
 
-        return ['table' => $carsTable, 'carsCount' => $carsCount];
     }
 
 }
