@@ -115,8 +115,8 @@ class CarRepository extends Repository
             $builder->orderBy($orderBy[0], $orderBy[1]);
         }
 
-
-
+        $builder->whereDate('sale_date', '>=', Carbon::today()->toDateString());
+       // $where['']
         $where['where'][] = ['active',1];
 
         if ($where) {
