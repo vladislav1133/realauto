@@ -1,10 +1,19 @@
+import Vue from 'vue'
 
-import {AvailableSearch} from "./AvailableSearch";
-import {CustomsCalculator} from "./CustomsCalculator";
+import Example from './Example.vue'
+
+import {AvailableSearch} from "./AvailableSearch"
+import {CustomsCalculator} from "./CustomsCalculator"
 import {MainTable} from './MainTable'
 import {MainSearch} from './MainSearch'
 import * as cookie from './helpers/cookie'
-import {AvailableTable} from "./AvailableTable";
+import {AvailableTable} from "./AvailableTable"
+
+const test = new Vue({
+    el: '#test',
+    template: `<example></example>`,
+    components: { Example },
+})
 
 
 require('./bootstrap');

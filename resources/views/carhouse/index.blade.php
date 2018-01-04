@@ -8,6 +8,7 @@
 
     <div id="main-content" class="car-list content-area">
 
+        <div id="test">@{{msg}}</div>
         <div class="hidden">
 
                 <div id="car-gallery">

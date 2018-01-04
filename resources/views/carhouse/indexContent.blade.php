@@ -6,6 +6,7 @@
                data-page-size="15">
             <thead>
             <tr>
+
                 <th>Фото</th>
                 <th data-breakpoints="">Лот</th>
                 <th data-breakpoints="xs">Год</th>
