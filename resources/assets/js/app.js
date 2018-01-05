@@ -1,20 +1,24 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
-import Example from './Example.vue'
+import AppVue from './App.vue';
+import TableVue from './Table.vue';
+import PaginationVue from './Pagination.vue';
 
-import {AvailableSearch} from "./AvailableSearch"
-import {CustomsCalculator} from "./CustomsCalculator"
-import {MainTable} from './MainTable'
-import {MainSearch} from './MainSearch'
-import * as cookie from './helpers/cookie'
+Vue.component("TableVue", TableVue);
+Vue.component("PagVue", PaginationVue);
+
+import {AvailableSearch} from "./AvailableSearch";
+import {CustomsCalculator} from "./CustomsCalculator";
+import {MainTable} from './MainTable';
+import {MainSearch} from './MainSearch';
+import * as cookie from './helpers/cookie';
 import {AvailableTable} from "./AvailableTable"
 
-const test = new Vue({
-    el: '#test',
-    template: `<example></example>`,
-    components: { Example },
-})
 
+const test = new Vue({
+    el: '.table-container',
+    render: h => h(AppVue)
+});
 
 require('./bootstrap');
 

@@ -148,7 +148,6 @@ export let MainTable = (function () {
 
             initSlider()
 
-            console.log('Table init')
         },
 
         showGallery: function (el) { // get the class name in arguments here

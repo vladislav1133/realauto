@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 //CarsController
-Route::get('cars','Api\CarsController@getCars');
+Route::post('cars','Api\CarsController@getCars');
 
 
 Route::get('available-cars/models/{mark}', 'Api\AvailableCarsController@getModels');
