@@ -24,9 +24,9 @@
             </div>
             <div class="tbody" id="table-body">
 
-                    <table-vue
-                            :cars="cars"
-
+                    <table-vue class="table__row"
+                               v-for="car in cars"
+                                :cars="cars"
                     ></table-vue>
 
             </div>

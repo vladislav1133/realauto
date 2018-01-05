@@ -1,15 +1,15 @@
 'use strict';
 
 let vueTable = Vue.component('table-vue', {
-    template: `<div class="table__row">
+    props: ['cars'],
+    template: `
                     <div class="table__row-cell" style="position: relative; width: 100px; margin: 0 auto;">
+                   
                         <img class="product__img"
                              src="{{car.path_to_image}}"
-                             alt=""
                              title="Смотреть фото"
                              data-car-id="{{car.lot_id}}"
-                             onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';"
-                        >
+                             onError="this.onerror=null;this.src='/carhouse/img/car-blank.png';">
                         <div v-if="car.highlights==='RUN AND DRIVE'" title="На ходу" style="    cursor: pointer;
                                                                 position: absolute;
                                                                 top: 0;
@@ -64,13 +64,7 @@ let vueTable = Vue.component('table-vue', {
                         <div class='thead-bottom'></div>
                         <div class='tbody-bottom'></div>
                     </div>
-            </div>`,
-    props: {
-        cars: {
-            type: Array
-        }
-    },
-
+            `,
     methods: {
         test: function () {
           console.log(this.cars)
@@ -240,7 +234,7 @@ const tableVue = new Vue({
         cars: [],
         currentPage: 1,
         perPage: 10,
-        total: 0,
+        total: 0
 
     },
     methods: {
@@ -250,10 +244,10 @@ const tableVue = new Vue({
 
             this.$http.post(this.endpoint, searchData).then(function (response) {
 
-                this.cars = response.body.cars.data;
-                this.currentPage = response.body.cars.current_page;
                 console.log(response);
-                this.total = response.data.cars.total;
+                this.cars = response.data.cars.data;
+                this.currentPage = response.data.cars.current_page;
+                this.total = response.data.carsCount;
             }, function (error) {
                 console.log("ошибка запроса");
             });
@@ -262,6 +256,7 @@ const tableVue = new Vue({
     },
     created: function (){
         this.getCars(1, Search.getSearchData());
+        console.log(this.total)
 
     },
     // render: h => h(vueTable)
