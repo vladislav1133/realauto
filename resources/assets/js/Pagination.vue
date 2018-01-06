@@ -23,6 +23,7 @@
 </template>
 
 <script>
+    import {MainSearch} from './MainSearch';
     export default {
         props: {
             current: {
@@ -86,7 +87,7 @@
                 return this.current < this.total
             },
             changePage: function(page) {
-                this.$emit('page-changed', page, Search.getSearchData());
+                this.$emit('page-changed', page, MainSearch.getSearchData());
             }
         }
     }
