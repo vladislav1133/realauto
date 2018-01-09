@@ -47,14 +47,15 @@
                   :location="car.location"
                   :doc_type="car.doc_type"
         ></tableVue>
+    </div>
+
+        </div>
         <pagVue
                 :current="currentPage"
                 :total="total"
                 :per-page="perPage"
                 @page-changed="getCars"
         ></pagVue>
-    </div>
-        </div>
     </div>
 </template>
 
@@ -84,11 +85,16 @@
             }
 
         },
-        mounted: function (){
+        created: function (){
             this.getCars(this.currentPage, MainSearch.getSearchData());
         },
+        mounted: function () {
+                
+        },
         updated: function () {
+            this.$nextTick(function () {
                 tableMain();
+            })
         }
     }
         $("body").on('click','.more-btn',function () {

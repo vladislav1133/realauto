@@ -17,21 +17,21 @@ export let MainTable = (function () {
             nextText: "<i class='fa fa-arrow-right'></i>",
         });
     }
-    function onPaginate() {
+    // function onPaginate() {
 
-        $(el).on('click', '.pagination a', function (e, data) {
+    //     $(el).on('click', '.pagination a', function (e, data) {
 
-            e.preventDefault();
+    //         e.preventDefault();
 
-            let page = $(this).attr('href').split('page=')[1];
+    //         let page = $(this).attr('href').split('page=')[1];
 
-            MainTable.getPage(page, MainSearch.getSearchData());
+    //         MainTable.getPage(page, MainSearch.getSearchData());
 
-            $('html, body').animate({
-                scrollTop: $(el).offset().top - 95
-            }, 300)
-        });
-    }
+    //         $('html, body').animate({
+    //             scrollTop: $(el).offset().top - 95
+    //         }, 300)
+    //     });
+    // }
 
     function onAddFavoriteCar() {
 
