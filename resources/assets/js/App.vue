@@ -15,8 +15,8 @@
         <div class="thead__cell">Основные моменты</div>
         <div class="thead__cell">Основные повреждения</div>
         <div class="thead__cell">Вторичные повреждения</div>
-        <div class="thead__cell">Дата</br> аукциона</div>
-        <div class="thead__cell">Текушая</br> ставка</div>
+        <div class="thead__cell">Дата<br> аукциона</div>
+        <div class="thead__cell">Текушая<br> ставка</div>
         <div class="thead__cell">Купить сейчас</div>
         <div class="thead__cell">Расположение</div>
         <div class="thead__cell">Тип документа</div>
@@ -77,17 +77,110 @@
 
                 post(`/api/cars`, searchData)
                     .then((res) => {
-                        console.log(res);
                         this.cars = res.data.data.data;
                         this.currentPage = res.data.data.current_page;
                         this.total = res.data.data.total;
-                    });
+                    })
             }
 
-
         },
-        created: function (){
-            this.getCars(1, MainSearch.getSearchData());
+        mounted: function (){
+            this.getCars(this.currentPage, MainSearch.getSearchData());
+        },
+        updated: function () {
+                tableMain();
         }
     }
+        $("body").on('click','.more-btn',function () {
+
+            let theadBottom = $(".thead__cell").filter(function() {
+                return $(this).is(':hidden');
+            });
+
+            if(!($(event.target).parents(".table__row").hasClass("active-row"))){
+
+                $(event.target).parents(".table__row").addClass("active-row");
+
+                let theadBottomClone = theadBottom.clone();
+                let theadContent = $(event.target).parents(".table__row").find(".thead-bottom");
+                $(theadBottomClone).each(function () {
+
+                    //$(this).css("display", "block");
+                    $(theadContent).append($(this));
+                    $(this).slideDown();
+
+                });
+
+                let cellArray = $(event.target).parents(".table__row").children(".table__row-cell");
+                let bottomContent = $(event.target).parents(".table__row").find(".tbody-bottom");
+
+                $(cellArray).each(function () {
+
+                    if(!($(this).is(":visible"))){
+
+                        let clone = $(this).clone();
+
+                        //clone.css("display", "block");
+
+                        $(bottomContent).append(clone);
+                        clone.slideDown();
+                    }
+
+                });
+
+                $(event.target).parents(".table__row").find(".more-btn").text("Закрыть");
+
+            }else {
+
+                $(event.target).parents(".table__row").removeClass("active-row");
+
+                let thead = $(event.target).parents(".table__row").find(".thead-bottom");
+                let tbody = $(event.target).parents(".table__row").find(".tbody-bottom");
+
+                thead.children().each(function (){
+                    $(this).slideUp(400 ,function (){
+                        $(this).remove();
+                    });
+                });
+
+                tbody.children().each(function (){
+                    $(this).slideUp(400 ,function (){
+                        $(this).remove();
+                    });
+                });
+
+                $(event.target).parents(".table__row").find(".more-btn").text("Подробнее");
+
+            }
+        });
+    function tableMain() {
+        let tableWidth = $(".thead").width();
+        let cellWidth = $(".table__row .table__row-cell").outerWidth();
+        let cellCount = Math.floor(tableWidth / cellWidth);
+
+
+        let theadArray = $(".thead__cell");
+        let theadBottom = theadArray.slice(cellCount, theadArray.length + 1);
+        theadArray.css("display", "inline-block");
+        theadBottom.css("display", "none");
+
+        $(".more-btn").remove();
+
+        let rowArray = $(".table__row");
+        rowArray.each(function(){
+
+            let cellArray = $(this).children(".table__row-cell");
+
+            let topCell = cellArray.slice(0, cellCount);
+            topCell.css("display", "inline-block");
+            topCell.last().append("<a class='more-btn'>Подробнее</a>");
+            let bottomCell = cellArray.slice(cellCount, cellArray.length + 1);
+            bottomCell.css("display", "none");
+
+        });
+
+    }
+    $(window).resize(function () {
+        tableMain();
+    });
 </script>

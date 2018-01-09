@@ -395,7 +395,7 @@ table>tbody>tr>td>span.footable-toggle.last-column {
 
 .product__img {
     height: 80px;
-    width: 100px;
+    width: 98px;
 }
 
 .product__img:hover{
@@ -1017,8 +1017,6 @@ body {
 .favorite__btn {
     background: transparent;
     font-size: 25px;
-    margin: 0;
-    padding: 3px 0;
     width: 20px;
     float: left;
     color: #6a0000;
@@ -1438,9 +1436,9 @@ footer .footer-item .gallery-item {
     background-color: #6A0000;
 }
 
-.table .thead div{
+.table .thead .thead__cell{
     display: inline-block;
-    width: 100px;
+    width: 98px;
     height: 40px;
 
     padding: 8px 0 !important;
@@ -1466,7 +1464,7 @@ footer .footer-item .gallery-item {
 
 .table__row-cell{
     display: inline-block;
-    width: 100px;
+    width: 98px;
 
     text-align: center;
     padding: 8px 0 !important;
@@ -1512,8 +1510,8 @@ footer .footer-item .gallery-item {
 
 .more-btn{
     float: right;
-    margin-left: -25px;
-    margin-top: 14px;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .more-btn:hover{
