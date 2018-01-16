@@ -87,7 +87,7 @@
                 return this.current < this.total
             },
             changePage: function(page) {
-                this.$emit('page-changed', page, MainSearch.getSearchData());
+                this.$emit('page-changed', page, this.$parent.$options.methods.getSearchData());
             }
         }
     }

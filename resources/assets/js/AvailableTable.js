@@ -8,23 +8,23 @@ export let AvailableTable = (function () {
 
     let errNotFound = '<tbody id="table-body"><tr class="footable-empty"><td colspan="11">Автомобили не найдеы</td></tr></tbody>'
 
-    function onPaginate() {
-
-        $(el).on('click', '.pagination a', function (e, data) {
-
-            e.preventDefault();
-
-            let page = $(this).attr('href').split('page=')[1];
-
-            console.log('PAGE ' + page)
-
-            AvailableTable.getPage(page, AvailableSearch.getSearchData());
-
-            $('html, body').animate({
-                scrollTop: $(el).offset().top - 95
-            }, 300)
-        });
-    }
+    // function onPaginate() {
+    //
+    //     $(el).on('click', '.pagination a', function (e, data) {
+    //
+    //         e.preventDefault();
+    //
+    //         let page = $(this).attr('href').split('page=')[1];
+    //
+    //         console.log('PAGE ' + page)
+    //
+    //         AvailableTable.getPage(page, AvailableSearch.getSearchData());
+    //
+    //         $('html, body').animate({
+    //             scrollTop: $(el).offset().top - 95
+    //         }, 300)
+    //     });
+    // }
 
 
     return {

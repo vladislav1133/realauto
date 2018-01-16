@@ -3,9 +3,11 @@ import Vue from 'vue';
 import AppVue from './App.vue';
 import TableVue from './Table.vue';
 import PaginationVue from './Pagination.vue';
+import Sidebar from './sideBar.vue';
 
 Vue.component("TableVue", TableVue);
 Vue.component("PagVue", PaginationVue);
+Vue.component("side-bar", Sidebar);
 
 import {AvailableSearch} from "./AvailableSearch";
 import {CustomsCalculator} from "./CustomsCalculator";
@@ -16,7 +18,7 @@ import {AvailableTable} from "./AvailableTable"
 
 
 const test = new Vue({
-    el: '.table-container',
+    el: '.main-content_inner',
     render: h => h(AppVue)
 });
 

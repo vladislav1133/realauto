@@ -189,14 +189,14 @@ export let MainTable = (function () {
             $('#main-table').html('<h2 style="text-align:center; color:#fff">По запросу автомобили не найдены</h2>')
         },
 
-        getPage: function (page, data) {
-
-            console.log(data)
-
-            data['page'] = page
-
-            this.getData(data)
-        },
+        // getPage: function (page, data) {
+        //
+        //     console.log(data)
+        //
+        //     data['page'] = page
+        //
+        //     this.getData(data)
+        // },
 
         getData: function (data) {
 
@@ -302,7 +302,7 @@ export let MainTable = (function () {
 
             onClickImage()
 
-            onPaginate()
+            //onPaginate()
 
             onAddFavoriteCar()
 

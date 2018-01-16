@@ -85,7 +85,7 @@ export let MainSearch = (function () {
 
     function initEvents() {
 
-        onSearchCars()
+        //onSearchCars()
 
         onToggleFavoriteBtn()
 
@@ -350,21 +350,21 @@ export let MainSearch = (function () {
         })
     }
 
-    function onSearchCars() {
-
-        $(searchBtn).click(function () {
-
-            searchType = 'main'
-            MainTable.getPage(1, MainSearch.getSearchData())
-        })
-
-        $(searchBtnTop).click(function () {
-
-            searchType = 'main'
-
-            MainTable.getPage(1, MainSearch.getSearchData())
-        })
-    }
+    // function onSearchCars() {
+    //
+    //     $(searchBtn).click(function () {
+    //
+    //         searchType = 'main'
+    //         MainTable.getPage(1, MainSearch.getSearchData())
+    //     })
+    //
+    //     $(searchBtnTop).click(function () {
+    //
+    //         searchType = 'main'
+    //
+    //         MainTable.getPage(1, MainSearch.getSearchData())
+    //     })
+    // }
 
     function onClearFavorite() {
 
@@ -543,7 +543,6 @@ export let MainSearch = (function () {
 
                     searchData['favoriteCars'] = favoriteCars
                 }
-
                 return searchData
             }
 
@@ -594,55 +593,57 @@ export let MainSearch = (function () {
 
             if (model) model = model.join(',');
 
-            console.log('перед get')
-            $.get({
-
-                url: '/cars/property/' + source + type,
-
-                data: {
-                    mark: mark,
-                    model: model
-                }
-
-            }).done(function (data) {
-
-                console.log('in done')
-
-                if (data.hasOwnProperty('marks')) {
-                    select.setOptions(selects['mark'], data.marks)
-                    $(selects['mark']).prepend("<option value='all' selected='selected'>ВСЕ</option>");
-                }
-
-                if(data.hasOwnProperty('models')) {
-                    select.setOptions(selects['model'], data.models)
-                }
-
-                select.setOptions(selects['yearTo'], data['years'])
-                select.setOptions(selects['yearFrom'], data['years'])
-
-
-                $(selects['yearFrom']).selectpicker('val', data['years'][0])
-                $(selects['yearTo']).selectpicker('val', data['years'][data['years'].length - 1])
-
-
-                select.setOptions(selects['damage'], data['damage'])
-
-                select.setOptions(selects['highlight'], data['highlights'])
-
-                select.setOptions(selects['drive'], data['drive'])
-                select.setOptions(selects['fuel'], data['fuel'])
-
-                select.setOptions(selects['locAdd'], data['location'])
-                select.setOptions(selects['locRem'], data['location'])
-
-                select.setOptions(selects['docAdd'], data['doc_type'])
-                select.setOptions(selects['docRem'], data['doc_type'])
-
-
-                $('.selectpicker').selectpicker('refresh');
-
-                MainSearch.stopPreloader()
-            })
+            // console.log('перед get')
+            // $.get({
+            //
+            //     url: '/cars/property/' + source + type,
+            //
+            //     data: {
+            //         mark: mark,
+            //         model: model
+            //     }
+            //
+            // }).done(function (data) {
+            //
+            //     console.log('in done')
+            //     console.log("data", data)
+            //
+            //     if (data.hasOwnProperty('marks')) {
+            //         select.setOptions(selects['mark'], data.marks)
+            //         $(selects['mark']).prepend("<option value='all' selected='selected'>ВСЕ</option>");
+            //     }
+            //
+            //     if(data.hasOwnProperty('models')) {
+            //         select.setOptions(selects['model'], data.models)
+            //     }
+            //
+            //     select.setOptions(selects['yearTo'], data['years'])
+            //     select.setOptions(selects['yearFrom'], data['years'])
+            //
+            //
+            //     $(selects['yearFrom']).selectpicker('val', data['years'][0])
+            //     $(selects['yearTo']).selectpicker('val', data['years'][data['years'].length - 1])
+            //
+            //
+            //     select.setOptions(selects['damage'], data['damage'])
+            //
+            //     select.setOptions(selects['highlight'], data['highlights'])
+            //
+            //     select.setOptions(selects['drive'], data['drive'])
+            //     select.setOptions(selects['fuel'], data['fuel'])
+            //
+            //     select.setOptions(selects['locAdd'], data['location'])
+            //     select.setOptions(selects['locRem'], data['location'])
+            //
+            //     select.setOptions(selects['docAdd'], data['doc_type'])
+            //     select.setOptions(selects['docRem'], data['doc_type'])
+            //
+            //
+            //     $('.selectpicker').selectpicker('refresh');
+            //
+            //     MainSearch.stopPreloader()
+            // })
+            MainSearch.stopPreloader()
         },
 
         //Set type:car selects options

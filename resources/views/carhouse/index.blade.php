@@ -26,12 +26,7 @@
             <div class="for-side-bar-fixed"></div>
 
             <div class="content content-area__table">
-                <div id="table">
-                    <div id="main-table">
                         @include(env('THEME').'.indexContent')
-                    </div>
-                    <div id="hide-table"></div>
-                </div>
             </div>
         </div>
 
