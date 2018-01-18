@@ -82,7 +82,6 @@
 
                 post(`/api/cars`, searchData)
                     .then((res) => {
-                        console.log(res);
                         this.cars = res.data.data.data;
                         this.currentPage = res.data.data.current_page;
                         this.total = res.data.data.total;

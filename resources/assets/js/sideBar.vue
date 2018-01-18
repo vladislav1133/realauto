@@ -63,7 +63,7 @@
                             data-title="Все"
                     >
                         <option value="all" selected>ВСЕ</option>
-                        <option value="iaai.com">IAAI</option>
+                        <option id="clickTarget" value="iaai.com">IAAI</option>
                         <option value="copart.com">COPART</option>
                     </select>
                 </div>
@@ -101,7 +101,7 @@
 
                         <option value="all" selected>ВСЕ</option>
 
-                        <option value=""></option>
+                        <option v-for="mark in options.marks" :value="mark">{{mark}}</option>
 
                     </select>
                 </div>
@@ -344,13 +344,51 @@
 </template>
 
 <script>
-    import {MainSearch} from './MainSearch';
+    import {get} from './helpers/api.js';
     export default {
         props: ["total"],
+        data(){
+            return{
+                options: {}
+            }
+        },
         methods: {
+            getOptions: function () {
+
+                get(`cars/property/copart.com/AUTOMOBILE`)
+                    .then((res) => {
+                        this.options = res.data
+                    }).catch(function (error) {
+                        console.log(error)
+                    });
+            },
             search: function(){
                 this.$emit('search', 1, this.$parent.$options.methods.getSearchData());
+            },
+            updateOption: function () {
+
             }
+        },
+        created: function (){
+            this.getOptions();
+        },
+        mounted: function () {
+            //let b1 = document.querySelector("#clickTarget");
+            //b1.onclick = bc;
+            //function bc(){};
+            //$(".search__select:first").addClass("open");
+            //$('.dropdown-menu.inner:first').click()
+            //console.log($(".dropdown-menu.inner:first"))
+            window.onload=function(){
+                setTimeout(function(){
+                    $(".search__select:first").addClass("open");
+                    $(".inner:first").children().first().next().triggerHandler("click");
+
+                },2000);
+            }
+
+
+            //$(".selectpicker").trigger("changed.bs.select")
         }
     }
 </script>
