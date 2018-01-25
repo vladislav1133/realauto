@@ -33,19 +33,19 @@ export let MainTable = (function () {
     //     });
     // }
 
-    function onAddFavoriteCar() {
+    // function onAddFavoriteCar() {
 
-        $(el).on('click', '.favorite__btn', function () {
+    //     $(el).on('click', '.favorite__btn', function () {
 
-            var lotId = $(this).data('lot')
+    //         var lotId = $(this).data('lot')
 
-            MainTable.addFavoriteCar(lotId)
+    //         MainTable.addFavoriteCar(lotId)
 
-            $(this).blur()
+    //         $(this).blur()
 
-            $(window).trigger('disableFavoriteBtn');
-        })
-    }
+    //         $(window).trigger('disableFavoriteBtn');
+    //     })
+    // }
 
     function onClickImage() {
 
@@ -139,7 +139,7 @@ export let MainTable = (function () {
 
 
 
-            this.updateFavoriteCars()
+            // this.updateFavoriteCars()
 
             this.initEvents()
 
@@ -198,105 +198,105 @@ export let MainTable = (function () {
         //     this.getData(data)
         // },
 
-        getData: function (data) {
+        // getData: function (data) {
 
 
 
-            $.ajax({
+        //     $.ajax({
 
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
 
-                type: "POST",
+        //         type: "POST",
 
-                url: '/cars',
+        //         url: '/cars',
 
-                data: data
+        //         data: data
 
-            }).done(function (data) {
-
-
-                if (data) {
-
-                    MainTable.render(data)
-
-                } else {
-
-                    MainTable.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
-                }
-
-            });
-        },
-
-        updateFavoriteCars: function () {
-
-            $(el + ' .favorite__btn').each(function (i) {
-
-                $(this).attr('title','Добавить в избранное')
-                $(this).html('<i class="fa fa-bookmark-o"></i>')
-            })
-
-            let favoriteCars = cookie.get('favoriteCars')
-
-            if (favoriteCars === undefined) return false
-
-            favoriteCars = JSON.parse(favoriteCars)
-
-            $(el + ' .favorite__btn').each(function (i) {
-
-                let favoriteBtn = $(this)
-
-                let lotId = $(this).data('lot')
-
-                favoriteCars.forEach(function (item, i) {
-
-                    if (lotId === item) {
-
-                        favoriteBtn.html('<i class="fa fa-bookmark"></i>')
-                        favoriteBtn.attr('title','Исключить из избранного')
-                    }
-                })
-            })
-        },
-
-        addFavoriteCar: function (lotId) {
-
-            let favoriteCars = cookie.get('favoriteCars')
-
-            if (favoriteCars === undefined) {
-
-                favoriteCars = [lotId]
-            } else {
-
-                favoriteCars = JSON.parse(favoriteCars)
-
-                let id = favoriteCars.indexOf(lotId);
-
-                if (id === -1) {
-
-                    favoriteCars.push(lotId);
-                } else {
-
-                    favoriteCars.splice(id, 1);
-                }
-            }
+        //     }).done(function (data) {
 
 
-            if (favoriteCars.length > 0) {
+        //         if (data) {
 
-                favoriteCars = JSON.stringify(favoriteCars)
+        //             MainTable.render(data)
 
-                document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
-            } else {
+        //         } else {
 
-                cookie.destroy('favoriteCars')
-            }
+        //             MainTable.render('<h3>К сожалению, по Вашему запросу авто не найдено</h3>')
+        //         }
+
+        //     });
+        // },
+
+        // updateFavoriteCars: function () {
+
+        //     $(el + ' .favorite__btn').each(function (i) {
+
+        //         $(this).attr('title','Добавить в избранное')
+        //         $(this).html('<i class="fa fa-bookmark-o"></i>')
+        //     })
+
+        //     let favoriteCars = cookie.get('favoriteCars')
+
+        //     if (favoriteCars === undefined) return false
+
+        //     favoriteCars = JSON.parse(favoriteCars)
+
+        //     $(el + ' .favorite__btn').each(function (i) {
+
+        //         let favoriteBtn = $(this)
+
+        //         let lotId = $(this).data('lot')
+
+        //         favoriteCars.forEach(function (item, i) {
+
+        //             if (lotId === item) {
+
+        //                 favoriteBtn.html('<i class="fa fa-bookmark"></i>')
+        //                 favoriteBtn.attr('title','Исключить из избранного')
+        //             }
+        //         })
+        //     })
+        // },
+
+        // addFavoriteCar: function (lotId) {
+
+        //     let favoriteCars = cookie.get('favoriteCars')
+
+        //     if (favoriteCars === undefined) {
+
+        //         favoriteCars = [lotId]
+        //     } else {
+
+        //         favoriteCars = JSON.parse(favoriteCars)
+
+        //         let id = favoriteCars.indexOf(lotId);
+
+        //         if (id === -1) {
+
+        //             favoriteCars.push(lotId);
+        //         } else {
+
+        //             favoriteCars.splice(id, 1);
+        //         }
+        //     }
+
+
+        //     if (favoriteCars.length > 0) {
+
+        //         favoriteCars = JSON.stringify(favoriteCars)
+
+        //         document.cookie = "favoriteCars=" + favoriteCars + "; expires=Thu, 18 Dec 2100 12:00:00 UTC";
+        //     } else {
+
+        //         cookie.destroy('favoriteCars')
+        //     }
 
 
 
-            this.updateFavoriteCars();
-        },
+        //     this.updateFavoriteCars();
+        // },
 
         initEvents: function () {
 
@@ -304,7 +304,7 @@ export let MainTable = (function () {
 
             //onPaginate()
 
-            onAddFavoriteCar()
+            // onAddFavoriteCar()
 
             onClickRemoveDoc()
 

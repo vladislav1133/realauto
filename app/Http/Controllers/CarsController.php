@@ -17,7 +17,7 @@ class CarsController extends Controller {
 
     public function getCars(Request $request)
     {
-
+        dd( $favoriteCars)
         $where = [];
 
         $drive = $request->drive;

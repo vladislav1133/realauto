@@ -26,7 +26,7 @@
         </div>
         <div style="display: inline" class="favorite__btn_wrap">
             <button class="product__btn favorite__btn" :data-lot="lot_id"
-                    title="Добавить в избранное"><i class="fa fa-bookmark-o"></i>
+                    title="Добавить в избранное" v-on:click="addFav($event)"><i class="fa fa-bookmark-o"></i>
             </button>
         </div>
         <a v-if="source === 'copart.com'" style="font-size: 25px; margin-left: 7px;" :href="car.url" target="_blank">C</a>
@@ -67,6 +67,11 @@
     export default {
         props: ['cars', 'car', 'path_to_image', 'highlights', 'url', 'lot_id', 'source', 'year', 'brand',
             'model','engine_type','fuel','transmission','odometer','drive','primary_damage','secondary_damage','sale_date',
-            'current_bid','buy_it_now','location', 'doc_type']
+            'current_bid','buy_it_now','location', 'doc_type'],
+        methods: {
+            addFav: function(e){
+                this.$emit('addFav', $(e.path[1]).data("lot"))
+            }
+        }
     }
 </script>

@@ -97,6 +97,7 @@
                             class="selectpicker search__select"
                             data-live-search="true"
                             data-title="Все"
+                            v-on:change="getModel"
                     >
 
                         <option value="all" selected>ВСЕ</option>
@@ -122,7 +123,12 @@
                             data-select-all-text="Выделить все"
                             data-deselect-all-text="Убрать все"
                     >
+
+                        <option v-for="model in options.models" :value="model">{{model}}</option>
+
                     </select>
+
+
                 </div>
 
 
@@ -137,7 +143,7 @@
                             data-title="От"
                     >
 
-                        <option value="" selected ></option>
+                        <option selected v-for="year in options.years" :value="year">{{year}}</option>
 
                     </select>
                 </div>
@@ -149,7 +155,7 @@
                             data-title="До"
                     >
 
-                        <option value="" selected ></option>
+                        <option selected v-for="year in options.years" :value="year">{{year}}</option>
 
                     </select>
                 </div>
@@ -169,7 +175,7 @@
                             data-deselect-all-text="Убрать все"
                     >
 
-                        <option value=""></option>
+                        <option v-for="highlight in options.highlights" :value="highlight">{{highlight}}</option>
 
                     </select>
                 </div>
@@ -189,7 +195,7 @@
                             data-select-all-text="Выделить все"
                             data-deselect-all-text="Убрать все"
                     >
-                        <option value=""></option>
+                        <option v-for="damag in options.damage" :value="damag">{{damag}}</option>
                     </select>
                 </div>
 
@@ -208,7 +214,7 @@
                             data-deselect-all-text="Убрать все"
                     >
 
-                        <option value=""></option>
+                        <option v-for="driv in options.drive" :value="driv">{{driv}}</option>
 
                     </select>
                 </div>
@@ -228,7 +234,7 @@
                             data-deselect-all-text="Убрать все"
                     >
 
-                        <option value=""></option>
+                        <option v-for="fue in options.fuel" :value="fue">{{fue}}</option>
 
                     </select>
                 </div>
@@ -249,7 +255,7 @@
                             data-deselect-all-text="Убрать все"
                     >
 
-                        <option value=""></option>
+                        <option v-for="locatio in options.location" :value="locatio">{{locatio}}</option>
 
                     </select>
                 </div>
@@ -267,7 +273,7 @@
                             data-deselect-all-text="Убрать все"
                     >
 
-                        <option value=""></option>
+                        <option v-for="locatio in options.location" :value="locatio">{{locatio}}</option>
 
                     </select>
                 </div>
@@ -289,7 +295,7 @@
                             data-deselect-all-text="Убрать все"
                     >
 
-                        <option value=""></option>
+                        <option v-for="doc_typ in options.doc_type" :value="doc_typ">{{doc_typ}}</option>
 
                     </select>
                 </div>
@@ -307,7 +313,7 @@
                             data-deselect-all-text="Убрать все"
                     >
 
-                        <option value=""></option>
+                        <option v-for="doc_typ in options.doc_type" :value="doc_typ">{{doc_typ}}</option>
 
                     </select>
                 </div>
@@ -325,7 +331,7 @@
                     <b>Найдено: </b><span class="total-cars"></span>
                 </div>
                 <div class="col-xs-12">
-                    <a id="search-btn" class="btn search-btn"><span class="search-btn-title"><span
+                    <a id="search-btn" @click="search()" class="btn search-btn"><span class="search-btn-title"><span
                             class="fa fa-search search-btn-icon"></span>Искать</span></a>
                 </div>
                 <div class="col-xs-12">
@@ -333,7 +339,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="favorite-wrapper">
-                        <a id="favorite-search-btn" class="btn search-btn search-btn_favorite">Избранное</a>
+                        <a id="favorite-search-btn" v-on:click="getFav" class="btn search-btn search-btn_favorite">Избранное</a>
                     </div>
                 </div>
 
@@ -358,6 +364,8 @@
                 get(`cars/property/copart.com/AUTOMOBILE`)
                     .then((res) => {
                         this.options = res.data
+                    }).then(() => {
+                        $('.selectpicker').selectpicker('refresh');
                     }).catch(function (error) {
                         console.log(error)
                     });
@@ -365,30 +373,32 @@
             search: function(){
                 this.$emit('search', 1, this.$parent.$options.methods.getSearchData());
             },
-            updateOption: function () {
+            getModel: function () {
 
+                let type = $("#search-type").val();
+                let mark = $("#search-marks").val();
+
+                get(`cars/property/copart.com/${type}?mark=${mark}`)
+                    .then((res) => {
+                        let oldMarks = this.options.marks
+                        this.options = res.data
+                        this.options.marks = oldMarks
+                    }).then(() => {
+                        $('.selectpicker').selectpicker('refresh');
+                    }).catch(function (error) {
+                        console.log(error)
+                    });
+
+            },
+            getFav: function(){
+                this.$emit('fav');
             }
         },
         created: function (){
             this.getOptions();
         },
         mounted: function () {
-            //let b1 = document.querySelector("#clickTarget");
-            //b1.onclick = bc;
-            //function bc(){};
-            //$(".search__select:first").addClass("open");
-            //$('.dropdown-menu.inner:first').click()
-            //console.log($(".dropdown-menu.inner:first"))
-            window.onload=function(){
-                setTimeout(function(){
-                    $(".search__select:first").addClass("open");
-                    $(".inner:first").children().first().next().triggerHandler("click");
 
-                },2000);
-            }
-
-
-            //$(".selectpicker").trigger("changed.bs.select")
         }
     }
 </script>

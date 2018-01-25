@@ -2,6 +2,7 @@
     <div class="main-content_inner">
         <side-bar :total="total"
                   @search="getCars"
+                  @fav="getFav"
             ></side-bar>
         <div class="table-container content">
             <div class="table car-table" data-empty="Автомобили не найдеы">
@@ -50,6 +51,7 @@
                         :buy_it_now="car.buy_it_now"
                         :location="car.location"
                         :doc_type="car.doc_type"
+                        @addFav="addFav"
                     ></tableVue>
                 </div>
             </div>
@@ -73,12 +75,18 @@
                 currentPage: 1,
                 perPage: 10,
                 total: 0,
+                favArray: []
             }
         },
         methods: {
 
-            getCars: function (page, searchData) {
+            getCars: function (page, searchData, fav) {
                 searchData['page'] = page;
+                if(fav){
+                    let arr = JSON.parse(localStorage.getItem('favArray'));
+                    console.log(arr)
+                    searchData['favoriteCars'] = arr
+                }
 
                 post(`/api/cars`, searchData)
                     .then((res) => {
@@ -95,31 +103,42 @@
 
                 searchData['type'] = $('#search-type').val()
 
-                // searchData['mark'] = $('#search-marks').val()
-                //
-                // searchData['model'] = $('#search-models').val()
-                //
-                // searchData['yearTo'] = $('#search-to').val()
-                //
-                // searchData['yearFrom'] = $('#search-from').val()
-                //
-                // searchData['damage'] = $('#search-damage').val()
-                //
-                // searchData['drive'] = $('#search-drive').val()
-                //
-                // searchData['fuel'] = $('#search-fuel').val()
-                //
-                // searchData['highlight'] = $('#search-highlight').val()
-                //
-                // searchData['locAdd'] = $('#search-loc-add').val()
-                // searchData['locRem'] = $('#search-loc-rem').val()
-                //
-                // searchData['docAdd'] = $('#search-doc-add').val()
-                //
-                // searchData['docRem'] = $('#search-doc-rem').val()
+                searchData['mark'] = $('#search-marks').val()
+            
+                searchData['model'] = $('#search-models').val()
+            
+                searchData['yearTo'] = $('#search-to').val()
+            
+                searchData['yearFrom'] = $('#search-from').val()
+            
+                searchData['damage'] = $('#search-damage').val()
+            
+                searchData['drive'] = $('#search-drive').val()
+            
+                searchData['fuel'] = $('#search-fuel').val()
+            
+                searchData['highlight'] = $('#search-highlight').val()
+            
+                searchData['locAdd'] = $('#search-loc-add').val()
+                searchData['locRem'] = $('#search-loc-rem').val()
+            
+                searchData['docAdd'] = $('#search-doc-add').val()
+            
+                searchData['docRem'] = $('#search-doc-rem').val()
 
                 return searchData
 
+            },
+            addFav: function(lot){
+                this.favArray.push(lot);
+                let arr = JSON.stringify(this.favArray)
+                console.log(arr)
+                localStorage.setItem('favArray', arr);
+                //console.log(JSON.parse(localStorage.getItem('favArray')))
+
+            },
+            getFav: function(){
+                this.getCars(this.currentPage, this.getSearchData(), true);
             }
 
         },
