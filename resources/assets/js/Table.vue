@@ -70,7 +70,7 @@
             'current_bid','buy_it_now','location', 'doc_type'],
         methods: {
             addFav: function(e){
-                this.$emit('addFav', $(e.path[1]).data("lot"))
+                this.$emit('addFav', e.path[1].getAttribute("data-lot"))
             }
         }
     }

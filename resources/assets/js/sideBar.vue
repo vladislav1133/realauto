@@ -143,7 +143,7 @@
                             data-title="От"
                     >
 
-                        <option selected v-for="year in options.years" :value="year">{{year}}</option>
+                        <option selected v-for="year in reversYears" :value="year">{{year}}</option>
 
                     </select>
                 </div>
@@ -155,7 +155,7 @@
                             data-title="До"
                     >
 
-                        <option selected v-for="year in options.years" :value="year">{{year}}</option>
+                        <option selected v-for="year1 in options.years" :value="year1">{{year1}}</option>
 
                     </select>
                 </div>
@@ -355,7 +355,8 @@
         props: ["total"],
         data(){
             return{
-                options: {}
+                options: {},
+                reversYears: []
             }
         },
         methods: {
@@ -364,6 +365,7 @@
                 get(`cars/property/copart.com/AUTOMOBILE`)
                     .then((res) => {
                         this.options = res.data
+                        this.reverse()
                     }).then(() => {
                         $('.selectpicker').selectpicker('refresh');
                     }).catch(function (error) {
@@ -392,13 +394,18 @@
             },
             getFav: function(){
                 this.$emit('fav');
+            },
+            reverse: function(){
+                this.reversYears = this.options.years.slice();
+                this.reversYears = this.reversYears.reverse()
+                console.log(this.options.years);
+                console.log(this.reversYears)
             }
         },
         created: function (){
             this.getOptions();
         },
         mounted: function () {
-
         }
     }
 </script>

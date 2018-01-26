@@ -90,6 +90,7 @@
 
                 post(`/api/cars`, searchData)
                     .then((res) => {
+                        console.log(res)
                         this.cars = res.data.data.data;
                         this.currentPage = res.data.data.current_page;
                         this.total = res.data.data.total;
@@ -130,15 +131,23 @@
 
             },
             addFav: function(lot){
+
+                if(localStorage.getItem('favArray') !== null){
+                    this.favArray = JSON.parse(localStorage.getItem('favArray'));
+                    console.log("Не пусто")
+                }else{
+
+                }
+
+                    console.log("Пусто")
                 this.favArray.push(lot);
                 let arr = JSON.stringify(this.favArray)
                 console.log(arr)
                 localStorage.setItem('favArray', arr);
-                //console.log(JSON.parse(localStorage.getItem('favArray')))
 
             },
             getFav: function(){
-                this.getCars(this.currentPage, this.getSearchData(), true);
+                this.getCars(1, this.getSearchData(), true);
             }
 
         },
